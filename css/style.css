@@ -1,0 +1,20 @@
+body {
+	position: relative;
+	padding-top: 50px;
+}
+.spacer { margin-top: 25px; margin-bottom: 25px; }
+.spacer-top { margin-top: 25px; }
+.spacer-bottom { margin-bottom: 25px; }
+.matreshka-slide { height: 400px; background: #222; color: #fff; }
+.matreshka-slide.first { padding-top: 30px; }
+.matreshka-slide .container{ width: 75%; }
+.matreshka-slide h2 { color: white; font-weight: normal; font-size: 45px; }
+.matreshka-slide pre.prettyprint {
+	font-size: 24px;
+	background-color: transparent;
+	border: none;
+}
+
+.matreshka-slide h2.superlead { font-size: 109px; }
+.matreshka-slide h2.superlead .gray { color: #777 }
+.matreshka-slide p.superlead { font-size: 30px; }
