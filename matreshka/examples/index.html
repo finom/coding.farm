@@ -58,112 +58,29 @@
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
-	</nav>	<div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example">
-		<ol class="carousel-indicators">
-			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="item active">
-				<div class="matreshka-slide first">
-					<div class="container">
-						<h2 class="superlead">Matreshka<span class="gray">.js</span></h2>
-						<p class="superlead">The new way how you build your apps</p>
-						<p class="spacer"><button type="button" class="btn btn-primary btn-lg">Download Matreshka</button></p>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>No code in HTML with smart element bindings</h2>
-						<p class="lead">You don't need to listen element event to change app property. You don't need to change element state manually when changing property.</p>
-<pre class="prettyprint">
+	</nav>	<div class="container spacer-top">
+<h1>Wellcome to Matreshka Examples</h1>
+<p>Ut malesuada nulla ac dui sollicitudin, sed posuere risus dictum. Donec congue urna et placerat sollicitudin. In consequat mauris quam, et semper turpis pharetra eget. In sed dolor ipsum. Etiam iaculis, elit nec ultricies tincidunt, ligula tellus rhoncus lectus, ut rutrum dolor sapien id lorem. Etiam aliquet tempor libero. Praesent et erat accumsan, pharetra metus at, pulvinar velit. Maecenas in justo ut nibh feugiat laoreet et non nunc. Sed nec justo a turpis dapibus luctus.</p>
 
-this.bindElement( 'myKey', '.my-element' );
 
-this.myKey = 'Be Awesome';</pre>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>Awesome client side event emitter</h2>
-						<p class="lead">You can even bind property change event. Isnt it awesome?</p>
-<pre class="prettyprint">this.on( 'change:myKey', function( evt ) {
-	alert( 'myKey value is ' + evt.value );
-});
 
-this.myKey = 'F... Yeah!'
-</pre>
-					</div>
-				</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>Works even in IE8</h2>
-						<p class="lead">Magic inside Matreshka gives possibility to use getters and setters.</p>
-<pre class="prettyprint">
-
-this.define( 'myKey', {
-	get: function() { ... },
-	set: function( v ) { ... }
-});</pre>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>Build your powerful app using Matreshka</h2>
-						<p class="lead">Matreshka uses classes for simple heritage.</p>
-<pre class="prettyprint">var MyApp = Class({
-	'extends': Matreshka,
-	constructor: function() {
-		this.initMK();
-	}
-});</pre>
-					</div>
-				</div>
-			</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h3>Matreshka</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum ipsum magna, vitae consectetur eros hendrerit id.</p>
+			<button type="button" class="btn btn-primary">Check this out</button>
 		</div>
-		<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-			<span class="icon-prev"></span>
-		</a>
-		<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-			<span class="icon-next"></span>
-		</a>
+		<div class="col-md-4">
+			<h3>Matreshka.Object</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum ipsum magna, vitae consectetur eros hendrerit id.</p>
+			<button type="button" class="btn btn-primary">Check this out</button>
+		</div>
+		<div class="col-md-4">
+			<h3>Matreshka.Array</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum ipsum magna, vitae consectetur eros hendrerit id.</p>
+			<button type="button" class="btn btn-primary">Check this out</button>
+		</div>
 	</div>
-	<div class="container spacer-top">
-		<h1>Why Matreshka?</h1>
-		<p>
-			Ut malesuada nulla ac dui sollicitudin, sed posuere risus dictum. Donec congue urna et placerat sollicitudin. In consequat mauris quam, et semper turpis pharetra eget. In sed dolor ipsum. Etiam iaculis, elit nec ultricies tincidunt, ligula tellus rhoncus lectus, ut rutrum dolor sapien id lorem. Etiam aliquet tempor libero. Praesent et erat accumsan, pharetra metus at, pulvinar velit. Maecenas in justo ut nibh feugiat laoreet et non nunc. Sed nec justo a turpis dapibus luctus.
-		</p>
-
-		<div class="row">
-			<div class="col-md-4">
-				<h3>Documentation</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum ipsum magna, vitae consectetur eros hendrerit id.</p>
-				<button type="button" class="btn btn-primary">Check this out</button>
-			</div>
-			<div class="col-md-4">
-				<h3>Examples</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum ipsum magna, vitae consectetur eros hendrerit id.</p>
-				<button type="button" class="btn btn-primary">Check this out</button>
-			</div>
-			<div class="col-md-4">
-				<h3>Documentation</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum ipsum magna, vitae consectetur eros hendrerit id.</p>
-				<button type="button" class="btn btn-primary">Check this out</button>
-			</div>
-		</div>
 	</div>
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>

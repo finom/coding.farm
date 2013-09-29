@@ -1,0 +1,60 @@
+h3.subsection-title {
+	font-size: 36px;
+	margin-top: 50px;
+}
+
+h4.name {
+	margin-top: 30px;
+	font-size: 26px;
+}
+pre { background-color: #fff; }
+code { font-size: 100%; }
+
+.code-caption {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-style: normal;
+}
+
+.details { border-left: 0; }
+
+.label.label-type {
+	color: white;
+	font-family: Consolas, "Lucida Console", Monaco, monospace;
+	font-size: 100%;
+	padding: 2px 4px;
+}
+
+.label.label-type.label-type-unknown {
+	color: #333;
+	background-color: #eee;
+}
+
+h5, .container-overview .subsection-title { margin: 8px 0 3px 0; }
+
+
+.description { margin-left: 0; }
+
+.example-wrapper:after {
+	content: "Example";
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #bbb;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.prettyprint {
+	border: 0;
+}
+
+.label-type-string {	background-color: #D62424; }
+.label-type-number {	background-color: #2424D6; }
+.label-type-boolean { background-color: #24D627; }
+.label-type-null { background-color: #969696; }
+.label-type-object {	background-color: #E38DB1; }
+.label-type-array { background-color: #7D7B1D; }
+.label-type-function { background-color: #8D3BAD; }
+.label-type-any { background-color: #333; }

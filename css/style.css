@@ -2,6 +2,7 @@ body {
 	position: relative;
 	padding-top: 50px;
 }
+.prettyprint code { font-size: 120%; }
 .spacer { margin-top: 25px; margin-bottom: 25px; }
 .spacer-top { margin-top: 25px; }
 .spacer-bottom { margin-bottom: 25px; }
@@ -18,3 +19,9 @@ body {
 .matreshka-slide h2.superlead { font-size: 109px; }
 .matreshka-slide h2.superlead .gray { color: #777 }
 .matreshka-slide p.superlead { font-size: 30px; }
+
+.mk-example {}
+.mk-example:before { display: block; }
+.mk-example-js:before { content: 'Javascript' }
+.mk-example-layout:before { content: 'Layout' }
+.mk-example-result:before { content: 'Result' }
