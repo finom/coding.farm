@@ -66,7 +66,7 @@
 		<h3>Element binding</h3>
 		<div class="row">
 			
-			<div class="col-md-4 mk-example mk-example-js">
+			<div class="col-md-5 mk-example mk-example-js">
 				<pre class="prettyprint">
 				var mk = new MK(); // same as new Matreshka;
 
@@ -83,7 +83,7 @@
 				mk.x = 3;
 				</pre>
 			</div>
-			<div class="col-md-4 mk-example mk-example-layout">
+			<div class="col-md-5 mk-example mk-example-layout">
 				<pre class="prettyprint lang-html escape-html">
 					<select class="my-select">
 						<option value="1">First Option</option>
@@ -94,7 +94,7 @@
 					</select>
 				</pre>				
 			</div>
-			<div class="col-md-4 mk-example mk-example-result">
+			<div class="col-md-2 mk-example mk-example-result">
 				<select class="my-select ex1">
 					<option value="1">First Option</option>
 					<option value="2">Second Option</option>
@@ -125,14 +125,14 @@
 		<h3>Element binding using predefined Element Options</h3>
 		<div class="row">
 			
-			<div class="col-md-4 mk-example mk-example-js">
+			<div class="col-md-5 mk-example mk-example-js">
 				<pre class="prettyprint">
 					var mk = new MK(); // same as new Matreshka;
 					mk.bindElement( 'x', '.my-select' );
 					mk.x = 3;
 				</pre>
 			</div>
-			<div class="col-md-4 mk-example mk-example-layout">
+			<div class="col-md-5 mk-example mk-example-layout">
 				<pre class="prettyprint lang-html escape-html">
 					<select class="my-select">
 						<option value="1">First Option</option>
@@ -143,7 +143,7 @@
 					</select>
 				</pre>				
 			</div>
-			<div class="col-md-4 mk-example mk-example-result">
+			<div class="col-md-2 mk-example mk-example-result">
 				<select class="my-select ex2">
 					<option value="1">First Option</option>
 					<option value="2">Second Option</option>
@@ -165,7 +165,7 @@
 		<h3>Element binding using predefined Element Options</h3>
 		<div class="row">
 			
-			<div class="col-md-4 mk-example mk-example-js">
+			<div class="col-md-5 mk-example mk-example-js">
 				<pre class="prettyprint">
 					// custom checkbox behavior
 					$( document ).on( 'click',  '.custom-checkbox', function() {
@@ -188,7 +188,7 @@
 					mk.x = true;
 				</pre>
 			</div>
-			<div class="col-md-4 mk-example mk-example-layout">
+			<div class="col-md-5 mk-example mk-example-layout">
 				<pre class="prettyprint lang-css">
 					.custom-checkbox {
 						background-image: url(...);
@@ -207,7 +207,7 @@
 					</span> My Checkbox
 				</pre>				
 			</div>
-			<div class="col-md-4 mk-example mk-example-result">
+			<div class="col-md-2 mk-example mk-example-result">
 				<span class="custom-checkbox my-checkbox ex1"></span> My Checkbox
 				<style>
 					.custom-checkbox {
@@ -241,6 +241,42 @@
 						});
 
 						mk.x = true;
+					});
+				</script>
+			</div>
+		</div>
+		<h3>Events</h3>
+		<div class="row">
+			
+			<div class="col-md-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+					var mk = new MK(); // same as new Matreshka;
+
+					mk.on( 'yeah', function() {
+						var args = [].slice.call( arguments ).join( ', ' );
+						$( '.output' ).html( args );
+					});
+
+					mk.trigger( 'yeah', 1, 'string', {} );
+				</pre>
+			</div>
+			<div class="col-md-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<div class="output"></div>
+				</pre>				
+			</div>
+			<div class="col-md-2 mk-example mk-example-result">
+				<div class="output ex1"></div>
+				<script>
+					runIt.push( function() {
+						var mk = new MK();
+
+						mk.on( 'yeah', function() {console.log( $( '.output.ex1' ) );
+							var args = [].slice.call( arguments ).join( ', ' );
+							$( '.output.ex1' ).html( args );
+						});
+
+						mk.trigger( 'yeah', 1, 'string', {} );
 					});
 				</script>
 			</div>
