@@ -2,7 +2,6 @@ body {
 	position: relative;
 	padding-top: 50px;
 }
-.prettyprint code { font-size: 120%; }
 .spacer { margin-top: 25px; margin-bottom: 25px; }
 .spacer-top { margin-top: 25px; }
 .spacer-bottom { margin-bottom: 25px; }
@@ -25,3 +24,11 @@ body {
 .mk-example-js:before { content: 'Javascript' }
 .mk-example-layout:before { content: 'Layout' }
 .mk-example-result:before { content: 'Result' }
+
+.prettyprint  { overflow: auto; word-wrap: normal; }
+.prettyprint code { display: block; white-space: pre; }
+/*
+pre>code:first-child, pre>code:first-child {
+max-height: 600px\9;
+display: block\9;
+}*/

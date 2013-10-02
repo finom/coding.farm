@@ -205,21 +205,34 @@ this.define( 'myKey', {
 			
 			window.onload = function() {
 				var toEscape = document.querySelectorAll( '.escape-html' ),
-					pre = document.getElementsByTagName( 'pre' );
+					pre = document.getElementsByTagName( 'pre' ),
+					code;
 				for( var i = 0; i < toEscape.length; i++ ) {
 					toEscape[ i ].innerHTML = escapeHTML( toEscape[ i ].innerHTML );
 				}
 				for( var i = 0; i < pre.length; i++ ) {
 					pre[ i ].innerHTML = removeExtraTabs( pre[ i ].innerHTML );
+					code = pre[ i ].getElementsByTagName( 'code' )[ 0 ];
+					pre[ i ].innerHTML = pre[ i ].innerHTML.trim();
+					if( code ) {
+						code.innerHTML = code.innerHTML.trim();
+					}
 				}
 				
 				prettyPrint();
+					
+				/*$( 'code' ).each( function() {
+					this.innerHTML = this.innerHTML.replace( /\n/g, '<br>' );
+				});*/
 				
 				if( window.runIt ) {
 					for( var i = 0; i < window.runIt.length; i++ ) {
 						window.runIt[ i ]();
 					}
 				}
+				
+				
+				
 			};
 		})();
 	</script>
