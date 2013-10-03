@@ -1,1 +1,487 @@
-I'm crazy github page
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Bootstrap 101 Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base href="/matreshka/">
+	<!-- Bootstrap -->
+	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../css/tomorrow-night.css" rel="stylesheet" media="screen">
+	<link href="../../css/style.css" rel="stylesheet" media="screen">
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
+      <script src="../../bootstrap/assets/js/respond.min.js"></script>
+    <![endif]--></head>
+
+<body>
+	<a href="https://github.com/finom/matreshka"><img style="position: fixed; z-index: 10000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> <a class="navbar-brand" href="/matreshka/index.html">Matreshka</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="docs/index.html">Introduction</a></li>
+							<li><a href="docs/Matreshka.html">Matreshka</a></li>
+							<li><a href="docs/Matreshka.Object.html">MK.Object</a></li>
+							<li><a href="docs/Matreshka.Array.html">MK.Array</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="examples/index.html">Introduction</a></li>
+							<li><a href="examples/Matreshka.html">Matreshka</a></li>
+							<li><a href="examples/Matreshka.Object.html">MK.Object</a></li>
+							<li><a href="examples/Matreshka.Array.html">MK.Array</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="plugins/">Plugins</a>
+					</li>
+					<li>
+						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+	</nav>		
+	<div class="container spacer-top">
+		<h1>Matreshka Examples</h1>
+		<p>Ut malesuada nulla ac dui sollicitudin, sed posuere risus dictum. Donec congue urna et placerat sollicitudin. In consequat mauris quam, et semper turpis pharetra eget. In sed dolor ipsum. Etiam iaculis, elit nec ultricies tincidunt, ligula tellus rhoncus lectus, ut rutrum dolor sapien id lorem. Etiam aliquet tempor libero. Praesent et erat accumsan, pharetra metus at, pulvinar velit. Maecenas in justo ut nibh feugiat laoreet et non nunc. Sed nec justo a turpis dapibus luctus.</p>
+		<script>window.runIt = [];</script>
+		<h3 id="binding"><a href="examples/Matreshka.html#binding">Element binding</a></h3>
+		<div class="row">
+			
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+				<code>
+				var mk = new MK(); // same as new Matreshka;
+
+				mk.bindElement( 'x', '.my-select', {
+					on: 'change',
+					getValue: function() {
+						return this.value;
+					},
+					setValue: function( v ) {
+						this.value = v;
+					}
+				});
+
+				mk.x = 3;
+				</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<select class="my-select">
+						<option value="1">First Option</option>
+						<option value="2">Second Option</option>
+						<option value="3">Third Option</option>
+						<option value="4">Fourth Option</option>
+						<option value="5">Fifth Option</option>
+					</select>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<select class="my-select ex1">
+					<option value="1">First Option</option>
+					<option value="2">Second Option</option>
+					<option value="3">Third Option</option>
+					<option value="4">Fourth Option</option>
+					<option value="5">Fifth Option</option>
+				</select>
+				<script>
+					runIt.push( function() {
+						var mk = new MK(); // same as new Matreshka;
+
+						mk.bindElement( 'x', '.my-select.ex1', {
+							on: 'change',
+							getValue: function() {
+								return this.value;
+							},
+							setValue: function( v ) {
+								this.value = v;
+							}
+						});
+
+						mk.x = 3;
+					});
+				</script>
+			</div>
+		</div>
+		
+		<h3 id="predef-binding"><a href="examples/Matreshka.html#predef-binding">Element binding using predefined Element Options</a></h3>
+		<div class="row">
+			
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+					<code>
+					var mk = new MK(); // same as new Matreshka;
+					mk.bindElement( 'x', '.my-select' );
+					mk.x = 3;
+					</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<select class="my-select">
+						<option value="1">First Option</option>
+						<option value="2">Second Option</option>
+						<option value="3">Third Option</option>
+						<option value="4">Fourth Option</option>
+						<option value="5">Fifth Option</option>
+					</select>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<select class="my-select ex2">
+					<option value="1">First Option</option>
+					<option value="2">Second Option</option>
+					<option value="3">Third Option</option>
+					<option value="4">Fourth Option</option>
+					<option value="5">Fifth Option</option>
+				</select>
+				<script>
+					runIt.push( function() {
+						var mk = new MK(); // same as new Matreshka;
+
+						mk.bindElement( 'x', '.my-select.ex2' );
+
+						mk.x = 3;
+					});
+				</script>
+			</div>
+		</div>
+		<h3 id="custom-binding"><a href="examples/Matreshka.html#custom-binding">Binding custom element</a></h3>
+		<div class="row">
+			
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+					<code>
+					// custom checkbox behavior
+					$( document ).on( 'click',  '.custom-checkbox', function() {
+						$( this ).toggleClass( 'checked' );
+					});
+					</code>
+				</pre>
+				<pre class="prettyprint">
+					<code>
+					var mk = new MK();
+
+					mk.bindElement( 'x', '.my-checkbox', {
+						on: 'click',
+						getValue: function() {
+							return $( this ).hasClass( 'checked' );
+						},
+						setValue: function( v ) {
+							$( this ).toggleClass( 'checked', !!v );
+						}
+					});
+
+					mk.x = true;
+					</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-css">
+					<code>
+					.custom-checkbox {
+						background-image: url(...);
+						position: relative;
+						display: inline-block;
+						width: 14px;
+						height: 14px;
+					}
+
+					.custom-checkbox.checked {
+						background-position: -14px;
+					}
+					</code>
+				</pre>	
+				<pre class="prettyprint lang-html escape-html">
+					<span class="custom-checkbox my-checkbox">
+					</span> My Checkbox
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<span class="custom-checkbox my-checkbox ex1"></span> My Checkbox
+				<style>
+					.custom-checkbox {
+					  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlBJREFUeNpijImJiWRAA////2dgZGREoUEAxMYHiNGHSw4mjm4eDCCrg/GJ0cMCEliyZMlyBhJAbGxsJLn6QPTixYvpYh8o8pgIxQq+mCJHH7mAHPtAephobVnadgYhbPpAbBwYFOhsUMxEacAwMdAQJG7+a/b7z997QDqNyMBhsra25v7w4cOE379/nwfyWSiNfap4MHLdL1EsYmY/fv/dBcT8QKyCxaHMQMwOxGxQdzDn5uYK79q1ax0/P3/mx48fN4CUI8c2OYCF3JCB6QtY8a0CSFUErPjjtiGC6xRUzAxI7QJifiDuBoqXYYlB5r9//94BemRjfHx8g4eHh0BKSsoqNjY2wy9fvqwTERFpAar5gy3PB6/6jtfRa8M44YpZyA0ZmL5vP3/zQz2yy23hRzeoNMxzHbvi+StxhdH79+8XCQsLV61du9aJiYmJg5mZWfHXr19nkpKSUoHyP2ExiA6evf9CwHWc8EhgoTR5gjxgM/sNKLmVQj3GAPPckVSRSjxa//j7+3fs2bPHjoODwwYkAIzR+0uXLg1fvXr1RyD3H64S+Hi6KNGxwkRpEgUBoEfKvv/60wfE/FBMyHNgI44ePfpt3bp1Sf/+/XsLNO/TqVOnYoCx9wjkV/TUQm41wUKtEvNstkSx9oSnIOavqwXSlUTWhX+jo6Mf2NnZpQLF/1pZWZ1G9xwl9S4DcjFMDQD0WDEZdegfWVnZjTC/YMt35HqO7EKGkpYMepsSl6eoAcD2ITe20RvLxHqQVH3oHkU3i1Cs4WpkY9MDEGAAFQxTksy+zWUAAAAASUVORK5CYII=);
+					  position: relative;
+					  display: inline-block;
+					  width: 14px;
+					  height: 14px;
+					}
+
+					.custom-checkbox.checked {
+					background-position: -14px;
+					}
+				</style>
+				<script>
+					runIt.push( function() {
+						$( document ).on( 'click',  '.custom-checkbox.ex1', function() {
+							$( this ).toggleClass( 'checked' );
+						});
+
+						var mk = new MK();
+
+						mk.bindElement( 'x', '.my-checkbox', {
+							on: 'click',
+							getValue: function() {
+								return $( this ).hasClass( 'checked' );
+							},
+							setValue: function( v ) {
+								$( this ).toggleClass( 'checked', !!v );
+							}
+						});
+
+						mk.x = true;
+					});
+				</script>
+			</div>
+		</div>
+		<h3 id="events"><a href="examples/Matreshka.html#events">Events</a></h3>
+		<div class="row">
+			
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+					<code>
+					var mk = new MK(); // same as new Matreshka;
+
+					mk.on( 'yeah', function() {
+						var args = [].slice.call( arguments ).join( ', ' );
+						$( '.output' ).html( args );
+					});
+
+					mk.trigger( 'yeah', 1, 'string', {} );
+					</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<div class="output"></div>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<div class="output ex1"></div>
+				<script>
+					runIt.push( function() {
+						var mk = new MK();
+
+						mk.on( 'yeah', function() {console.log( $( '.output.ex1' ) );
+							var args = [].slice.call( arguments ).join( ', ' );
+							$( '.output.ex1' ).html( args );
+						});
+
+						mk.trigger( 'yeah', 1, 'string', {} );
+					});
+				</script>
+			</div>
+		</div>
+		
+		<h3 id="change-event"><a href="examples/Matreshka.html#change-event"><code>change:</code> event</a></h3>
+		<div class="row">
+			
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+					<code>
+					var mk = new MK();
+
+					mk.on( 'change:x', function() {
+						var text = 'x changed to ' + this.x;
+						$( '.output' ).html( text );
+					});
+
+					mk.x = 5;
+					</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<div class="output"></div>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<div class="output ex2"></div>
+				<script>
+					runIt.push( function() {
+						var mk = new MK();
+
+						mk.on( 'change:x', function() {
+							var text = 'x changed to ' + this.x;
+							$( '.output.ex2' ).html( text );
+						});
+
+						mk.x = 5;
+					});
+				</script>
+			</div>
+		</div>
+		
+		<h3 id="inheritance"><a href="examples/Matreshka.html#inheritance">Inheritance</a></h3>
+		<div class="row">
+			
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+					<code>
+					var MyApp = Class({
+						'extends': MK,
+						constructor: function() {
+							this
+								//calling this method is required before you use events and bindings
+								.initMK()
+								// default data
+								.set( 'x', 3 )
+								.bindElement( 'x', '.my-select' )
+								.on( 'change:x', function() {
+									alert( 'x changed to ' + this.x );
+								})
+							;
+						}
+					});
+
+					var app = new MyApp();
+					</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<select class="my-select">
+						<option value="1">First Option</option>
+						<option value="2">Second Option</option>
+						<option value="3">Third Option</option>
+						<option value="4">Fourth Option</option>
+						<option value="5">Fifth Option</option>
+					</select>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<select class="my-select ex3">
+					<option value="1">First Option</option>
+					<option value="2">Second Option</option>
+					<option value="3">Third Option</option>
+					<option value="4">Fourth Option</option>
+					<option value="5">Fifth Option</option>
+				</select>
+				<script>
+					runIt.push( function() {
+						var MyApp = Class({
+							'extends': MK,
+							constructor: function() {
+								this
+									//calling this method is required before you use events and bindings
+									.initMK() 
+									.set( 'x', 3 )
+									.bindElement( 'x', '.my-select.ex3' )
+									.on( 'change:x', function() {
+										alert( 'x changed to ' + this.x );
+									})
+								;
+							}
+						});
+
+						var app = new MyApp();
+					});
+				</script>
+			</div>
+		</div>
+		<!-- <a class="jsbin-embed" href="http://jsbin.com/iroGuqe/1/embed?js,output">JS Bin</a>
+		<a class="jsbin-embed" href="http://jsbin.com/aZEseWE/5/embed?js,output">JS Bin</a>
+		<a class="jsbin-embed" href="http://jsbin.com/omOsaQo/1/embed?js,output">JS Bin</a>
+		<a class="jsbin-embed" href="http://jsbin.com/omOsaQo/3/embed?js,output">JS Bin</a>
+		<a class="jsbin-embed" href="http://jsbin.com/EJUYeqi/2/embed?js,output">JS Bin</a>
+		<a class="jsbin-embed" href="http://jsbin.com/EJUYeqi/4/embed?js,output">JS Bin</a>
+		<a class="jsbin-embed" href="http://jsbin.com/IfAKaYE/1/embed?js,output">JS Bin</a> -->
+	</div>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../js/prettify.js"></script>
+	<script src="http://finom.github.io/js/matreshka/xclass.js"></script>
+	<script src="http://finom.github.io/js/matreshka/matreshka.js"></script>
+	<script src="http://finom.github.io/js/matreshka/array.mk.js"></script>
+	<script src="http://finom.github.io/js/matreshka/object.mk.js"></script>	
+	<script>
+		( function() {
+			function escapeHTML( string ) {
+				var pre = document.createElement( 'pre' ),
+					text = document.createTextNode( string );
+				pre.appendChild( text );
+				return pre.innerHTML;
+			};
+			
+			function removeExtraTabs( string ) {
+				var lines = string.split( '\n' ),
+					tabsLength,
+					minTabsLength = Infinity,
+					tabsReg;
+					
+				for( var i = 0; i < lines.length; i++ ) {
+					if( lines[ i ].replace( /\s/g, '' ).length ) {
+						tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/g, '$1' ).length;
+						minTabsLength = Math.min( minTabsLength, tabsLength );
+					}
+				}
+				minTabsLength = minTabsLength | 0;
+				tabsReg = new RegExp( new Array( minTabsLength + 1 ).join( '\t' ) );
+				for( var i = 0; i < lines.length; i++ ) {
+					lines[ i ] = lines[ i ].replace( tabsReg, '' );
+				}
+				
+				return lines.join( '\n' );
+			};
+			
+			window.onload = function() {
+				var toEscape = document.querySelectorAll( '.escape-html' ),
+					pre = document.getElementsByTagName( 'pre' ),
+					code;
+				for( var i = 0; i < toEscape.length; i++ ) {
+					toEscape[ i ].innerHTML = escapeHTML( toEscape[ i ].innerHTML );
+				}
+				for( var i = 0; i < pre.length; i++ ) {
+					pre[ i ].innerHTML = removeExtraTabs( pre[ i ].innerHTML );
+					code = pre[ i ].getElementsByTagName( 'code' )[ 0 ];
+					pre[ i ].innerHTML = pre[ i ].innerHTML.trim();
+					if( code ) {
+						code.innerHTML = code.innerHTML.trim();
+					}
+				}
+				
+				prettyPrint();
+					
+				/*$( 'code' ).each( function() {
+					this.innerHTML = this.innerHTML.replace( /\n/g, '<br>' );
+				});*/
+				
+				if( window.runIt ) {
+					for( var i = 0; i < window.runIt.length; i++ ) {
+						window.runIt[ i ]();
+					}
+				}
+				
+				
+				
+			};
+		})();
+	</script>
+	
+		<script>
+		
+	</script>
+</body>
+
+</html>
