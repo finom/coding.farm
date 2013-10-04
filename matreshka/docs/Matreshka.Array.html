@@ -191,7 +191,7 @@
     
     <pre class="prettyprint"><code>// creates Matreshka.Array instance with length = 2new MK.Array( 'Hi', { a: 'b' } );</code></pre>
 
-        <p class="code-caption">Inheriting</p>
+        <p class="code-caption">Inheritance</p>
     
     <pre class="prettyprint"><code>var MyClass = Class({	'extends': MK.Array,	constructor: function() {		// calls MK.Array constructor with this context and given arguments		MyClass.parent.constructor( this, arguments );	},	method: function() {}});</code></pre>
 
@@ -219,18 +219,14 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="createSelf"><span class="type-signature"></span>createSelf<span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="concat"><span class="type-signature"></span>concat<span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Creates self from another array</p>
+    <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">Array.prototype.concat</a> and accepts <a href="Matreshka.Array.html">Matreshka.Array</a> instances</p>
     
 </dt>
 <dd>
     
-    
-    <div class="description">
-        If you have array or array-like object (eg arguments) you can convert it to MK.Array instance by the method
-    </div>
     
 
     
@@ -270,6 +266,9 @@
             
                 
 <span class="param-type label label-type label-type-array">Array</span>
+ or 
+
+<span class="param-type label label-type label-type-unknown"><a href="Matreshka.Array.html">Matreshka.Array</a></span>
 
 
             
@@ -279,7 +278,200 @@
             
             
             
+            <td class="description last">(Array instance or MK.Array instance)</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+   
+    
+	
+    <h5>Returns:
+    
+            
+
+
+	
+<span class="param-type label label-type label-type-unknown"><a href="global.html#mkArray">mkArray</a></span>
+
+
+    (new <a href="Matreshka.Array.html">Matreshka.Array</a> instance)
+
+
+        </h5>
+	
+	
+	
+    
+	
+	
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line251">line 251</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Examples</h5>
+        
+        <p class="code-caption">Basic usage 1</p>
+    
+    <pre class="prettyprint"><code>var result = this.concat( [ 1, 2, 3 ] );</code></pre>
+
+        <p class="code-caption">Basic usage 2</p>
+    
+    <pre class="prettyprint"><code>var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 5 ] ),	result = this.concat( mkArray, [ 6, 7, 8 ] );</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="createFrom"><span class="type-signature"></span>createFrom<span class="signature">(array, <span class="optional">boolean</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    
+    
+    <p class="summary">Creates self from another array</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        If you have array or array-like object (e.g. arguments) you can convert it to MK.Array instance by this method
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5 class="hide">Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>array</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-array">Array</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
             <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>boolean</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-unknown">capture</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">if you want to capture previous value via <code>"was"</code> key in event gandler argument</td>
         </tr>
 	
 	
@@ -306,6 +498,14 @@
 	
 	
 	
+    
+    <h5>Fires:
+    
+        <code>recreate</code>
+    
+        <code>modify</code>
+    
+	</h5>
     
 	
 	
@@ -357,7 +557,7 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>new MK.Array().createSelf( [1, 2, 3, 4, 5] );</code></pre>
+    <pre class="prettyprint"><code>new MK.Array().createFrom( [1, 2, 3, 4, 5] );</code></pre>
 
     
 </dd>
@@ -516,7 +716,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line475">line 475</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line542">line 542</a>
     </li></ul></dd>
     
     
@@ -699,7 +899,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line410">line 410</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line477">line 477</a>
     </li></ul></dd>
     
     
@@ -884,7 +1084,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line386">line 386</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line453">line 453</a>
     </li></ul></dd>
     
     
@@ -1069,7 +1269,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line462">line 462</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line529">line 529</a>
     </li></ul></dd>
     
     
@@ -1161,7 +1361,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line194">line 194</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line220">line 220</a>
     </li></ul></dd>
     
     
@@ -1344,7 +1544,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line497">line 497</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line564">line 564</a>
     </li></ul></dd>
     
     
@@ -1370,7 +1570,7 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var mkArray = new MK.Array().createSelf( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
+    <pre class="prettyprint"><code>var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
 
     
 </dd>
@@ -1438,7 +1638,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line177">line 177</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line203">line 203</a>
     </li></ul></dd>
     
     
@@ -1578,7 +1778,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line521">line 521</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line588">line 588</a>
     </li></ul></dd>
     
     
@@ -1604,7 +1804,7 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var mkArray = new MK.Array().createSelf( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );alert( this.join( ':' ) ); // alerts '1:2:3:4:4:3:2:1'</code></pre>
+    <pre class="prettyprint"><code>var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );alert( this.join( ':' ) ); // alerts '1:2:3:4:4:3:2:1'</code></pre>
 
     
 </dd>
@@ -1761,7 +1961,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line509">line 509</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line576">line 576</a>
     </li></ul></dd>
     
     
@@ -1787,7 +1987,7 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var mkArray = new MK.Array().createSelf( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
+    <pre class="prettyprint"><code>var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
 
     
 </dd>
@@ -1946,7 +2146,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line373">line 373</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line440">line 440</a>
     </li></ul></dd>
     
     
@@ -2048,7 +2248,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line239">line 239</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line292">line 292</a>
     </li></ul></dd>
     
     
@@ -2210,7 +2410,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line225">line 225</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line278">line 278</a>
     </li></ul></dd>
     
     
@@ -2397,7 +2597,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line436">line 436</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line503">line 503</a>
     </li></ul></dd>
     
     
@@ -2423,7 +2623,7 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>new MK.Array().createSelf( [0,1,2,3,4] ).reduce( function( previousValue, currentValue ) {	return previousValue + currentValue;});</code></pre>
+    <pre class="prettyprint"><code>new MK.Array().createFrom( [0,1,2,3,4] ).reduce( function( previousValue, currentValue ) {	return previousValue + currentValue;});</code></pre>
 
     
 </dd>
@@ -2580,7 +2780,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line449">line 449</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line516">line 516</a>
     </li></ul></dd>
     
     
@@ -2606,7 +2806,7 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>new MK.Array().createSelf( [0,1,2,3,4] ).reduceRight( function( previousValue, currentValue ) {	return previousValue + currentValue;});</code></pre>
+    <pre class="prettyprint"><code>new MK.Array().createFrom( [0,1,2,3,4] ).reduceRight( function( previousValue, currentValue ) {	return previousValue + currentValue;});</code></pre>
 
     
 </dd>
@@ -2682,7 +2882,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line289">line 289</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line342">line 342</a>
     </li></ul></dd>
     
     
@@ -2784,7 +2984,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line262">line 262</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line315">line 315</a>
     </li></ul></dd>
     
     
@@ -2811,6 +3011,152 @@
         <p class="code-caption">Basic usage</p>
     
     <pre class="prettyprint"><code>this.shift( 1, 2, 3 );</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="silentCreateFrom"><span class="type-signature"></span>silentCreateFrom<span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    
+    
+    <p class="summary">Creates self from another array</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Works similar to <a href="Matreshka.Array.html#createFrom">Matreshka.Array#createFrom</a> but without triggering events
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5 class="hide">Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>array</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-array">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+   
+    
+	
+    <h5>Returns:
+    
+            
+
+
+	
+<span class="param-type label label-type label-type-unknown"><a href="global.html#mkArray">mkArray</a></span>
+
+
+    (self)
+
+
+        </h5>
+	
+	
+	
+    
+	
+	
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line152">line 152</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Example</h5>
+        
+        <p class="code-caption">Basic usage</p>
+    
+    <pre class="prettyprint"><code>new MK.Array().silentCreateFrom( [1, 2, 3, 4, 5] );</code></pre>
 
     
 </dd>
@@ -2878,7 +3224,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line324">line 324</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line377">line 377</a>
     </li></ul></dd>
     
     
@@ -3032,7 +3378,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line314">line 314</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line367">line 367</a>
     </li></ul></dd>
     
     
@@ -3126,7 +3472,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line352">line 352</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line419">line 419</a>
     </li></ul></dd>
     
     
@@ -3220,7 +3566,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line343">line 343</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line396">line 396</a>
     </li></ul></dd>
     
     
@@ -3247,6 +3593,152 @@
         <p class="code-caption">Basic usage</p>
     
     <pre class="prettyprint"><code>this.silentShift();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="silentSort"><span class="type-signature"></span>silentSort<span class="signature">(compareFunction)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    
+    
+    <p class="summary">Works similar to <a href="Matreshka.Array.html#sort">Matreshka.Array#sort</a> but without triggering events</p>
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        <h5 class="hide">Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>compareFunction</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-function">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+   
+    
+	
+    <h5>Returns:
+    
+            
+
+
+	
+<span class="param-type label label-type label-type-unknown"><a href="global.html#mkArray">mkArray</a></span>
+
+
+    (self)
+
+
+        </h5>
+	
+	
+	
+    
+	
+	
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line405">line 405</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Examples</h5>
+        
+        <p class="code-caption">Basic usage</p>
+    
+    <pre class="prettyprint"><code>this.silentSort();</code></pre>
+
+        <p class="code-caption">Sorting callback</p>
+    
+    <pre class="prettyprint"><code>this.silentSort( function( a, b ) {	 return a > b ? -1 : 1;});</code></pre>
 
     
 </dd>
@@ -3438,7 +3930,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line361">line 361</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line428">line 428</a>
     </li></ul></dd>
     
     
@@ -3592,7 +4084,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line333">line 333</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line386">line 386</a>
     </li></ul></dd>
     
     
@@ -3757,7 +4249,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line399">line 399</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line466">line 466</a>
     </li></ul></dd>
     
     
@@ -3940,7 +4432,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line423">line 423</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line490">line 490</a>
     </li></ul></dd>
     
     
@@ -4090,7 +4582,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line273">line 273</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line326">line 326</a>
     </li></ul></dd>
     
     
@@ -4320,7 +4812,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line300">line 300</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line353">line 353</a>
     </li></ul></dd>
     
     
@@ -4414,7 +4906,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line147">line 147</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line173">line 173</a>
     </li></ul></dd>
     
     
@@ -4510,7 +5002,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line209">line 209</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line235">line 235</a>
     </li></ul></dd>
     
     
@@ -4604,7 +5096,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line166">line 166</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line192">line 192</a>
     </li></ul></dd>
     
     
@@ -4696,7 +5188,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line488">line 488</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line555">line 555</a>
     </li></ul></dd>
     
     
@@ -4858,7 +5350,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line250">line 250</a>
+        <a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line303">line 303</a>
     </li></ul></dd>
     
     
@@ -4908,13 +5400,13 @@
 </div>
 
 <nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 03 2013 01:57:11 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 05 2013 02:17:54 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

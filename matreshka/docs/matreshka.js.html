@@ -92,11 +92,13 @@
  * @example &lt;caption>Basic usage&lt;/caption>
  * var m = new Matreshka;
  * @example &lt;caption>Using MK synonim&lt;/caption>
- * var m = new MK; // does the same as previous example
- * @example &lt;caption>Inheriting&lt;/caption>
+ * var m = new MK;
+ * @example &lt;caption>Inheritance&lt;/caption>
  * var MyClass = Class({
  * 	'extends': Matreshka,
- * 	method: function() {}
+ * 	method: function() {
+ * 		this.initMK();
+ * }
  * });
 */
 gc.MK = gc.Matreshka = Class({
@@ -104,13 +106,13 @@ gc.MK = gc.Matreshka = Class({
 	//__events: null,
 	/** 
 	 * @method Matreshka#on
-	 * @summary Binds event handler
-	 * @desc The method adds event handler to Matreshka instance. The event could be triggered by {@link Matreshka#trigger} method. 
-	 * You can pass &lt;code>"change:myKey"&lt;/code> as first {@link Matreshka#on} argument to monitor &lt;code>"myKey"&lt;/code> property change.
-	 * @param {eventNames} names - Names of the events separated by space (eg. "change:x ajaxcomplete change:y")
-	 * @param {eventHandler} callback - Event handler
-	 * @param {boolean} [triggerOnInit] - If equals to true then event handler will be triggered immediately
-	 * @param {object} [context] - &lt;code>this&lt;/code> context for the handler
+	 * @summary Attaches an event handler to the self
+	 * @desc The {@link Matreshka#on} method attaches event handler to the Matreshka instance. The event could be triggered by {@link Matreshka#trigger} method. 
+	 * You can pass &lt;code>"change:myKey"&lt;/code> as first {@link Matreshka#on} argument to monitor &lt;code>"myKey"&lt;/code> property changes.
+	 * @param {eventNames} names - Names of the space-delimited list of events (eg. "change:x ajaxcomplete change:y")
+	 * @param {eventHandler} callback - A function to execute when the event is triggered
+	 * @param {boolean} [triggerOnInit] - If &lt;code>triggerOnInit&lt;/code> equals to &lt;code>true&lt;/code> then an event handler will be triggered immediately
+	 * @param {object} [context] - An object to use as &lt;code>this&lt;/code>when executing &lt;code>callback&lt;/code>
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.on( 'change:x', function() {
@@ -118,11 +120,11 @@ gc.MK = gc.Matreshka = Class({
 	 * });
 	 * this.x = Math.random();
 	 * @example &lt;caption>Passing context&lt;/caption>
-	 * //Alert will be execuded in window context and display secons argument,
+	 * //Alert will be execuded in window context and display second argument,
 	 * //that has been passed to .trigger method
 	 * this.on( 'ohmygosh', alert, window );
 	 * this.trigger( 'ohmygosh', 'Hello world' );
-	 * @example &lt;caption>Call event handler immediately&lt;/caption>
+	 * @example &lt;caption>Calling event handler immediately after initialization&lt;/caption>
 	 * //Alerts "bar" immediately and waits for triggering "foo" event
 	 * this.on( 'foo', function() {
 	 *   alert( 'bar' );
@@ -167,12 +169,12 @@ gc.MK = gc.Matreshka = Class({
 	
 	/** 
 	 * @method Matreshka#once
-	 * @summary Binds event handler that could be triggered once
-	 * @desc Works similar to {@link Matreshka#on} method but the handler could be triggered only once.
+	 * @summary Attaches an event handler to the self. A handler is executed at most once.
+	 * @desc Works similar to {@link Matreshka#on} method but a handler could be executed only once.
 	 * Pay attention that this method doesn't have &lt;code>triggerOnInit&lt;/code> argument.
-	 * @param {eventNames} names - Names of the events separated by space (eg. &lt;code>"change:x ajaxcomplete change:y"&lt;/code>)
-	 * @param {eventHandler} callback - Event handler
-	 * @param {object} [context] - &lt;code>this&lt;/code> context for the handler
+	 * @param {eventNames} names - Space-delimited list of event names (e.g. &lt;code>"change:x ajaxcomplete change:y"&lt;/code>)
+	 * @param {eventHandler} callback - A function to execute when the event is triggered
+	 * @param {object} [context] - An object to use as &lt;code>this&lt;/code>when executing &lt;code>callback&lt;/code>
 	 * @returns {mk} self
 	 * @example
 	 * this.once( 'change:x', function() {
@@ -206,7 +208,7 @@ gc.MK = gc.Matreshka = Class({
 				this.on(name, once, context);
 			}).call( this, name );
 			
-			if( !names[ i ].indexOf( 'change:' ) ) { // means 'change:' in the beginning of the string
+			if( !names[ i ].indexOf( 'change:' ) ) { // means 'change:' substring is in the beginning of the string
 				this.makeSpecial( names[ i ].replace( 'change:', '' ) );
 			}
 		}
@@ -216,29 +218,29 @@ gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#off
-	 * @summary Removes event handler from MK instance
-	 * @desc If you no longer need added event, you can remove it by passing event names as first argument.
-	 * You can pass callback and given context for the events that you want to remove and you can pass nothing to remove all events.
-	 * @param {eventNames} [names] - The names of the events separated by space
-	 * @param {eventHandler} callback - Event handler
-	 * @param {object} [context] - &lt;code>this&lt;/code> context for the handler
+	 * @summary Removes all event handlers from Matreshka instance of given events
+	 * @desc If you no longer need some event or few events, you can remove them by passing event names as first argument to the {@link Matreshka#off} method.
+	 * You can specify the callback and given context for the events that you want to remove and you can pass nothing to remove all events.
+	 * @param {eventNames} [names] - Space-delimited list of event names (e.g. &lt;code>"change:x ajaxcomplete change:y"&lt;/code>)
+	 * @param {eventHandler} [callback] - A function that has been passed to {@link Matreshka#on}
+	 * @param {object} [context] - An object that used as &lt;code>this&lt;/code> when executing &lt;code>callback&lt;/code>
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.off( 'change:x bind' );
-	 * @example &lt;caption>Removing all events&lt;/caption>
+	 * @example &lt;caption>Remove all events&lt;/caption>
 	 * this.off();
-	 * @example &lt;caption>Removing events with given event handler&lt;/caption>
+	 * @example &lt;caption>Remove event with given event handler&lt;/caption>
 	 * var handler = function() { 
 	 * 	//...
 	 * }
 	 * this.on( 'change:x', handler );
 	 * this.off( 'change:x', handler );
-	 * @example &lt;caption>Removing events with given event handler and context&lt;/caption>
+	 * @example &lt;caption>Remove event with given event handler and given context&lt;/caption>
 	 * var object = {};
 	 * this.on( 'change:x', handler, object );
 	 * this.off( 'change:x', handler, object );
 	 */
-	off: function (names, callback, context) { // @todo test
+	off: function (names, callback, context) {
 		var retain, ev, events, names, i, l, j, k;
 		
 		if (!names && !callback && !context) {
@@ -267,10 +269,10 @@ gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#trigger
-	 * @summary Triggers given events
-	 * @desc After binding event by {@link Matreshka#on} or {@link Matreshka#once} you can trigger it by {@link Matreshka#trigger} method and pass needed arguments to event handler.
+	 * @summary Trigger callbacks (event handlers) for the given event, or space-delimited list of events. Subsequent arguments to trigger will be passed along to the event callbacks.
+	 * @desc After attaching event using {@link Matreshka#on} or {@link Matreshka#once} you can trigger it by {@link Matreshka#trigger} method and pass needed arguments to event handler using subsequent arguments.
 	 * You can bind &lt;code>"all"&lt;/code> event to catch any event triggering.
-	 * @param {eventNames} [names] - The names of the events separated by space that you want to trigger
+	 * @param {eventNames} [names] - Space-delimited list of event names that you want to trigger
 	 * @param {...*} [arg] - Arguments that you wish to pass to the event handler
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
@@ -329,10 +331,10 @@ gc.MK = gc.Matreshka = Class({
 	 * @summary Creates event bridge between DOM node and Matreshka instance property
 	 * @desc This powerful function binds element to instance property with given options that say when and how to extract element's value, how to set element's value when property is changed.
 	 * 
-	 * @param {(string|mk)} key - The key (or keys separated by space) that has to be binded to given element(s)
-	 * @param {(Node[]|NodeList|Node|jQuery|string)} el - The element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be binded to given key(s)
-	 * @param {elementOptions} [elOpts] - Element options object that contains: setValue (how to set value for an element), getValue (how to extract value from element), on (when we have to extract value from element and put it to the property)
-	 * @param {eventOptions} [evtOpts] - If you want to set &lt;code>"silent"&lt;/code> flag or pass some options to &lt;code>"bind"&lt;/code> event handler
+	 * @param {(string|mk)} key - A key (or space-delimited list keys) that has to be binded to given element(s)
+	 * @param {(Node[]|NodeList|Node|jQuery|string)} el - An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector...) that has to be binded to given key(s)
+	 * @param {elementOptions} [elOpts] - An element options object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)
+	 * @param {eventOptions} [evtOpts] - If you want to set &lt;code>"silent"&lt;/code> flag or pass some options to a &lt;code>"bind"&lt;/code> event handler
 	 * 
 	 * @returns {mk} self
 	 * 
@@ -353,7 +355,7 @@ gc.MK = gc.Matreshka = Class({
 	 * @example &lt;caption>Basic usage 2. By Default {@link Matreshka.elementProcessors} array contains elementOptions for few dom elements &lt;code>(input[type="text"], input[type="radio"], input[type="checkbox"], select, textarea...)&lt;/code>. So you don't need to pass eventOptions for these elements&lt;/caption>
 	 * this.bindElement( 'myKey', '.checkbox' );
 	 * 
-	 * @example &lt;caption>Custom checkbox 1. This example Shows how to create your own custom checkbox that has &lt;code>"checked"&lt;/code> class if checked.&lt;/caption>
+	 * @example &lt;caption>Custom checkbox 1. This example Shows how to create your own custom checkbox that has &lt;code>"checked"&lt;/code> class if it's state is checked.&lt;/caption>
 	 * this.bindElement( 'myKey', '.custom-checkbox', {
 	 * 	on: 'click',
 	 * 	getValue: function() {
@@ -380,18 +382,18 @@ gc.MK = gc.Matreshka = Class({
 	 * 	})
 	 * this.bindElement( 'myKey', '.custom-checkbox' );
 	 * 
-	 * @example &lt;caption>Using &lt;code>"bind"&lt;/code> event&lt;/caption>
+	 * @example &lt;caption>Use &lt;code>"bind"&lt;/code> event&lt;/caption>
 	 * this.on( 'bind:myKey', function() { alert( 'ok!' ); });
 	 * this.bindElement( 'myKey', '.custom-checkbox' ); // alerts "ok!"
 	 * 
-	 * @example &lt;caption>Using &lt;code>"bind"&lt;/code> event options&lt;/caption>
+	 * @example &lt;caption>Use &lt;code>"bind"&lt;/code> event options&lt;/caption>
 	 * this.on( 'bind:myKey', function() { alert( 'ok!' ); });
 	 * this.bindElement( 'myKey', '.custom-checkbox', {}, { silent: true } ); // no alert
 	 * 
-	 * @example &lt;caption>Extending default elementOptions. For example we're working with &lt;code>input[type="text"]&lt;/code>. By default &lt;code>"on"&lt;/code> property contains &lt;code>"keydown"&lt;/code>. But we want to use &lt;code>"blur"&lt;/code> event for changing &lt;code>myKey&lt;/code>&lt;/caption>
+	 * @example &lt;caption>Extending default elementOptions. For example we're working with &lt;code>input[type="text"]&lt;/code>. By default &lt;code>"on"&lt;/code> property for this element contains &lt;code>"keydown"&lt;/code> string. But we want to use &lt;code>"blur"&lt;/code> event for the element that has been bound to &lt;code>myKey&lt;/code> property&lt;/caption>
 	 * this.bindElement( 'myKey', '.custom-checkbox', { on: "blur" });
 	 * 
-	 * @example &lt;caption>Binding self to the element. If you want to use context (sandbox) for binding elements contained in single element, you can pass &lt;code>this&lt;/code> to the method&lt;/caption>
+	 * @example &lt;caption>Binding self to the element. If you want to use context (sandbox) for binding elements contained in single element, you can pass &lt;code>this&lt;/code> special property to the method&lt;/caption>
 	 * // you can use this.bindElement( '__this__', '.app' ); instead
 	 * this.bindElement( this, '.app' );
 	 * // this.$( '.my-element' ) takes element(s) from .app
@@ -401,7 +403,8 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#bindElement
 	 * @variation 2
-	 * @summary {@link Matreshka#bindElement} accepts key-element use case if you have many bindings
+	 * @summary Object alternative
+	 * @desc {@link Matreshka#bindElement} accepts key-element use case if you have many bindings.
 	 * 
 	 * @param {object} keyElementPairs
 	 * @param {elementOptions} [elOpts] - (see above)
@@ -417,7 +420,8 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#bindElement
 	 * @variation 3
-	 * @summary {@link Matreshka#bindElement} accepts one more way how to pass &lt;code>key, element, elementOptions&lt;/code> to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using {@link Matreshka#unbindElement}
+	 * @summary Many options alternative
+	 * @desc {@link Matreshka#bindElement} accepts one more way how to pass &lt;code>key, element, elementOptions&lt;/code> to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using {@link Matreshka#unbindElement}.
 	 * 
 	 * @param {Array[]} setOfArguments - (see example)
 	 * @param {eventOptions} [evtOpts] - (see above)
@@ -563,14 +567,14 @@ gc.MK = gc.Matreshka = Class({
 	 * @fires unbind
 	 * @variation 1
 	 * @summary Unbinds element from given property
-	 * @desc If you no longer need element binding you can remove it by the method.
-	 * @param {string|null} key - The key (or keys separated by space) that has to be unbinded from given element(s) (null if you want to unbind element(s) from all keys of instance)
-	 * @param {(Node[]|NodeList|Node|jQuery|string)} [el]- The element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be unbinded from given key(s)
+	 * @desc If you no longer need a bridge between element and Matreshka property you can remove it by this method.
+	 * @param {string|null} key - A key (or space-delimited list keys) that has to be unbinded from given element(s) (null if you want to unbind element(s) from any key of instance)
+	 * @param {(Node[]|NodeList|Node|jQuery|string)} [el]- An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be unbinded from given key(s)
 	 * @param {eventOptions} [evtOpts] - If you want to set "silent" flag or pass some options to "unbind" event handler
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.bindElement( 'myKey', '.my-element' );
-	 * this.myKey = true; // changes myKey property and binded element state
+	 * this.myKey = true; // changes myKey property and element state
 	 * this.unbindElement( 'myKey', '.my-element' );
 	 * this.myKey = false; // changes property only
 	 */
@@ -579,9 +583,9 @@ gc.MK = gc.Matreshka = Class({
 	 * @method Matreshka#unbindElement
 	 * @variation 2
 	 * @summary Unbinds element(s) from given properties contained in key-element object
-	 * @param {object} keyElementPairs
+	 * @param {object} keyElementPairs (see example)
 	 * @param {(Node[]|NodeList|Node|jQuery|string)} [el]
-	 * @param {eventOptions} [evtOpts]
+	 * @param {eventOptions} [evtOpts] (see above)
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.unbindElement({
@@ -594,8 +598,8 @@ gc.MK = gc.Matreshka = Class({
 	 * @method Matreshka#unbindElement
 	 * @variation 3
 	 * @summary Unbinds elements that passed to big ugly array (see {@link Matreshka#bindElement})
-	 * @param {array[]} setOfArguments
-	 * @param {eventOptions} [evtOpts]
+	 * @param {array[]} setOfArguments (see example)
+	 * @param {eventOptions} [evtOpts] (see above)
 	 * @returns {mk} self
 	 *  @example &lt;caption>Basic usage&lt;/caption>
 	 * var temporaryBindings = [
@@ -704,15 +708,15 @@ gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#$el
-	 * @summary Returns binded elements wrapped with jQuery
-	 * @desc After you binded elements you can get them by using the method.
-	 * @param {string} [key] - For which key we want to get elements. If undefined or null returns elements binded to &lt;code>this&lt;/code>.
-	 * @returns {jQuery} Binded elements
+	 * @summary Returns elements wrapped with jQuery that bound to given property 
+	 * @desc After you bound elements to a property you can extract them by using this method.
+	 * @param {string} [key] - For which key we want to extract elements. If undefined or null returns elements bound to &lt;code>this&lt;/code>.
+	 * @returns {jQuery} Bound elements
 	 * 
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.bindElement( 'myKey', '.my-element' );
 	 * this.$el( 'myKey' ); // returns $( '.my-element' )
-	 * @example &lt;caption>Get elements binded to &lt;code>this&lt;/code>&lt;/caption>
+	 * @example &lt;caption>Get element bound to &lt;code>this&lt;/code>&lt;/caption>
 	 * this.bindElement( this, '.app' );
 	 * this.$el(); // returns $( '.app' )
 	 */
@@ -733,13 +737,13 @@ gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#el
-	 * @summary Returns first binded element
-	 * @param {string} [key] - For which key we want to get single element. If undefined or null returns element binded to &lt;code>this&lt;/code>.
-	 * @returns {(Node|null)} Binded element
+	 * @summary Returns first bound element
+	 * @param {string} [key] - For which key we want to extract single element. If undefined or null returns element bound to &lt;code>this&lt;/code>.
+	 * @returns {(Node|null)} Bound element
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.bindElement( 'myKey', '.my-element' );
 	 * this.el( 'mykey' ); // returns $( '.my-element' )[0]
-	 * @example &lt;caption>Get element binded to &lt;code>this&lt;/code>&lt;/caption>
+	 * @example &lt;caption>Get element bound to &lt;code>this&lt;/code>&lt;/caption>
 	 * this.bindElement( this, '.app' );
 	 * this.$el(); // returns $( '.app' )[0]
 	 */
@@ -749,8 +753,8 @@ gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#$
-	 * @summary Finds elements contained in element that binded to &lt;code>this&lt;/code>
-	 * @desc After you bind element to &lt;code>this ("__this__")&lt;/code> you can use the method for finding elements that places in binded element.
+	 * @summary Finds elements that contained in element that bound to &lt;code>this&lt;/code>
+	 * @desc After you bind element to &lt;code>this ("__this__")&lt;/code> you can use this method for finding elements that contained in bound element.
 	 * @param {string} selector
 	 * @returns {jQuery}
 	 * @example &lt;caption>Basic usage&lt;/caption>
@@ -798,9 +802,9 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#defineGetter
 	 * @variation 1
-	 * @summary Defines getter for given key
-	 * @desc Makes possible to create custom getter using Object.defineProperty. 
-	 * @param {string} key - The key for which you want to customize getter
+	 * @summary Defines getter for given property
+	 * @desc This method makes possible to create custom getter using Object.defineProperty. 
+	 * @param {string} key - A key for which you want to customize getter
 	 * @param {function} getter - Your getter
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.defineGetter( 'mykey', function() {
@@ -812,7 +816,7 @@ gc.MK = gc.Matreshka = Class({
 	 * @method Matreshka#defineGetter
 	 * @variation 2
 	 * @summary Defines getter using key-getter pairs object
-	 * @param {object} keyGetterPairs
+	 * @param {object} keyGetterPairs (see example)
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.defineGetter({
 	 * 	myKey1: function() { return 1; } 
@@ -847,11 +851,11 @@ gc.MK = gc.Matreshka = Class({
 	 * @fires change
 	 * @fires change:*key*
 	 * @variation 1
-	 * @summary Sets given property value
-	 * @desc Sets given property value and gives possibility to pass event object (with &lt;code>"silent"&lt;/code> property if you added &lt;code>change:*key*&lt;/code> event in a past or other data).
+	 * @summary Sets value for given property 
+	 * @desc Sets value for given property and gives possibility to pass event object (with &lt;code>"silent"&lt;/code> property if you added &lt;code>change:*key*&lt;/code> event in a past or other data).
 	 * @param {string} key
 	 * @param {*} value
-	 * @param {eventOptions} [evtOptions]
+	 * @param {eventOptions} [evtOpts]
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.on( 'change:myKey', function( evtOpts ) {
 	 * 	alert( evtOpts.value );
@@ -870,9 +874,9 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#set
 	 * @variation 2
-	 * @summary You can use key-value pairs object if you want to set few properties
+	 * @summary You can use key-value pairs object if you want to set few properties at once
 	 * @param {object} keyValuePairs
-	 * @param {eventOptions} [evtOptions]
+	 * @param {eventOptions} [evtOpts]
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * this.set({
 	 * 	myKey1: 1,
@@ -932,7 +936,7 @@ gc.MK = gc.Matreshka = Class({
 	 * @fires remove
 	 * @fires remove:*key*
 	 * @summary Removes property from {@link Matreshka} instance
-	 * @param {string} key - Key (or keys separated by space) that you want to remove from current instance
+	 * @param {string} key - A key (or space-delimited list of keys) that you want to remove from current instance
 	 * @param {eventOptions} [evtOptions]
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
@@ -975,7 +979,7 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#define
 	 * @variation 1
-	 * @summary Defines property using &lt;code>Object.defineProperty&lt;/code>. Pay attention that &lt;code>Object.defineProperty&lt;/code> doesn't work correctrly in IE8.
+	 * @summary Defines property using &lt;code>Object.defineProperty&lt;/code>. Pay attention that &lt;code>Object.defineProperty&lt;/code> doesn't work correctly in IE8.
 	 * @param {string} key - key
 	 * @param {function} descriptor - descriptor
 	 * @returns {mk} self
@@ -1017,7 +1021,7 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#defineNotEnum
 	 * @variation 1
-	 * @summary Defines not enumerable property using get-set hack for IE8
+	 * @summary Defines non-enumerable property using get-set hack for IE8
 	 * @param {string} key - key
 	 * @param {*} - value
 	 * @returns {mk} self
@@ -1027,7 +1031,7 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#defineNotEnum
 	 * @variation 2
-	 * @summary Defines not enumerable properties defined in key-value object
+	 * @summary Defines non-enumerable properties defined in key-value object
 	 * @param {object} keyValuePairs
 	 * @returns {mk} self
 	 * @example &lt;caption>Basic usage&lt;/caption>
@@ -1067,11 +1071,12 @@ gc.MK = gc.Matreshka = Class({
 	/**
 	 * @method Matreshka#initMK
 	 * @summary Initializes Matreshka
+	 * @desc This method initializes Matreshka by creating needed objects. You should call it if you inherit your own class from Matreshka.
 	 * @returns {mk} self
 	 * @example &lt;caption>Usage&lt;/caption>
 	 * this.initMK();
 	 */
-	initMK: function() { // do not enumerable for IE8 (get: function() {return x;})
+	initMK: function() {
 		return this.defineNotEnum({
 			/**
 			 * This object contains all events
@@ -1128,8 +1133,8 @@ MK.extend( MK, {
 	/**
 	 * @member {function[]} Matreshka.elementProcessors
 	 * @enum {function}
-	 * @summary {@link Matreshka.elementProcessors} is the array of functions that compare given element with rules. This using for defining elements behavior in {@link Matreshka#bindElement} method.
-	 * @example &lt;caption>HTML5 input type number&lt;/caption>
+	 * @summary {@link Matreshka.elementProcessors} is the array of functions that compare given element by given rules and returns elementOptions if comparing is successfully. It used for defining elements behavior in {@link Matreshka#bindElement} method without passing third argument.
+	 * @example &lt;caption>HTML5 input type=number&lt;/caption>
 	 * //shift means that we're adding new elementProcessor to the beginning of MK.elementProcessors list
 	 * MK.elementProcessors.shift( function( element ) {
 	 * 	if( element.tagName === 'input' && element.type === 'number' ) return {
@@ -1162,8 +1167,8 @@ MK.extend( MK, {
 	
 	/**
 	 * @member {elementOptions} Matreshka.htmlp
-	 * @summary &lt;code>innerHTML&lt;/code> element processor
-	 * @desc By default if you pass html element to {@link Matreshka#bindElement} that doesn't match any &lt;code>elementProcessor&lt;/code>, the binding does nothing. But sometimes you want to change &lt;code>innerHTML&lt;/code> without having possibility to retrieve value from the element. {@link Matreshka.htmlp} is created as simple &lt;code>elementOptions&lt;/code> object for this case for redusing your code.
+	 * @summary &lt;code>innerHTML&lt;/code> element options
+	 * @desc By default if you pass html element to {@link Matreshka#bindElement} as second argument that doesn't match any &lt;code>elementProcessor&lt;/code>, the binding does nothing. But sometimes you want to change &lt;code>innerHTML&lt;/code> without having possibility to retrieve value from the element. {@link Matreshka.htmlp} is created as simple &lt;code>elementOptions&lt;/code> object for this case for reducing your code.
 	 * @example &lt;caption>Usage&lt;/caption>
 	 * this.bindElement( 'myKey', '.my-element', MK.htmlp );
 	 * // same as
@@ -1180,11 +1185,17 @@ MK.extend( MK, {
 	},
 	
 	/**
+	 * @method Matreshka.noop
+	 * @summary Just empty function
+	 */
+	noop: function() {},
+	
+	/**
 	 * @method Matreshka.each
 	 * @summary Iterates given object with given callback
-	 * @param {object} o - object to iterate
-	 * @param {function} f - callback function
-	 * @param {*} [thisArg] - &lt;code>this&lt;/code> context for &lt;code>f&lt;/code>
+	 * @param {object} o - iterable object
+	 * @param {function} callback - Function to execute for each element.
+	 * @param {*} [thisArg] - Object to use as &lt;code>this&lt;/code> when executing &lt;code>callback&lt;/code>
 	 */
 	each: function( o, f, thisArg ) {
 		if( !o ) return;
@@ -1251,7 +1262,7 @@ MK.elementProcessors.push( function( el ) {
  */
 
  /**
- * The list of events separated by space
+ * Event name or space-delimited list of event names 
  * @typedef {string} eventNames
  * @example
  * var eventNames = 'change:a change:b fyeah done change:x'
@@ -1259,11 +1270,11 @@ MK.elementProcessors.push( function( el ) {
  */
 
  /**
- * &lt;code>elementOptions&lt;/code> contains information how to extract value from the element, how to set value for an element and which element event we have to listen
+ * &lt;code>elementOptions&lt;/code> contains information about how to extract value from an element, how to set value for an element and which element's event we have to listen
  * @typedef {object} elementOptions
- * @property {string} [on] - event name (or events separated by space) on which we have to listen
- * @property {function} [getValue] - function that tells to JS interpreter how to extract value from the element (context "this" is given element)
- * @property {function} [setValue] - "How to set value" for the element (context "this" is given element)
+ * @property {string} [on] - event name (or space-delimited list of events) which we have to listen
+ * @property {function} [getValue] - function that tells how to extract value from an element (context &lt;code>this&lt;/code> is given element)
+ * @property {function} [setValue] - "How to set value" for an element (context &lt;code>this&lt;/code> is given element)
  * 
  * @example
  * var elementOptions = {
@@ -1275,7 +1286,7 @@ MK.elementProcessors.push( function( el ) {
  */
 
 /**
- * &lt;code>eventOptions&lt;/code> could contain any properties. The only special property is &lt;code>"silent"&lt;/code> that passed to {@link Matreshka#set}, {@link Matreshka#remove}, {@link Matreshka#bind}, {@link Matreshka#unbind} and says "Hs event has to be triggered after the method is executed?" 
+ * &lt;code>eventOptions&lt;/code> object could contain any properties. The only special property is &lt;code>"silent"&lt;/code> that could be passed to {@link Matreshka#set}, {@link Matreshka#remove}, {@link Matreshka#bind}, {@link Matreshka#unbind} if you'd like to prevent the event from being triggered
  * @typedef {object} eventOptions
  * 
  * @example
@@ -1302,13 +1313,13 @@ MK.elementProcessors.push( function( el ) {
 </div>
 
 <nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 03 2013 01:57:11 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 05 2013 02:17:54 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

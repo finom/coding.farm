@@ -32,3 +32,8 @@ pre>code:first-child, pre>code:first-child {
 max-height: 600px\9;
 display: block\9;
 }*/
+
+.carousel-inner { background-image: url(khokhloma.png); }
+.matreshka-slide {
+	background-color: rgba(0,0,0,.8);
+}

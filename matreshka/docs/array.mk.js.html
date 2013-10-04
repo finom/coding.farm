@@ -82,10 +82,7 @@
             <pre class="prettyprint source"><code>"use strict";
 /*
  * todo pass arguments to the methods as event property
- * todo silentSort
- * todo trigger 'modify' on createSelf (maybe rename to create and make silentCreate)
- * todo add method that removes array item and change next indexes (splice one given element)
- * todo renderer (DOMCollection)
+ * todo .pull method that removes an element with given index
  */
 ( function( MK, Array_prototype ) {
 	if( !MK ) {
@@ -110,6 +107,9 @@
 	 * createArrayMethod( MODIFIES, 'push', true );
 	 */
 	var	createArrayMethod = function( type, name, silent ) {
+		if( !Array.prototype[ name ] ) {
+			throw Error( 'There no such method: ' + name + '. If you\'re using Internet Explorer 8 you should use es5-shim: https://github.com/kriskowal/es5-shim' );
+		}
 		if( type === SIMPLE ) {
 			return function() {
 				var array = this.toArray();
@@ -120,7 +120,7 @@
 			return function() {
 				var array = this.toArray(),
 					returns = Array.prototype[ name ].apply( array, arguments );
-				this.createSelf( array );
+				this.silentCreateFrom( array );
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
@@ -134,7 +134,7 @@
 			return function() {
 				var array = this.toArray(),
 					returns = Array.prototype[ name ].apply( array, arguments );
-					return new MK.Array().createSelf( returns );
+					return new MK.Array().silentCreateFrom( returns );
 			};
 		} else if( type === RETURNS_NEW_TYPE ) {
 			return function() {
@@ -145,8 +145,8 @@
 			return function() {
 				var array = this.toArray(),
 					returns = Array.prototype[ name ].apply( array, arguments );
-				this.createSelf( array );
-				returns = new MK.Array().createSelf( returns );
+				this.silentCreateFrom( array );
+				returns = new MK.Array().silentCreateFrom( returns );
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
@@ -175,7 +175,7 @@
 	 * @example &lt;caption>Passing elements&lt;/caption>
 	 * // creates Matreshka.Array instance with length = 2
 	 * new MK.Array( 'Hi', { a: 'b' } );
-	 * @example &lt;caption>Inheriting&lt;/caption>
+	 * @example &lt;caption>Inheritance&lt;/caption>
 	 * var MyClass = Class({
 	 *	'extends': MK.Array,
 	 * 	constructor: function() {
@@ -200,20 +200,46 @@
 				this.length = arguments.length;
 			}
 			
-			this.on( 'push pop unshift shift splice sort remove', function( evtOptions ) {
+			this.on( 'recreate push pop unshift shift splice sort remove', function( evtOptions ) {
 				this.trigger( 'modify', evtOptions );
 			});
 		},
 		/**
-		 * @method Matreshka.Array#createSelf
+		 * @method Matreshka.Array#createFrom
+		 * @fires recreate
+		 * @fires modify
 		 * @summary Creates self from another array 
-		 * @desc If you have array or array-like object (eg arguments) you can convert it to MK.Array instance by the method
+		 * @desc If you have array or array-like object (e.g. arguments) you can convert it to MK.Array instance by this method
+		 * @param {Array} array
+		 * @param {capture} [boolean] if you want to capture previous value via &lt;code>"was"&lt;/code> key in event gandler argument
+		 * @returns {mkArray} self
+		 * @example &lt;caption>Basic usage&lt;/caption>
+		 * new MK.Array().createFrom( [1, 2, 3, 4, 5] );
+		 */
+		createFrom: function( array, capture ) {
+			var evtOpts = {
+				createdFrom: array
+			};
+			if( capture ) {
+				evtOpts.was = this.toNative()
+			}
+			this
+				.silentCreateFrom( array )
+				.trigger( 'recreate', evtOpts )
+			;
+			return this;
+		},
+		
+		/**
+		 * @method Matreshka.Array#silentCreateFrom
+		 * @summary Creates self from another array 
+		 * @desc Works similar to {@link Matreshka.Array#createFrom} but without triggering events
 		 * @param {Array} array
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * new MK.Array().createSelf( [1, 2, 3, 4, 5] );
+		 * new MK.Array().silentCreateFrom( [1, 2, 3, 4, 5] );
 		 */
-		createSelf: function( array ) {
+		silentCreateFrom: function( array ) {
 			var diff = this.length - array.length;
 			for( var i = 0; i &lt; array.length; i++ ) {
 				this[ i ] = array[ i ];
@@ -301,6 +327,33 @@
 				this[ i ] && this[ i ].toJSON ? JSON.push( this[ i ].toJSON() ) : JSON.push( this[ i ] );
 			}
 			return JSON;
+		},
+		
+		/**
+		 * @method Matreshka.Array#concat
+		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat Array.prototype.concat} and accepts {@link Matreshka.Array} instances
+		 * @param {...Array|...Matreshka.Array} array (Array instance or MK.Array instance)
+		 * @returns {mkArray} new {@link Matreshka.Array} instance
+		 * @example &lt;caption>Basic usage 1&lt;/caption>
+		 * var result = this.concat( [ 1, 2, 3 ] );
+		 * @example &lt;caption>Basic usage 2&lt;/caption>
+		 * var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 5 ] ),
+		 * 	result = this.concat( mkArray, [ 6, 7, 8 ] );
+		 */
+		concat: function() {
+			var args = arguments,
+				result = this.toArray(),
+				i, j, arg;
+			for( i = 0; i &lt; args.length; i++ ) {
+				arg = args[ i ];
+				if( arg instanceof Array || arg && arg.instanceOf && arg.instanceOf( MK.Array ) ) {
+					for( j = 0; j &lt; arg.length; j++ ) {
+						result.push( arg[ i ] );
+					}
+				}
+			}
+			
+			return new MK.Array().createFrom( result );
 		},
 		
 		/**
@@ -431,6 +484,20 @@
 		silentShift: createArrayMethod( MODIFIES, 'shift', true ),
 		
 		/**
+		 * @method Matreshka.Array#silentSort
+		 * @summary Works similar to {@link Matreshka.Array#sort} but without triggering events
+		 * @param {function} compareFunction
+		 * @returns {mkArray} self
+		 * @example &lt;caption>Basic usage&lt;/caption>
+		 * this.silentSort();
+		 * @example &lt;caption>Sorting callback&lt;/caption>
+		 * this.silentSort( function( a, b ) {
+		 * 	 return a > b ? -1 : 1;
+		 * });
+		 */
+		silentSort: createArrayMethod( MODIFIES, 'sort', true ), // @warning @todo third argument is not __this__
+		
+		/**
 		 * @method Matreshka.Array#silentReverse
 		 * @summary Works similar to {@link Matreshka.Array#reverse} but without triggering events
 		 * @returns {mkArray} self
@@ -521,7 +588,7 @@
 		 * @param {*} [initialValue]
 		 * @returns {*}
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * new MK.Array().createSelf( [0,1,2,3,4] ).reduce( function( previousValue, currentValue ) {
+		 * new MK.Array().createFrom( [0,1,2,3,4] ).reduce( function( previousValue, currentValue ) {
 		 * 	return previousValue + currentValue;
 		 * });
 		 */
@@ -534,7 +601,7 @@
 		 * @param {*} [initialValue]
 		 * @returns {*}
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * new MK.Array().createSelf( [0,1,2,3,4] ).reduceRight( function( previousValue, currentValue ) {
+		 * new MK.Array().createFrom( [0,1,2,3,4] ).reduceRight( function( previousValue, currentValue ) {
 		 * 	return previousValue + currentValue;
 		 * });
 		 */
@@ -582,7 +649,7 @@
 		 * @param {number} [fromIndex]
 		 * @returns {string}
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * var mkArray = new MK.Array().createSelf( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );
+		 * var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );
 		 * alert( this.indexOf( 2 ) ); // alerts 1
 		 */
 		indexOf: createArrayMethod( RETURNS_NEW_TYPE, 'indexOf' ),
@@ -594,7 +661,7 @@
 		 * @param {number} [fromIndex]
 		 * @returns {string}
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * var mkArray = new MK.Array().createSelf( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );
+		 * var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );
 		 * alert( this.lastIndexOf( 2 ) ); // alerts 6
 		 */
 		lastIndexOf: createArrayMethod( RETURNS_NEW_TYPE, 'lastIndexOf' ),
@@ -605,11 +672,10 @@
 		 * @param {string} separator
 		 * @returns {string}
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * var mkArray = new MK.Array().createSelf( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );
+		 * var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 4, 3, 2, 1 ] );
 		 * alert( this.join( ':' ) ); // alerts '1:2:3:4:4:3:2:1'
 		 */
-		join: createArrayMethod( RETURNS_NEW_TYPE, 'join' ),
-		concat: '@TODO'
+		join: createArrayMethod( RETURNS_NEW_TYPE, 'join' )
 	});
 
 /**
@@ -645,13 +711,13 @@
 </div>
 
 <nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 03 2013 01:57:11 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 05 2013 02:17:54 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

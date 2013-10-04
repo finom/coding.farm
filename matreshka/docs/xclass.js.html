@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: xclass.js</title>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
+      <script src="../../bootstrap/assets/js/respond.min.js"></script>
+    <![endif]-->
+	
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+   
+	
+	 <!-- Bootstrap -->
+	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../css/style.css" rel="stylesheet" media="screen">
+	<link type="text/css" rel="stylesheet" href="styles/matreshka.css">
+</head>
+
+<body>
+
+<div id="main">
+	<a href="https://github.com/finom/matreshka"><img style="position: fixed; z-index: 10000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> <a class="navbar-brand" href="/matreshka/index.html">Matreshka</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/matreshka/docs/index.html">Introduction</a></li>
+							<li><a href="/matreshka/docs/Matreshka.html">Matreshka</a></li>
+							<li><a href="/matreshka/docs/Matreshka.Object.html">MK.Object</a></li>
+							<li><a href="/matreshka/docs/Matreshka.Array.html">MK.Array</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/matreshka/examples/index.html">Introduction</a></li>
+							<li><a href="/matreshka/examples/Matreshka.html">Matreshka</a></li>
+							<li><a href="/matreshka/examples/Matreshka.Object.html">MK.Object</a></li>
+							<li><a href="/matreshka/examples/Matreshka.Array.html">MK.Array</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="/matreshka/plugins/">Plugins</a>
+					</li>
+					<li>
+						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+	</nav>
+    <div class="container">
+    <h1 class="page-title hide">Source: xclass.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>"use strict";
+( function( gc ) {
+var isArguments = function( o ) {
+	return !!o && ( o.toString === '[object Arguments]' || typeof o === 'object' && o !== null && 'length' in o && 'callee' in o );
+};
+
+/**
+ * @function Class
+ * @summary Javascript class implementation
+ * @desc Class function provides possibility to use classical OOP. Modern browsers use prototype based implementation but Internet Explorer 8 uses XDomainRequest hack to provide possibility to use getters and setters by Object.defineProperty method. Each time when you create an instance, the Class function core creates XDomainRequest instance and extends it by given prototype.
+ * @param {object} prototype - Methods and properties
+ * @returns {function} constructor
+ * @example &lt;caption>Usage&lt;/caption>
+ * var A = Class({
+ * 	method1: function() { ... }
+ * });
+ * var B = Class({
+ * 	'extends': A,
+ * 	method2: function() { ... }
+ * });
+ * var C = Class({
+ * 	'extends': B,
+ * 	method2: function() {
+ * 		// "this" is execution context
+ * 		// arguments is just standard arguments pseudo array
+ * 		// the same as B.prototype.apply( this, arguments );
+ * 		C.patent.method2( this, arguments );
+ * 	},
+ * 	method3: function( a, b ) { ... }
+ * });
+ * var D = Class({
+ * 	'extends': C,
+ * 	method3: function( a, b ) {
+ * 		// you can pass any arguments to the method
+ * 		// the same as C.prototype.call( this, a, b );
+ * 		C.patent.method2( this, a, b );
+ * 	}
+ * });
+ */
+ 
+ /**
+ * @method instanceOf
+ * @summary Checks is instance of class created by {@link Class} function instanced by given class
+ * @desc You still can use instanceof operator but it doesn't work in Internet Explorer 8 because of XDR hack. 
+ * @param {function} class
+ * @returns {boolean}
+ * @example &lt;caption>Usage&lt;/caption>
+ * x = new X;
+ * x.instanceOf( X ); // true
+ */
+gc.Class = function( prototype ) {
+	var constructor = realConstructor = prototype.constructor !== Object ? prototype.constructor : function EmptyConstructor() {},
+		extend = prototype[ 'extends' ] = prototype[ 'extends' ] || prototype.extend,
+		extend_prototype = extend && extend.prototype,
+		implement = prototype[ 'implements' ] = prototype[ 'implements' ] || prototype.implement,
+		realConstructor = constructor,
+		parent = {};
+	
+	delete prototype.extend;
+	delete prototype.implement;
+	
+	if( extend_prototype ) {
+		for( var key in extend_prototype ) {
+			parent[ key ] = typeof extend_prototype[ key ] === 'function' ? ( function( value ) {
+				return function( context, args ) {
+					args = isArguments( args ) ? args : Array.prototype.splice.call( arguments, 1 );
+					return value.apply( context, args );
+				}
+			})( extend_prototype[ key ] ) : extend_prototype[ key ];
+		}
+		
+		parent.constructor = ( function( value ) {
+			return function( context, args ) {
+				args = isArguments( args ) ? args : Array.prototype.splice.call( arguments, 1 );
+				return value.apply( context, args );
+			}
+		})( extend_prototype.constructor );
+	}
+	
+	if( Object.defineProperty && !Object.create ) { // if ie8
+		prototype.prototype = null;
+		prototype.constructor = null;
+		constructor = function() {
+			if( this instanceof constructor ) {
+				var r = new XDomainRequest;
+				for( var p in constructor.prototype ) if( p !== 'constructor' ) {
+					r[ p ] = constructor.prototype[ p ];
+				}
+				r.hasOwnProperty = constructor.prototype.hasOwnProperty;
+				realConstructor.apply( r, arguments );
+
+				return r;
+			} else {
+				realConstructor.apply( this, arguments );
+			}			
+		};
+		
+		prototype.constructor = constructor;
+		constructor.prototype = prototype;
+		constructor.parent = parent;
+		extend && Class.IEInherits( constructor, extend );
+	} else {
+		prototype.constructor = constructor;
+		constructor.prototype = prototype;
+		constructor.parent = parent;
+
+		extend && Class.inherits( constructor, extend );
+	}
+	
+	implement && implement.validate( constructor.prototype );
+	
+	if( this instanceof Class ) {
+		return new constructor;
+	} else {
+		return constructor;
+	}
+};
+
+Class.inherits = function( Child, Parent ) {
+	var prototype = Child.prototype,
+		F = function() {};
+	F.prototype = Parent.prototype;
+    Child.prototype = new F;
+    Child.prototype.constructor = Child;
+	for( var m in prototype ) {
+		Child.prototype[ m ] = prototype[ m ];
+	};
+	
+	Child.prototype.instanceOf = function( _Class ) {
+		return this instanceof _Class;
+	}
+};
+
+Class.IEInherits = function( Child, Parent ) {
+	var childHasOwn = Child.prototype.hasOwnProperty,
+		childConstructor = Child.prototype.constructor,
+		parentHasOwn,
+		objectHasOwn = Object.prototype.hasOwnProperty;
+	while ( Parent ) {
+		parentHasOwn = parentHasOwn || Parent.prototype.hasOwnProperty,
+		Child.prototype = ( function( pp, cp ) { // extending
+			var o = {},
+				i;
+			for( i in pp )  {
+				o[ i ] = pp[ i ]
+			}
+			for( i in cp ) {
+				o[ i ] = cp[ i ]
+			}
+			return o;
+		})( Parent.prototype, Child.prototype );
+		Parent = Parent.prototype && Parent.prototype[ 'extends' ] && Parent.prototype[ 'extends' ].prototype;
+	}
+
+	if( childHasOwn !== objectHasOwn ) {
+		Child.prototype.hasOwnProperty = childHasOwn;
+	} else if( parentHasOwn !== objectHasOwn ) {
+		Child.prototype.hasOwnProperty = parentHasOwn;
+	}
+	
+	Child.prototype.constructor = childConstructor;
+	
+	Child.prototype.instanceOf = function( _Class ) {
+		var PossibleParent = Child;
+		while( PossibleParent ) {
+			if( PossibleParent === _Class ) {
+				return true;
+			}
+			PossibleParent = PossibleParent.prototype[ 'extends' ]
+		}
+		return false;
+	}
+};
+})( this );</code></pre>
+        </article>
+    </section>
+
+
+
+
+	</div>
+</div>
+
+<nav class="navigation">
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 05 2013 02:17:54 GMT+0300 (EEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//code.jquery.com/jquery.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

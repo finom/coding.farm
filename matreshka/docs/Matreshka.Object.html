@@ -187,7 +187,7 @@
     
     <pre class="prettyprint"><code>// creates Matreshka.Object instance with 2 enumerable keys (a, b)new MK.Object({ a: 1, b: 2 });// same as new MK.Object().jset({ a: 1, b: 2 });</code></pre>
 
-        <p class="code-caption">Inheriting</p>
+        <p class="code-caption">Inheritance</p>
     
     <pre class="prettyprint"><code>var MyClass = Class({	'extends': MK.Object,	constructor: function() {		// calls MK.Object constructor with this context and given arguments		MyClass.parent.constructor( this, arguments );	},	method: function() {}});</code></pre>
 
@@ -218,7 +218,7 @@
     <h4 class="name" id="addJSONKeys"><span class="type-signature"></span>addJSONKeys<span class="signature">(keys)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
-    <p class="summary">Adds keys to enumerable list</p>
+    <p class="summary">Adds given keys to enumerable list</p>
     
 </dt>
 <dd>
@@ -281,7 +281,7 @@
             
             
             
-            <td class="description last">list of keys separated by space or array of keys or repeated string</td>
+            <td class="description last">a list of space-delimited keys or array of keys or repeated string</td>
         </tr>
 	
 	
@@ -567,7 +567,7 @@
     <h4 class="name" id="hasOwnProperty"><span class="type-signature"></span>hasOwnProperty<span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
-    <p class="summary">Checks is <a href="Matreshka.Object.html">Matreshka.Object</a> instance has own property key</p>
+    <p class="summary">Checks is <a href="Matreshka.Object.html">Matreshka.Object</a> instance has own property <code>key</code></p>
     
 </dt>
 <dd>
@@ -810,7 +810,7 @@
     
     
     <div class="description">
-        <p>This is common method of <a href="Matreshka.Object.html">Matreshka.Object</a> insance that does two things:</p><p>1. Sets property.</p><p>2. Adds given key to enumerable list (key enumerates via <a href="Matreshka.Object.html#each">Matreshka.Object#each</a> method, includes in result object returned by <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> and <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a>).</p>
+        <p>This is common method of <a href="Matreshka.Object.html">Matreshka.Object</a> insance that does two things:</p><p>1. Sets property.</p><p>2. Adds given key to enumerable list (key enumerates via <a href="Matreshka.Object.html#each">Matreshka.Object#each</a> method and includes to result object returned by <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> and <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a>) methods.</p>
     </div>
     
 
@@ -1036,9 +1036,9 @@
     
     <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );// sets 'c' to 3 but not adds keys to enumerable listthis.set( 'c', 3 );console.log( this.toObject() ); // logs { a: 1, b: 2 }</code></pre>
 
-        <p class="code-caption">After using Matreshka.Object#jset you can work with property as with regular ptoperty</p>
+        <p class="code-caption">After using Matreshka.Object#jset you can work with property as with regular property</p>
     
-    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 ); // sets properties and adds to enumerable listthis.set( 'a', 3 ); this.b = 4;</code></pre>
+    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 ); // sets properties and adds to <code>'a'</code> and <code>'b'</code> enumerable listthis.set( 'a', 3 ); this.b = 4;</code></pre>
 
     
 </dd>
@@ -1049,7 +1049,7 @@
     <h4 class="name" id="jset"><span class="type-signature"></span>jset<span class="signature">(keyValuePairs, evtOpts)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
-    <p class="summary">Uses key-value object for setting property and adding it's key to enumerable list</p>
+    <p class="summary">Uses key-value object for setting few properties and adding theirs keys to enumerable list</p>
     
 </dt>
 <dd>
@@ -1462,14 +1462,14 @@
     <h4 class="name" id="removeJSONKeys"><span class="type-signature"></span>removeJSONKeys<span class="signature">(keys)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
-    <p class="summary">Removes keys from enumerable list (but not removes property from the instance)</p>
+    <p class="summary">Removes keys from enumerable list (but not removes a property from the instance)</p>
     
 </dt>
 <dd>
     
     
     <div class="description">
-        You can remove keys from enumerable list if you no longer need them.
+        You can remove keys from enumerable list if you no longer need them as part of data.
     </div>
     
 
@@ -1525,7 +1525,7 @@
             
             
             
-            <td class="description last">list of keys separated by space or array of keys or repeated string</td>
+            <td class="description last">a list of space-delimited keys or array of keys or repeated string</td>
         </tr>
 	
 	
@@ -1629,7 +1629,7 @@
     
     
     <div class="description">
-        Diferrence between <code>toJSON</code> and <code>toObjec</code> is that <code>toJSON</code> tries to call <code>toJSON</code> method for inner objects.
+        The diferrence between <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a> and <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> is that  <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a> tries to call <code>toJSON</code> method for inner objects.
     </div>
     
 
@@ -1915,13 +1915,13 @@
 </div>
 
 <nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 03 2013 01:57:12 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 05 2013 02:17:54 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -101,7 +101,7 @@
 	 * // creates Matreshka.Object instance with 2 enumerable keys (a, b)
 	 * new MK.Object({ a: 1, b: 2 });
 	 * // same as new MK.Object().jset({ a: 1, b: 2 });
-	 * @example &lt;caption>Inheriting&lt;/caption>
+	 * @example &lt;caption>Inheritance&lt;/caption>
 	 * var MyClass = Class({
 	 *	'extends': MK.Object,
 	 * 	constructor: function() {
@@ -167,7 +167,7 @@
 		
 		/**
 		 * @method Matreshka.Object#hasOwnProperty
-		 * @summary Checks is {@link Matreshka.Object} instance has own property key
+		 * @summary Checks is {@link Matreshka.Object} instance has own property &lt;code>key&lt;/code>
 		 * @param {string} key
 		 * @returns {mkObject} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
@@ -212,7 +212,7 @@
 		/**
 		 * @method Matreshka.Object#toJSON
 		 * @summary Converts {@link Matreshka.Object} instance to native object
-		 * @desc Diferrence between &lt;code>toJSON&lt;/code> and &lt;code>toObjec&lt;/code> is that &lt;code>toJSON&lt;/code> tries to call &lt;code>toJSON&lt;/code> method for inner objects.
+		 * @desc The diferrence between {@link Matreshka.Object#toJSON} and {@link Matreshka.Object#toObject} is that  {@link Matreshka.Object#toJSON} tries to call &lt;code>toJSON&lt;/code> method for inner objects.
 		 * @returns {Object}
 		 * @example &lt;caption>Usage&lt;/caption>
 		 * var json = this.toJSON();
@@ -257,7 +257,7 @@
 		 * @summary Sets given property and adds key to enumerable list
 		 * @desc &lt;p>This is common method of {@link Matreshka.Object} insance that does two things:&lt;/p>
 		 * &lt;p>1. Sets property.&lt;/p>
-		 * &lt;p>2. Adds given key to enumerable list (key enumerates via {@link Matreshka.Object#each} method, includes in result object returned by {@link Matreshka.Object#toObject} and {@link Matreshka.Object#toJSON}).&lt;/p>
+		 * &lt;p>2. Adds given key to enumerable list (key enumerates via {@link Matreshka.Object#each} method and includes to result object returned by {@link Matreshka.Object#toObject} and {@link Matreshka.Object#toJSON}) methods.&lt;/p>
 		 * 
 		 * @param {string} key
 		 * @param {*} value
@@ -289,8 +289,8 @@
 		 * this.set( 'c', 3 );
 		 * console.log( this.toObject() ); // logs { a: 1, b: 2 }
 		 * 
-		 * @example &lt;caption>After using {@link Matreshka.Object#jset} you can work with property as with regular ptoperty&lt;/caption>
-		 * this.jset( 'a', 1 ).jset( 'b', 2 ); // sets properties and adds to enumerable list
+		 * @example &lt;caption>After using {@link Matreshka.Object#jset} you can work with property as with regular property&lt;/caption>
+		 * this.jset( 'a', 1 ).jset( 'b', 2 ); // sets properties and adds to &lt;code>'a'&lt;/code> and &lt;code>'b'&lt;/code> enumerable list
 		 * this.set( 'a', 3 ); 
 		 * this.b = 4;
 		 */
@@ -298,7 +298,7 @@
 		/**
 		 * @method Matreshka.Object#jset
 		 * @variation 2
-		 * @summary Uses key-value object for setting property and adding it's key to enumerable list
+		 * @summary Uses key-value object for setting few properties and adding theirs keys to enumerable list
 		 * @param {object} keyValuePairs
 		 * @param {eventOptions} evtOpts
 		 * 
@@ -335,8 +335,8 @@
 		 * @fires remove
 		 * @fires remove:*key*
 		 * @fires modify
-		 * @summary Removes property from {@link Matreshka.Object} instance and enumerable list
-		 * @param {string} key - key (or keys separated by space) that you want to remove from current instance
+		 * @summary Removes property from {@link Matreshka.Object} instance and from enumerable list
+		 * @param {string} key - a key (space-delimited list of keys) that you want to remove from current instance
 		 * @param {eventOptions} - [evtOptions]
 		 * @returns {MKInstance} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
@@ -352,9 +352,9 @@
 		
 		/**
 		 * @method Matreshka.Object#addJSONKeys
-		 * @summary Adds keys to enumerable list
+		 * @summary Adds given keys to enumerable list
 		 * @desc This method is used if you want to define enumerable keys but you don't know values yet.
-		 * @param {(...string|string[]|string)} keys - list of keys separated by space or array of keys or repeated string
+		 * @param {(...string|string[]|string)} keys - a list of space-delimited keys or array of keys or repeated string
 		 * @returns {mkObject} self
 		 * @example &lt;caption>Basic usage 1&lt;/caption>
 		 * this.addJSONKeys( 'a b' );
@@ -380,9 +380,9 @@
 		
 		/**
 		 * @method Matreshka.Object#removeJSONKeys
-		 * @summary Removes keys from enumerable list (but not removes property from the instance)
-		 * @desc You can remove keys from enumerable list if you no longer need them.
-		 * @param {(string|string[]|...string)} keys - list of keys separated by space or array of keys or repeated string
+		 * @summary Removes keys from enumerable list (but not removes a property from the instance)
+		 * @desc You can remove keys from enumerable list if you no longer need them as part of data.
+		 * @param {(string|string[]|...string)} keys - a list of space-delimited keys or array of keys or repeated string
 		 * @returns {mkObject} self
 		 * @example &lt;caption>Basic usage 1&lt;/caption>
 		 * this.removeJSONKeys( 'a b' );
@@ -434,13 +434,13 @@
 </div>
 
 <nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 03 2013 01:57:11 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 05 2013 02:17:54 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
