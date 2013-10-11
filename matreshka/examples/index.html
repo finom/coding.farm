@@ -85,7 +85,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<script src="../../js/prettify.js"></script>
-	<script src="http://finom.github.io/js/matreshka.all.min.js"></script>
+	<script src="/js/matreshka.all.min.js"></script>
 	<script>
 		( function() {
 			function escapeHTML( string ) {
@@ -103,11 +103,11 @@
 					
 				for( var i = 0; i < lines.length; i++ ) {
 					if( lines[ i ].replace( /\s/g, '' ).length ) {
-						tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/g, '$1' ).length;
+						tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/, '$1' ).length;
 						minTabsLength = Math.min( minTabsLength, tabsLength );
 					}
 				}
-				minTabsLength = minTabsLength | 0;
+				minTabsLength = minTabsLength | 0;console.log( minTabsLength )
 				tabsReg = new RegExp( new Array( minTabsLength + 1 ).join( '\t' ) );
 				for( var i = 0; i < lines.length; i++ ) {
 					lines[ i ] = lines[ i ].replace( tabsReg, '' );
