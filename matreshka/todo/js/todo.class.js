@@ -19,20 +19,33 @@ app.Todo = Class({
 			.bindElement( this, this.render() )
 			.bindElement({
 				completed: this.$( '.toggle' ),
-				title: this.$( 'label' )
+				title: this.$( '.edit' )
 			})
-			.bindElement( 'completed', this.el(), {
-				setValue: function( v ) {
-					$( this ).toggleClass( 'completed', v );
-				}
+			.bindElement( 'completed', this.el(), function( v ) {
+				$( this ).toggleClass( 'completed', v );
 			})
-			.bindElement( 'title', this.$( '.edit' ), MK.htmlp )
+			.bindElement( 'hidden', this.el(), function( v ) {
+				$( this ).toggleClass( 'hide', v );
+			})
+			.bindElement( 'title', this.$( 'label' ), MK.htmlp )
 		;
 	},
 	events: function() {
-		this.$el().on( 'click', '.destroy', function() {
-			
-		});
+		this.$el().on( 'click', '.destroy', this.trigger.bind( this, 'readytodie' ) );
+		
+		this.$( 'label' ).on( 'dblclick', function() {
+			this.$el().addClass( 'editing' );
+			this.$( '.edit' ).focus();
+		}.bind( this ) );
+		
+		this.$( '.edit' ).on( 'blur pressenter', function() {
+			if( !this.title.length ) {
+				this.trigger( 'readytodie' );
+			} else {
+				this.$el().removeClass( 'editing' );
+			}
+		}.bind( this ) );
+		
 		return this;
 	},
 	render: function() {

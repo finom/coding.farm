@@ -5,6 +5,16 @@ $( document ).on( 'keydown', 'input, textarea, [contenteditable]', function( evt
 		$( this ).trigger( 'pressenter' );
 	}
 });
+
+app.Router = Class({
+	on: function() {
+		routie
+	},
+	set: function( s ) {
+		routie( s );
+	}
+});
+
 $( function() {
 	app.todos = new app.Todos();
 });
