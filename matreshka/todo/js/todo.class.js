@@ -21,12 +21,8 @@ app.Todo = Class({
 				completed: this.$( '.toggle' ),
 				title: this.$( '.edit' )
 			})
-			.bindElement( 'completed', this.el(), function( v ) {
-				$( this ).toggleClass( 'completed', v );
-			})
-			.bindElement( 'hidden', this.el(), function( v ) {
-				$( this ).toggleClass( 'hide', v );
-			})
+			.bindElement( 'completed', this.el(), MK.classp( 'completed' ) )
+			.bindElement( 'hidden', this.el(), MK.classp( 'hide' ) )
 			.bindElement( 'title', this.$( 'label' ), MK.htmlp )
 		;
 	},

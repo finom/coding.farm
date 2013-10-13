@@ -7,8 +7,8 @@ $( document ).on( 'keydown', 'input, textarea, [contenteditable]', function( evt
 });
 
 app.Router = Class({
-	on: function() {
-		routie
+	on: function( route, callback, thisArg ) {
+		routie( route, callback.bind( thisArg || this ) );
 	},
 	set: function( s ) {
 		routie( s );

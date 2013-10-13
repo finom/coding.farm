@@ -1,7 +1,7 @@
 "use strict";
 ( function( gc ) {
 var isArguments = function( o ) {
-	return !!o && ( o.toString === '[object Arguments]' || typeof o === 'object' && o !== null && 'length' in o && 'callee' in o );
+	return !!o && ( o.toString() === '[object Arguments]' || typeof o === 'object' && o !== null && 'length' in o && 'callee' in o );
 };
 
 /**
@@ -178,7 +178,7 @@ Class.IEInherits = function( Child, Parent ) {
  * @class Matreshka
  * @version 0.0.1
  * @author Andrey Gubanov <a@odessite.com.ua>
- * @license {@link http://www.apache.org/licenses/ Apache License}
+ * @license {@link https://raw.github.com/finom/matreshka/master/LICENSE MIT}
  * Version 2.0, January 2004
  * @alias MK
  * @example <caption>Basic usage</caption>
@@ -1295,6 +1295,32 @@ MK.extend( MK, {
 	},
 	
 	/**
+	 * @method {elementOptions} Matreshka.classp
+	 * @since 0.0.2
+	 * @summary <code>className</code> element options function
+	 * @desc This function is a shortcut for using existence of element's <code>className</code> as boolean value when you bind it to a property.
+	 * @param {string} className
+	 * @returns {elementOptions}
+	 * @example <caption>Usage</caption>
+	 * this.bindElement( 'myKey', '.my-element', MK.classp( 'blah' ) );
+	 * // same as
+	 * this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property
+	 * 	setValue: function( v ) {
+	 * 		$( this ).toggleClass( 'blah', v );
+	 * 	}
+	 * });
+	 * this.myKey = true; // adds 'blah' class to '.my-element'
+	 * this.myKey = false; // removes 'blah' class to '.my-element'
+	 */
+	classp: function( className ) {
+		return {
+			setValue: function( v ) {
+				$( this ).toggleClass( className, v );
+			}
+		};
+	},
+	
+	/**
 	 * @method Matreshka.noop
 	 * @summary Just empty function
 	 */
@@ -1424,7 +1450,7 @@ MK.elementProcessors.push( function( el ) {
 	 * @class Matreshka.Object
 	 * @version 0.0.1
 	 * @author Andrey Gubanov <a@odessite.com.ua>
-	 * @license {@link http://www.apache.org/licenses/ Apache License}
+	 * @license {@link https://raw.github.com/finom/matreshka/master/LICENSE MIT}
 	 * Version 2.0, January 2004
 	 * @classdesc Matreshka Object class. Extends {@link Matreshka}.
 	 * @inherits Matreshka
@@ -1443,6 +1469,7 @@ MK.elementProcessors.push( function( el ) {
 	 *	},
 	 * 	method: function() {}
 	 * });
+	 * @todo .createFrom method
 	 */
 	MK.Object = Class({
 		'extends': MK,
@@ -1786,19 +1813,19 @@ MK.elementProcessors.push( function( el ) {
 	 * createArrayMethod( MODIFIES, 'push', true );
 	 */
 	var	createArrayMethod = function( type, name, silent ) {
-		if( !Array.prototype[ name ] ) {
+		if( !Array_prototype[ name ] ) {
 			throw Error( 'There no such method: ' + name + '. If you\'re using Internet Explorer 8 you should use es5-shim: https://github.com/kriskowal/es5-shim' );
 		}
 		if( type === SIMPLE ) {
 			return function() {
 				var array = this.toArray();
-				Array.prototype[ name ].apply( array, arguments );
+				Array_prototype[ name ].apply( array, arguments );
 				return this;
 			};
 		} else if( type === MODIFIES ) {
 			return function() {
 				var array = this.toArray(),
-					returns = Array.prototype[ name ].apply( array, arguments );
+					returns = Array_prototype[ name ].apply( array, arguments );
 				this.silentCreateFrom( array );
 				if( !silent ) {
 					this.trigger( name, {
@@ -1812,18 +1839,18 @@ MK.elementProcessors.push( function( el ) {
 		} else if( type === RETURNS_NEW_ARRAY ) {
 			return function() {
 				var array = this.toArray(),
-					returns = Array.prototype[ name ].apply( array, arguments );
+					returns = Array_prototype[ name ].apply( array, arguments );
 					return new MK.Array().silentCreateFrom( returns );
 			};
 		} else if( type === RETURNS_NEW_TYPE ) {
 			return function() {
 				var array = this.toArray();
-				return Array.prototype[ name ].apply( array, arguments );;
+				return Array_prototype[ name ].apply( array, arguments );;
 			};
 		} else if( type === SPLICE ) { // the combination of returnsnew and modify
 			return function() {
 				var array = this.toArray(),
-					returns = Array.prototype[ name ].apply( array, arguments );
+					returns = Array_prototype[ name ].apply( array, arguments );
 				this.silentCreateFrom( array );
 				returns = new MK.Array().silentCreateFrom( returns );
 				if( !silent ) {
@@ -1842,7 +1869,7 @@ MK.elementProcessors.push( function( el ) {
 	 * @class Matreshka.Array
 	 * @version 0.0.1
 	 * @author Andrey Gubanov <a@odessite.com.ua>
-	 * @license {@link http://www.apache.org/licenses/ Apache License}
+	 * @license {@link https://raw.github.com/finom/matreshka/master/LICENSE MIT}
 	 * Version 2.0, January 2004
 	 * @classdesc Matreshka Array class. Extends {@link Matreshka}.
 	 * @inherits Matreshka
@@ -1935,7 +1962,7 @@ MK.elementProcessors.push( function( el ) {
 		 */
 		toArray: function() {
 			try {
-				return Array.prototype.slice.call( this );
+				return Array_prototype.slice.call( this );
 			} catch( e ) {
 				var array = [];
 				for( var i = 0; i < this.length; i++ ) {
