@@ -60,10 +60,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="/matreshka/plugins/">Plugins</a>
+						<a href="plugins/index.html">Plugins</a>
 					</li>
 					<li>
-						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+						<a href="https://github.com/finom/matreshka/releases">Download</a>
 					</li>
 				</ul>
 			</div>
@@ -151,7 +151,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line4">line 4</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line6">line 6</a>
     </li></ul></dd>
     
     
@@ -221,6 +221,157 @@
         <dl>
             
 <dt>
+    <h4 class="name" id="classp"><span class="type-signature">&lt;static> </span>classp<span class="signature">(className)</span><span class="type-signature"> &rarr; {<a href="global.html#elementOptions">elementOptions</a>}</span></h4>
+    
+    
+    <p class="summary"><code>className</code> element options function</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>This function is a shortcut for using existence of element&#39;s &lt;code&gt;className&lt;/code&gt; as boolean value when you bind it to a property.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5 class="hide">Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>className</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-string">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+   
+    
+	
+    <h5>Returns:
+    
+            
+
+
+	
+<span class="param-type label label-type label-type-unknown"><a href="global.html#elementOptions">elementOptions</a></span>
+
+
+
+        </h5>
+	
+	
+	
+    
+	
+	
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>0.0.2</dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1172">line 1172</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Examples</h5>
+        
+        <p class="code-caption">Usage</p>
+    
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element', MK.classp( 'blah' ) );// same asthis.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property	setValue: function( v ) {		$( this ).toggleClass( 'blah', v );	}});this.myKey = true; // adds 'blah' class to '.my-element'this.myKey = false; // removes 'blah' class from '.my-element'	</code></pre>
+
+        <p class="code-caption">Using "!" (not) statement</p>
+    
+    <pre class="prettyprint"><code>this.bindElement( 'shown', '.my-element', MK.classp( '!hide' ) );// same asthis.bindElement( 'shown', '.my-element', { // no "getValue" and no "on" property	setValue: function( v ) {		$( this ).toggleClass( 'hide', !v );	}});this.shown = true; // removes 'hide' class from '.my-element'this.shown = false; // adds 'hide' class to '.my-element'</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="each"><span class="type-signature">&lt;static> </span>each<span class="signature">(o, callback, <span class="optional">thisArg</span>)</span><span class="type-signature"></span></h4>
     
     
@@ -287,7 +438,7 @@
             
             
             
-            <td class="description last">iterable object</td>
+            <td class="description last"><p>iterable object</p></td>
         </tr>
 	
 	
@@ -318,7 +469,7 @@
             
             
             
-            <td class="description last">Function to execute for each element.</td>
+            <td class="description last"><p>Function to execute for each element.</p></td>
         </tr>
 	
 	
@@ -351,7 +502,7 @@
             
             
             
-            <td class="description last">Object to use as <code>this</code> when executing <code>callback</code></td>
+            <td class="description last"><p>Object to use as &lt;code&gt;this&lt;/code&gt; when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
         </tr>
 	
 	
@@ -390,7 +541,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1130">line 1130</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1215">line 1215</a>
     </li></ul></dd>
     
     
@@ -445,7 +596,7 @@
 <span class="param-type label label-type label-type-object">object</span>
 
 
-    (o1)
+    (<p>o1</p>)
 
 
         </h5>
@@ -551,7 +702,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1042">line 1042</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1090">line 1090</a>
     </li></ul></dd>
     
     
@@ -632,7 +783,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1124">line 1124</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1209">line 1209</a>
     </li></ul></dd>
     
     
@@ -669,7 +820,7 @@
     
     
     <div class="description">
-        After you bind element to <code>this ("__this__")</code> you can use this method for finding elements that contained in bound element.
+        <p>After you bind element to &lt;code&gt;this (&quot;<strong>this</strong>&quot;)&lt;/code&gt; you can use this method for finding elements that contained in bound element.</p>
     </div>
     
 
@@ -769,7 +920,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line689">line 689</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line683">line 683</a>
     </li></ul></dd>
     
     
@@ -813,7 +964,7 @@
     
     
     <div class="description">
-        After you bound elements to a property you can extract them by using this method.
+        <p>After you bound elements to a property you can extract them by using this method.</p>
     </div>
     
 
@@ -875,7 +1026,7 @@
             
             
             
-            <td class="description last">For which key we want to extract elements. If undefined or null returns elements bound to <code>this</code>.</td>
+            <td class="description last"><p>For which key we want to extract elements. If undefined or null returns elements bound to &lt;code&gt;this&lt;/code&gt;.</p></td>
         </tr>
 	
 	
@@ -895,7 +1046,7 @@
 <span class="param-type label label-type label-type-unknown">jQuery</span>
 
 
-    (Bound elements)
+    (<p>Bound elements</p>)
 
 
         </h5>
@@ -927,7 +1078,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line644">line 644</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line638">line 638</a>
     </li></ul></dd>
     
     
@@ -975,7 +1126,7 @@
     
     
     <div class="description">
-        This powerful function binds element to instance property with given options that say when and how to extract element's value, how to set element's value when property is changed.
+        <p>This powerful function binds element to instance property with given options that say when and how to extract element&#39;s value, how to set element&#39;s value when property is changed.</p>
     </div>
     
 
@@ -1038,7 +1189,7 @@
             
             
             
-            <td class="description last">A key (or space-delimited list keys) that has to be binded to given element(s)</td>
+            <td class="description last"><p>A key (or space-delimited list keys) that has to be binded to given element(s)</p></td>
         </tr>
 	
 	
@@ -1081,7 +1232,7 @@
             
             
             
-            <td class="description last">An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector...) that has to be binded to given key(s)</td>
+            <td class="description last"><p>An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector...) that has to be binded to given key(s)</p></td>
         </tr>
 	
 	
@@ -1114,7 +1265,7 @@
             
             
             
-            <td class="description last">An element options object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)</td>
+            <td class="description last"><p>An element options object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)</p></td>
         </tr>
 	
 	
@@ -1147,7 +1298,7 @@
             
             
             
-            <td class="description last">If you want to set <code>"silent"</code> flag or pass some options to a <code>"bind"</code> event handler</td>
+            <td class="description last"><p>If you want to set &lt;code&gt;&quot;silent&quot;&lt;/code&gt; flag or pass some options to a &lt;code&gt;&quot;bind&quot;&lt;/code&gt; event handler</p></td>
         </tr>
 	
 	
@@ -1167,7 +1318,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -1205,7 +1356,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line258">line 258</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line260">line 260</a>
     </li></ul></dd>
     
     
@@ -1277,7 +1428,7 @@
     
     
     <div class="description">
-        Matreshka#bindElement accepts key-element use case if you have many bindings.
+        <p>Matreshka#bindElement accepts key-element use case if you have many bindings.</p>
     </div>
     
 
@@ -1370,7 +1521,7 @@
             
             
             
-            <td class="description last">(see above)</td>
+            <td class="description last"><p>(see above)</p></td>
         </tr>
 	
 	
@@ -1403,7 +1554,7 @@
             
             
             
-            <td class="description last">(see above)</td>
+            <td class="description last"><p>(see above)</p></td>
         </tr>
 	
 	
@@ -1442,7 +1593,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line260">line 260</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line262">line 262</a>
     </li></ul></dd>
     
     
@@ -1486,7 +1637,7 @@
     
     
     <div class="description">
-        Matreshka#bindElement accepts one more way how to pass <code>key, element, elementOptions</code> to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using Matreshka#unbindElement.
+        <p>Matreshka#bindElement accepts one more way how to pass &lt;code&gt;key, element, elementOptions&lt;/code&gt; to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using Matreshka#unbindElement.</p>
     </div>
     
 
@@ -1546,7 +1697,7 @@
             
             
             
-            <td class="description last">(see example)</td>
+            <td class="description last"><p>(see example)</p></td>
         </tr>
 	
 	
@@ -1579,7 +1730,7 @@
             
             
             
-            <td class="description last">(see above)</td>
+            <td class="description last"><p>(see above)</p></td>
         </tr>
 	
 	
@@ -1618,7 +1769,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line262">line 262</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line264">line 264</a>
     </li></ul></dd>
     
     
@@ -1708,7 +1859,7 @@
             
             
             
-            <td class="description last">key</td>
+            <td class="description last"><p>key</p></td>
         </tr>
 	
 	
@@ -1731,7 +1882,7 @@
             
             
             
-            <td class="description last">descriptor</td>
+            <td class="description last"><p>descriptor</p></td>
         </tr>
 	
 	
@@ -1751,7 +1902,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -1783,7 +1934,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line916">line 916</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line956">line 956</a>
     </li></ul></dd>
     
     
@@ -1893,7 +2044,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -1925,7 +2076,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line917">line 917</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line957">line 957</a>
     </li></ul></dd>
     
     
@@ -1969,7 +2120,7 @@
     
     
     <div class="description">
-        This method makes possible to create custom getter using Object.defineProperty.
+        <p>This method makes possible to create custom getter using Object.defineProperty.</p>
     </div>
     
 
@@ -2019,7 +2170,7 @@
             
             
             
-            <td class="description last">A key for which you want to customize getter</td>
+            <td class="description last"><p>A key for which you want to customize getter</p></td>
         </tr>
 	
 	
@@ -2042,7 +2193,7 @@
             
             
             
-            <td class="description last">Your getter</td>
+            <td class="description last"><p>Your getter</p></td>
         </tr>
 	
 	
@@ -2081,7 +2232,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line737">line 737</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line745">line 745</a>
     </li></ul></dd>
     
     
@@ -2171,7 +2322,7 @@
             
             
             
-            <td class="description last">(see example)</td>
+            <td class="description last"><p>(see example)</p></td>
         </tr>
 	
 	
@@ -2210,7 +2361,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line739">line 739</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line747">line 747</a>
     </li></ul></dd>
     
     
@@ -2300,7 +2451,7 @@
             
             
             
-            <td class="description last">key</td>
+            <td class="description last"><p>key</p></td>
         </tr>
 	
 	
@@ -2323,7 +2474,7 @@
             
             
             
-            <td class="description last">value</td>
+            <td class="description last"><p>value</p></td>
         </tr>
 	
 	
@@ -2343,7 +2494,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -2375,7 +2526,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line958">line 958</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line998">line 998</a>
     </li></ul></dd>
     
     
@@ -2485,7 +2636,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -2517,7 +2668,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line959">line 959</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line999">line 999</a>
     </li></ul></dd>
     
     
@@ -2619,7 +2770,7 @@
             
             
             
-            <td class="description last">For which key we want to extract single element. If undefined or null returns element bound to <code>this</code>.</td>
+            <td class="description last"><p>For which key we want to extract single element. If undefined or null returns element bound to &lt;code&gt;this&lt;/code&gt;.</p></td>
         </tr>
 	
 	
@@ -2642,7 +2793,7 @@
 <span class="param-type label label-type label-type-null">null</span>
 
 
-    (Bound element)
+    (<p>Bound element</p>)
 
 
         </h5>
@@ -2674,7 +2825,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line673">line 673</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line667">line 667</a>
     </li></ul></dd>
     
     
@@ -2705,6 +2856,146 @@
         <p class="code-caption">Get element bound to <code>this</code></p>
     
     <pre class="prettyprint"><code>this.bindElement( this, '.app' );this.$el(); // returns $( '.app' )[0]</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="eq"><span class="type-signature"></span>eq<span class="signature">(object)</span><span class="type-signature"></span></h4>
+    
+    
+    <p class="summary">Checks is instance equals to given object</p>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>The IE8 throws an exception when you&#39;re trying to check equality of two Matreshka instances. Use &lt;code&gt;.eq&lt;/code&gt; method instead of &lt;code&gt;==&lt;/code&gt; and &lt;code&gt;===&lt;/code&gt;</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5 class="hide">Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-object">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>An object that you wish to test for equality with</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+   
+    
+	
+	
+	
+	
+    
+	
+	
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>0.0.2</dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line730">line 730</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Examples</h5>
+        
+        <p class="code-caption">IE8 issue</p>
+    
+    <pre class="prettyprint"><code>this === object; //sometimes IE8 throws "Class doesn't support Automation"</code></pre>
+
+        <p class="code-caption">Basic usage</p>
+    
+    <pre class="prettyprint"><code>this.eq( object ); // true or false</code></pre>
 
     
 </dd>
@@ -2807,7 +3098,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line773">line 773</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line812">line 812</a>
     </li></ul></dd>
     
     
@@ -2851,7 +3142,7 @@
     
     
     <div class="description">
-        This method initializes Matreshka by creating needed objects. You should call it if you inherit your own class from Matreshka.
+        <p>This method initializes Matreshka by creating needed objects. You should call it if you inherit your own class from Matreshka.</p>
     </div>
     
 
@@ -2873,7 +3164,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -2905,7 +3196,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1008">line 1008</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1049">line 1049</a>
     </li></ul></dd>
     
     
@@ -2949,7 +3240,8 @@
     
     
     <div class="description">
-        If you no longer need some event or few events, you can remove them by passing event names as first argument to the <a href="Matreshka.html#off">Matreshka#off</a> method.You can specify the callback and given context for the events that you want to remove and you can pass nothing to remove all events.
+        <p>If you no longer need some event or few events, you can remove them by passing event names as first argument to the <a href="Matreshka.html#off">Matreshka#off</a> method.
+You can specify the callback and given context for the events that you want to remove and you can pass nothing to remove all events.</p>
     </div>
     
 
@@ -3011,7 +3303,7 @@
             
             
             
-            <td class="description last">Space-delimited list of event names (e.g. <code>"change:x ajaxcomplete change:y"</code>)</td>
+            <td class="description last"><p>Space-delimited list of event names (e.g. &lt;code&gt;&quot;change:x ajaxcomplete change:y&quot;&lt;/code&gt;)</p></td>
         </tr>
 	
 	
@@ -3044,7 +3336,7 @@
             
             
             
-            <td class="description last">A function that has been passed to <a href="Matreshka.html#on">Matreshka#on</a></td>
+            <td class="description last"><p>A function that has been passed to <a href="Matreshka.html#on">Matreshka#on</a></p></td>
         </tr>
 	
 	
@@ -3077,7 +3369,7 @@
             
             
             
-            <td class="description last">An object that used as <code>this</code> when executing <code>callback</code></td>
+            <td class="description last"><p>An object that used as &lt;code&gt;this&lt;/code&gt; when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
         </tr>
 	
 	
@@ -3097,7 +3389,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -3129,7 +3421,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line150">line 150</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line152">line 152</a>
     </li></ul></dd>
     
     
@@ -3185,7 +3477,8 @@
     
     
     <div class="description">
-        The <a href="Matreshka.html#on">Matreshka#on</a> method attaches event handler to the Matreshka instance. The event could be triggered by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method. You can pass <code>"change:myKey"</code> as first <a href="Matreshka.html#on">Matreshka#on</a> argument to monitor <code>"myKey"</code> property changes.
+        <p>The <a href="Matreshka.html#on">Matreshka#on</a> method attaches event handler to the Matreshka instance. The event could be triggered by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method. 
+You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href="Matreshka.html#on">Matreshka#on</a> argument to monitor &lt;code&gt;&quot;myKey&quot;&lt;/code&gt; property changes.</p>
     </div>
     
 
@@ -3245,7 +3538,7 @@
             
             
             
-            <td class="description last">Names of the space-delimited list of events (eg. "change:x ajaxcomplete change:y")</td>
+            <td class="description last"><p>Names of the space-delimited list of events (eg. &quot;change:x ajaxcomplete change:y&quot;)</p></td>
         </tr>
 	
 	
@@ -3276,7 +3569,7 @@
             
             
             
-            <td class="description last">A function to execute when the event is triggered</td>
+            <td class="description last"><p>A function to execute when the event is triggered</p></td>
         </tr>
 	
 	
@@ -3309,7 +3602,7 @@
             
             
             
-            <td class="description last">If <code>triggerOnInit</code> equals to <code>true</code> then an event handler will be triggered immediately</td>
+            <td class="description last"><p>If &lt;code&gt;triggerOnInit&lt;/code&gt; equals to &lt;code&gt;true&lt;/code&gt; then an event handler will be triggered immediately</p></td>
         </tr>
 	
 	
@@ -3342,7 +3635,7 @@
             
             
             
-            <td class="description last">An object to use as <code>this</code>when executing <code>callback</code></td>
+            <td class="description last"><p>An object to use as &lt;code&gt;this&lt;/code&gt;when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
         </tr>
 	
 	
@@ -3362,7 +3655,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -3394,7 +3687,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line26">line 26</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line28">line 28</a>
     </li></ul></dd>
     
     
@@ -3446,7 +3739,8 @@
     
     
     <div class="description">
-        Works similar to <a href="Matreshka.html#on">Matreshka#on</a> method but a handler could be executed only once.Pay attention that this method doesn't have <code>triggerOnInit</code> argument.
+        <p>Works similar to <a href="Matreshka.html#on">Matreshka#on</a> method but a handler could be executed only once.
+Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/code&gt; argument.</p>
     </div>
     
 
@@ -3506,7 +3800,7 @@
             
             
             
-            <td class="description last">Space-delimited list of event names (e.g. <code>"change:x ajaxcomplete change:y"</code>)</td>
+            <td class="description last"><p>Space-delimited list of event names (e.g. &lt;code&gt;&quot;change:x ajaxcomplete change:y&quot;&lt;/code&gt;)</p></td>
         </tr>
 	
 	
@@ -3537,7 +3831,7 @@
             
             
             
-            <td class="description last">A function to execute when the event is triggered</td>
+            <td class="description last"><p>A function to execute when the event is triggered</p></td>
         </tr>
 	
 	
@@ -3570,7 +3864,7 @@
             
             
             
-            <td class="description last">An object to use as <code>this</code>when executing <code>callback</code></td>
+            <td class="description last"><p>An object to use as &lt;code&gt;this&lt;/code&gt;when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
         </tr>
 	
 	
@@ -3590,7 +3884,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -3622,7 +3916,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line101">line 101</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line103">line 103</a>
     </li></ul></dd>
     
     
@@ -3720,7 +4014,7 @@
             
             
             
-            <td class="description last">A key (or space-delimited list of keys) that you want to remove from current instance</td>
+            <td class="description last"><p>A key (or space-delimited list of keys) that you want to remove from current instance</p></td>
         </tr>
 	
 	
@@ -3773,7 +4067,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -3813,7 +4107,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line871">line 871</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line911">line 911</a>
     </li></ul></dd>
     
     
@@ -3907,7 +4201,7 @@
             
             
             
-            <td class="description last">a key (space-delimited list of keys) that you want to remove from current instance</td>
+            <td class="description last"><p>a key (space-delimited list of keys) that you want to remove from current instance</p></td>
         </tr>
 	
 	
@@ -3930,7 +4224,7 @@
             
             
             
-            <td class="description last">[evtOptions]</td>
+            <td class="description last"><p>[evtOptions]</p></td>
         </tr>
 	
 	
@@ -3950,7 +4244,7 @@
 <span class="param-type label label-type label-type-unknown">MKInstance</span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -3992,7 +4286,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="object.mk.js.html">object.mk.js</a>, <a href="object.mk.js.html#line254">line 254</a>
+        <a href="object.mk.js.html">object.mk.js</a>, <a href="object.mk.js.html#line255">line 255</a>
     </li></ul></dd>
     
     
@@ -4040,7 +4334,7 @@
     
     
     <div class="description">
-        Sets value for given property and gives possibility to pass event object (with <code>"silent"</code> property if you added <code>change:*key*</code> event in a past or other data).
+        <p>Sets value for given property and gives possibility to pass event object (with &lt;code&gt;&quot;silent&quot;&lt;/code&gt; property if you added &lt;code&gt;change:<em>key</em>&lt;/code&gt; event in a past or other data).</p>
     </div>
     
 
@@ -4211,7 +4505,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line784">line 784</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line823">line 823</a>
     </li></ul></dd>
     
     
@@ -4387,7 +4681,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line785">line 785</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line824">line 824</a>
     </li></ul></dd>
     
     
@@ -4435,7 +4729,8 @@
     
     
     <div class="description">
-        After attaching event using <a href="Matreshka.html#on">Matreshka#on</a> or <a href="Matreshka.html#once">Matreshka#once</a> you can trigger it by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method and pass needed arguments to event handler using subsequent arguments.You can bind <code>"all"</code> event to catch any event triggering.
+        <p>After attaching event using <a href="Matreshka.html#on">Matreshka#on</a> or <a href="Matreshka.html#once">Matreshka#once</a> you can trigger it by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method and pass needed arguments to event handler using subsequent arguments.
+You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event triggering.</p>
     </div>
     
 
@@ -4497,7 +4792,7 @@
             
             
             
-            <td class="description last">Space-delimited list of event names that you want to trigger</td>
+            <td class="description last"><p>Space-delimited list of event names that you want to trigger</p></td>
         </tr>
 	
 	
@@ -4532,7 +4827,7 @@
             
             
             
-            <td class="description last">Arguments that you wish to pass to the event handler</td>
+            <td class="description last"><p>Arguments that you wish to pass to the event handler</p></td>
         </tr>
 	
 	
@@ -4552,7 +4847,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -4584,7 +4879,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line201">line 201</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line203">line 203</a>
     </li></ul></dd>
     
     
@@ -4628,7 +4923,7 @@
     
     
     <div class="description">
-        If you no longer need a bridge between element and Matreshka property you can remove it by this method.
+        <p>If you no longer need a bridge between element and Matreshka property you can remove it by this method.</p>
     </div>
     
 
@@ -4691,7 +4986,7 @@
             
             
             
-            <td class="description last">A key (or space-delimited list keys) that has to be unbinded from given element(s) (null if you want to unbind element(s) from any key of instance)</td>
+            <td class="description last"><p>A key (or space-delimited list keys) that has to be unbinded from given element(s) (null if you want to unbind element(s) from any key of instance)</p></td>
         </tr>
 	
 	
@@ -4736,7 +5031,7 @@
             
             
             
-            <td class="description last">An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be unbinded from given key(s)</td>
+            <td class="description last"><p>An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be unbinded from given key(s)</p></td>
         </tr>
 	
 	
@@ -4769,7 +5064,7 @@
             
             
             
-            <td class="description last">If you want to set "silent" flag or pass some options to "unbind" event handler</td>
+            <td class="description last"><p>If you want to set &quot;silent&quot; flag or pass some options to &quot;unbind&quot; event handler</p></td>
         </tr>
 	
 	
@@ -4789,7 +5084,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -4827,7 +5122,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line500">line 500</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line494">line 494</a>
     </li></ul></dd>
     
     
@@ -4927,7 +5222,7 @@
             
             
             
-            <td class="description last">(see example)</td>
+            <td class="description last"><p>(see example)</p></td>
         </tr>
 	
 	
@@ -5005,7 +5300,7 @@
             
             
             
-            <td class="description last">(see above)</td>
+            <td class="description last"><p>(see above)</p></td>
         </tr>
 	
 	
@@ -5025,7 +5320,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -5057,7 +5352,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line502">line 502</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line496">line 496</a>
     </li></ul></dd>
     
     
@@ -5157,7 +5452,7 @@
             
             
             
-            <td class="description last">(see example)</td>
+            <td class="description last"><p>(see example)</p></td>
         </tr>
 	
 	
@@ -5190,7 +5485,7 @@
             
             
             
-            <td class="description last">(see above)</td>
+            <td class="description last"><p>(see above)</p></td>
         </tr>
 	
 	
@@ -5210,7 +5505,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (self)
+    (<p>self</p>)
 
 
         </h5>
@@ -5242,7 +5537,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line504">line 504</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line498">line 498</a>
     </li></ul></dd>
     
     
@@ -5326,7 +5621,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1070">line 1070</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1118">line 1118</a>
     </li></ul></dd>
     
     
@@ -5364,7 +5659,7 @@
 <dd>
     
     <div class="description">
-        By default if you pass html element to Matreshka#bindElement as second argument that doesn't match any <code>elementProcessor</code>, the binding does nothing. But sometimes you want to change <code>innerHTML</code> without having possibility to retrieve value from the element. <a href="Matreshka.html#htmlp">Matreshka.htmlp</a> is created as simple <code>elementOptions</code> object for this case for reducing your code.
+        <p>By default if you pass html element to Matreshka#bindElement as second argument that doesn&#39;t match any &lt;code&gt;elementProcessor&lt;/code&gt;, the binding does nothing. But sometimes you want to change &lt;code&gt;innerHTML&lt;/code&gt; without having possibility to retrieve value from the element. <a href="Matreshka.html#htmlp">Matreshka.htmlp</a> is created as simple &lt;code&gt;elementOptions&lt;/code&gt; object for this case for reducing your code.</p>
     </div>
     
     
@@ -5403,7 +5698,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1105">line 1105</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1153">line 1153</a>
     </li></ul></dd>
     
     
@@ -5472,7 +5767,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1064">line 1064</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1112">line 1112</a>
     </li></ul></dd>
     
     
@@ -5510,7 +5805,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 12 2013 18:52:02 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:39 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

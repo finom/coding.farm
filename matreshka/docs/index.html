@@ -60,10 +60,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="/matreshka/plugins/">Plugins</a>
+						<a href="plugins/index.html">Plugins</a>
 					</li>
 					<li>
-						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+						<a href="https://github.com/finom/matreshka/releases">Download</a>
 					</li>
 				</ul>
 			</div>
@@ -78,9 +78,10 @@
 
     
 
-
+<!-- 
     <h3> </h3>
 
+ -->
 
 
 
@@ -91,61 +92,208 @@
 
     
 
+<!-- 
+ -->
 
+    <!--<section>
+        <article><h1>Matreshka v0.0.2</h1>
 
+<p><a href="https://github.com/finom/matreshka/archive/0.0.2.zip">Download</a></p>
 
-    <section>
-        <article><h1>Matreshka</h1>
+<p>Matreshka - is the client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:
+<em> binding of DOM elements to the data
+</em> model events
+<em> Pub/Sub pattern
+</em> improved data types (MK.Array and MK.Object)</p>
 
-<p><em>(Coming soon)</em></p>
+<p>Forget that you have a UI, because it changes automatically when the data changes.</p>
 
 <h2>Getting started</h2>
 
-<h4>Matreshka (main class)</h4>
+<h4>Plug in Matreshka to your app</h4>
 
-<p><code>javascript
-new Matreshka;
+<p><code>html
+&lt;script src=&quot;build/matreshka.all.min.js&quot;&gt;&lt;/script&gt;
+&lt;!-- that&#39;s all --&gt;
 </code></p>
 
-<h4>Matreshka.Object (inherits Matreshka)</h4>
+<h4>Matreshka (main class) using</h4>
 
-<p><code>javascript
-new MK.Object;
-</code></p>
+<p><code></code>`js
+var mk = new MK;</p>
 
-<h4>Matreshka.Array (inherits Matreshka)</h4>
+<p>mk.bindElement( &#39;myKey&#39;, &#39;.my-element&#39; ); // you just bound element to your key &quot;myKey&quot;</p>
 
-<p><code>javascript
-new MK.Array;
-</code></p>
+<p>mk.on( &#39;change:myKey&#39;, function() {
+	alert( &#39;yeah&#39; );
+});</p>
+
+<p>mk.myKey = 5; // changes DOM element (&quot;.my-element&quot;) and alerts &quot;yeah&quot;
+<code></code>`</p>
+
+<h4>Matreshka.Object (inherits Matreshka) using</h4>
+
+<p><code></code>`js
+var mkObject = new MK.Object({
+	a: 3,
+	b: 4
+});</p>
+
+<p>mkObject.bindElement({
+	a: &#39;.a-element&#39;,
+	b: &#39;.b-element&#39;
+});</p>
+
+<p>mkObject.on( &#39;modify&#39;, function() {
+	alert( &#39;yeah&#39; );
+});</p>
+
+<p>mkObject.a = 5; // changes DOM element (&quot;.a-element&quot;) and alerts &quot;yeah&quot;</p>
+
+<p>console.log( mkObject.toJSON() ); // logs { a:5, b:4 }
+<code></code>`</p>
+
+<h4>Matreshka.Array (inherits Matreshka) using</h4>
+
+<p><code></code>`js
+mkArray = new MK.Array( 1, 2, 3, 4 );</p>
+
+<p>mkArray.on( &#39;push&#39;, function() {
+	alert( &#39;yeah&#39; );
+});</p>
+
+<p>mkArray.push( 5 ); // adds 5 to the end of given array and alerts &quot;yeah&quot;</p>
+
+<p>console.log( mkArray.toString() ); // logs &quot;1,2,3,4,5&quot;
+<code></code>`</p>
+
+<p>Cool?</p>
+
+<p><a href="http://finom.github.io/matreshka/examples/">More live examples</a></p>
 
 <h2>Documentation</h2>
 
-<p><a href="http://finom.github.io/matreshka/docs/Matreshka.html">Matreshka documentation</a></p>
+<p><a href="http://finom.github.io/matreshka/docs/Matreshka.html">Matreshka</a></p>
 
-<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">Matreshka.Object documentation</a></p>
+<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a></p>
 
-<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html">Matreshka.Array documentation</a></p>
-
-<h2>Author</h2>
-
-<p>Andrey Gubanov
-<a href="mailto:a@odessite.com.ua">a@odessite.com.ua</a></p>
-
-<h2>License</h2>
-
-<p><a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT License</a></p>
-
-<h2><a href="https://github.com/finom/matreshka/issues">Issues</a></h2>
+<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html">MK.Array</a></p>
 
 <h2><a href="https://github.com/finom/matreshka/releases">Release History</a></h2>
 
-<h2>Support/Discussion</h2>
+<hr/>
 
-<p><a href="https://groups.google.com/forum/#!forum/matreshkajs">Google Group (ENG)</a></p>
+<p><a href="https://github.com/finom/matreshka/issues"><strong>Issues</strong></a></p>
 
-<p><a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">Google Group (RUS)</a></p></article>
-    </section>
+<p><strong>Author:</strong> Andrey Gubanov <a href="mailto:a@odessite.com.ua">a@odessite.com.ua</a></p>
+
+<p><strong>License:</strong> <a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT License</a></p>
+
+<p><strong>Support/Discussion</strong>: <a href="https://groups.google.com/forum/#!forum/matreshkajs">ENG</a>, <a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">RUS</a></p></article>
+    </section>-->
+	
+	<section>
+<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a name="matreshka-v002" class="anchor" href="#matreshka-v002"><span class="octicon octicon-link"></span></a>Matreshka v0.0.2</h1>
+
+<p><a href="https://github.com/finom/matreshka/archive/0.0.2.zip">Download</a></p>
+
+<p>Matreshka - is the client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:</p>
+
+<ul>
+<li>binding of DOM elements to the data</li>
+<li>model events</li>
+<li>Pub/Sub pattern</li>
+<li>improved data types (MK.Array and MK.Object)</li>
+</ul><p>Forget that you have a UI, because it changes automatically when the data changes.</p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
+
+<h4>
+<a name="plug-in-matreshka-to-your-app" class="anchor" href="#plug-in-matreshka-to-your-app"><span class="octicon octicon-link"></span></a>Plug in Matreshka to your app</h4>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"build/matreshka.all.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- that's all --&gt;</span>
+</pre></div>
+
+<h4>
+<a name="matreshka-main-class-using" class="anchor" href="#matreshka-main-class-using"><span class="octicon octicon-link"></span></a>Matreshka (main class) using</h4>
+
+<p>`js
+var mk = new MK;</p>
+
+<p>mk.bindElement( 'myKey', '.my-element' ); // you just bound element to your key "myKey"</p>
+
+<p>mk.on( 'change:myKey', function() {
+    alert( 'yeah' );
+});</p>
+
+<p>mk.myKey = 5; // changes DOM element (".my-element") and alerts "yeah"
+`</p>
+
+<h4>
+<a name="matreshkaobject-inherits-matreshka-using" class="anchor" href="#matreshkaobject-inherits-matreshka-using"><span class="octicon octicon-link"></span></a>Matreshka.Object (inherits Matreshka) using</h4>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">mkObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">.</span><span class="nb">Object</span><span class="p">({</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nx">b</span><span class="o">:</span> <span class="mi">4</span>
+<span class="p">});</span>
+
+<span class="nx">mkObject</span><span class="p">.</span><span class="nx">bindElement</span><span class="p">({</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="s1">'.a-element'</span><span class="p">,</span>
+    <span class="nx">b</span><span class="o">:</span> <span class="s1">'.b-element'</span>
+<span class="p">});</span>
+
+<span class="nx">mkObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s1">'modify'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span> <span class="s1">'yeah'</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">mkObject</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// changes DOM element (".a-element") and alerts "yeah"</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">mkObject</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()</span> <span class="p">);</span> <span class="c1">// logs { a:5, b:4 }</span>
+</pre></div>
+
+<h4>
+<a name="matreshkaarray-inherits-matreshka-using" class="anchor" href="#matreshkaarray-inherits-matreshka-using"><span class="octicon octicon-link"></span></a>Matreshka.Array (inherits Matreshka) using</h4>
+
+<div class="highlight highlight-js"><pre><span class="nx">mkArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">.</span><span class="nb">Array</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">);</span>
+
+<span class="nx">mkArray</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s1">'push'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span> <span class="s1">'yeah'</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">mkArray</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="mi">5</span> <span class="p">);</span> <span class="c1">// adds 5 to the end of given array and alerts "yeah"</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">mkArray</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="p">);</span> <span class="c1">// logs "1,2,3,4,5"</span>
+</pre></div>
+
+<p>Cool?</p>
+
+<p><a href="http://finom.github.io/matreshka/examples/">More live examples</a></p>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p><a href="http://finom.github.io/matreshka/docs/Matreshka.html">Matreshka</a></p>
+
+<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a></p>
+
+<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html">MK.Array</a></p>
+
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a><a href="https://github.com/finom/matreshka/releases">Release History</a>
+</h2>
+
+<hr><p><a href="https://github.com/finom/matreshka/issues"><strong>Issues</strong></a></p>
+
+<p><strong>Author:</strong> Andrey Gubanov <a href="mailto:a@odessite.com.ua">a@odessite.com.ua</a></p>
+
+<p><strong>License:</strong> <a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT License</a></p>
+
+<p><strong>Support/Discussion</strong>: <a href="https://groups.google.com/forum/#!forum/matreshkajs">ENG</a>, <a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">RUS</a></p></article>
+</section>
+
 
 
 
@@ -162,7 +310,7 @@ new MK.Array;
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 12 2013 18:52:02 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:39 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

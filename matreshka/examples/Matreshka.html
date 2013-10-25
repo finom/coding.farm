@@ -49,10 +49,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="plugins/">Plugins</a>
+						<a href="plugins/index.html">Plugins</a>
 					</li>
 					<li>
-						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+						<a href="https://github.com/finom/matreshka/releases">Download</a>
 					</li>
 				</ul>
 			</div>
@@ -61,15 +61,13 @@
 	</nav>		
 	<div class="container spacer-top">
 		<h1>Matreshka Examples</h1>
-		<p>Ut malesuada nulla ac dui sollicitudin, sed posuere risus dictum. Donec congue urna et placerat sollicitudin. In consequat mauris quam, et semper turpis pharetra eget. In sed dolor ipsum. Etiam iaculis, elit nec ultricies tincidunt, ligula tellus rhoncus lectus, ut rutrum dolor sapien id lorem. Etiam aliquet tempor libero. Praesent et erat accumsan, pharetra metus at, pulvinar velit. Maecenas in justo ut nibh feugiat laoreet et non nunc. Sed nec justo a turpis dapibus luctus.</p>
 		<script>window.runIt = [];</script>
 		<h3 id="binding"><a href="examples/Matreshka.html#binding">Element binding</a></h3>
 		<div class="row">
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-				<code>
-				var mk = new MK(); // same as new Matreshka;
+				<code>var mk = new MK(); // same as new Matreshka;
 
 				mk.bindElement( 'x', '.my-select', {
 					on: 'change',
@@ -129,8 +127,7 @@
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-					<code>
-					var mk = new MK(); // same as new Matreshka;
+					<code>var mk = new MK(); // same as new Matreshka;
 					mk.bindElement( 'x', '.my-select' );
 					mk.x = 3;
 					</code>
@@ -171,16 +168,14 @@
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-					<code>
-					// custom checkbox behavior
+					<code>// custom checkbox behavior
 					$( document ).on( 'click',  '.custom-checkbox', function() {
 						$( this ).toggleClass( 'checked' );
 					});
 					</code>
 				</pre>
 				<pre class="prettyprint">
-					<code>
-					var mk = new MK();
+					<code>var mk = new MK();
 
 					mk.bindElement( 'x', '.my-checkbox', {
 						on: 'click',
@@ -260,8 +255,7 @@
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-					<code>
-					var mk = new MK(); // same as new Matreshka;
+					<code>var mk = new MK(); // same as new Matreshka;
 
 					mk.on( 'yeah', function() {
 						var args = [].slice.call( arguments ).join( ', ' );
@@ -299,8 +293,7 @@
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-					<code>
-					var mk = new MK();
+					<code>var mk = new MK();
 
 					mk.on( 'change:x', function() {
 						var text = 'x changed to ' + this.x;
@@ -338,8 +331,7 @@
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-					<code>
-					var MyApp = Class({
+					<code>var MyApp = Class({
 						'extends': MK,
 						constructor: function() {
 							this

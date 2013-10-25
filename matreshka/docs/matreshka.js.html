@@ -60,10 +60,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="/matreshka/plugins/">Plugins</a>
+						<a href="plugins/index.html">Plugins</a>
 					</li>
 					<li>
-						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+						<a href="https://github.com/finom/matreshka/releases">Download</a>
 					</li>
 				</ul>
 			</div>
@@ -80,8 +80,10 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>"use strict";
-( function( gc ) {
-
+( function( gc, Class ) {
+if( !Class ) {
+	throw Error( 'Class function is not defined' );
+}
 /**
  * @class Matreshka
  * @version 0.0.1
@@ -101,7 +103,7 @@
  * }
  * });
 */
-gc.MK = gc.Matreshka = Class({
+var MK = gc.MK = gc.Matreshka = Class({
 	//__special: null, // { &lt;key>: { getter: f, elements: jQ, value: 4 }}
 	//__events: null,
 	/** 
@@ -472,11 +474,7 @@ gc.MK = gc.Matreshka = Class({
 		/*
 		 * this.bindElement(this, el, ...);
 		 */
-		try { // "Class doesn't support Automation" bug in IE8
-			if( key === this ) {
-				key = '__this__';
-			}
-		} catch( e ) {
+		if( this.eq( key ) ) {
 			key = '__this__';
 		}
 		
@@ -515,10 +513,6 @@ gc.MK = gc.Matreshka = Class({
 				this.bindElement( i, key[ i ], el, elOpts );
 			}
 			return this;
-		}
-		
-		if( typeof elOpts === 'function' ) {
-			elOpts = { setValue: elOpts };
 		}
 		
 		this.makeSpecial( key );
@@ -701,7 +695,7 @@ gc.MK = gc.Matreshka = Class({
 			MK.each( evts, function( evt, evtName ) { 
 				var mk;
 				for( var i = 0; i &lt; evt.length; i++ ) {
-					if( evt[ i ].namespace === 'mk' && 'mk' in evt[ i ].data && evt[ i ].data.mk.instance === this ) {
+					if( evt[ i ].namespace === 'mk' && 'mk' in evt[ i ].data && this.eq( evt[ i ].data.mk.instance) ) {
 						mk = evt[ i ].data.mk;
 						this.off( '_change:' + mk.key, mk.mkHandler );
 						// @question can I remove an element from event array: evt.splice( i--, 1 );? It works but I'm not sure is this good idea.
@@ -814,6 +808,20 @@ gc.MK = gc.Matreshka = Class({
 		return specialProps;
 	},
 	
+	/**
+	 * @method Matreshka#eq
+	 * @since 0.0.2
+	 * @summary Checks is instance equals to given object
+	 * @desc The IE8 throws an exception when you're trying to check equality of two Matreshka instances. Use &lt;code>.eq&lt;/code> method instead of &lt;code>==&lt;/code> and &lt;code>===&lt;/code>
+	 * @param {object} object - An object that you wish to test for equality with 
+	 * @example &lt;caption>IE8 issue&lt;/caption>
+	 * this === object; //sometimes IE8 throws "Class doesn't support Automation"
+	 * @example &lt;caption>Basic usage&lt;/caption>
+	 * this.eq( object ); // true or false
+	 */
+	eq: function( object ) {
+		return typeof object === 'object' && object !== null && this.__id === object.__id;
+	},
 	
 	/**
 	 * @method Matreshka#defineGetter
@@ -849,6 +857,37 @@ gc.MK = gc.Matreshka = Class({
 		
 		this.makeSpecial( key ).getter = getter.bind( this );
 		return this;
+	},
+	
+	/**
+	 * @private
+	 * @method Matreshka#addDependence
+	 * @since 0.0.3
+	 * @summary Defines smart getter
+	 * @desc {@link Matreshka#addDependence} adds dependence of &lt;code>key&lt;/code> from &lt;code>keys&lt;/code>. You can use it instead of {@link Matreshka#defineGetter} if you want to listen change:*key* event for given key or bind key to an element.
+	 * @param {string} key
+	 * @param {string|string[]} keys
+	 * @param {function} getter
+	 * @example &lt;caption>Basic usage&lt;/caption>
+	 * this.a = 3;
+	 * this.b = 4;
+	 * this.addDependence( 'perimeter', 'a b', function() { return ( this.a + this.b ) * 2} );
+	 * alert( this.perimeter ); // 14
+	 * this.on( 'change:perimeter', function() {
+	 * 	alert( 'perimeter is changed to ' + this.perimeter );
+	 * });
+	 * this.a = 5; // alerts "perimeter is changed to 18"
+	 */
+	addDependence: function( key, keys, getter ) {
+		var keys = typeof keys === 'string' ? keys.split( /\s/ ) : keys;
+		return this
+			.set( key, getter.call( this ) )
+			.on( keys.join( ':_change ' ) + ':_change', function( evt ) {
+				this.set( key, getter.call( this ), {
+					silent: evt.silentChangeEvent
+				});
+			})
+		;
 	},
 	
 	/**
@@ -926,7 +965,8 @@ gc.MK = gc.Matreshka = Class({
 		
 		if( v !== prevVal || evtOpts.triggerAnyway ) {
 			this.trigger( '_change:' + key, { // using for changing element state
-				silentAllEvent: true
+				silentAllEvent: true,
+				silentChangeEvent: evtOpts.silent
 			}); 
 			
 			if( !evtOpts.silent ) {
@@ -1080,7 +1120,8 @@ gc.MK = gc.Matreshka = Class({
 			Object.defineProperty( this, key, {
 				value: value,
 				enumerable: false,
-				writable: true
+				writable: true,
+				configurable: true
 			});
 		}
 		return this;
@@ -1096,6 +1137,13 @@ gc.MK = gc.Matreshka = Class({
 	 */
 	initMK: function() {
 		return this.defineNotEnum({
+			/**
+			 * Instance id
+			 * @private
+			 * @since 0.0.2
+			 * @member {number}
+			 */
+			__id: this.__id || new Date().getTime() + '' + Math.random(),
 			/**
 			 * This object contains all events
 			 * @private
@@ -1146,7 +1194,7 @@ MK.extend( MK, {
 	 * @member {boolean} Matreshka.isXDR
 	 * @summary Tells us are we using XDomainRequest hack. In other words, is current browser IE8.
 	 */
-	isXDR: !!gc.XDomainRequest,
+	isXDR: Class.isXDR,
 	
 	/**
 	 * @member {function[]} Matreshka.elementProcessors
@@ -1200,6 +1248,43 @@ MK.extend( MK, {
 		setValue: function( v ) {
 			this.innerHTML = v;
 		}
+	},
+	
+	/**
+	 * @method Matreshka.classp
+	 * @since 0.0.2
+	 * @summary &lt;code>className&lt;/code> element options function
+	 * @desc This function is a shortcut for using existence of element's &lt;code>className&lt;/code> as boolean value when you bind it to a property.
+	 * @param {string} className
+	 * @returns {elementOptions}
+	 * @example &lt;caption>Usage&lt;/caption>
+	 * this.bindElement( 'myKey', '.my-element', MK.classp( 'blah' ) );
+	 * // same as
+	 * this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property
+	 * 	setValue: function( v ) {
+	 * 		$( this ).toggleClass( 'blah', v );
+	 * 	}
+	 * });
+	 * this.myKey = true; // adds 'blah' class to '.my-element'
+	 * this.myKey = false; // removes 'blah' class from '.my-element'	
+	 * @example &lt;caption>Using "!" (not) statement&lt;/caption>
+	 * this.bindElement( 'shown', '.my-element', MK.classp( '!hide' ) );
+	 * // same as
+	 * this.bindElement( 'shown', '.my-element', { // no "getValue" and no "on" property
+	 * 	setValue: function( v ) {
+	 * 		$( this ).toggleClass( 'hide', !v );
+	 * 	}
+	 * });
+	 * this.shown = true; // removes 'hide' class from '.my-element'
+	 * this.shown = false; // adds 'hide' class to '.my-element'
+	 */
+	classp: function( className ) {
+		var not = !className.indexOf( '!' );
+		return {
+			setValue: function( v ) {
+				$( this ).toggleClass( className, not ? !v : v );
+			}
+		};
 	},
 	
 	/**
@@ -1320,7 +1405,7 @@ MK.elementProcessors.push( function( el ) {
  * this.set( 'a', 2 ); // alerts "yeah"
  */
 
- })( this );</code></pre>
+ })( this, this.Class );</code></pre>
         </article>
     </section>
 
@@ -1337,7 +1422,7 @@ MK.elementProcessors.push( function( el ) {
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Oct 12 2013 18:52:02 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:38 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -10,18 +10,6 @@ body
 	background-color: #fff;
 }
 
-a {
-    color: #444;
-}
-
-a:visited {
-    color: #444;
-}
-
-a:active {
-    color: #444;
-}
-
 header
 {
 	display: block;

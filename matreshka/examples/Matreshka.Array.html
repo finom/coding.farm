@@ -49,10 +49,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="plugins/">Plugins</a>
+						<a href="plugins/index.html">Plugins</a>
 					</li>
 					<li>
-						<a href="https://github.com/finom/matreshka/archive/master.zip">Download</a>
+						<a href="https://github.com/finom/matreshka/releases">Download</a>
 					</li>
 				</ul>
 			</div>
@@ -61,16 +61,14 @@
 	</nav>		
 	<div class="container spacer-top">
 		<h1>Matreshka.Array Examples</h1>
-		<p>Ut malesuada nulla ac dui sollicitudin, sed posuere risus dictum. Donec congue urna et placerat sollicitudin. In consequat mauris quam, et semper turpis pharetra eget. In sed dolor ipsum. Etiam iaculis, elit nec ultricies tincidunt, ligula tellus rhoncus lectus, ut rutrum dolor sapien id lorem. Etiam aliquet tempor libero. Praesent et erat accumsan, pharetra metus at, pulvinar velit. Maecenas in justo ut nibh feugiat laoreet et non nunc. Sed nec justo a turpis dapibus luctus.</p>
 		<script>window.runIt = [];</script>
-		<h3 id="original-methods"><a href="examples/Matreshka.Array.html#original-methods">Original methods</a></h3>
+		<h3 id="original-methods"><a href="examples/Matreshka.Array.html#original-methods">Original Array methods</a></h3>
 		<p>Remember that Matreshka.Array instance has same methods as native Javascript Array. Some methods are changed for chain calling.</p>
 		<div class="row">
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-				<code>
-				var     mkArray = new MK.Array(),
+				<code>var     mkArray = new MK.Array(),
 					result = mkArray
 							.push( 1, 2, 3, 4, 5 )
 							.shift()
@@ -113,8 +111,7 @@
 			
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
-						<code>								
-						var mkArray = new MK.Array();
+						<code>var mkArray = new MK.Array();
 						
 						mkArray
 							.on( 'modify', function( evtOpts ) {
