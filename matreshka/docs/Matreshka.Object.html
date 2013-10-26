@@ -86,7 +86,7 @@
     Object
     </h2>
     
-        <div class="class-description"><p>Matreshka Object class. Extends <a href="Matreshka.html">Matreshka</a>.</p></div>
+        <div class="class-description">Matreshka Object class. Extends <a href="Matreshka.html">Matreshka</a>.</div>
     
 </header>  
 
@@ -125,7 +125,7 @@
         
     
     <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>0.0.1</li></ul></dd>
+    <dd class="tag-version"><ul class="dummy"><li>0.0.3</li></ul></dd>
     
     
     
@@ -147,7 +147,8 @@
     
     
     <dt class="tag-license">License:</dt>
-    <dd class="tag-license"><ul class="dummy"><li><a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT</a>Version 2.0, January 2004</li></ul></dd>
+    <dd class="tag-license"><ul class="dummy"><li><a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT</a>
+Version 2.0, January 2004</li></ul></dd>
     
     
     
@@ -192,11 +193,20 @@
 
         <p class="code-caption">Passing object</p>
     
-    <pre class="prettyprint"><code>// creates Matreshka.Object instance with 2 enumerable keys (a, b)new MK.Object({ a: 1, b: 2 });// same as new MK.Object().jset({ a: 1, b: 2 });</code></pre>
+    <pre class="prettyprint"><code>// creates Matreshka.Object instance with 2 enumerable keys (a, b)
+new MK.Object({ a: 1, b: 2 });
+// same as new MK.Object().jset({ a: 1, b: 2 });</code></pre>
 
         <p class="code-caption">Inheritance</p>
     
-    <pre class="prettyprint"><code>var MyClass = Class({	'extends': MK.Object,	constructor: function() {		// calls MK.Object constructor with this context and given arguments		MyClass.parent.constructor( this, arguments );	},	method: function() {}});</code></pre>
+    <pre class="prettyprint"><code>var MyClass = Class({
+	'extends': MK.Object,
+	constructor: function() {
+		// calls MK.Object constructor with this context and given arguments
+		MyClass.parent.constructor( this, arguments );
+	},
+	method: function() {}
+});</code></pre>
 
     
 </dd>
@@ -232,7 +242,7 @@
     
     
     <div class="description">
-        <p>This method is used if you want to define enumerable keys but you don&#39;t know values yet.</p>
+        This method is used if you want to define enumerable keys but you don't know values yet.
     </div>
     
 
@@ -288,7 +298,7 @@
             
             
             
-            <td class="description last"><p>a list of space-delimited keys or array of keys or repeated string</p></td>
+            <td class="description last">a list of space-delimited keys or array of keys or repeated string</td>
         </tr>
 	
 	
@@ -308,7 +318,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -378,7 +388,11 @@
 
         <p class="code-caption">Using <a href="Matreshka.Object.html#each">Matreshka.Object#each</a></p>
     
-    <pre class="prettyprint"><code>this.addJSONKeys( 'a b' );this.each( function( value, key ) {	console.log( key, value );});// logs 'a' undefined and 'b' undefined</code></pre>
+    <pre class="prettyprint"><code>this.addJSONKeys( 'a b' );
+this.each( function( value, key ) {
+	console.log( key, value );
+});
+// logs 'a' undefined and 'b' undefined</code></pre>
 
     
 </dd>
@@ -485,7 +499,7 @@
             
             
             
-            <td class="description last"><p>the context of callback</p></td>
+            <td class="description last">the context of callback</td>
         </tr>
 	
 	
@@ -505,7 +519,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -563,7 +577,9 @@
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>this.each( function() {	... }, this );</code></pre>
+    <pre class="prettyprint"><code>this.each( function() {
+	... 
+}, this );</code></pre>
 
     
 </dd>
@@ -647,7 +663,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -705,7 +721,10 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );mkObject.hasOwnProperty( 'a' ); // truemkObject.hasOwnProperty( 'b' ); // truemkObject.hasOwnProperty( 'c' ); // false</code></pre>
+    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );
+mkObject.hasOwnProperty( 'a' ); // true
+mkObject.hasOwnProperty( 'b' ); // true
+mkObject.hasOwnProperty( 'c' ); // false</code></pre>
 
     
 </dd>
@@ -741,7 +760,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -799,7 +818,12 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var MyClass = Class({	'extends': MK.Object, constructor: function() { 	this.initMK();	}});</code></pre>
+    <pre class="prettyprint"><code>var MyClass = Class({
+	'extends': MK.Object,
+ constructor: function() {
+ 	this.initMK();
+	}
+});</code></pre>
 
     
 </dd>
@@ -817,9 +841,9 @@
     
     
     <div class="description">
-        <p>&lt;p&gt;This is common method of <a href="Matreshka.Object.html">Matreshka.Object</a> insance that does two things:&lt;/p&gt;
-&lt;p&gt;1. Sets property.&lt;/p&gt;
-&lt;p&gt;2. Adds given key to enumerable list (key enumerates via <a href="Matreshka.Object.html#each">Matreshka.Object#each</a> method and includes to result object returned by <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> and <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a>) methods.&lt;/p&gt;</p>
+        <p>This is common method of <a href="Matreshka.Object.html">Matreshka.Object</a> insance that does two things:</p>
+<p>1. Sets property.</p>
+<p>2. Adds given key to enumerable list (key enumerates via <a href="Matreshka.Object.html#each">Matreshka.Object#each</a> method and includes to result object returned by <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> and <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a>) methods.</p>
     </div>
     
 
@@ -963,7 +987,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -1035,19 +1059,33 @@
 
         <p class="code-caption"><a href="Matreshka.Object.html#each">Matreshka.Object#each</a> method example</p>
     
-    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );// sets 'c' to 3 but not adds keys to enumerable listthis.set( 'c', 3 );this.each( function( value, key ) {	console.log( key, value ); });// logs 'a' 1 and 'b' 2</code></pre>
+    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );
+// sets 'c' to 3 but not adds keys to enumerable list
+this.set( 'c', 3 );
+this.each( function( value, key ) {
+	console.log( key, value ); 
+});
+// logs 'a' 1 and 'b' 2</code></pre>
 
         <p class="code-caption"><a href="Matreshka.Object.html#keys">Matreshka.Object#keys</a> method example</p>
     
-    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );// sets 'c' to 3 but not adds keys to enumerable listthis.set( 'c', 3 );console.log( this.keys() ); // logs [ 'a', 'b' ]</code></pre>
+    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );
+// sets 'c' to 3 but not adds keys to enumerable list
+this.set( 'c', 3 );
+console.log( this.keys() ); // logs [ 'a', 'b' ]</code></pre>
 
         <p class="code-caption"><a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> method example</p>
     
-    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );// sets 'c' to 3 but not adds keys to enumerable listthis.set( 'c', 3 );console.log( this.toObject() ); // logs { a: 1, b: 2 }</code></pre>
+    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 );
+// sets 'c' to 3 but not adds keys to enumerable list
+this.set( 'c', 3 );
+console.log( this.toObject() ); // logs { a: 1, b: 2 }</code></pre>
 
         <p class="code-caption">After using Matreshka.Object#jset you can work with property as with regular property</p>
     
-    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 ); // sets properties and adds to <code>'a'</code> and <code>'b'</code> enumerable listthis.set( 'a', 3 ); this.b = 4;</code></pre>
+    <pre class="prettyprint"><code>this.jset( 'a', 1 ).jset( 'b', 2 ); // sets properties and adds to <code>'a'</code> and <code>'b'</code> enumerable list
+this.set( 'a', 3 ); 
+this.b = 4;</code></pre>
 
     
 </dd>
@@ -1154,7 +1192,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -1212,11 +1250,17 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.jset({	a: 1,	b: 2});</code></pre>
+    <pre class="prettyprint"><code>this.jset({
+	a: 1,
+	b: 2
+});</code></pre>
 
         <p class="code-caption">Using <code>eventOptions</code></p>
     
-    <pre class="prettyprint"><code>this.jset({	a: 1,	b: 2}, { silent: true });</code></pre>
+    <pre class="prettyprint"><code>this.jset({
+	a: 1,
+	b: 2
+}, { silent: true });</code></pre>
 
     
 </dd>
@@ -1234,7 +1278,7 @@
     
     
     <div class="description">
-        <p>Returns first match or &lt;code&gt;null&lt;/code&gt; if no property found (&lt;code&gt;Array.prototype.indexOf&lt;/code&gt; analogue)</p>
+        Returns first match or <code>null</code> if no property found (<code>Array.prototype.indexOf</code> analogue)
     </div>
     
 
@@ -1312,7 +1356,7 @@
             
             
             
-            <td class="description last"><p>value that we want to find</p></td>
+            <td class="description last">value that we want to find</td>
         </tr>
 	
 	
@@ -1366,7 +1410,10 @@
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );mkObject.keyOf( 1 ); // 'a'mkObject.keyOf( 2 ); // 'b'mkObject.keyOf( 3 ); // null</code></pre>
+    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );
+mkObject.keyOf( 1 ); // 'a'
+mkObject.keyOf( 2 ); // 'b'
+mkObject.keyOf( 3 ); // null</code></pre>
 
     
 </dd>
@@ -1402,7 +1449,7 @@
 <span class="param-type label label-type label-type-unknown">string[]</span>
 
 
-    (<p>keys</p>)
+    (keys)
 
 
         </h5>
@@ -1478,7 +1525,7 @@
     
     
     <div class="description">
-        <p>You can remove keys from enumerable list if you no longer need them as part of data.</p>
+        You can remove keys from enumerable list if you no longer need them as part of data.
     </div>
     
 
@@ -1534,7 +1581,7 @@
             
             
             
-            <td class="description last"><p>a list of space-delimited keys or array of keys or repeated string</p></td>
+            <td class="description last">a list of space-delimited keys or array of keys or repeated string</td>
         </tr>
 	
 	
@@ -1554,7 +1601,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkObject">mkObject</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -1638,7 +1685,7 @@
     
     
     <div class="description">
-        <p>The diferrence between <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a> and <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> is that  <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a> tries to call &lt;code&gt;toJSON&lt;/code&gt; method for inner objects.</p>
+        The diferrence between <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a> and <a href="Matreshka.Object.html#toObject">Matreshka.Object#toObject</a> is that  <a href="Matreshka.Object.html#toJSON">Matreshka.Object#toJSON</a> tries to call <code>toJSON</code> method for inner objects.
     </div>
     
 
@@ -1808,7 +1855,8 @@
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );mkObject.toNative(); // returns { a: 1, b: 2 }</code></pre>
+    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );
+mkObject.toNative(); // returns { a: 1, b: 2 }</code></pre>
 
     
 </dd>
@@ -1900,7 +1948,8 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );mkObject.toObject(); // returns { a: 1, b: 2 }</code></pre>
+    <pre class="prettyprint"><code>var mkObject = new MK.Object( { a: 1, b: 2 } );
+mkObject.toObject(); // returns { a: 1, b: 2 }</code></pre>
 
     
 </dd>
@@ -1930,7 +1979,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:39 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Oct 27 2013 01:42:35 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

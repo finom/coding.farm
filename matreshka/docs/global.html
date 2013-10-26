@@ -155,7 +155,7 @@
     
     
     <div class="description">
-        <p>Class function provides possibility to use classical OOP. Modern browsers use prototype based implementation but Internet Explorer 8 uses XDomainRequest hack to provide possibility to use getters and setters by Object.defineProperty method. Each time when you create an instance, the Class function core creates XDomainRequest instance and extends it by given prototype.</p>
+        Class function provides possibility to use classical OOP. Modern browsers use prototype based implementation but Internet Explorer 8 uses XDomainRequest hack to provide possibility to use getters and setters by Object.defineProperty method. Each time when you create an instance, the Class function core creates XDomainRequest instance and extends it by given prototype.
     </div>
     
 
@@ -205,7 +205,7 @@
             
             
             
-            <td class="description last"><p>Methods and properties</p></td>
+            <td class="description last">Methods and properties</td>
         </tr>
 	
 	
@@ -225,7 +225,7 @@
 <span class="param-type label label-type label-type-function">function</span>
 
 
-    (<p>constructor</p>)
+    (constructor)
 
 
         </h5>
@@ -301,7 +301,7 @@
     
     
     <div class="description">
-        <p>You still can use instanceof operator but it doesn&#39;t work in Internet Explorer 8 because of XDR hack.</p>
+        You still can use instanceof operator but it doesn't work in Internet Explorer 8 because of XDR hack.
     </div>
     
 
@@ -451,8 +451,8 @@
     
     
     <div class="description">
-        <p>&lt;p&gt;Array callback is using in some <a href="Matreshka.Array.html">Matreshka.Array</a> methods like: <a href="Matreshka.Array.html#forEach">Matreshka.Array#forEach</a>, <a href="Matreshka.Array.html#filter">Matreshka.Array#filter</a>, <a href="Matreshka.Array.html#some">Matreshka.Array#some</a>... as iterator callback.&lt;/p&gt;
-&lt;p&gt;To keep methods as fast as possible and reduce errors, most of methods are written using native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">Array.prototype</a> methods. Pay attention that callback gets third argument that doesn&#39;t match self (&lt;code&gt;this&lt;/code&gt; of the method). This is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> representation of <a href="Matreshka.Array.html">Matreshka.Array</a> instance because &lt;code&gt;Array.prototype[ method ].apply( this, arguments );&lt;/code&gt; doesn&#39;t work with DOM objects (XDomainRequest hack that we&#39;re using to keep dynamic accessors support). So we convert <a href="Matreshka.Array.html">Matreshka.Array</a> to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> and use it this way: &lt;code&gt;Array.prototype[ method ].apply( representation, arguments );&lt;/code&gt;&lt;/p&gt;</p>
+        <p>Array callback is using in some <a href="Matreshka.Array.html">Matreshka.Array</a> methods like: <a href="Matreshka.Array.html#forEach">Matreshka.Array#forEach</a>, <a href="Matreshka.Array.html#filter">Matreshka.Array#filter</a>, <a href="Matreshka.Array.html#some">Matreshka.Array#some</a>... as iterator callback.</p>
+<p>To keep methods as fast as possible and reduce errors, most of methods are written using native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">Array.prototype</a> methods. Pay attention that callback gets third argument that doesn't match self (<code>this</code> of the method). This is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> representation of <a href="Matreshka.Array.html">Matreshka.Array</a> instance because <code>Array.prototype[ method ].apply( this, arguments );</code> doesn't work with DOM objects (XDomainRequest hack that we're using to keep dynamic accessors support). So we convert <a href="Matreshka.Array.html">Matreshka.Array</a> to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> and use it this way: <code>Array.prototype[ method ].apply( representation, arguments );</code></p>
     </div>
     
 
@@ -611,11 +611,16 @@
     
         <h5 class="hide">Examples</h5>
         
-    <pre class="prettyprint"><code>var callback = function( item, key, array ) {	console.log( item, key, array );}this.forEach( callback );</code></pre>
+    <pre class="prettyprint"><code>var callback = function( item, key, array ) {
+	console.log( item, key, array );
+}
+this.forEach( callback );</code></pre>
 
         <p class="code-caption">Third argument issue</p>
     
-    <pre class="prettyprint"><code>this.forEach( function( item, key, array ) {	console.log( this === array ); // false}, this );</code></pre>
+    <pre class="prettyprint"><code>this.forEach( function( item, key, array ) {
+	console.log( this === array ); // false
+}, this );</code></pre>
 
     
 </dd>
@@ -630,7 +635,7 @@
 <dd>
     
     <div class="description">
-        <p>&lt;code&gt;elementOptions&lt;/code&gt; contains information about how to extract value from an element, how to set value for an element and which element&#39;s event we have to listen</p>
+        <code>elementOptions</code> contains information about how to extract value from an element, how to set value for an element and which element's event we have to listen
     </div>
     
     
@@ -702,7 +707,7 @@
             
             
             
-            <td class="description last"><p>event name (or space-delimited list of events) which we have to listen</p></td>
+            <td class="description last">event name (or space-delimited list of events) which we have to listen</td>
         </tr>
 	
 	
@@ -733,7 +738,7 @@
             
             
             
-            <td class="description last"><p>function that tells how to extract value from an element (context &lt;code&gt;this&lt;/code&gt; is given element)</p></td>
+            <td class="description last">function that tells how to extract value from an element (context <code>this</code> is given element)</td>
         </tr>
 	
 	
@@ -764,7 +769,7 @@
             
             
             
-            <td class="description last"><p>&quot;How to set value&quot; for an element (context &lt;code&gt;this&lt;/code&gt; is given element)</p></td>
+            <td class="description last">"How to set value" for an element (context <code>this</code> is given element)</td>
         </tr>
 	
 	
@@ -792,7 +797,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1275">line 1275</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1278">line 1278</a>
     </li></ul></dd>
     
     
@@ -807,7 +812,12 @@
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>var elementOptions = {	on: 'click',	getValue: function() { return this.value; } 	setValue: function( v ) { this.value = v; } };this.bindElement( 'a', '.my-checkbox', elementOptions );</code></pre>
+    <pre class="prettyprint"><code>var elementOptions = {
+	on: 'click',
+	getValue: function() { return this.value; } 
+	setValue: function( v ) { this.value = v; } 
+};
+this.bindElement( 'a', '.my-checkbox', elementOptions );</code></pre>
 
     
 </dd>
@@ -823,7 +833,7 @@
     
     
     <div class="description">
-        <p>Event handler</p>
+        Event handler
     </div>
     
 
@@ -885,7 +895,7 @@
             
             
             
-            <td class="description last"><p>any arguments that passed to <a href="Matreshka.html#trigger">Matreshka#trigger</a> after event name</p></td>
+            <td class="description last">any arguments that passed to <a href="Matreshka.html#trigger">Matreshka#trigger</a> after event name</td>
         </tr>
 	
 	
@@ -924,7 +934,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1269">line 1269</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1272">line 1272</a>
     </li></ul></dd>
     
     
@@ -948,7 +958,11 @@
     
         <h5 class="hide">Example</h5>
         
-    <pre class="prettyprint"><code>var eventHandler = function() {	console.log( arguments ); }this.on( 'fyeah', eventHandler );this.trigger( 'fyeah', 'foo', 'bar', 'baz' ); // logs 'foo', 'bar', 'baz'</code></pre>
+    <pre class="prettyprint"><code>var eventHandler = function() {
+	console.log( arguments ); 
+}
+this.on( 'fyeah', eventHandler );
+this.trigger( 'fyeah', 'foo', 'bar', 'baz' ); // logs 'foo', 'bar', 'baz'</code></pre>
 
     
 </dd>
@@ -963,7 +977,7 @@
 <dd>
     
     <div class="description">
-        <p>Event name or space-delimited list of event names</p>
+        Event name or space-delimited list of event names
     </div>
     
     
@@ -1002,7 +1016,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1273">line 1273</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1276">line 1276</a>
     </li></ul></dd>
     
     
@@ -1017,7 +1031,8 @@
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>var eventNames = 'change:a change:b fyeah done change:x'this.on( eventNames, function() {} );</code></pre>
+    <pre class="prettyprint"><code>var eventNames = 'change:a change:b fyeah done change:x'
+this.on( eventNames, function() {} );</code></pre>
 
     
 </dd>
@@ -1032,7 +1047,7 @@
 <dd>
     
     <div class="description">
-        <p>&lt;code&gt;eventOptions&lt;/code&gt; object could contain any properties. The only special property is &lt;code&gt;&quot;silent&quot;&lt;/code&gt; that could be passed to Matreshka#set, {@link Matreshka#remove}, Matreshka#bind, {@link Matreshka#unbind} if you&#39;d like to prevent the event from being triggered</p>
+        <code>eventOptions</code> object could contain any properties. The only special property is <code>"silent"</code> that could be passed to Matreshka#set, {@link Matreshka#remove}, Matreshka#bind, {@link Matreshka#unbind} if you'd like to prevent the event from being triggered
     </div>
     
     
@@ -1071,7 +1086,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1277">line 1277</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1280">line 1280</a>
     </li></ul></dd>
     
     
@@ -1086,9 +1101,15 @@
     
         <h5>Examples</h5>
         
-    <pre class="prettyprint"><code>var eventOptions = { silent: true };this.a = 1;this.on( 'change:a', function() { alert( 'a is changed' ); });this.a = 2; // no alert</code></pre>
+    <pre class="prettyprint"><code>var eventOptions = { silent: true };
+this.a = 1;
+this.on( 'change:a', function() { alert( 'a is changed' ); });
+this.a = 2; // no alert</code></pre>
 
-    <pre class="prettyprint"><code>var eventOptions = { f: 'yeah' };this.a = 1;this.on( 'change:a', function( eventOptions ) { alert( eventOptions.f ); });this.set( 'a', 2 ); // alerts "yeah"</code></pre>
+    <pre class="prettyprint"><code>var eventOptions = { f: 'yeah' };
+this.a = 1;
+this.on( 'change:a', function( eventOptions ) { alert( eventOptions.f ); });
+this.set( 'a', 2 ); // alerts "yeah"</code></pre>
 
     
 </dd>
@@ -1103,7 +1124,7 @@
 <dd>
     
     <div class="description">
-        <p><a href="Matreshka.html">Matreshka</a> instance</p>
+        <a href="Matreshka.html">Matreshka</a> instance
     </div>
     
     
@@ -1142,7 +1163,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1271">line 1271</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1274">line 1274</a>
     </li></ul></dd>
     
     
@@ -1167,7 +1188,7 @@
 <dd>
     
     <div class="description">
-        <p><a href="Matreshka.Array.html">Matreshka.Array</a> instance</p>
+        <a href="Matreshka.Array.html">Matreshka.Array</a> instance
     </div>
     
     
@@ -1231,7 +1252,7 @@
 <dd>
     
     <div class="description">
-        <p><a href="Matreshka.Object.html">Matreshka.Object</a> instance</p>
+        <a href="Matreshka.Object.html">Matreshka.Object</a> instance
     </div>
     
     
@@ -1306,7 +1327,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:38 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Oct 27 2013 01:42:34 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -25,7 +25,7 @@ MK.DOMArray = Class({
 					}
 				}
 			})
-			.on( 'shift', function( evt ) {console.log( evt.returns )
+			.on( 'shift', function( evt ) {
 				if( evt && evt.returns ) {
 					evt.returns.$el( this.__id ).remove()
 					this.killItem( evt.returns );
@@ -59,13 +59,9 @@ MK.DOMArray = Class({
 		if( this.renderer ) {
 			if( !item.el( __id ) ) {
 				$el = $( this.renderer( item ) );
-				el = $el[ 0 ];
 				item
-					.bindElement( __id, el )
-					.trigger( 'render', {
-						el: el,
-						$el: $el
-					})
+					.bindElement( __id, $el )
+					.trigger( 'render' )
 				;
 			}
 		}

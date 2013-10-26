@@ -121,7 +121,7 @@
         
     
     <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>0.0.1</li></ul></dd>
+    <dd class="tag-version"><ul class="dummy"><li>0.0.3</li></ul></dd>
     
     
     
@@ -143,7 +143,8 @@
     
     
     <dt class="tag-license">License:</dt>
-    <dd class="tag-license"><ul class="dummy"><li><a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT</a>Version 2.0, January 2004</li></ul></dd>
+    <dd class="tag-license"><ul class="dummy"><li><a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT</a>
+Version 2.0, January 2004</li></ul></dd>
     
     
     
@@ -185,7 +186,12 @@
 
         <p class="code-caption">Inheritance</p>
     
-    <pre class="prettyprint"><code>var MyClass = Class({	'extends': Matreshka,	method: function() {		this.initMK();}});</code></pre>
+    <pre class="prettyprint"><code>var MyClass = Class({
+	'extends': Matreshka,
+	method: function() {
+		this.initMK();
+}
+});</code></pre>
 
     
 </dd>
@@ -231,7 +237,7 @@
     
     
     <div class="description">
-        <p>This function is a shortcut for using existence of element&#39;s &lt;code&gt;className&lt;/code&gt; as boolean value when you bind it to a property.</p>
+        This function is a shortcut for using existence of element's <code>className</code> as boolean value when you bind it to a property.
     </div>
     
 
@@ -360,11 +366,27 @@
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element', MK.classp( 'blah' ) );// same asthis.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property	setValue: function( v ) {		$( this ).toggleClass( 'blah', v );	}});this.myKey = true; // adds 'blah' class to '.my-element'this.myKey = false; // removes 'blah' class from '.my-element'	</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element', MK.classp( 'blah' ) );
+// same as
+this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property
+	setValue: function( v ) {
+		$( this ).toggleClass( 'blah', v );
+	}
+});
+this.myKey = true; // adds 'blah' class to '.my-element'
+this.myKey = false; // removes 'blah' class from '.my-element'	</code></pre>
 
         <p class="code-caption">Using "!" (not) statement</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'shown', '.my-element', MK.classp( '!hide' ) );// same asthis.bindElement( 'shown', '.my-element', { // no "getValue" and no "on" property	setValue: function( v ) {		$( this ).toggleClass( 'hide', !v );	}});this.shown = true; // removes 'hide' class from '.my-element'this.shown = false; // adds 'hide' class to '.my-element'</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'shown', '.my-element', MK.classp( '!hide' ) );
+// same as
+this.bindElement( 'shown', '.my-element', { // no "getValue" and no "on" property
+	setValue: function( v ) {
+		$( this ).toggleClass( 'hide', !v );
+	}
+});
+this.shown = true; // removes 'hide' class from '.my-element'
+this.shown = false; // adds 'hide' class to '.my-element'</code></pre>
 
     
 </dd>
@@ -438,7 +460,7 @@
             
             
             
-            <td class="description last"><p>iterable object</p></td>
+            <td class="description last">iterable object</td>
         </tr>
 	
 	
@@ -469,7 +491,7 @@
             
             
             
-            <td class="description last"><p>Function to execute for each element.</p></td>
+            <td class="description last">Function to execute for each element.</td>
         </tr>
 	
 	
@@ -502,7 +524,7 @@
             
             
             
-            <td class="description last"><p>Object to use as &lt;code&gt;this&lt;/code&gt; when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
+            <td class="description last">Object to use as <code>this</code> when executing <code>callback</code></td>
         </tr>
 	
 	
@@ -541,7 +563,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1215">line 1215</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1218">line 1218</a>
     </li></ul></dd>
     
     
@@ -596,7 +618,7 @@
 <span class="param-type label label-type label-type-object">object</span>
 
 
-    (<p>o1</p>)
+    (o1)
 
 
         </h5>
@@ -728,7 +750,9 @@
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>var o1 = { a: 3 },    o2 = { b: 4 }MK.extend( o1, o2 );</code></pre>
+    <pre class="prettyprint"><code>var o1 = { a: 3 },
+    o2 = { b: 4 }
+MK.extend( o1, o2 );</code></pre>
 
     
 </dd>
@@ -783,7 +807,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1209">line 1209</a>
+        <a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1212">line 1212</a>
     </li></ul></dd>
     
     
@@ -820,7 +844,7 @@
     
     
     <div class="description">
-        <p>After you bind element to &lt;code&gt;this (&quot;<strong>this</strong>&quot;)&lt;/code&gt; you can use this method for finding elements that contained in bound element.</p>
+        After you bind element to <code>this ("__this__")</code> you can use this method for finding elements that contained in bound element.
     </div>
     
 
@@ -946,7 +970,12 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement( this, '.app' );this.$( '.my-element' );// equals tothis.$el().find( '.my-element' );// equals to$( '.app' ).find( '.my-element' );</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( this, '.app' );
+this.$( '.my-element' );
+// equals to
+this.$el().find( '.my-element' );
+// equals to
+$( '.app' ).find( '.my-element' );</code></pre>
 
     
 </dd>
@@ -964,7 +993,7 @@
     
     
     <div class="description">
-        <p>After you bound elements to a property you can extract them by using this method.</p>
+        After you bound elements to a property you can extract them by using this method.
     </div>
     
 
@@ -1026,7 +1055,7 @@
             
             
             
-            <td class="description last"><p>For which key we want to extract elements. If undefined or null returns elements bound to &lt;code&gt;this&lt;/code&gt;.</p></td>
+            <td class="description last">For which key we want to extract elements. If undefined or null returns elements bound to <code>this</code>.</td>
         </tr>
 	
 	
@@ -1046,7 +1075,7 @@
 <span class="param-type label label-type label-type-unknown">jQuery</span>
 
 
-    (<p>Bound elements</p>)
+    (Bound elements)
 
 
         </h5>
@@ -1104,11 +1133,13 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element' );this.$el( 'myKey' ); // returns $( '.my-element' )</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element' );
+this.$el( 'myKey' ); // returns $( '.my-element' )</code></pre>
 
         <p class="code-caption">Get element bound to <code>this</code></p>
     
-    <pre class="prettyprint"><code>this.bindElement( this, '.app' );this.$el(); // returns $( '.app' )</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( this, '.app' );
+this.$el(); // returns $( '.app' )</code></pre>
 
     
 </dd>
@@ -1126,7 +1157,7 @@
     
     
     <div class="description">
-        <p>This powerful function binds element to instance property with given options that say when and how to extract element&#39;s value, how to set element&#39;s value when property is changed.</p>
+        This powerful function binds element to instance property with given options that say when and how to extract element's value, how to set element's value when property is changed.
     </div>
     
 
@@ -1189,7 +1220,7 @@
             
             
             
-            <td class="description last"><p>A key (or space-delimited list keys) that has to be binded to given element(s)</p></td>
+            <td class="description last">A key (or space-delimited list keys) that has to be binded to given element(s)</td>
         </tr>
 	
 	
@@ -1232,7 +1263,7 @@
             
             
             
-            <td class="description last"><p>An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector...) that has to be binded to given key(s)</p></td>
+            <td class="description last">An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector...) that has to be binded to given key(s)</td>
         </tr>
 	
 	
@@ -1265,7 +1296,7 @@
             
             
             
-            <td class="description last"><p>An element options object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)</p></td>
+            <td class="description last">An element options object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)</td>
         </tr>
 	
 	
@@ -1298,7 +1329,7 @@
             
             
             
-            <td class="description last"><p>If you want to set &lt;code&gt;&quot;silent&quot;&lt;/code&gt; flag or pass some options to a &lt;code&gt;&quot;bind&quot;&lt;/code&gt; event handler</p></td>
+            <td class="description last">If you want to set <code>"silent"</code> flag or pass some options to a <code>"bind"</code> event handler</td>
         </tr>
 	
 	
@@ -1318,7 +1349,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -1382,7 +1413,18 @@
         
         <p class="code-caption">Basic usage 1</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', 'input[type="checkbox"]', {	on: 'click',	getValue: function() {		return this.checked; // "this" is checkbox element  	},	setValue: function( v ) {		this.checked = !!v;	}});// now when element is binded you can change myKey and look at changes in UIthis.myKey = true; // makes checkbox checkedthis.myKey = false; // makes checkbox unchecked</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', 'input[type="checkbox"]', {
+	on: 'click',
+	getValue: function() {
+		return this.checked; // "this" is checkbox element  
+	},
+	setValue: function( v ) {
+		this.checked = !!v;
+	}
+});
+// now when element is binded you can change myKey and look at changes in UI
+this.myKey = true; // makes checkbox checked
+this.myKey = false; // makes checkbox unchecked</code></pre>
 
         <p class="code-caption">Basic usage 2. By Default <a href="Matreshka.html#elementProcessors">Matreshka.elementProcessors</a> array contains elementOptions for few dom elements <code>(input[type="text"], input[type="radio"], input[type="checkbox"], select, textarea...)</code>. So you don't need to pass eventOptions for these elements</p>
     
@@ -1390,19 +1432,42 @@
 
         <p class="code-caption">Custom checkbox 1. This example Shows how to create your own custom checkbox that has <code>"checked"</code> class if it's state is checked.</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.custom-checkbox', {	on: 'click',	getValue: function() {		// at this case we use jQuery		return $( this ).hasClass( 'checked' );	},	setValue: function( v ) {		$( this ).toggleClass( 'checked', !!v );	}});</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.custom-checkbox', {
+	on: 'click',
+	getValue: function() {
+		// at this case we use jQuery
+		return $( this ).hasClass( 'checked' );
+	},
+	setValue: function( v ) {
+		$( this ).toggleClass( 'checked', !!v );
+	}
+});</code></pre>
 
         <p class="code-caption">Custom checkbox 2. In this example we'll do the same as in previous example but using predefined elementOptions via <a href="Matreshka.html#elementProcessors">Matreshka.elementProcessors</a>.</p>
     
-    <pre class="prettyprint"><code>//shift means that we're adding new elementProcessor to the beginning of MK.elementProcessors listMK.elementProcessors.shift( function( element ) {	if( $( element ).hasClass( 'custom-checkbox' ) ) return {		on: 'click',		getValue: function() {			return $( this ).hasClass( 'checked' );		},		setValue: function( v ) {			$( this ).toggleClass( 'checked', !!v );		}	};	})this.bindElement( 'myKey', '.custom-checkbox' );</code></pre>
+    <pre class="prettyprint"><code>//shift means that we're adding new elementProcessor to the beginning of MK.elementProcessors list
+MK.elementProcessors.shift( function( element ) {
+	if( $( element ).hasClass( 'custom-checkbox' ) ) return {
+		on: 'click',
+		getValue: function() {
+			return $( this ).hasClass( 'checked' );
+		},
+		setValue: function( v ) {
+			$( this ).toggleClass( 'checked', !!v );
+		}
+	};
+	})
+this.bindElement( 'myKey', '.custom-checkbox' );</code></pre>
 
         <p class="code-caption">Use <code>"bind"</code> event</p>
     
-    <pre class="prettyprint"><code>this.on( 'bind:myKey', function() { alert( 'ok!' ); });this.bindElement( 'myKey', '.custom-checkbox' ); // alerts "ok!"</code></pre>
+    <pre class="prettyprint"><code>this.on( 'bind:myKey', function() { alert( 'ok!' ); });
+this.bindElement( 'myKey', '.custom-checkbox' ); // alerts "ok!"</code></pre>
 
         <p class="code-caption">Use <code>"bind"</code> event options</p>
     
-    <pre class="prettyprint"><code>this.on( 'bind:myKey', function() { alert( 'ok!' ); });this.bindElement( 'myKey', '.custom-checkbox', {}, { silent: true } ); // no alert</code></pre>
+    <pre class="prettyprint"><code>this.on( 'bind:myKey', function() { alert( 'ok!' ); });
+this.bindElement( 'myKey', '.custom-checkbox', {}, { silent: true } ); // no alert</code></pre>
 
         <p class="code-caption">Extending default elementOptions. For example we're working with <code>input[type="text"]</code>. By default <code>"on"</code> property for this element contains <code>"keydown"</code> string. But we want to use <code>"blur"</code> event for the element that has been bound to <code>myKey</code> property</p>
     
@@ -1410,7 +1475,10 @@
 
         <p class="code-caption">Binding self to the element. If you want to use context (sandbox) for binding elements contained in single element, you can pass <code>this</code> special property to the method</p>
     
-    <pre class="prettyprint"><code>// you can use this.bindElement( '__this__', '.app' ); insteadthis.bindElement( this, '.app' );// this.$( '.my-element' ) takes element(s) from .appthis.bindElement( 'myKey', this.$( '.my-element' ) );</code></pre>
+    <pre class="prettyprint"><code>// you can use this.bindElement( '__this__', '.app' ); instead
+this.bindElement( this, '.app' );
+// this.$( '.my-element' ) takes element(s) from .app
+this.bindElement( 'myKey', this.$( '.my-element' ) );</code></pre>
 
     
 </dd>
@@ -1428,7 +1496,7 @@
     
     
     <div class="description">
-        <p>Matreshka#bindElement accepts key-element use case if you have many bindings.</p>
+        Matreshka#bindElement accepts key-element use case if you have many bindings.
     </div>
     
 
@@ -1521,7 +1589,7 @@
             
             
             
-            <td class="description last"><p>(see above)</p></td>
+            <td class="description last">(see above)</td>
         </tr>
 	
 	
@@ -1554,7 +1622,7 @@
             
             
             
-            <td class="description last"><p>(see above)</p></td>
+            <td class="description last">(see above)</td>
         </tr>
 	
 	
@@ -1619,7 +1687,10 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement({	myKey1: '.custom-checkbox',	myKey2: 'textarea'});</code></pre>
+    <pre class="prettyprint"><code>this.bindElement({
+	myKey1: '.custom-checkbox',
+	myKey2: 'textarea'
+});</code></pre>
 
     
 </dd>
@@ -1637,7 +1708,7 @@
     
     
     <div class="description">
-        <p>Matreshka#bindElement accepts one more way how to pass &lt;code&gt;key, element, elementOptions&lt;/code&gt; to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using Matreshka#unbindElement.</p>
+        Matreshka#bindElement accepts one more way how to pass <code>key, element, elementOptions</code> to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using Matreshka#unbindElement.
     </div>
     
 
@@ -1697,7 +1768,7 @@
             
             
             
-            <td class="description last"><p>(see example)</p></td>
+            <td class="description last">(see example)</td>
         </tr>
 	
 	
@@ -1730,7 +1801,7 @@
             
             
             
-            <td class="description last"><p>(see above)</p></td>
+            <td class="description last">(see above)</td>
         </tr>
 	
 	
@@ -1795,7 +1866,28 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement([	[{		myKey1: '.my-element1',		myKey2: '.my-element2'	}],	[{		myKey3: '.my-element3',		myKey4: '.my-element4'	}, {		on: 'click',		getValue: function() { ... },		setValue: function() { ... }	}],	[{		myKey5: '.my-element5',		myKey6: '.my-element6'	}, {		on: 'somethingelse',		getValue: function() { ... },		setValue: function() { ... }	}]]);</code></pre>
+    <pre class="prettyprint"><code>this.bindElement([
+	[{
+		myKey1: '.my-element1',
+		myKey2: '.my-element2'
+	}],
+	[{
+		myKey3: '.my-element3',
+		myKey4: '.my-element4'
+	}, {
+		on: 'click',
+		getValue: function() { ... },
+		setValue: function() { ... }
+	}],
+	[{
+		myKey5: '.my-element5',
+		myKey6: '.my-element6'
+	}, {
+		on: 'somethingelse',
+		getValue: function() { ... },
+		setValue: function() { ... }
+	}]
+]);</code></pre>
 
     
 </dd>
@@ -1859,7 +1951,7 @@
             
             
             
-            <td class="description last"><p>key</p></td>
+            <td class="description last">key</td>
         </tr>
 	
 	
@@ -1882,7 +1974,7 @@
             
             
             
-            <td class="description last"><p>descriptor</p></td>
+            <td class="description last">descriptor</td>
         </tr>
 	
 	
@@ -1902,7 +1994,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -1960,7 +2052,10 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.define( 'myKey', {	get: function() { ... }	set: function() { ... }});</code></pre>
+    <pre class="prettyprint"><code>this.define( 'myKey', {
+	get: function() { ... }
+	set: function() { ... }
+});</code></pre>
 
     
 </dd>
@@ -2044,7 +2139,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -2102,7 +2197,16 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.define({	myKey1: {		get: function() { ... }		set: function() { ... }	},	myKey2: {		get: function() { ... }		set: function() { ... }	}|);</code></pre>
+    <pre class="prettyprint"><code>this.define({
+	myKey1: {
+		get: function() { ... }
+		set: function() { ... }
+	},
+	myKey2: {
+		get: function() { ... }
+		set: function() { ... }
+	}
+|);</code></pre>
 
     
 </dd>
@@ -2120,7 +2224,7 @@
     
     
     <div class="description">
-        <p>This method makes possible to create custom getter using Object.defineProperty.</p>
+        This method makes possible to create custom getter using Object.defineProperty.
     </div>
     
 
@@ -2170,7 +2274,7 @@
             
             
             
-            <td class="description last"><p>A key for which you want to customize getter</p></td>
+            <td class="description last">A key for which you want to customize getter</td>
         </tr>
 	
 	
@@ -2193,7 +2297,7 @@
             
             
             
-            <td class="description last"><p>Your getter</p></td>
+            <td class="description last">Your getter</td>
         </tr>
 	
 	
@@ -2258,7 +2362,9 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.defineGetter( 'mykey', function() {	return 42; // you can pass any computed value });</code></pre>
+    <pre class="prettyprint"><code>this.defineGetter( 'mykey', function() {
+	return 42; // you can pass any computed value 
+});</code></pre>
 
     
 </dd>
@@ -2322,7 +2428,7 @@
             
             
             
-            <td class="description last"><p>(see example)</p></td>
+            <td class="description last">(see example)</td>
         </tr>
 	
 	
@@ -2387,7 +2493,10 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.defineGetter({	myKey1: function() { return 1; } 	myKey2: function() { return 2; } });</code></pre>
+    <pre class="prettyprint"><code>this.defineGetter({
+	myKey1: function() { return 1; } 
+	myKey2: function() { return 2; } 
+});</code></pre>
 
     
 </dd>
@@ -2451,7 +2560,7 @@
             
             
             
-            <td class="description last"><p>key</p></td>
+            <td class="description last">key</td>
         </tr>
 	
 	
@@ -2474,7 +2583,7 @@
             
             
             
-            <td class="description last"><p>value</p></td>
+            <td class="description last">value</td>
         </tr>
 	
 	
@@ -2494,7 +2603,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -2636,7 +2745,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -2694,7 +2803,10 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.defineNotEnum({	myKey1: 3,	myKey2: 4});</code></pre>
+    <pre class="prettyprint"><code>this.defineNotEnum({
+	myKey1: 3,
+	myKey2: 4
+});</code></pre>
 
     
 </dd>
@@ -2770,7 +2882,7 @@
             
             
             
-            <td class="description last"><p>For which key we want to extract single element. If undefined or null returns element bound to &lt;code&gt;this&lt;/code&gt;.</p></td>
+            <td class="description last">For which key we want to extract single element. If undefined or null returns element bound to <code>this</code>.</td>
         </tr>
 	
 	
@@ -2793,7 +2905,7 @@
 <span class="param-type label label-type label-type-null">null</span>
 
 
-    (<p>Bound element</p>)
+    (Bound element)
 
 
         </h5>
@@ -2851,11 +2963,13 @@
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element' );this.el( 'mykey' ); // returns $( '.my-element' )[0]</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element' );
+this.el( 'mykey' ); // returns $( '.my-element' )[0]</code></pre>
 
         <p class="code-caption">Get element bound to <code>this</code></p>
     
-    <pre class="prettyprint"><code>this.bindElement( this, '.app' );this.$el(); // returns $( '.app' )[0]</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( this, '.app' );
+this.$el(); // returns $( '.app' )[0]</code></pre>
 
     
 </dd>
@@ -2873,7 +2987,7 @@
     
     
     <div class="description">
-        <p>The IE8 throws an exception when you&#39;re trying to check equality of two Matreshka instances. Use &lt;code&gt;.eq&lt;/code&gt; method instead of &lt;code&gt;==&lt;/code&gt; and &lt;code&gt;===&lt;/code&gt;</p>
+        The IE8 throws an exception when you're trying to check equality of two Matreshka instances. Use <code>.eq</code> method instead of <code>==</code> and <code>===</code>
     </div>
     
 
@@ -2923,7 +3037,7 @@
             
             
             
-            <td class="description last"><p>An object that you wish to test for equality with</p></td>
+            <td class="description last">An object that you wish to test for equality with</td>
         </tr>
 	
 	
@@ -3142,7 +3256,7 @@
     
     
     <div class="description">
-        <p>This method initializes Matreshka by creating needed objects. You should call it if you inherit your own class from Matreshka.</p>
+        This method initializes Matreshka by creating needed objects. You should call it if you inherit your own class from Matreshka.
     </div>
     
 
@@ -3164,7 +3278,7 @@
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -3240,8 +3354,8 @@
     
     
     <div class="description">
-        <p>If you no longer need some event or few events, you can remove them by passing event names as first argument to the <a href="Matreshka.html#off">Matreshka#off</a> method.
-You can specify the callback and given context for the events that you want to remove and you can pass nothing to remove all events.</p>
+        If you no longer need some event or few events, you can remove them by passing event names as first argument to the <a href="Matreshka.html#off">Matreshka#off</a> method.
+You can specify the callback and given context for the events that you want to remove and you can pass nothing to remove all events.
     </div>
     
 
@@ -3303,7 +3417,7 @@ You can specify the callback and given context for the events that you want to r
             
             
             
-            <td class="description last"><p>Space-delimited list of event names (e.g. &lt;code&gt;&quot;change:x ajaxcomplete change:y&quot;&lt;/code&gt;)</p></td>
+            <td class="description last">Space-delimited list of event names (e.g. <code>"change:x ajaxcomplete change:y"</code>)</td>
         </tr>
 	
 	
@@ -3336,7 +3450,7 @@ You can specify the callback and given context for the events that you want to r
             
             
             
-            <td class="description last"><p>A function that has been passed to <a href="Matreshka.html#on">Matreshka#on</a></p></td>
+            <td class="description last">A function that has been passed to <a href="Matreshka.html#on">Matreshka#on</a></td>
         </tr>
 	
 	
@@ -3369,7 +3483,7 @@ You can specify the callback and given context for the events that you want to r
             
             
             
-            <td class="description last"><p>An object that used as &lt;code&gt;this&lt;/code&gt; when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
+            <td class="description last">An object that used as <code>this</code> when executing <code>callback</code></td>
         </tr>
 	
 	
@@ -3389,7 +3503,7 @@ You can specify the callback and given context for the events that you want to r
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -3455,11 +3569,17 @@ You can specify the callback and given context for the events that you want to r
 
         <p class="code-caption">Remove event with given event handler</p>
     
-    <pre class="prettyprint"><code>var handler = function() { 	//...}this.on( 'change:x', handler );this.off( 'change:x', handler );</code></pre>
+    <pre class="prettyprint"><code>var handler = function() { 
+	//...
+}
+this.on( 'change:x', handler );
+this.off( 'change:x', handler );</code></pre>
 
         <p class="code-caption">Remove event with given event handler and given context</p>
     
-    <pre class="prettyprint"><code>var object = {};this.on( 'change:x', handler, object );this.off( 'change:x', handler, object );</code></pre>
+    <pre class="prettyprint"><code>var object = {};
+this.on( 'change:x', handler, object );
+this.off( 'change:x', handler, object );</code></pre>
 
     
 </dd>
@@ -3477,8 +3597,8 @@ You can specify the callback and given context for the events that you want to r
     
     
     <div class="description">
-        <p>The <a href="Matreshka.html#on">Matreshka#on</a> method attaches event handler to the Matreshka instance. The event could be triggered by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method. 
-You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href="Matreshka.html#on">Matreshka#on</a> argument to monitor &lt;code&gt;&quot;myKey&quot;&lt;/code&gt; property changes.</p>
+        The <a href="Matreshka.html#on">Matreshka#on</a> method attaches event handler to the Matreshka instance. The event could be triggered by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method. 
+You can pass <code>"change:myKey"</code> as first <a href="Matreshka.html#on">Matreshka#on</a> argument to monitor <code>"myKey"</code> property changes.
     </div>
     
 
@@ -3538,7 +3658,7 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
             
             
             
-            <td class="description last"><p>Names of the space-delimited list of events (eg. &quot;change:x ajaxcomplete change:y&quot;)</p></td>
+            <td class="description last">Names of the space-delimited list of events (eg. "change:x ajaxcomplete change:y")</td>
         </tr>
 	
 	
@@ -3569,7 +3689,7 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
             
             
             
-            <td class="description last"><p>A function to execute when the event is triggered</p></td>
+            <td class="description last">A function to execute when the event is triggered</td>
         </tr>
 	
 	
@@ -3602,7 +3722,7 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
             
             
             
-            <td class="description last"><p>If &lt;code&gt;triggerOnInit&lt;/code&gt; equals to &lt;code&gt;true&lt;/code&gt; then an event handler will be triggered immediately</p></td>
+            <td class="description last">If <code>triggerOnInit</code> equals to <code>true</code> then an event handler will be triggered immediately</td>
         </tr>
 	
 	
@@ -3635,7 +3755,7 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
             
             
             
-            <td class="description last"><p>An object to use as &lt;code&gt;this&lt;/code&gt;when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
+            <td class="description last">An object to use as <code>this</code>when executing <code>callback</code></td>
         </tr>
 	
 	
@@ -3655,7 +3775,7 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -3713,15 +3833,24 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.on( 'change:x', function() {  alert( 'x is changed' );});this.x = Math.random();</code></pre>
+    <pre class="prettyprint"><code>this.on( 'change:x', function() {
+  alert( 'x is changed' );
+});
+this.x = Math.random();</code></pre>
 
         <p class="code-caption">Passing context</p>
     
-    <pre class="prettyprint"><code>//Alert will be execuded in window context and display second argument,//that has been passed to .trigger methodthis.on( 'ohmygosh', alert, window );this.trigger( 'ohmygosh', 'Hello world' );</code></pre>
+    <pre class="prettyprint"><code>//Alert will be execuded in window context and display second argument,
+//that has been passed to .trigger method
+this.on( 'ohmygosh', alert, window );
+this.trigger( 'ohmygosh', 'Hello world' );</code></pre>
 
         <p class="code-caption">Calling event handler immediately after initialization</p>
     
-    <pre class="prettyprint"><code>//Alerts "bar" immediately and waits for triggering "foo" eventthis.on( 'foo', function() {  alert( 'bar' );}, true );</code></pre>
+    <pre class="prettyprint"><code>//Alerts "bar" immediately and waits for triggering "foo" event
+this.on( 'foo', function() {
+  alert( 'bar' );
+}, true );</code></pre>
 
     
 </dd>
@@ -3739,8 +3868,8 @@ You can pass &lt;code&gt;&quot;change:myKey&quot;&lt;/code&gt; as first <a href=
     
     
     <div class="description">
-        <p>Works similar to <a href="Matreshka.html#on">Matreshka#on</a> method but a handler could be executed only once.
-Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/code&gt; argument.</p>
+        Works similar to <a href="Matreshka.html#on">Matreshka#on</a> method but a handler could be executed only once.
+Pay attention that this method doesn't have <code>triggerOnInit</code> argument.
     </div>
     
 
@@ -3800,7 +3929,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
             
             
             
-            <td class="description last"><p>Space-delimited list of event names (e.g. &lt;code&gt;&quot;change:x ajaxcomplete change:y&quot;&lt;/code&gt;)</p></td>
+            <td class="description last">Space-delimited list of event names (e.g. <code>"change:x ajaxcomplete change:y"</code>)</td>
         </tr>
 	
 	
@@ -3831,7 +3960,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
             
             
             
-            <td class="description last"><p>A function to execute when the event is triggered</p></td>
+            <td class="description last">A function to execute when the event is triggered</td>
         </tr>
 	
 	
@@ -3864,7 +3993,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
             
             
             
-            <td class="description last"><p>An object to use as &lt;code&gt;this&lt;/code&gt;when executing &lt;code&gt;callback&lt;/code&gt;</p></td>
+            <td class="description last">An object to use as <code>this</code>when executing <code>callback</code></td>
         </tr>
 	
 	
@@ -3884,7 +4013,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -3940,7 +4069,11 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
     
         <h5 class="hide">Example</h5>
         
-    <pre class="prettyprint"><code>this.once( 'change:x', function() {  alert( 'x is changed' );});this.x = Math.random(); // alerts 'x is changed'this.x = Math.random(); // does nothing</code></pre>
+    <pre class="prettyprint"><code>this.once( 'change:x', function() {
+  alert( 'x is changed' );
+});
+this.x = Math.random(); // alerts 'x is changed'
+this.x = Math.random(); // does nothing</code></pre>
 
     
 </dd>
@@ -4014,7 +4147,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
             
             
             
-            <td class="description last"><p>A key (or space-delimited list of keys) that you want to remove from current instance</p></td>
+            <td class="description last">A key (or space-delimited list of keys) that you want to remove from current instance</td>
         </tr>
 	
 	
@@ -4067,7 +4200,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -4133,7 +4266,8 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.remove( 'myKey' );this.remove( 'myKey1 myKey2' );</code></pre>
+    <pre class="prettyprint"><code>this.remove( 'myKey' );
+this.remove( 'myKey1 myKey2' );</code></pre>
 
         <p class="code-caption">Using <code>eventOptions</code></p>
     
@@ -4201,7 +4335,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
             
             
             
-            <td class="description last"><p>a key (space-delimited list of keys) that you want to remove from current instance</p></td>
+            <td class="description last">a key (space-delimited list of keys) that you want to remove from current instance</td>
         </tr>
 	
 	
@@ -4224,7 +4358,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
             
             
             
-            <td class="description last"><p>[evtOptions]</p></td>
+            <td class="description last">[evtOptions]</td>
         </tr>
 	
 	
@@ -4244,7 +4378,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
 <span class="param-type label label-type label-type-unknown">MKInstance</span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -4312,7 +4446,8 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.remove( 'myKey' );this.remove( 'myKey1 myKey2' );</code></pre>
+    <pre class="prettyprint"><code>this.remove( 'myKey' );
+this.remove( 'myKey1 myKey2' );</code></pre>
 
         <p class="code-caption">Using <code>eventOptions</code></p>
     
@@ -4334,7 +4469,7 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
     
     
     <div class="description">
-        <p>Sets value for given property and gives possibility to pass event object (with &lt;code&gt;&quot;silent&quot;&lt;/code&gt; property if you added &lt;code&gt;change:<em>key</em>&lt;/code&gt; event in a past or other data).</p>
+        Sets value for given property and gives possibility to pass event object (with <code>"silent"</code> property if you added <code>change:*key*</code> event in a past or other data).
     </div>
     
 
@@ -4531,11 +4666,21 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.on( 'change:myKey', function( evtOpts ) {	alert( evtOpts.value );});this.set( 'myKey', 3 ); // equals to this[ 'myKey' ] = 3 or this.myKey = 3, alerts 3</code></pre>
+    <pre class="prettyprint"><code>this.on( 'change:myKey', function( evtOpts ) {
+	alert( evtOpts.value );
+});
+this.set( 'myKey', 3 ); // equals to this[ 'myKey' ] = 3 or this.myKey = 3, alerts 3</code></pre>
 
         <p class="code-caption">Passing <code>eventOptions</code></p>
     
-    <pre class="prettyprint"><code>// no alertthis.set( 'myKey', 4, {	silent: true});// alerts 5, evtOpts (first event handler argument) contains property myFlagthis.set( 'myKey', 5, { 	myFlag: 'Jigurda'});</code></pre>
+    <pre class="prettyprint"><code>// no alert
+this.set( 'myKey', 4, {
+	silent: true
+});
+// alerts 5, evtOpts (first event handler argument) contains property myFlag
+this.set( 'myKey', 5, { 
+	myFlag: 'Jigurda'
+});</code></pre>
 
     
 </dd>
@@ -4707,11 +4852,18 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.set({	myKey1: 1,	myKey2: 2});</code></pre>
+    <pre class="prettyprint"><code>this.set({
+	myKey1: 1,
+	myKey2: 2
+});</code></pre>
 
         <p class="code-caption">Passing <code>eventOptions</code></p>
     
-    <pre class="prettyprint"><code>this.set({		myKey: 3	}, {		myFlag: 'Jigurda'});</code></pre>
+    <pre class="prettyprint"><code>this.set({
+		myKey: 3
+	}, {
+		myFlag: 'Jigurda'
+});</code></pre>
 
     
 </dd>
@@ -4729,8 +4881,8 @@ Pay attention that this method doesn&#39;t have &lt;code&gt;triggerOnInit&lt;/co
     
     
     <div class="description">
-        <p>After attaching event using <a href="Matreshka.html#on">Matreshka#on</a> or <a href="Matreshka.html#once">Matreshka#once</a> you can trigger it by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method and pass needed arguments to event handler using subsequent arguments.
-You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event triggering.</p>
+        After attaching event using <a href="Matreshka.html#on">Matreshka#on</a> or <a href="Matreshka.html#once">Matreshka#once</a> you can trigger it by <a href="Matreshka.html#trigger">Matreshka#trigger</a> method and pass needed arguments to event handler using subsequent arguments.
+You can bind <code>"all"</code> event to catch any event triggering.
     </div>
     
 
@@ -4792,7 +4944,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>Space-delimited list of event names that you want to trigger</p></td>
+            <td class="description last">Space-delimited list of event names that you want to trigger</td>
         </tr>
 	
 	
@@ -4827,7 +4979,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>Arguments that you wish to pass to the event handler</p></td>
+            <td class="description last">Arguments that you wish to pass to the event handler</td>
         </tr>
 	
 	
@@ -4847,7 +4999,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -4905,7 +5057,10 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.on( 'somethingchanged ohyeah', function( a, b, c ) {	alert( 1 + 2 + 3 );});this.trigger( 'ohyeah', 1, 2, 3 ); // alerts 6</code></pre>
+    <pre class="prettyprint"><code>this.on( 'somethingchanged ohyeah', function( a, b, c ) {
+	alert( 1 + 2 + 3 );
+});
+this.trigger( 'ohyeah', 1, 2, 3 ); // alerts 6</code></pre>
 
     
 </dd>
@@ -4923,7 +5078,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
     
     
     <div class="description">
-        <p>If you no longer need a bridge between element and Matreshka property you can remove it by this method.</p>
+        If you no longer need a bridge between element and Matreshka property you can remove it by this method.
     </div>
     
 
@@ -4986,7 +5141,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>A key (or space-delimited list keys) that has to be unbinded from given element(s) (null if you want to unbind element(s) from any key of instance)</p></td>
+            <td class="description last">A key (or space-delimited list keys) that has to be unbinded from given element(s) (null if you want to unbind element(s) from any key of instance)</td>
         </tr>
 	
 	
@@ -5031,7 +5186,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be unbinded from given key(s)</p></td>
+            <td class="description last">An element (DOM Node or DOM NodeList or array of nodes or jQuery instance or css selector) that has to be unbinded from given key(s)</td>
         </tr>
 	
 	
@@ -5064,7 +5219,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>If you want to set &quot;silent&quot; flag or pass some options to &quot;unbind&quot; event handler</p></td>
+            <td class="description last">If you want to set "silent" flag or pass some options to "unbind" event handler</td>
         </tr>
 	
 	
@@ -5084,7 +5239,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -5148,7 +5303,10 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element' );this.myKey = true; // changes myKey property and element statethis.unbindElement( 'myKey', '.my-element' );this.myKey = false; // changes property only</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element' );
+this.myKey = true; // changes myKey property and element state
+this.unbindElement( 'myKey', '.my-element' );
+this.myKey = false; // changes property only</code></pre>
 
     
 </dd>
@@ -5222,7 +5380,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>(see example)</p></td>
+            <td class="description last">(see example)</td>
         </tr>
 	
 	
@@ -5300,7 +5458,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>(see above)</p></td>
+            <td class="description last">(see above)</td>
         </tr>
 	
 	
@@ -5320,7 +5478,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -5378,7 +5536,10 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>this.unbindElement({	myKey1: '.my-element1' 	myKey1: '.my-element2' });</code></pre>
+    <pre class="prettyprint"><code>this.unbindElement({
+	myKey1: '.my-element1' 
+	myKey1: '.my-element2' 
+});</code></pre>
 
     
 </dd>
@@ -5452,7 +5613,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>(see example)</p></td>
+            <td class="description last">(see example)</td>
         </tr>
 	
 	
@@ -5485,7 +5646,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
             
             
             
-            <td class="description last"><p>(see above)</p></td>
+            <td class="description last">(see above)</td>
         </tr>
 	
 	
@@ -5505,7 +5666,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mk">mk</a></span>
 
 
-    (<p>self</p>)
+    (self)
 
 
         </h5>
@@ -5563,7 +5724,32 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
         
         <p class="code-caption">Basic usage</p>
     
-    <pre class="prettyprint"><code>var temporaryBindings = [	[{		myKey1: '.my-element1'		myKey2: '.my-element2'	}],	[{		myKey3: '.my-element3'		myKey4: '.my-element4'	}, {		on: 'click',		getValue: function() { ... },		setValue: function() { ... }	}],	[{		myKey5: '.my-element5'		myKey6: '.my-element6'	}, {		on: 'somethingelse',		getValue: function() { ... },		setValue: function() { ... }	}]]this.bindElement( temporaryBindings );// you no longer want to have these bindingsthis.unbindElement( temporaryBindings );</code></pre>
+    <pre class="prettyprint"><code>var temporaryBindings = [
+	[{
+		myKey1: '.my-element1'
+		myKey2: '.my-element2'
+	}],
+	[{
+		myKey3: '.my-element3'
+		myKey4: '.my-element4'
+	}, {
+		on: 'click',
+		getValue: function() { ... },
+		setValue: function() { ... }
+	}],
+	[{
+		myKey5: '.my-element5'
+		myKey6: '.my-element6'
+	}, {
+		on: 'somethingelse',
+		getValue: function() { ... },
+		setValue: function() { ... }
+	}]
+]
+this.bindElement( temporaryBindings );
+
+// you no longer want to have these bindings
+this.unbindElement( temporaryBindings );</code></pre>
 
     
 </dd>
@@ -5638,11 +5824,34 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
         
         <p class="code-caption">HTML5 input type=number</p>
     
-    <pre class="prettyprint"><code>//shift means that we're adding new elementProcessor to the beginning of MK.elementProcessors listMK.elementProcessors.shift( function( element ) {	if( element.tagName === 'input' && element.type === 'number' ) return {		on: 'mouseup',		getValue: function() {			return this.value;		},		setValue: function( v ) {			this.value = v;		}	};});this.bindElement( 'myKey', '.my-input-type-number' );</code></pre>
+    <pre class="prettyprint"><code>//shift means that we're adding new elementProcessor to the beginning of MK.elementProcessors list
+MK.elementProcessors.shift( function( element ) {
+	if( element.tagName === 'input' && element.type === 'number' ) return {
+		on: 'mouseup',
+		getValue: function() {
+			return this.value;
+		},
+		setValue: function( v ) {
+			this.value = v;
+		}
+	};
+});
+this.bindElement( 'myKey', '.my-input-type-number' );</code></pre>
 
         <p class="code-caption">Custom checkbox</p>
     
-    <pre class="prettyprint"><code>MK.elementProcessors.shift( function( element ) {	if( $( element ).hasClass( 'custom-checkbox' ) ) return {		on: 'click',		getValue: function() {			return $( this ).hasClass( 'checked' );		},		setValue: function( v ) {			$( this ).toggleClass( 'checked', !!v );		}	};});this.bindElement( 'myKey', '.custom-checkbox' );</code></pre>
+    <pre class="prettyprint"><code>MK.elementProcessors.shift( function( element ) {
+	if( $( element ).hasClass( 'custom-checkbox' ) ) return {
+		on: 'click',
+		getValue: function() {
+			return $( this ).hasClass( 'checked' );
+		},
+		setValue: function( v ) {
+			$( this ).toggleClass( 'checked', !!v );
+		}
+	};
+});
+this.bindElement( 'myKey', '.custom-checkbox' );</code></pre>
 
     
 </dd>
@@ -5659,7 +5868,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
 <dd>
     
     <div class="description">
-        <p>By default if you pass html element to Matreshka#bindElement as second argument that doesn&#39;t match any &lt;code&gt;elementProcessor&lt;/code&gt;, the binding does nothing. But sometimes you want to change &lt;code&gt;innerHTML&lt;/code&gt; without having possibility to retrieve value from the element. <a href="Matreshka.html#htmlp">Matreshka.htmlp</a> is created as simple &lt;code&gt;elementOptions&lt;/code&gt; object for this case for reducing your code.</p>
+        By default if you pass html element to Matreshka#bindElement as second argument that doesn't match any <code>elementProcessor</code>, the binding does nothing. But sometimes you want to change <code>innerHTML</code> without having possibility to retrieve value from the element. <a href="Matreshka.html#htmlp">Matreshka.htmlp</a> is created as simple <code>elementOptions</code> object for this case for reducing your code.
     </div>
     
     
@@ -5715,7 +5924,13 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element', MK.htmlp );// same asthis.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property	setValue: function( v ) {		this.innerHTML = v;	}});</code></pre>
+    <pre class="prettyprint"><code>this.bindElement( 'myKey', '.my-element', MK.htmlp );
+// same as
+this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property
+	setValue: function( v ) {
+		this.innerHTML = v;
+	}
+});</code></pre>
 
     
 </dd>
@@ -5805,7 +6020,7 @@ You can bind &lt;code&gt;&quot;all&quot;&lt;/code&gt; event to catch any event t
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:39 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Oct 27 2013 01:42:34 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

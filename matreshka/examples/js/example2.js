@@ -1,4 +1,4 @@
-var Example = Class({ // http://jsbin.com/eQomoJe/5/
+var Example = Class({ // http://jsbin.com/eQomoJe/6/
 	'extends': MK.DOMArray,
 	constructor: function() {
 		this
@@ -41,10 +41,10 @@ var ExampleObject = Class({
 			.initMK()
 			.jset( o )
 			// MK.DOMArray генерирует событие render и передаёт отрендеренный элемент в объекте события
-			.on( 'render', function( evt ) {
+			.on( 'render', function() {
 				// this привязывается при рендеринге
 				// после генерации события привязываем необходимые элементы
-				this.bindElement( this, evt.$el ).bindElement({
+				this.bindElement({
 					a: this.$( '.a' ),
 					b: this.$( '.b' ),
 					c: this.$( '.c' )

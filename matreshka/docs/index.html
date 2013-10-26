@@ -96,11 +96,11 @@
  -->
 
     <!--<section>
-        <article><h1>Matreshka v0.0.2</h1>
+        <article><h1>Matreshka v0.0.3</h1>
 
-<p><a href="https://github.com/finom/matreshka/archive/0.0.2.zip">Download</a></p>
+<p><a href="https://github.com/finom/matreshka/releases">Download</a></p>
 
-<p>Matreshka - is the client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:
+<p>Matreshka - is the tiny (15KB uncompressed, 5KB gzipped) client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:
 <em> binding of DOM elements to the data
 </em> model events
 <em> Pub/Sub pattern
@@ -113,6 +113,8 @@
 <h4>Plug in Matreshka to your app</h4>
 
 <p><code>html
+&lt;!-- Latest version of jQuery 1.X or 2.X --&gt;
+&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;build/matreshka.all.min.js&quot;&gt;&lt;/script&gt;
 &lt;!-- that&#39;s all --&gt;
 </code></p>
@@ -185,6 +187,8 @@ mkArray = new MK.Array( 1, 2, 3, 4 );</p>
 
 <p><a href="https://github.com/finom/matreshka/issues"><strong>Issues</strong></a></p>
 
+<p><a href="http://finom.github.io/matreshka/"><strong>Website</strong></a></p>
+
 <p><strong>Author:</strong> Andrey Gubanov <a href="mailto:a@odessite.com.ua">a@odessite.com.ua</a></p>
 
 <p><strong>License:</strong> <a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT License</a></p>
@@ -194,11 +198,11 @@ mkArray = new MK.Array( 1, 2, 3, 4 );</p>
 	
 	<section>
 <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
-<a name="matreshka-v002" class="anchor" href="#matreshka-v002"><span class="octicon octicon-link"></span></a>Matreshka v0.0.2</h1>
+<a name="matreshka-v003" class="anchor" href="#matreshka-v003"><span class="octicon octicon-link"></span></a>Matreshka v0.0.3</h1>
 
-<p><a href="https://github.com/finom/matreshka/archive/0.0.2.zip">Download</a></p>
+<p><a href="https://github.com/finom/matreshka/releases">Download</a></p>
 
-<p>Matreshka - is the client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:</p>
+<p>Matreshka - is the tiny (15KB uncompressed, 5KB gzipped) client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:</p>
 
 <ul>
 <li>binding of DOM elements to the data</li>
@@ -213,24 +217,25 @@ mkArray = new MK.Array( 1, 2, 3, 4 );</p>
 <h4>
 <a name="plug-in-matreshka-to-your-app" class="anchor" href="#plug-in-matreshka-to-your-app"><span class="octicon octicon-link"></span></a>Plug in Matreshka to your app</h4>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"build/matreshka.all.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="c">&lt;!-- Latest version of jQuery 1.X or 2.X --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"build/matreshka.all.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="c">&lt;!-- that's all --&gt;</span>
 </pre></div>
 
 <h4>
 <a name="matreshka-main-class-using" class="anchor" href="#matreshka-main-class-using"><span class="octicon octicon-link"></span></a>Matreshka (main class) using</h4>
 
-<p>`js
-var mk = new MK;</p>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">mk</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">;</span>
 
-<p>mk.bindElement( 'myKey', '.my-element' ); // you just bound element to your key "myKey"</p>
+<span class="nx">mk</span><span class="p">.</span><span class="nx">bindElement</span><span class="p">(</span> <span class="s1">'myKey'</span><span class="p">,</span> <span class="s1">'.my-element'</span> <span class="p">);</span> <span class="c1">// you just bound element to your key "myKey"</span>
 
-<p>mk.on( 'change:myKey', function() {
-    alert( 'yeah' );
-});</p>
+<span class="nx">mk</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span> <span class="s1">'change:myKey'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span> <span class="s1">'yeah'</span> <span class="p">);</span>
+<span class="p">});</span>
 
-<p>mk.myKey = 5; // changes DOM element (".my-element") and alerts "yeah"
-`</p>
+<span class="nx">mk</span><span class="p">.</span><span class="nx">myKey</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// changes DOM element (".my-element") and alerts "yeah"</span>
+</pre></div>
 
 <h4>
 <a name="matreshkaobject-inherits-matreshka-using" class="anchor" href="#matreshkaobject-inherits-matreshka-using"><span class="octicon octicon-link"></span></a>Matreshka.Object (inherits Matreshka) using</h4>
@@ -287,12 +292,13 @@ var mk = new MK;</p>
 
 <hr><p><a href="https://github.com/finom/matreshka/issues"><strong>Issues</strong></a></p>
 
+<p><a href="http://finom.github.io/matreshka/"><strong>Website</strong></a></p>
+
 <p><strong>Author:</strong> Andrey Gubanov <a href="mailto:a@odessite.com.ua">a@odessite.com.ua</a></p>
 
 <p><strong>License:</strong> <a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT License</a></p>
 
-<p><strong>Support/Discussion</strong>: <a href="https://groups.google.com/forum/#!forum/matreshkajs">ENG</a>, <a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">RUS</a></p></article>
-</section>
+<p><strong>Support/Discussion</strong>: <a href="https://groups.google.com/forum/#!forum/matreshkajs">ENG</a>, <a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">RUS</a></p></article></section>
 
 
 
@@ -310,7 +316,7 @@ var mk = new MK;</p>
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Oct 22 2013 02:55:39 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sun Oct 27 2013 01:42:34 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
