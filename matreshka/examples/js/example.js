@@ -1,4 +1,4 @@
-var Example = Class({ // http://jsbin.com/aZEseWE/6/edit
+var Example = Class({ // http://jsbin.com/aZEseWE/12/
 	'extends': MK.DOMArray,
 	constructor: function() {
 		this
@@ -11,7 +11,7 @@ var Example = Class({ // http://jsbin.com/aZEseWE/6/edit
 	},
 	renderer: function( object ) {
 		// Возвращает строку с пустыми тегами. Значения ячеек обновятся автоматически, при привязке
-		return '<tr><td class="a"></td><td class="b"></td><td class="c"></td></tr>' 
+		return '<tr><td class="a"></td><td class="b"></td><td class="c"></td></tr>';
 	},
 	// Переопределяем функцию .push так, чтобы она принимала обычные объекты в качестве элемента, которые затем конвертируются в объект ExampleObject
 	push: function() {
@@ -43,7 +43,7 @@ var Example = Class({ // http://jsbin.com/aZEseWE/6/edit
 			i = 0;
 		( function callee( f ) {
 			setTimeout( function() {
-				this.log( f.toString().replace( /function\s*\(\)\s*{\s*([\s\S]+)}/, '$1' ).replace( /\n/g, '<br>' ).replace( /\t/g, '&#09;' ) );
+				this.log( f.toString().replace( /function\s*\(\)\s*\{(\s*[\s\S]+\s*)\}/, '$1' ) );
 				f.call( this );
 				if( ++i < functions.length ) {
 					callee.call( this, functions[ i ] );
@@ -54,7 +54,7 @@ var Example = Class({ // http://jsbin.com/aZEseWE/6/edit
 		return this;
 	},
 	log: function( text ) {
-		this.$el( 'log' ).html( text );
+		this.$el( 'log' ).html( prettyPrintOne( removeExtraTabs( text ) ) );
 	}
 });
 
@@ -64,7 +64,10 @@ var ExampleObject = Class({
 		this
 			.initMK()
 			.jset( o )
+			// MK.DOMArray генерирует событие render и передаёт отрендеренный элемент в объекте события
 			.on( 'render', function( evt ) {
+				// this привязывается при рендеринге
+				// после генерации события привязываем необходимые элементы
 				this.bindElement( this, evt.$el ).bindElement({
 					a: this.$( '.a' ),
 					b: this.$( '.b' ),
@@ -81,7 +84,7 @@ window.example = new Example().demo( 4000,
 			a: 1,
 			b: 2,
 			c: 3
-		})
+		});
 	},
 	function () {
 		this[0].a = 'xxx';
@@ -91,7 +94,7 @@ window.example = new Example().demo( 4000,
 			a: 4,
 			b: 5,
 			c: 6
-		})
+		});
 	},
 	function () {
 		this.push({
@@ -102,7 +105,7 @@ window.example = new Example().demo( 4000,
 			a: 10,
 			b: 11,
 			c: 12
-		})
+		});
 	},
 	function () {
 		this.pop();
@@ -119,7 +122,7 @@ window.example = new Example().demo( 4000,
 			a: 'a',
 			b: 'b',
 			c: 'c'
-		})
+		});
 	},
 	function () {
 		this[0].a = 111;
@@ -135,10 +138,31 @@ window.example = new Example().demo( 4000,
 			a: 19,
 			b: 20,
 			c: 21
-		})
+		});
 	},
 	function () {
 		this.sort(function (x, y) {
 			return x.a > y.a ? 1 : -1;
-		})
+		});
 	});
+
+function removeExtraTabs( string ) {
+	var lines = string.split( '\n' ),
+		tabsLength,
+		minTabsLength = Infinity,
+		tabsReg;
+		
+	for( var i = 0; i < lines.length; i++ ) {
+		if( lines[ i ].replace( /\s/g, '' ).length ) {
+			tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/, '$1' ).length;
+			minTabsLength = Math.min( minTabsLength, tabsLength );
+		}
+	}
+	minTabsLength = minTabsLength | 0;
+	tabsReg = new RegExp( new Array( minTabsLength + 1 ).join( '\t' ) );
+	for( i = 0; i < lines.length; i++ ) {
+		lines[ i ] = lines[ i ].replace( tabsReg, '' );
+	}
+	
+	return lines.join( '\n' );
+}
