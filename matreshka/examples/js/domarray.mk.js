@@ -59,6 +59,7 @@ MK.DOMArray = Class({
 		if( this.renderer ) {
 			if( !item.el( __id ) ) {
 				$el = $( this.renderer( item ) );
+				console.log( $el )
 				item
 					.bindElement( __id, $el )
 					.trigger( 'render' )
