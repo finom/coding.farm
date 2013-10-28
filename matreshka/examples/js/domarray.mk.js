@@ -61,7 +61,7 @@ MK.DOMArray = Class({
 				$el = $( this.renderer( item ) );
 				console.log( $el )
 				item
-					.bindElement( __id, $el )
+					.bindElement( __id, $el[ 0 ] )
 					.trigger( 'render' )
 				;
 			}
