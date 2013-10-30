@@ -1,4 +1,4 @@
-var Example = Class({ // http://jsbin.com/aZEseWE/13/
+var Example = Class({ // http://jsbin.com/aZEseWE/16/
 	'extends': MK.DOMArray,
 	constructor: function() {
 		this
@@ -11,6 +11,7 @@ var Example = Class({ // http://jsbin.com/aZEseWE/13/
 	},
 	renderer: function( object ) {
 		// Возвращает строку с пустыми тегами. Значения ячеек обновятся автоматически, при привязке
+		// Не забудьте, что HTML код элемента можно брать откуда угодно (можно определить в <script type="text/mktemplate"> и пр.)
 		return '<tr><td class="a"></td><td class="b"></td><td class="c"></td></tr>';
 	},
 	// Переопределяем функцию .push так, чтобы она принимала обычные объекты в качестве элемента, которые затем конвертируются в объект ExampleObject

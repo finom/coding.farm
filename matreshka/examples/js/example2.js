@@ -1,4 +1,4 @@
-var Example = Class({ // http://jsbin.com/eQomoJe/6/
+var Example = Class({ // http://jsbin.com/eQomoJe/7/
 	'extends': MK.DOMArray,
 	constructor: function() {
 		this
@@ -11,6 +11,7 @@ var Example = Class({ // http://jsbin.com/eQomoJe/6/
 	},
 	renderer: function( object ) {
 		// Возвращает строку с пустыми тегами. Значения ячеек обновятся автоматически, при привязке
+		// Не забудьте, что HTML код элемента можно брать откуда угодно (можно определить в <script type="text/mktemplate"> и пр.)
 		return '<tr><td class="a"></td><td class="b"></td><td class="c"></td></tr>';
 	},
 	// Метод выполняет и выводит код, содержащийся в функциях, являющихся вторым и последующими аргументами. duration — задержка выполнения каждой функции 
