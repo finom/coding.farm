@@ -38,11 +38,12 @@ app.Todos = Class({
 		
 		return this
 			.on( 'modify', function() {
+				var uncompletedLength = this.getUncompleted().length;
 				this.$( '#main, #footer' ).toggleClass( 'hide', !this.length );
 				this
 					.set({
-						activeLength: this.getUncompleted().length,
-						completedLength: this.length - this.activeLength
+						activeLength: uncompletedLength,
+						completedLength: this.length - uncompletedLength
 					})
 					.save()
 				;
@@ -61,7 +62,7 @@ app.Todos = Class({
 				this.$( '.item-plural_singular' ).html( this.activeLength === 1 ? 'item' : 'items' );
 			})
 			.on( 'change:completedLength', function() {
-				this.$( '#clear-completed' ).toggleClass( 'hide', !this.completedLength );
+				this.$el( 'clearCompleted' ).toggleClass( 'hide', !this.completedLength );
 			})
 			.on( 'change:state', function() {
 				this.$( '#filters a' )
