@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Matreshka.js - Matreshka.Hash plugin</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base href="/matreshka/">
+	<!-- Bootstrap -->
+	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../css/tomorrow-night.css" rel="stylesheet" media="screen">
+	<link href="../../css/style.css" rel="stylesheet" media="screen">
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
+      <script src="../../bootstrap/assets/js/respond.min.js"></script>
+    <![endif]--></head>
+
+<body>
+	<a href="https://github.com/finom/matreshka"><img style="position: fixed; z-index: 10000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> <a class="navbar-brand" href="/matreshka/index.html">Matreshka</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="docs/index.html">Introduction</a></li>
+							<li><a href="docs/Matreshka.html">Matreshka</a></li>
+							<li><a href="docs/Matreshka.Object.html">MK.Object</a></li>
+							<li><a href="docs/Matreshka.Array.html">MK.Array</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="examples/index.html">Introduction</a></li>
+							<li><a href="examples/Matreshka.html">Matreshka</a></li>
+							<li><a href="examples/Matreshka.Object.html">MK.Object</a></li>
+							<li><a href="examples/Matreshka.Array.html">MK.Array</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="plugins/index.html">Plugins</a>
+					</li>
+					<li>
+						<a href="https://github.com/finom/matreshka/releases">Download</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+	</nav>		
+	<div class="container spacer-top">
+		<h1>Matreshka.Hash plugin</h1>
+		<p class="lead">MK.Hash allows you to manipulate with hash parameters and listen them.</p>
+		<script>window.runIt = [];</script>
+		<h3>Initializing and listening</h3>
+		<div class="row">
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+						<code>window.mkHash = new MK.Hash( 'a b' ); // which keys listen to
+						
+						mkHash.a = 'A';
+						mkHash.b = 'B';
+						
+						mkHash.on( 'change:a', function() {
+							alert( 'a is now ' + this.a );
+						});
+						
+						$( '.btn' ).on( 'click', function() {
+							mkHash.a = 'Blah';
+						});
+						</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<button class="btn">Change "a"</button>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<button class="btn ex1">Change "a"</button>
+				<script>
+					runIt.push( function() {
+						window.mkHash = new MK.Hash( 'a b' ); // which keys listen to
+						
+						mkHash.a = 'A';
+						mkHash.b = 'B';
+						
+						mkHash.on( 'change:a', function() {
+							alert( 'a is now ' + this.a );
+						});
+						
+						$( '.btn.ex1' ).on( 'click', function() {
+							mkHash.a = 'Blah';
+						});
+					});
+				</script>
+			</div>
+		</div>	
+		<h3>Hide property from hash</h3>
+		<div class="row">
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+						<code>$( '.btn' ).on( 'click', function() {
+							mkHash.a = null; // could be undefined
+						});
+						</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<button class="btn">Hide "a"</button>
+				</pre>				
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<button class="btn ex2">Hide "a"</button>
+				<script>
+					runIt.push( function() {
+						$( '.btn.ex2' ).on( 'click', function() {
+							mkHash.a = null; // could be undefined
+						});
+					});
+				</script>
+			</div>
+		</div>
+		<h3><code>.toJSON</code> method</h3>
+		<div class="row">
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+						<code>mkHash.on( 'modify', function() {
+							var json = JSON.stringify( this.toJSON() );
+							$( '.output' ).html( json );
+						});
+						</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<div class="output"></div>			
+				</pre>
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<code class="output ex3"></code>
+				<script>
+					runIt.push( function() {
+						mkHash.on( 'modify', function() {
+							var json = JSON.stringify( this.toJSON() );
+							$( '.output.ex3' ).html( json );
+						}, true );
+					});
+				</script>
+			</div>
+		</div>	
+		<h3>Adding new keys</h3>
+		<div class="row">
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+						<code>$( '.btn.ex4' ).on( 'click', function() {
+							mkHash.addJSONKeys( 'c d' );
+							mkHash.c = 'C';
+							mkHash.c = 'D';
+						});
+						</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<button class="btn">Add "c" and "d" keys</button>
+				</pre>
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<button class="btn ex4">Add "c" and "d" keys</button>
+				<script>
+					runIt.push( function() {
+						$( '.btn.ex4' ).on( 'click', function() {
+							mkHash.addJSONKeys( 'c d' );
+							mkHash.c = 'C';
+							mkHash.c = 'D';
+						});
+					});
+				</script>
+			</div>
+		</div>	
+		<h3>Adding new keys and setting values imidiatelly</h3>
+		<div class="row">
+			<div class="col-lg-5 mk-example mk-example-js">
+				<pre class="prettyprint">
+						<code>
+						$( '.btn.ex4' ).on( 'click', function() {
+							// you can use .jset method even if keys already exist
+							mkHash.jset({
+								e: 'E',
+								f: 'F'
+							});
+						});
+						</code>
+				</pre>
+			</div>
+			<div class="col-lg-5 mk-example mk-example-layout">
+				<pre class="prettyprint lang-html escape-html">
+					<button class="btn">Add "e" and "f" keys</button>
+				</pre>
+			</div>
+			<div class="col-lg-2 mk-example mk-example-result">
+				<button class="btn ex4">Add "e" and "f" keys</button>
+				<script>
+					runIt.push( function() {
+						$( '.btn.ex4' ).on( 'click', function() {
+							// you can use .jset method even if keys already exist
+							mkHash.jset({
+								e: 'E',
+								f: 'F'
+							});
+						});
+					});
+				</script>
+			</div>
+		</div>		
+	</div>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../js/prettify.js"></script>
+	<script src="/js/matreshka.all.min.js"></script>
+	<script>
+		( function() {
+			function escapeHTML( string ) {
+				var pre = document.createElement( 'pre' ),
+					text = document.createTextNode( string );
+				pre.appendChild( text );
+				return pre.innerHTML;
+			};
+			
+			function removeExtraTabs( string ) {
+				var lines = string.split( '\n' ),
+					tabsLength,
+					minTabsLength = Infinity,
+					tabsReg;
+					
+				for( var i = 0; i < lines.length; i++ ) {
+					if( lines[ i ].replace( /\s/g, '' ).length ) {
+						tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/, '$1' ).length;
+						minTabsLength = Math.min( minTabsLength, tabsLength );
+					}
+				}
+				minTabsLength = minTabsLength | 0;
+				tabsReg = new RegExp( new Array( minTabsLength + 1 ).join( '\t' ) );
+				for( var i = 0; i < lines.length; i++ ) {
+					lines[ i ] = lines[ i ].replace( tabsReg, '' );
+				}
+				
+				return lines.join( '\n' );
+			};
+			
+			window.onload = function() {
+				var toEscape = document.querySelectorAll( '.escape-html' ),
+					pre = document.getElementsByTagName( 'pre' ),
+					code;
+				for( var i = 0; i < toEscape.length; i++ ) {
+					toEscape[ i ].innerHTML = escapeHTML( toEscape[ i ].innerHTML );
+				}
+				for( var i = 0; i < pre.length; i++ ) {
+					pre[ i ].innerHTML = removeExtraTabs( pre[ i ].innerHTML );
+					code = pre[ i ].getElementsByTagName( 'code' )[ 0 ];
+					pre[ i ].innerHTML = pre[ i ].innerHTML.trim();
+					if( code ) {
+						code.innerHTML = code.innerHTML.trim();
+					}
+				}
+				
+				prettyPrint();
+
+				if( window.runIt ) {
+					for( var i = 0; i < window.runIt.length; i++ ) {
+						window.runIt[ i ]();
+					}
+				}
+			};
+		})();
+	</script>
+	
+		<script src="/matreshka/plugins/js/hash.mk.js">
+		
+	</script>
+</body>
+
+</html>
