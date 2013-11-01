@@ -185,7 +185,7 @@
 						$( '.btn.ex4' ).on( 'click', function() {
 							mkHash.addJSONKeys( 'c d' );
 							mkHash.c = 'C';
-							mkHash.c = 'D';
+							mkHash.d = 'D';
 						});
 					});
 				</script>
@@ -196,7 +196,7 @@
 			<div class="col-lg-5 mk-example mk-example-js">
 				<pre class="prettyprint">
 						<code>
-						$( '.btn.ex4' ).on( 'click', function() {
+						$( '.btn' ).on( 'click', function() {
 							// you can use .jset method even if keys already exist
 							mkHash.jset({
 								e: 'E',
@@ -212,10 +212,10 @@
 				</pre>
 			</div>
 			<div class="col-lg-2 mk-example mk-example-result">
-				<button class="btn ex4">Add "e" and "f" keys</button>
+				<button class="btn ex5">Add "e" and "f" keys</button>
 				<script>
 					runIt.push( function() {
-						$( '.btn.ex4' ).on( 'click', function() {
+						$( '.btn.ex5' ).on( 'click', function() {
 							// you can use .jset method even if keys already exist
 							mkHash.jset({
 								e: 'E',
