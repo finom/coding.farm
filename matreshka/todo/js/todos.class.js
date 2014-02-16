@@ -6,11 +6,12 @@ app.Todos = Class({
 	constructor: function() {
 		this
 			.initMK()
-			.set({
+			/*.set({
 				router: new app.Router
-			})
+			})*/
 			.bindings()
 			.events()
+			.dependences()
 			.restore()
 		;
 	},
@@ -18,59 +19,63 @@ app.Todos = Class({
 		return this
 			.bindElement( this, '#todoapp' )
 			.bindElement({
-				list: this.$( '#todo-list' ),
-				newTodo: this.$( '#new-todo' ),
-				clearCompleted: this.$( '#clear-completed' )
+				container: this.select( '#todo-list' ),
+				list: this.select( '#todo-list' ),
+				newTodo: this.select( '#new-todo' ),
+				clearCompleted: this.select( '#clear-completed' ),
+				completedAll: this.select( '#toggle-all' )
 			})
 			.bindElement({
-				activeLength: this.$( '.count' ),
-				completedLength: this.$( '.completed' )
-			}, MK.htmlp )
+				activeLength: this.select( '#count' ),
+				completedLength: this.select( '#completed' ),
+				'item(s)': this.select( '#item-plural_singular' )
+			}, MK.binders.innerHTML() )
+			.bindElement({
+				completedLength: this.select( '#clear-completed' ),
+				length: this.selectAll( '#main, #footer' )
+			}, MK.binders.className( '!hide' ) )
 		;
 	},
 	events: function() {
-		this.router.on( '/*', function( state ) {
-			this.state = state === 'active' || state === 'completed' ? state : '';
-		}, this );
+		document.addEventListener( 'keydown', function( evt ) {
+			var target = window.event ? event.srcElement : evt.target;
+			if( target.tagName === 'TEXTAREA' || target.tagName === 'INPUT' || target.contenteditable ) {
+				if( evt.which === 13 ) {
+					target.dispatchEvent( new CustomEvent( 'pressEnter' ) );
+				} else
+				if( evt.which === 27 ) {
+					target.dispatchEvent( new CustomEvent( 'pressEsc'   ) );
+				}
+			}
+			
+		});
 		
-		this.$el( 'newTodo' ).on( 'pressenter', this.createOne.bind( this ) );
-		this.$el( 'clearCompleted' ).on( 'click', this.removeCompleted.bind( this ) );
-		
+
 		return this
-			.on( 'modify', function() {
-				var uncompletedLength = this.getUncompleted().length;
-				this.$( '#main, #footer' ).toggleClass( 'hide', !this.length );
+			.on( 'pressEnter::newTodo', this.createOne )
+			.on( 'click::clearCompleted', this.removeCompleted )
+			.on( 'click::completedAll', function() {
 				this
-					.set({
-						activeLength: uncompletedLength,
-						completedLength: this.length - uncompletedLength
-					})
-					.save()
+					.forEach( function( todo ) {
+						todo.set( 'completed', this.completedAll, { silent: true });
+					}, this )
+					.trigger( 'modify' )
 				;
 			})
-			.on( 'push', function( evt ) {
-				for( var i = 0; i < evt.arguments.length; i++ ) {
-					this.$el( 'list' ).append( evt.arguments[ i ].$el() );
-				}
-			})
-			.on( 'splice', function( evt ) {
-				for( var i = 0; i < evt.returns.length; i++ ) {
-					evt.returns[ i ].$el().remove();
-				}
-			})
-			.on( 'change:activeLength', function() {
-				this.$( '.item-plural_singular' ).html( this.activeLength === 1 ? 'item' : 'items' );
-			})
-			.on( 'change:completedLength', function() {
-				this.$el( 'clearCompleted' ).toggleClass( 'hide', !this.completedLength );
-			})
-			.on( 'change:state', function() {
+			.on( 'modify', this.save )
+			.on( 'modify', function() {
+				this.completed = this.filter( function( item ) {
+					return item.completed;
+				});
+			}, true )
+			
+			/*.on( 'change:state', function() {
 				this.$( '#filters a' )
 					.removeClass( 'selected' )
 					.filter( '[href="#/' + this.state + '"]' )
 					.addClass( 'selected' )
 				;
-			}, true )
+			}, true )*/
 			.on( 'change:state modify', function() {
 				this.forEach( function( item ) {
 					item.hidden = 
@@ -81,32 +86,48 @@ app.Todos = Class({
 			}, true )
 		;
 	},
+	dependences: function() {
+		return this
+			.addDependence( 'completedLength', 'completed', function() {
+				return this.completed.length;
+			})
+			.addDependence( 'activeLength', 'completed', function() {
+				return this.length - this.completed.length;
+			})
+			.addDependence( 'item(s)', 'activeLength', function() {
+				return 'item' + ( this.activeLength !== 1 ? 's' : '' );
+			})
+			.addDependence( 'completedAll', 'completed', function() {
+				return this.completed.length === this.length;
+			})
+		;
+	},
+	renderer: function() {
+		 return document.getElementById( 'item-template' ).innerHTML;
+	},
 	createOne: function() {
-		if( this.newTodo ) {
+		var newTodo = this.newTodo.trim();
+		if( newTodo ) {
 			this.addOne({
-				title: this.newTodo.trim()
+				title: newTodo
 			});
 			this.newTodo = '';
 		}
 		return this;
 	},
 	addOne: function( todo ) {
-		todo = new app.Todo( todo )
+		return this.push( new app.Todo( todo )
 			.on( 'modify', function() {
 				this.trigger( 'modify' );
 			}, this )
 			.on( 'readytodie', function() {
-				this.removeOne( todo );
-			}, this )
+				this.pull( this.indexOf( todo ) );
+			}, this ) )
 		;
-		return this.push( todo );
-	},
-	removeOne: function( todo ) {
-		return this.splice( this.indexOf( todo ), 1 );
 	},
 	removeCompleted: function() {
-		return this.getCompleted().forEach( function( todo ) {
-			this.removeOne( todo );
+		return this.completed.forEach( function( todo ) {
+			this.pull( this.indexOf( todo ) );
 		}, this );
 	},
 	save: function() {
@@ -115,15 +136,6 @@ app.Todos = Class({
 	},
 	restore: function() {
 		MK.each( this.storage.local, this.addOne, this );
-	},
-	getCompleted: function() {
-		return this.filter( function( item ) {
-			return item.completed;
-		});
-	},
-	getUncompleted: function() {
-		return this.filter( function( item ) {
-			return !item.completed;
-		});
+		return this;
 	}
 });

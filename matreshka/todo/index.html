@@ -21,7 +21,7 @@
 				<ul id="todo-list"></ul>
 			</section>
 			<footer id="footer" class="hide">
-				<span id="todo-count"><strong class="count"></strong> <span class="item-plural_singular"></span> left</span>
+				<span id="todo-count"><strong id="count"></strong> <span id="item-plural_singular"></span> left</span>
 				<ul id="filters">
 					<li>
 						<a class="selected" href="#/">All</a>
@@ -33,7 +33,7 @@
 						<a href="#/completed">Completed</a>
 					</li>
 				</ul>
-				<button id="clear-completed">Clear completed (<span class="completed"></span>)</button>
+				<button id="clear-completed">Clear completed (<span id="completed"></span>)</button>
 			</footer>
 		</section>
 		<footer id="info">
@@ -54,8 +54,14 @@
 		<script type="text/template" id="stats-template">
 			
 		</script>
-		<script src="/js/matreshka.all.min.js"></script>
-		<script src="js/lib/jquery-1.10.2.min.js"></script>
+		<script src="js/lib/matreshka/balalaika.js"></script>
+		<script src="js/lib/matreshka/balalaika-ie8.js"></script>
+		<script src="js/lib/matreshka/xclass.js"></script>
+		<script src="js/lib/matreshka/matreshka.js"></script>
+		<script src="js/lib/matreshka/balalaika-mk-plugins.js"></script>
+		<script src="js/lib/matreshka/mk-binders.js"></script>
+		<script src="js/lib/matreshka/array.mk.js"></script>
+		<script src="js/lib/matreshka/object.mk.js"></script>
 		<script src="js/lib/objectstorage.js"></script>
 		<script src="js/lib/routie.min.js"></script>
 		<script src="js/todo.class.js"></script>

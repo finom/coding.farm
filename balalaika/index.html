@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Matreshka.js</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base href="/balalaika/">
+	<!-- Bootstrap -->
+	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../../css/tomorrow-night.css" rel="stylesheet" media="screen">
+	<link href="../../css/style.css" rel="stylesheet" media="screen">
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
+      <script src="../../bootstrap/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	
+	
+	
+	Нравится Ванилла? Надоели огромные ДОМ библиотеки, такие как Жиквери? Хочешь стать крутым Яваскрипт ниндзей? 
+	Балалайка - дружественная ванилле, эмбеддед, библиотека, которая занимает меньше 1К.
+	Просто вставь этот код к себе на страницу:
+	...
+	Никакого подключения внешних скриптов, никаких ожиданий от сервера. Выглядит, как подключение счетчика просмотров. Круто?
+	
+	ЗАЧЕМ?
+	Ванилла это круто, но иногда хочется избежать дублирования кода
+	Array.prototype.slice.call( document.querySelectorAll( 'selector' ) ).filter( someFilter );
+	Слишком неудобно
+	Гараздо удобнее использовать библиотечный стиль:
+	$( 'selector' ).filter( someFilter );
+	Поэтому было решено сделать очень компактную, включающую в себя только самое необнодимое библиотеку
+
+	
+	ФИЧИ
+	Балалайка наследуется от массива. Это значит, что все методы массива могут быть использованы балалайкий:
+	forEach
+	filter
+	map
+	splice
+	...
+	
+	Кроме этого балалайка предоставляет три необходимых метода:
+	он(), который добавляет обработчики события элементам и поддерживает нэймспэйсы (жиквери стиль)
+	офф(), который отключает обработчики события от элементов, даже если не указан обработчик событий
+	сравнение офф и ремувэвентлисенер
+	из(), который проверяет является ли элемент соответсвующим некоемуму селектору. Это удобно, когда мы создаем делегирующие события или ищем родителей\детей\сиблингс по селектору
+	Реди() куда без него? :)
+	экстенд() - утилита, которая просто расширает один объект другим
+	Всё остальное ты можешь сделать сам, используя ваниллу
+	
+	ГДЕ ИСПОЛЬЗОВАТЬ?
+	В проектах
+	В библиотеках
+		вверху
+		аршументом
+	
+	ПРИМЕР ИСПОЛЬЗОВАНИЯ
+	Выборка, фильтр, форыч
+	События
+	
+	СТИЛЬ КОДА
+	Балалайка предоставляет одну переменную ;Б, но ты можешь использовать стиль других библиотек:
+	Жиквери стиль
+	Мутулз стиль
+	
+	ЕЩЕ ПРИМЕРЫ (сравнение с жиквери)
+	делегация событий
+	установка стиля
+	получение стиля
+	установка класса (ссылка на класслист)
+	получение
+	установка атрибута
+	получение
+	...
+	
+	ПЛАГИНЫ
+	Балалайка - полностью расширяемая библиотека, ты можешь добавить любимый метод в любой момент, подняв при этом свои навыки
+	тоггл\адд\ремув\хэзКласс
+	парэнт
+	парэнтс
+	фильтр (с селектором)
+	адд
+	файнд
+	
+	ИЕ
+	Как известно, ие не поддерживает новых штук. Например, у ие нету методов массива, как форыч, а дом элементы не подерживают матчес. Было бы обидно, если бы интернет експлорер разбил твою мечту о том, чтобы стать ванилла ниндзей. Есть решение.
+	Во первых подключи ес5 шим, который добавляет функции жаваскрипт, в том числе и современные методы массива
+	Во вторых подключи домшим, который добавит аддевентлисенер и другие полезные методы в ие
+	В третьих добавь очень маленький патч для балалайки
+	Весь код для поддержки ИЕ выглядит так:
+	...
+	
+
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../js/prettify.js"></script>
+	<script src="/js/matreshka.all.min.js"></script>
+	<script>
+		( function() {
+			function escapeHTML( string ) {
+				var pre = document.createElement( 'pre' ),
+					text = document.createTextNode( string );
+				pre.appendChild( text );
+				return pre.innerHTML;
+			};
+			
+			function removeExtraTabs( string ) {
+				var lines = string.split( '\n' ),
+					tabsLength,
+					minTabsLength = Infinity,
+					tabsReg;
+					
+				for( var i = 0; i < lines.length; i++ ) {
+					if( lines[ i ].replace( /\s/g, '' ).length ) {
+						tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/, '$1' ).length;
+						minTabsLength = Math.min( minTabsLength, tabsLength );
+					}
+				}
+				minTabsLength = minTabsLength | 0;
+				tabsReg = new RegExp( new Array( minTabsLength + 1 ).join( '\t' ) );
+				for( var i = 0; i < lines.length; i++ ) {
+					lines[ i ] = lines[ i ].replace( tabsReg, '' );
+				}
+				
+				return lines.join( '\n' );
+			};
+			
+			window.onload = function() {
+				var toEscape = document.querySelectorAll( '.escape-html' ),
+					pre = document.getElementsByTagName( 'pre' ),
+					code;
+				for( var i = 0; i < toEscape.length; i++ ) {
+					toEscape[ i ].innerHTML = escapeHTML( toEscape[ i ].innerHTML );
+				}
+				for( var i = 0; i < pre.length; i++ ) {
+					pre[ i ].innerHTML = removeExtraTabs( pre[ i ].innerHTML );
+					code = pre[ i ].getElementsByTagName( 'code' )[ 0 ];
+					pre[ i ].innerHTML = pre[ i ].innerHTML.trim();
+					if( code ) {
+						code.innerHTML = code.innerHTML.trim();
+					}
+				}
+				
+				prettyPrint();
+
+				if( window.runIt ) {
+					for( var i = 0; i < window.runIt.length; i++ ) {
+						window.runIt[ i ]();
+					}
+				}
+			};
+		})();
+	</script>
+</body>
+</html>

@@ -10,41 +10,49 @@ app.Todo = Class({
 				completed: false
 			})
 			.set( todo )
-			.bindings()
-			.events()
+			.on( 'render', function( evt ) {
+				this
+					.bindElement( this, evt.element )
+					.bindings()
+					.events()
+				;
+			})
 		;
 	},
 	bindings: function() {
 		return this
-			.bindElement( this, this.render() )
 			.bindElement({
-				completed: this.$( '.toggle' ),
-				title: this.$( '.edit' )
+				completed: this.select( '.toggle' ),
+				title: this.select( '.edit' )
 			})
-			.bindElement( 'completed', this.el(), MK.classp( 'completed' ) )
-			.bindElement( 'hidden', this.el(), MK.classp( 'hide' ) )
-			.bindElement( 'title', this.$( 'label' ), MK.htmlp )
+			.bindElement( 'completed', this.bound(), MK.binders.className( 'completed' ) )
+			.bindElement( 'hidden', this.bound(), MK.binders.className( 'hide' ) )
+			.bindElement( 'title', this.select( 'label' ), MK.binders.innerHTML() )
 		;
 	},
 	events: function() {
-		this.$el().on( 'click', '.destroy', this.trigger.bind( this, 'readytodie' ) );
-		
-		this.$( 'label' ).on( 'dblclick', function() {
-			this.$el().addClass( 'editing' );
-			this.$( '.edit' ).focus();
-		}.bind( this ) );
-		
-		this.$( '.edit' ).on( 'blur pressenter', function() {
-			if( !this.title.length ) {
-				this.trigger( 'readytodie' );
-			} else {
-				this.$el().removeClass( 'editing' );
-			}
-		}.bind( this ) );
-		
-		return this;
-	},
-	render: function() {
-		return document.getElementById( 'item-template' ).innerHTML;
+		return this
+			.on( 'click::__this__', function( evt ) {
+				if( evt.target.classList.contains( 'destroy' ) ) {
+					this.trigger( 'readytodie' );
+				}
+			})
+			.on( 'dblclick::title', function() {
+				this.bound().classList.add( 'editing' );
+				this.savedTitle = this.title;
+				this.bound( 'title' ).focus();
+			})
+			.on( 'pressEsc::title', function() {
+				this.bound().classList.remove( 'editing' );
+				this.title = this.savedTitle;
+			})
+			.on( 'blur::title pressEnter::title', function() {
+				if( !this.title ) {
+					this.trigger( 'readytodie' );
+				} else {
+					this.bound().classList.remove( 'editing' );
+				}
+			})
+		;
 	}
 });
