@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New layout</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style>
+	@import "../../bootstrap/css/bootstrap.min.css";
+	@import "../../bootstrap/css/bootstrap-theme.min.css";
+	@import "../../css/syntax.css";
+	@import "../../css/style.css";
+</style>
+	</head>
+	<body class="docs">
+		<header>
+			<div class="wrap">
+	<div class="logo">
+		<img src="../../../img/mk-logo-colour.svg" height="80">
+		<span>Matreshka.js</span>
+	</div>
+	<nav>
+		<a href="../../matreshka" >Home</a>
+		<a href="../../matreshka/about" >Why Matreshka</a>
+		<a href="../../matreshka/docs"  class="selected" >Docs</a>
+		<a href="../../matreshka/examples" >Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
+	</nav>
+</div> 
+
+		</header>
+		<main>
+			 <script src="scripts/prettify/prettify.js"></script>
+<script src="scripts/prettify/lang-css.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/prettify.css">
+<linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
+<nav class="navigation">
+    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
+    <a href="global.html">Globals</a><br>
+    <a href="Matreshka.html">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html">MK.Object</a><br>
+    <a href="Matreshka.Array.html">MK.Array</a><br>
+</nav>
+<main>
+    <div class="container docs">
+		<h1 class="page-title hide">Source: balalaika.js</h1>
+		
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>"use strict";
+/**
+ * @function $b
+ * @version 1.0
+ * @since 0.1
+ * @extends Array
+ * @summary &lt;code>Balalaika&lt;/code> DOM utilite
+ * 
+ * @desc &lt;p>Balalaika is tiny (997 bytes uncompressed) embedded library that makes easier vanilla.js (pure JS) coding. This is individual project and will be presented on github soon.&lt;/p>
+ * 
+ * &lt;p>It's using in {@link http://finom.github.io/matreshka|Matreshka} framework as DOM utilite when jQuery is not defined.&lt;/p>
+ * 
+ * &lt;p>Balalaika extends Array. It means that you can use Array methods such as &lt;code>.forEach&lt;/code>, &lt;code>.map&lt;/code>, &lt;code>.reduce&lt;/code>, &lt;code>.splice&lt;/code> and so on.&lt;/p>
+ * 
+ * &lt;p>Balalaika includes 3 own methods: &lt;code>.on&lt;/code>, &lt;code>.off&lt;/code>, &lt;code>.is&lt;/code> and static &lt;code>.extend&lt;/code> method that work same way as jQuery analogues (&lt;code>.on&lt;/code> doesn't support data). &lt;/p>
+ * 
+ * &lt;p>WARNING: This lib works fine in modern browsers (including Internet Explorer 9) only or using DOM shims. For older browsers you still need jQuery.&lt;/p>
+ * 
+ * @example $( 'div' ).forEach( ... );
+ * @example $( 'span', document.body ).map( ... );
+ * @example $( '.button' ).on( 'click.mynamespace', ... );
+ * @example $( '.button' ).off( '.mynamespace' );
+ */
+// nsRegAndEvents is regesp for eventname.namespace and the list of all events
+// fn is empty array and balalaika prototype
+window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener, s_MatchesSelector, i, j, k, l, $ ) {
+	$ = function( s, context ) {
+		return new $.i( s, context );
+	};
+	
+	$.i = function( s, context ) {
+		fn.push.apply( this, !s ? fn : s.nodeType || s == window ? [s] : "" + s === s ? /&lt;/.test( s ) 
+		? ( ( i = document.createElement( context || 'div' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : $(document).on('DOMContentLoaded', s) : s );
+	};
+	
+	$.i[ l = 'prototype' ] = ( $.extend = function(obj) {
+		k = arguments;
+		for( i = 1; i &lt; k.length; i++ ) {
+			if ( l = k[ i ] ) {
+				for (j in l) {
+					obj[j] = l[j];
+				}
+			}
+		}
+		
+		return obj;
+	})( $.fn = $[ l ] = fn, { // $.fn = $.prototype = fn
+		on: function( n, f ) {
+			// n = [ eventName, nameSpace ]
+			n = n.split( nsRegAndEvents );
+			this.map( function( item ) {
+				// item.b$ is balalaika_id for an element
+				// i is eventName + id ("click75")
+				// nsRegAndEvents[ i ] is array of events (eg all click events for element#75) ([[namespace, handler], [namespace, handler]])
+				( nsRegAndEvents[ i ] = nsRegAndEvents[ i = n[ 0 ] + ( item.b$ = item.b$ || ++id ) ] || [] ).push([f, n[ 1 ]]);
+				// item.addEventListener( eventName, f )
+				item[ 'add' + s_EventListener ]( n[ 0 ], f );
+			});
+			return this;
+		},
+		off: function( n, f ) {
+			// n = [ eventName, nameSpace ]
+			n = n.split( nsRegAndEvents );
+			// l = 'removeEventListener'
+			l = 'remove' + s_EventListener;
+			this.map( function( item ) {
+				// k - array of events
+				// item.b$ - balalaika_id for an element
+				// n[ 0 ] + item.b$ - eventName + id ("click75")
+				k = nsRegAndEvents[ n[ 0 ] + item.b$ ];
+				// if array of events exist then i = length of array of events
+				if( i = k && k.length ) {
+					// while j = one of array of events
+					while( j = k[ --i ] ) {
+						// if( no f and no namespace || f but no namespace || no f but namespace || f and namespace )
+						if( ( !f || f == j[ 0 ] ) && ( !n[ 1 ] || n[ 1 ] == j[ 1 ] ) ) {
+							// item.removeEventListener( eventName, handler );
+							item[ l ]( n[ 0 ], j[ 0 ] );
+							// remove event from array of events
+							k.splice( i, 1 );
+						}
+					}
+				} else {
+					// if event added before using addEventListener, just remove it using item.removeEventListener( eventName, f )
+					item[ l ]( n[ 0 ], f );
+				}	
+			});
+			return this;
+		},
+		is: function( s ) {
+			i = this[ 0 ];
+			j = !!i && ( i.matches
+				|| i[ 'webkit' + s_MatchesSelector ]
+				|| i[ 'moz' + s_MatchesSelector ]
+				|| i[ 'ms' + s_MatchesSelector ] );
+			return !!j && j.call( i, s );
+		}
+	});	
+	return $;
+})( window, document, [], /\.(.+)/, 0, 'EventListener', 'MatchesSelector' );</code></pre>
+        </article>
+    </section>
+
+
+
+
+	</div>
+</main>
+
+<footer class="jsdoc-footer container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:51 GMT+0200 (EET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+
+		</main>
+		<footer></footer>
+	</body>
+</html>

@@ -34,7 +34,7 @@
 <linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 <link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
 <nav class="navigation">
-    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
+    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.html#Array">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li></ul>-->
     <a href="global.html">Globals</a><br>
     <a href="Matreshka.html">Matreshka (MK)</a><br>
     <a href="Matreshka.Object.html">MK.Object</a><br>
@@ -67,7 +67,7 @@
     
         
 <dt>
-    <h4 class="name" id="Array"><a class="method-anchor" href="#Array"> <span class="type-signature"></span>new Array</a><span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Array"><span class="type-signature"></span>new Array<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -183,7 +183,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     
-   
+    <!---->
     
     
     
@@ -195,10 +195,10 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         <dl>
             
 <dt>
-    <h4 class="name" id="concat"><a class="method-anchor" href="#concat"> <span class="type-signature"></span>concat</a><span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="concat"><span class="type-signature"></span>concat<span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">Array.prototype.concat</a> and accepts <a href="Matreshka.Array.html">Matreshka.Array</a> instances</p>
+    <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">Array.prototype.concat</a> and accepts <a href="Matreshka.html#Array">Matreshka.Array</a> instances</p>
     
 </dt>
 <dd>
@@ -223,7 +223,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
 <span class="param-type label label-type label-type-unknown"><a href="global.html#mkArray">mkArray</a></span>
 
 
-    (new <a href="Matreshka.Array.html">Matreshka.Array</a> instance)
+    (new <a href="Matreshka.html#Array">Matreshka.Array</a> instance)
 
 
         </div>
@@ -278,7 +278,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
 <span class="param-type label label-type label-type-array">Array</span>
  
 
-<span class="param-type label label-type label-type-unknown"><a href="Matreshka.Array.html">Matreshka.Array</a></span>
+<span class="param-type label label-type label-type-unknown"><a href="Matreshka.html#Array">Matreshka.Array</a></span>
 
 
             
@@ -356,7 +356,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         
             
 <dt>
-    <h4 class="name" id="createFrom"><a class="method-anchor" href="#createFrom"> <span class="type-signature"></span>createFrom</a><span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="createFrom"><span class="type-signature"></span>createFrom<span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Creates self from another array</p>
@@ -513,7 +513,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         
             
 <dt>
-    <h4 class="name" id="each"><a class="method-anchor" href="#each"> <span class="type-signature"></span>each</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="each"><span class="type-signature"></span>each<span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to Matreshka.Array.forEach</p>
@@ -702,7 +702,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         
             
 <dt>
-    <h4 class="name" id="every"><a class="method-anchor" href="#every"> <span class="type-signature"></span>every</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="every"><span class="type-signature"></span>every<span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">Array.prototype.every</a></p>
@@ -889,7 +889,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         
             
 <dt>
-    <h4 class="name" id="filter"><a class="method-anchor" href="#filter"> <span class="type-signature"></span>filter</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="filter"><span class="type-signature"></span>filter<span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array.prototype.filter</a></p>
@@ -1078,7 +1078,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         
             
 <dt>
-    <h4 class="name" id="forEach"><a class="method-anchor" href="#forEach"> <span class="type-signature"></span>forEach</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="forEach"><span class="type-signature"></span>forEach<span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array.prototype.forEach</a> but returns self instead of undefined</p>
@@ -1267,7 +1267,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         
             
 <dt>
-    <h4 class="name" id="hasOwnProperty"><a class="method-anchor" href="#hasOwnProperty"> <span class="type-signature"></span>hasOwnProperty</a><span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="hasOwnProperty"><span class="type-signature"></span>hasOwnProperty<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
     
     <p class="summary">Tells is given property defined in the instance</p>
@@ -1363,7 +1363,7 @@ mkArray.hasOwnProperty( 'blah' ); // false</code></pre>
         
             
 <dt>
-    <h4 class="name" id="indexOf"><a class="method-anchor" href="#indexOf"> <span class="type-signature"></span>indexOf</a><span class="signature">(searchElement, <span class="optional">fromIndex</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="indexOf"><span class="type-signature"></span>indexOf<span class="signature">(searchElement, <span class="optional">fromIndex</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">Array.prototype.indexOf</a></p>
@@ -1549,7 +1549,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
         
             
 <dt>
-    <h4 class="name" id="initAllDOMItems"><a class="method-anchor" href="#initAllDOMItems"> <span class="type-signature"></span>initAllDOMItems</a><span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="initAllDOMItems"><span class="type-signature"></span>initAllDOMItems<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span> <span class="label new"></span></h4>
     
     
     <p class="summary">TODO DESCRIPTION</p>
@@ -1644,7 +1644,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
         
             
 <dt>
-    <h4 class="name" id="initMK"><a class="method-anchor" href="#initMK"> <span class="type-signature"></span>initMK</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="initMK"><span class="type-signature"></span>initMK<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Initializes MK.Array instance</p>
@@ -1743,7 +1743,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
         
             
 <dt>
-    <h4 class="name" id="join"><a class="method-anchor" href="#join"> <span class="type-signature"></span>join</a><span class="signature">(separator)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="join"><span class="type-signature"></span>join<span class="signature">(separator)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join">Array.prototype.join</a></p>
@@ -1887,7 +1887,7 @@ alert( this.join( ':' ) ); // alerts '1:2:3:4:4:3:2:1'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="lastIndexOf"><a class="method-anchor" href="#lastIndexOf"> <span class="type-signature"></span>lastIndexOf</a><span class="signature">(searchElement, <span class="optional">fromIndex</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="lastIndexOf"><span class="type-signature"></span>lastIndexOf<span class="signature">(searchElement, <span class="optional">fromIndex</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf">Array.prototype.lastIndexOf</a></p>
@@ -2073,7 +2073,7 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
         
             
 <dt>
-    <h4 class="name" id="map"><a class="method-anchor" href="#map"> <span class="type-signature"></span>map</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="map"><span class="type-signature"></span>map<span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">Array.prototype.map</a></p>
@@ -2262,7 +2262,7 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
         
             
 <dt>
-    <h4 class="name" id="pop"><a class="method-anchor" href="#pop"> <span class="type-signature"></span>pop</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="pop"><span class="type-signature"></span>pop<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop">Array.prototype.pop</a></p>
@@ -2366,7 +2366,7 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
         
             
 <dt>
-    <h4 class="name" id="pull"><a class="method-anchor" href="#pull"> <span class="type-signature"></span>pull</a><span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="pull"><span class="type-signature"></span>pull<span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span> <span class="label new"></span></h4>
     
     
     <p class="summary">Removes Matreshka#Array element by given index and returns that element.</p>
@@ -2529,7 +2529,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="push"><a class="method-anchor" href="#push"> <span class="type-signature"></span>push</a><span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="push"><span class="type-signature"></span>push<span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push">Array.prototype.push</a> but returns self instead of length</p>
@@ -2696,7 +2696,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="reduce"><a class="method-anchor" href="#reduce"> <span class="type-signature"></span>reduce</a><span class="signature">(callback, <span class="optional">initialValue</span>)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id="reduce"><span class="type-signature"></span>reduce<span class="signature">(callback, <span class="optional">initialValue</span>)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">Array.prototype.reduce</a></p>
@@ -2883,7 +2883,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="reduceRight"><a class="method-anchor" href="#reduceRight"> <span class="type-signature"></span>reduceRight</a><span class="signature">(callback, <span class="optional">initialValue</span>)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id="reduceRight"><span class="type-signature"></span>reduceRight<span class="signature">(callback, <span class="optional">initialValue</span>)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight">Array.prototype.reduceRight</a></p>
@@ -3070,7 +3070,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="renderer"><a class="method-anchor" href="#renderer"> <span class="type-signature"></span>renderer</a><span class="signature">()</span><span class="type-signature"> &rarr; {string|Node|jQuery}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="renderer"><span class="type-signature"></span>renderer<span class="signature">()</span><span class="type-signature"> &rarr; {string|Node|jQuery}</span> <span class="label new"></span></h4>
     
     
     <p class="summary">Renderer for array items</p>
@@ -3170,7 +3170,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="reverse"><a class="method-anchor" href="#reverse"> <span class="type-signature"></span>reverse</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="reverse"><span class="type-signature"></span>reverse<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse">Array.prototype.reverse</a></p>
@@ -3272,7 +3272,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="shift"><a class="method-anchor" href="#shift"> <span class="type-signature"></span>shift</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="shift"><span class="type-signature"></span>shift<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift">Array.prototype.shift</a></p>
@@ -3376,7 +3376,7 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentCreateFrom"><a class="method-anchor" href="#silentCreateFrom"> <span class="type-signature"></span>silentCreateFrom</a><span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentCreateFrom"><span class="type-signature"></span>silentCreateFrom<span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Creates self from another array</p>
@@ -3386,7 +3386,7 @@ alert( this.toString ); // 'a,c' </code></pre>
     
     
     <div class="description">
-        Works similar to <a href="Matreshka.Array.html#createFrom">Matreshka.Array#createFrom</a> but without triggering events
+        Works similar to <a href="Matreshka.html#Array#createFrom">Matreshka.Array#createFrom</a> but without triggering events
     </div>
     
 
@@ -3525,10 +3525,10 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentPop"><a class="method-anchor" href="#silentPop"> <span class="type-signature"></span>silentPop</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentPop"><span class="type-signature"></span>silentPop<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#pop">Matreshka.Array#pop</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#pop">Matreshka.Array#pop</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -3619,10 +3619,10 @@ alert( this.toString ); // 'a,c' </code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentPull"><a class="method-anchor" href="#silentPull"> <span class="type-signature"></span>silentPull</a><span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="silentPull"><span class="type-signature"></span>silentPull<span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span> <span class="label new"></span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#pull">Matreshka.Array#pull</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#pull">Matreshka.Array#pull</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -3774,10 +3774,10 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentPush"><a class="method-anchor" href="#silentPush"> <span class="type-signature"></span>silentPush</a><span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentPush"><span class="type-signature"></span>silentPush<span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#push">Matreshka.Array#push</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#push">Matreshka.Array#push</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -3927,10 +3927,10 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentReverse"><a class="method-anchor" href="#silentReverse"> <span class="type-signature"></span>silentReverse</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentReverse"><span class="type-signature"></span>silentReverse<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#reverse">Matreshka.Array#reverse</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#reverse">Matreshka.Array#reverse</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -4021,10 +4021,10 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentShift"><a class="method-anchor" href="#silentShift"> <span class="type-signature"></span>silentShift</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentShift"><span class="type-signature"></span>silentShift<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#shift">Matreshka.Array#shift</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#shift">Matreshka.Array#shift</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -4115,10 +4115,10 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentSort"><a class="method-anchor" href="#silentSort"> <span class="type-signature"></span>silentSort</a><span class="signature">(compareFunction)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentSort"><span class="type-signature"></span>silentSort<span class="signature">(compareFunction)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#sort">Matreshka.Array#sort</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#sort">Matreshka.Array#sort</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -4266,10 +4266,10 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentSplice"><a class="method-anchor" href="#silentSplice"> <span class="type-signature"></span>silentSplice</a><span class="signature">(index, howMany, <span class="optional">element</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentSplice"><span class="type-signature"></span>silentSplice<span class="signature">(index, howMany, <span class="optional">element</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#splice">Matreshka.Array#splice</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#splice">Matreshka.Array#splice</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -4489,10 +4489,10 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="silentUnshift"><a class="method-anchor" href="#silentUnshift"> <span class="type-signature"></span>silentUnshift</a><span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="silentUnshift"><span class="type-signature"></span>silentUnshift<span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="Matreshka.Array.html#shift">Matreshka.Array#shift</a> but without triggering events</p>
+    <p class="summary">Works similar to <a href="Matreshka.html#Array#shift">Matreshka.Array#shift</a> but without triggering events</p>
     
 </dt>
 <dd>
@@ -4642,7 +4642,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="slice"><a class="method-anchor" href="#slice"> <span class="type-signature"></span>slice</a><span class="signature">(begin, end)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="slice"><span class="type-signature"></span>slice<span class="signature">(begin, end)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">Array.prototype.slice</a></p>
@@ -4815,7 +4815,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="some"><a class="method-anchor" href="#some"> <span class="type-signature"></span>some</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="some"><span class="type-signature"></span>some<span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">Array.prototype.some</a></p>
@@ -5002,7 +5002,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="sort"><a class="method-anchor" href="#sort"> <span class="type-signature"></span>sort</a><span class="signature">(compareFunction)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="sort"><span class="type-signature"></span>sort<span class="signature">(compareFunction)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.prototype.sort</a></p>
@@ -5161,7 +5161,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="splice"><a class="method-anchor" href="#splice"> <span class="type-signature"></span>splice</a><span class="signature">(index, howMany, <span class="optional">element</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="splice"><span class="type-signature"></span>splice<span class="signature">(index, howMany, <span class="optional">element</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">Array.prototype.splice</a></p>
@@ -5396,7 +5396,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="toArray"><a class="method-anchor" href="#toArray"> <span class="type-signature"></span>toArray</a><span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="toArray"><span class="type-signature"></span>toArray<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
     <p class="summary">Converts MK.Array instance to Javascript Array</p>
@@ -5490,7 +5490,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="toJSON"><a class="method-anchor" href="#toJSON"> <span class="type-signature"></span>toJSON</a><span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
     
     
     <p class="summary">Converts MK.Array instance to native object</p>
@@ -5586,7 +5586,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="toNative"><a class="method-anchor" href="#toNative"> <span class="type-signature"></span>toNative</a><span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="toNative"><span class="type-signature"></span>toNative<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
     <p class="summary">Does the same as MK.Array#toArray</p>
@@ -5680,7 +5680,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="toString"><a class="method-anchor" href="#toString"> <span class="type-signature"></span>toString</a><span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString">Array.prototype.toString</a></p>
@@ -5772,7 +5772,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         
             
 <dt>
-    <h4 class="name" id="unshift"><a class="method-anchor" href="#unshift"> <span class="type-signature"></span>unshift</a><span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
+    <h4 class="name" id="unshift"><span class="type-signature"></span>unshift<span class="signature">(element)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
     <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift">Array.prototype.unshift</a> but returns self instead of length</p>
@@ -5936,65 +5936,6 @@ alert( this.toString ); // 'a,c'</code></pre>
     
 	
 	
-        <h3 class="subsection-title">Members</h3>
-        
-        <dl>
-            
-<dt>
-    <h4 class="name" id="isMKArray"><a href="#isMKArray"><span class="type-signature"></span>isMKArray<span class="type-signature"> :boolean</span></a> 
-        
-<span class="param-type label label-type label-type-boolean">boolean</span>
-
-
-     </h4>
-    
-    
-    <p class="summary"><code>isMKArray</code> is always </code>true</code>. It using for easy detecting Matreshka.Array instance.</p>
-    
-</dt>
-<dd>
-    
-    
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line120">line 120</a></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        </dl>
-    
     
     
     
@@ -6010,7 +5951,7 @@ alert( this.toString ); // 'a,c'</code></pre>
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Feb 18 2014 20:29:45 GMT+0200 (EET)
 </footer>
 
 <script> prettyPrint(); </script>

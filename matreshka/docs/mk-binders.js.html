@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New layout</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style>
+	@import "../../bootstrap/css/bootstrap.min.css";
+	@import "../../bootstrap/css/bootstrap-theme.min.css";
+	@import "../../css/syntax.css";
+	@import "../../css/style.css";
+</style>
+	</head>
+	<body class="docs">
+		<header>
+			<div class="wrap">
+	<div class="logo">
+		<img src="../../../img/mk-logo-colour.svg" height="80">
+		<span>Matreshka.js</span>
+	</div>
+	<nav>
+		<a href="../../matreshka" >Home</a>
+		<a href="../../matreshka/about" >Why Matreshka</a>
+		<a href="../../matreshka/docs"  class="selected" >Docs</a>
+		<a href="../../matreshka/examples" >Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
+	</nav>
+</div> 
+
+		</header>
+		<main>
+			 <script src="scripts/prettify/prettify.js"></script>
+<script src="scripts/prettify/lang-css.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/prettify.css">
+<linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
+<nav class="navigation">
+    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
+    <a href="global.html">Globals</a><br>
+    <a href="Matreshka.html">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html">MK.Object</a><br>
+    <a href="Matreshka.Array.html">MK.Array</a><br>
+</nav>
+<main>
+    <div class="container docs">
+		<h1 class="page-title hide">Source: mk-binders.js</h1>
+		
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>"use strict";
+( function( MK ) {
+	if( !MK ) {
+		throw Error( 'Matreshka is missing' );
+	}
+	var constructObject = function( f ) {
+		return { on: null, getValue: null, setValue: f };
+	};
+	/**
+	 * @namespace Matreshka.binders
+	 * @desc TODO
+	 */
+	MK.binders = {
+		/**
+		* @function Matreshka.binders.innerHTML
+		* @since 0.1
+		* @summary &lt;code>innerHTML&lt;/code> binder
+		* @desc By default if you pass html element to {@link Matreshka#bindElement} as second argument that doesn't match any &lt;code>defaultBinders item&lt;/code>, the binding does nothing. But sometimes you want to change &lt;code>innerHTML&lt;/code> without having possibility to retrieve value from the element. {@link Matreshka.htmlp} is created as simple &lt;code>binder&lt;/code> function for this case and it reduces your code.
+		* @returns {binder}
+		* @example &lt;caption>Usage&lt;/caption>
+		* this.bindElement( 'myKey', '.my-element', MK.binders.innerHTML() );
+		* // same as
+		* this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property
+		* 	setValue: function( v ) {
+		* 		this.innerHTML = v;
+		* 	}
+		* });
+		*/
+		innerHTML: function() {
+			return constructObject( function( v ) {
+				this.innerHTML = v === null ? '' : v;
+			});
+		},
+  
+		/**
+		* @function Matreshka.binders.className
+		* @since 0.1
+		* @summary &lt;code>className&lt;/code> binder
+		* @desc This function is a shortcut for using existence of element's &lt;code>className&lt;/code> as boolean value when you bind it to a property.
+		* @param {string} className
+		* @returns {binder}
+		* @example &lt;caption>Usage&lt;/caption>
+		* this.bindElement( 'myKey', '.my-element', MK.binders.className( 'blah' ) );
+		* // same as
+		* this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" property
+		* 	setValue: function( v ) {
+		* 		$( this ).toggleClass( 'blah', v );
+		* 	}
+		* });
+		* this.myKey = true; // adds 'blah' class to '.my-element'
+		* this.myKey = false; // removes 'blah' class from '.my-element'	
+		* @example &lt;caption>Using "!" (not) statement&lt;/caption>
+		* this.bindElement( 'shown', '.my-element', MK.binders.className( '!hide' ) );
+		* // same as
+		* this.bindElement( 'shown', '.my-element', { // no "getValue" and no "on" property
+		* 	setValue: function( v ) {
+		* 		$( this ).toggleClass( 'hide', !v );
+		* 	}
+		* });
+		* this.shown = true; // removes 'hide' class from '.my-element'
+		* this.shown = false; // adds 'hide' class to '.my-element'
+		*/
+		className: function( className ) {
+			var not = !className.indexOf( '!' );
+			if( not ) {
+				className = className.replace( '!', '' );
+			}
+			return constructObject( function( v ) {
+				MK.$( this ).toggleClass( className, not ? !v : !!v );
+			});
+		},
+		switchClassName: function( className1, className2 ) {
+			return constructObject( function( v ) {
+				var $this = MK.$( this );
+				$this.toggleClass( className2, !v );
+				$this.toggleClass( className1, !!v );
+			});
+		},
+		property: function( propertyName ) {
+			return constructObject( function( v ) {
+				this[ propertyName ] = v;
+			});
+		},
+		switchProperty: function( propertyName, value1, value2 ) {
+			return constructObject( function( v ) {
+				this[ propertyName ] = v ? value1 : value2;
+			});
+		},
+		attribute: function( attributeName ) {
+			return constructObject( function( v ) {
+				this.setAttribute( attributeName, v );
+			});
+		},
+		switchAttribute: function( attributeName, value1, value2 ) {
+			return constructObject( function( v ) {
+				this.setAtteibute( attributeName, v ? value1 : value2 );
+			});
+		}
+	};
+})( Matreshka );</code></pre>
+        </article>
+    </section>
+
+
+
+
+	</div>
+</main>
+
+<footer class="jsdoc-footer container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+
+		</main>
+		<footer></footer>
+	</body>
+</html>

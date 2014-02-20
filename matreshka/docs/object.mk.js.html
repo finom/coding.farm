@@ -1,99 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: object.mk.js</title>
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
-      <script src="../../bootstrap/assets/js/respond.min.js"></script>
-    <![endif]-->
-	
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-   
-	
-	 <!-- Bootstrap -->
-	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="../../css/style.css" rel="stylesheet" media="screen">
-	<link type="text/css" rel="stylesheet" href="styles/matreshka.css">
-</head>
-
-<body>
-
-<div id="main">
-	<a href="https://github.com/finom/matreshka"><img style="position: fixed; z-index: 10000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> <a class="navbar-brand" href="/matreshka/index.html">Matreshka</a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="/matreshka/docs/index.html">Introduction</a></li>
-							<li><a href="/matreshka/docs/Matreshka.html">Matreshka</a></li>
-							<li><a href="/matreshka/docs/Matreshka.Object.html">MK.Object</a></li>
-							<li><a href="/matreshka/docs/Matreshka.Array.html">MK.Array</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="/matreshka/examples/index.html">Introduction</a></li>
-							<li><a href="/matreshka/examples/Matreshka.html">Matreshka</a></li>
-							<li><a href="/matreshka/examples/Matreshka.Object.html">MK.Object</a></li>
-							<li><a href="/matreshka/examples/Matreshka.Array.html">MK.Array</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="plugins/index.html">Plugins</a>
-					</li>
-					<li>
-						<a href="https://github.com/finom/matreshka/releases">Download</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
+<html>
+	<head>
+		<title>New layout</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style>
+	@import "../../bootstrap/css/bootstrap.min.css";
+	@import "../../bootstrap/css/bootstrap-theme.min.css";
+	@import "../../css/syntax.css";
+	@import "../../css/style.css";
+</style>
+	</head>
+	<body class="docs">
+		<header>
+			<div class="wrap">
+	<div class="logo">
+		<img src="../../../img/mk-logo-colour.svg" height="80">
+		<span>Matreshka.js</span>
+	</div>
+	<nav>
+		<a href="../../matreshka" >Home</a>
+		<a href="../../matreshka/about" >Why Matreshka</a>
+		<a href="../../matreshka/docs"  class="selected" >Docs</a>
+		<a href="../../matreshka/examples" >Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
 	</nav>
-    <div class="container">
-    <h1 class="page-title hide">Source: object.mk.js</h1>
-    
-    
+</div> 
+
+		</header>
+		<main>
+			 <script src="scripts/prettify/prettify.js"></script>
+<script src="scripts/prettify/lang-css.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/prettify.css">
+<linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
+<nav class="navigation">
+    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
+    <a href="global.html">Globals</a><br>
+    <a href="Matreshka.html">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html">MK.Object</a><br>
+    <a href="Matreshka.Array.html">MK.Array</a><br>
+</nav>
+<main>
+    <div class="container docs">
+		<h1 class="page-title hide">Source: object.mk.js</h1>
+		
 
 
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>"use strict";// tests, 
-// BIG TODO: make Array.prototype default methods work in IE!
-// @todo pass arguments to the methods as event property
+            <pre class="prettyprint source"><code>"use strict";
 ( function( MK ) {
+	var i;
 	if( !MK ) {
-		throw Error( 'Matreshka is not defined' );
+		throw Error( 'Matreshka is missing' );
 	}
 	
 	/**
 	 * @class Matreshka.Object
-	 * @version 0.0.3
 	 * @author Andrey Gubanov &lt;a@odessite.com.ua>
 	 * @license {@link https://raw.github.com/finom/matreshka/master/LICENSE MIT}
 	 * Version 2.0, January 2004
-	 * @classdesc Matreshka Object class. Extends {@link Matreshka}.
+	 * @classdesc Matreshka Object class (Matreshka "model"). Extends {@link Matreshka}.
 	 * @inherits Matreshka
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * new MK.Object;
@@ -110,10 +78,14 @@
 	 *	},
 	 * 	method: function() {}
 	 * });
-	 * @todo .createFrom method
 	 */
 	MK.Object = Class({
 		'extends': MK,
+		/**
+		 * @member {boolean} Matreshka.Object#isMKObject
+		 * @summary &lt;code>isMKObject&lt;/code> is always &lt;/code>true&lt;/code>. It using for easy detecting Matreshka.Object instance.
+		 */
+		isMKObject: true,
 		constructor: function( object ) {
 			this.initMK();
 			if( object ) {
@@ -320,7 +292,7 @@
 			if( typeof key === 'undefined' ) return this;
 			
 			if( typeof key === 'object' ) {
-				for( var i in key ) {
+				for( i in key ) {
 					this.jset( i, key[ i ], v );
 				}
 				return this;
@@ -373,8 +345,9 @@
 		 * // logs 'a' undefined and 'b' undefined
 		 */
 		addJSONKeys: function( keys ) {
-			keys = arguments.length > 1 ? arguments : keys instanceof Array ? keys : keys.split( /\s/ );
-			for( var i = 0; i &lt; keys.length; i++ ) {
+			if( !arguments.length ) return this;
+			keys = arguments.length > 1 ? arguments : keys instanceof Array ? keys : String( keys ).split( /\s/ );
+			for( i = 0; i &lt; keys.length; i++ ) {
 				this._keys[ keys[ i ] ] = 1;
 				this.makeSpecial( keys[ i ] );
 			}
@@ -395,8 +368,9 @@
 		 * this.removeJSONKeys( 'a', 'b' );
 		 */
 		removeJSONKeys: function( keys ) {
-			keys = arguments.length > 1 ? arguments : keys instanceof Array ? keys : keys.split( /\s/ );
-			for( var i = 0; i &lt; keys.length; i++ ) {
+			if( !arguments.length ) return this;
+			keys = arguments.length > 1 ? arguments : keys instanceof Array ? keys : String( keys ).split( /\s/ );
+			for( i = 0; i &lt; keys.length; i++ ) {
 				delete this._keys[ keys[ i ] ];
 			}
 			return this;
@@ -434,23 +408,16 @@
 
 
 	</div>
-</div>
+</main>
 
-<nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
-</nav>
-
-<br clear="both">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Jan 08 2014 13:39:17 GMT+0200 (EET)
+<footer class="jsdoc-footer container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
 </footer>
 
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="//code.jquery.com/jquery.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-</body>
+
+		</main>
+		<footer></footer>
+	</body>
 </html>

@@ -1,229 +1,84 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<title>Matreshka.js</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<base href="/matreshka/">
-	<!-- Bootstrap -->
-	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="../../css/tomorrow-night.css" rel="stylesheet" media="screen">
-	<link href="../../css/style.css" rel="stylesheet" media="screen">
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
-      <script src="../../bootstrap/assets/js/respond.min.js"></script>
-    <![endif]--></head>
-
-<body>
-	<a href="https://github.com/finom/matreshka"><img style="position: fixed; z-index: 10000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> <a class="navbar-brand" href="/matreshka/index.html">Matreshka</a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="docs/index.html">Introduction</a></li>
-							<li><a href="docs/Matreshka.html">Matreshka</a></li>
-							<li><a href="docs/Matreshka.Object.html">MK.Object</a></li>
-							<li><a href="docs/Matreshka.Array.html">MK.Array</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="examples/index.html">Introduction</a></li>
-							<li><a href="examples/Matreshka.html">Matreshka</a></li>
-							<li><a href="examples/Matreshka.Object.html">MK.Object</a></li>
-							<li><a href="examples/Matreshka.Array.html">MK.Array</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="plugins/index.html">Plugins</a>
-					</li>
-					<li>
-						<a href="https://github.com/finom/matreshka/releases">Download</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-	</nav>	<div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example">
-		<ol class="carousel-indicators">
-			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="item active">
-				<div class="matreshka-slide first">
-					<div class="container">
-						<h2 class="superlead">Matreshka<span class="gray">.js</span></h2>
-						<p class="superlead">The new way how you build your apps</p>
-						<p class="spacer"><a href="https://github.com/finom/matreshka/releases" class="btn btn-primary btn-lg">Download Matreshka</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>No code in HTML with smart element bindings</h2>
-						<p class="lead">You don't need to listen element event to change app property. You don't need to change element state manually when changing property.</p>
-<pre class="prettyprint">
-
-this.bindElement( 'myKey', '.my-element' );
-
-this.myKey = 'Be Awesome';</pre>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>Awesome client side event emitter</h2>
-						<p class="lead">You can even bind property change event. Isnt it awesome?</p>
-<pre class="prettyprint">this.on( 'change:myKey', function( evt ) {
-	alert( 'myKey value is ' + evt.value );
-});
-
-this.myKey = 'F... Yeah!'
-</pre>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>Works even in IE8</h2>
-						<p class="lead">Magic inside Matreshka gives possibility to use getters and setters.</p>
-<pre class="prettyprint">
-
-this.define( 'myKey', {
-	get: function() { ... },
-	set: function( v ) { ... }
-});</pre>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="matreshka-slide">
-					<div class="container">
-						<h2>Build your powerful app using Matreshka</h2>
-						<p class="lead">Matreshka uses classes for simple heritage.</p>
-<pre class="prettyprint">var MyApp = Class({
-	'extends': Matreshka,
-	constructor: function() {
-		this.initMK();
-	}
-});</pre>
-					</div>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-			<span class="icon-prev"></span>
-		</a>
-		<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-			<span class="icon-next"></span>
-		</a>
+	<head>
+		<title>New layout</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style>
+	@import "../bootstrap/css/bootstrap.min.css";
+	@import "../bootstrap/css/bootstrap-theme.min.css";
+	@import "../css/syntax.css";
+	@import "../css/style.css";
+</style>
+	</head>
+	<body class="home">
+		<header>
+			<div class="wrap">
+	<div class="logo">
+		<img src="../../img/mk-logo-colour.svg" height="80">
+		<span>Matreshka.js</span>
 	</div>
-	<div class="container spacer-top">
-		<h1>Why Matreshka?</h1>
-		<p>
-			Matreshka is the powerful framework that does you forgetting about element updating when you change your application data. Matreshka gives you possibility to operate with a model without taking care about your UI. Besides Matreshka has awesome events engine which do your coding more easier. Less code, more sense.
-		</p>
+	<nav>
+		<a href="../matreshka"  class="selected" >Home</a>
+		<a href="../matreshka/about" >Why Matreshka</a>
+		<a href="../matreshka/docs" >Docs</a>
+		<a href="../matreshka/examples" >Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
+	</nav>
+</div> 
 
-		<div class="row">
-			<div class="col-md-4">
-				<h3>Documentation</h3>
-				<p>Matreshka docs contain description of each method that allow you to become the Javascript ninja.</p>
-				<a href="docs/" class="btn btn-primary">Check this out</a>
-			</div>
-			<div class="col-md-4">
-				<h3>Examples</h3>
-				<p>Examples let you know how to conquer the Universe using Matreshka.</p>
-				<a href="examples/" class="btn btn-primary">Check this out</a>
-			</div>
-			<div class="col-md-4">
-				<h3>Plugins</h3>
-				<p>The powerful Matreshka engine that based on classes allow you to do all the things you only dreamed of.</p>
-				<a href="plugins/" class="btn btn-primary">Check this out</a>
-			</div>
+		</header>
+		<main>
+			 <div class="index">
+	<section class="first">
+		<img src="../img/mk-logo-white.svg" height="280">
+		<h1>Matreshka.js</h1>
+		<p>The awesome way how you build your apps </p>
+	</section>
+	<section class="row-fluid info second">
+		<div class="col-md-4 sponsoring">
+			<p>Sponsoring by<p>
+			<a href="http://www.shooju.com/"><img class="shooju-logo" src="../img/shooju-logo.png"></a>
 		</div>
-	</div>
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../js/prettify.js"></script>
-	<script src="/js/matreshka.all.min.js"></script>
-	<script>
-		( function() {
-			function escapeHTML( string ) {
-				var pre = document.createElement( 'pre' ),
-					text = document.createTextNode( string );
-				pre.appendChild( text );
-				return pre.innerHTML;
-			};
-			
-			function removeExtraTabs( string ) {
-				var lines = string.split( '\n' ),
-					tabsLength,
-					minTabsLength = Infinity,
-					tabsReg;
-					
-				for( var i = 0; i < lines.length; i++ ) {
-					if( lines[ i ].replace( /\s/g, '' ).length ) {
-						tabsLength = lines[ i ].length - lines[ i ].replace( /\t*(.*)/, '$1' ).length;
-						minTabsLength = Math.min( minTabsLength, tabsLength );
-					}
-				}
-				minTabsLength = minTabsLength | 0;
-				tabsReg = new RegExp( new Array( minTabsLength + 1 ).join( '\t' ) );
-				for( var i = 0; i < lines.length; i++ ) {
-					lines[ i ] = lines[ i ].replace( tabsReg, '' );
-				}
-				
-				return lines.join( '\n' );
-			};
-			
-			window.onload = function() {
-				var toEscape = document.querySelectorAll( '.escape-html' ),
-					pre = document.getElementsByTagName( 'pre' ),
-					code;
-				for( var i = 0; i < toEscape.length; i++ ) {
-					toEscape[ i ].innerHTML = escapeHTML( toEscape[ i ].innerHTML );
-				}
-				for( var i = 0; i < pre.length; i++ ) {
-					pre[ i ].innerHTML = removeExtraTabs( pre[ i ].innerHTML );
-					code = pre[ i ].getElementsByTagName( 'code' )[ 0 ];
-					pre[ i ].innerHTML = pre[ i ].innerHTML.trim();
-					if( code ) {
-						code.innerHTML = code.innerHTML.trim();
-					}
-				}
-				
-				prettyPrint();
-
-				if( window.runIt ) {
-					for( var i = 0; i < window.runIt.length; i++ ) {
-						window.runIt[ i ]();
-					}
-				}
-			};
-		})();
-	</script>
-	
+		
+		<div class="col-md-8">
+			<article>
+			<h2>Why Matreshka?</h2>
+			<p>Matreshka is the powerful framework that does you forgetting about element updating when you change your application data. Matreshka gives you possibility to operate with a model without taking care about UI.</p>
+			<article>
+			</article>
+			<h2>Magic</h2>
+			<p>Matreshka provides you magic which you only dreamed of: getters and setters, dependences of one data from another data, data change events and more. It works even in IE8!</p>
+			</article>
+		</div>
+		<div class="clearfix"></div>
+	</section>
+	<section class="row-fluid info third">
+		<div class="col-md-12">
+			<article>
+			<h2>No dirty HTML</h2>
+			<p>There're many Javascript frameworks that create new language by extending HTML. Developers that use these frameworks should change HTML code by adding new attributes and new syntax stuff. We love HTML and {{dont.like}} when application logic goes to HTML code. So one of the main advantages of Matreshka is keeping HTML to be just HTML.</p>
+			</article>
+			<article>
+			<h2>Get semantic code</h2>
+			<p>Methods and properties of Matreshka are named so that anybody can understand what's going on and what the method does.</p>
+			</article>
+			<article>
+			<h2>Open-source and free</h2>
+			<p>Matreshka is developing under MIT license, it means that Matreshka is  open-source and completely free and you can do with it averything you want.</p>
+			</article>
+		</div>
+		<div class="clearfix"></div>
+	</section>
+	<section class="row-fluid info fourth">
+		<img src="../img/mk-logo-colour.svg" height="480" style="position: absolute; left: -147px;">
+		<div style="margin-top: 150px; text-align: center;">
+			<h2>Get Matreshka now!</h2>
+			<a href="https://github.com/finom/matreshka/releases" class="btn download btn-lg">Download latest version</a>
+			<p>Or fork it on <a href="https://github.com/finom/matreshka">Github</a></p>
+		</div>
+	</section>
+</div>
+		</main>
+		<footer></footer>
 	</body>
-
 </html>

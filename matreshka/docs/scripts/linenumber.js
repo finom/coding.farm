@@ -9,7 +9,8 @@
         numbered = source.innerHTML.split('\n');
         numbered = numbered.map(function(item) {
             counter++;
-            return '<span id="line' + counter + '" class="line"></span>' + item;
+			document.styleSheets[0].insertRule(".line#line"+counter+"::before{content:'" + counter + "'}", 0)
+            return '<a href="#line' + counter + '" id="line' + counter + '" class="line"></a>' + item;
         });
 
         source.innerHTML = numbered.join('\n');

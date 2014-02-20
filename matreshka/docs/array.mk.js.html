@@ -1,100 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: array.mk.js</title>
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-      <script src="../../bootstrap/assets/js/html5shiv.js"></script>
-      <script src="../../bootstrap/assets/js/respond.min.js"></script>
-    <![endif]-->
-	
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-   
-	
-	 <!-- Bootstrap -->
-	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="../../css/style.css" rel="stylesheet" media="screen">
-	<link type="text/css" rel="stylesheet" href="styles/matreshka.css">
-</head>
-
-<body>
-
-<div id="main">
-	<a href="https://github.com/finom/matreshka"><img style="position: fixed; z-index: 10000; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"> <span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> <a class="navbar-brand" href="/matreshka/index.html">Matreshka</a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="/matreshka/docs/index.html">Introduction</a></li>
-							<li><a href="/matreshka/docs/Matreshka.html">Matreshka</a></li>
-							<li><a href="/matreshka/docs/Matreshka.Object.html">MK.Object</a></li>
-							<li><a href="/matreshka/docs/Matreshka.Array.html">MK.Array</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="/matreshka/examples/index.html">Introduction</a></li>
-							<li><a href="/matreshka/examples/Matreshka.html">Matreshka</a></li>
-							<li><a href="/matreshka/examples/Matreshka.Object.html">MK.Object</a></li>
-							<li><a href="/matreshka/examples/Matreshka.Array.html">MK.Array</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="plugins/index.html">Plugins</a>
-					</li>
-					<li>
-						<a href="https://github.com/finom/matreshka/releases">Download</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
+<html>
+	<head>
+		<title>New layout</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style>
+	@import "../../bootstrap/css/bootstrap.min.css";
+	@import "../../bootstrap/css/bootstrap-theme.min.css";
+	@import "../../css/syntax.css";
+	@import "../../css/style.css";
+</style>
+	</head>
+	<body class="docs">
+		<header>
+			<div class="wrap">
+	<div class="logo">
+		<img src="../../../img/mk-logo-colour.svg" height="80">
+		<span>Matreshka.js</span>
+	</div>
+	<nav>
+		<a href="../../matreshka" >Home</a>
+		<a href="../../matreshka/about" >Why Matreshka</a>
+		<a href="../../matreshka/docs"  class="selected" >Docs</a>
+		<a href="../../matreshka/examples" >Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
 	</nav>
-    <div class="container">
-    <h1 class="page-title hide">Source: array.mk.js</h1>
-    
-    
+</div> 
+
+		</header>
+		<main>
+			 <script src="scripts/prettify/prettify.js"></script>
+<script src="scripts/prettify/lang-css.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/prettify.css">
+<linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
+<nav class="navigation">
+    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
+    <a href="global.html">Globals</a><br>
+    <a href="Matreshka.html">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html">MK.Object</a><br>
+    <a href="Matreshka.Array.html">MK.Array</a><br>
+</nav>
+<main>
+    <div class="container docs">
+		<h1 class="page-title hide">Source: array.mk.js</h1>
+		
 
 
     
     <section>
         <article>
             <pre class="prettyprint source"><code>"use strict";
-/*
- * todo pass arguments to the methods as event property
- * todo .pull method that removes an element with given index
- */
 ( function( MK, Array_prototype ) {
 	if( !MK ) {
-		throw Error( 'Matreshka is not defined' );
+		throw Error( 'Matreshka is missing' );
 	}
 	
-	// Array methods flags (5 types) 
+	// Array methods flags
 	var SIMPLE = 1,
-		MODIFIES = 2,
-		RETURNS_NEW_ARRAY = 3,
-		RETURNS_NEW_TYPE = 4,
-		SPLICE = 5;
+		RETURNS_NEW_ARRAY = 2,
+		RETURNS_NEW_TYPE = 3,
+		MODIFIES = 4,
+		MODIFIES_AND_RETURNS_NEW_TYPE = 5,
+		SPLICE = 6,
+		i; // uses in for
 	
 	/**
 	 * @function createArrayMethod
@@ -116,20 +84,6 @@
 				Array_prototype[ name ].apply( array, arguments );
 				return this;
 			};
-		} else if( type === MODIFIES ) {
-			return function() {
-				var array = this.toArray(),
-					returns = Array_prototype[ name ].apply( array, arguments );
-				this.silentCreateFrom( array );
-				if( !silent ) {
-					this.trigger( name, {
-						returns: returns,
-						arguments: arguments,
-						method: name
-					});
-				}
-				return this;
-			};
 		} else if( type === RETURNS_NEW_ARRAY ) {
 			return function() {
 				var array = this.toArray(),
@@ -141,31 +95,58 @@
 				var array = this.toArray();
 				return Array_prototype[ name ].apply( array, arguments );;
 			};
+		} else if( type === MODIFIES ) {
+			return function() {
+				var array = this.toArray(),
+					returns = Array_prototype[ name ].apply( array, arguments );
+				this.silentCreateFrom( array );
+				if( !silent ) {
+					this.trigger( name, {
+						returns: returns,
+						args: [].slice.call( arguments ),
+						method: name
+					});
+				}
+				return this;
+			};
+		} else if( type === MODIFIES_AND_RETURNS_NEW_TYPE ) {
+			return function() {
+				var array = this.toArray(),
+					returns = Array_prototype[ name ].apply( array, arguments );
+				this.silentCreateFrom( array );
+				if( !silent ) {
+					this.trigger( name, {
+						returns: returns,
+						args: [].slice.call( arguments ),
+						method: name
+					});
+				}
+				return returns;
+			};
 		} else if( type === SPLICE ) { // the combination of returnsnew and modify
 			return function() {
 				var array = this.toArray(),
 					returns = Array_prototype[ name ].apply( array, arguments );
 				this.silentCreateFrom( array );
-				returns = new MK.Array().silentCreateFrom( returns );
+
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
 						method: name,
-						arguments: arguments
+						args: [].slice.call( arguments )
 					});
 				}
-				return returns;
+				return new MK.Array().silentCreateFrom( returns );;
 			};
 		}
 	};
 	
 	/**
 	 * @class Matreshka.Array
-	 * @version 0.0.3
 	 * @author Andrey Gubanov &lt;a@odessite.com.ua>
 	 * @license {@link https://raw.github.com/finom/matreshka/master/LICENSE MIT}
 	 * Version 2.0, January 2004
-	 * @classdesc Matreshka Array class. Extends {@link Matreshka}.
+	 * @classdesc Matreshka Array class  (Matreshka "collection"). Extends {@link Matreshka}.
 	 * @inherits Matreshka
 	 * @example &lt;caption>Basic usage&lt;/caption>
 	 * new MK.Array;
@@ -187,14 +168,27 @@
 	 */
 	MK.Array = Class({
 		'extends': MK,
+		/**
+		 * @member {boolean} Matreshka.Array#isMKArray
+		 * @summary &lt;code>isMKArray&lt;/code> is always &lt;/code>true&lt;/code>. It using for easy detecting Matreshka.Array instance.
+		 */
+		isMKArray: true,
 		length: 0,
+		/**
+		 * @method Matreshka.Array#renderer
+		 * @since 0.1
+		 * @summary Renderer for array items
+		 * @desc TODO
+		 * @returns {string|Node|jQuery} HTML or element
+		 */
+		renderer: null,
 		constructor: function( length ) {
 			this.initMK();
 			var al = arguments.length;
 			if( al === 1 && typeof length === 'number' ) {
 				this.length = length;
 			} else {
-				for( var i = 0; i &lt; al; i++ ) {
+				for( i = 0; i &lt; al; i++ ) {
 					this[ i ] = arguments[ i ];
 				}
 				this.length = arguments.length;
@@ -207,18 +201,16 @@
 		 * @summary Creates self from another array 
 		 * @desc If you have array or array-like object (e.g. arguments) you can convert it to MK.Array instance by this method
 		 * @param {Array} array
-		 * @param {capture} [boolean] if you want to capture previous value via &lt;code>"was"&lt;/code> key in event gandler argument
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * new MK.Array().createFrom( [1, 2, 3, 4, 5] );
 		 */
-		createFrom: function( array, capture ) {
+		createFrom: function( array ) {
 			var evtOpts = {
-				createdFrom: array
+				createdFrom: array,
+				was: this.toNative()
 			};
-			if( capture ) {
-				evtOpts.was = this.toNative()
-			}
+
 			this
 				.silentCreateFrom( array )
 				.trigger( 'recreate', evtOpts )
@@ -237,7 +229,7 @@
 		 */
 		silentCreateFrom: function( array ) {
 			var diff = this.length - array.length;
-			for( var i = 0; i &lt; array.length; i++ ) {
+			for( i = 0; i &lt; array.length; i++ ) {
 				this[ i ] = array[ i ];
 			}
 			for( i = 0; i &lt; diff; i++ ) {
@@ -259,7 +251,7 @@
 				return Array_prototype.slice.call( this );
 			} catch( e ) {
 				var array = [];
-				for( var i = 0; i &lt; this.length; i++ ) {
+				for( i = 0; i &lt; this.length; i++ ) {
 					array[ i ] = this[ i ];
 				}
 				return array;
@@ -290,10 +282,202 @@
 		 * });
 		 */
 		initMK: function() {
-			MK.Array.parent.initMK( this, arguments );
-			return this.on( 'recreate push pop unshift shift splice sort remove reverse', function( evtOptions ) {
-				this.trigger( 'modify', evtOptions );
-			});
+			var _this = this,
+				s_container = 'container';
+			
+			return MK.prototype.initMK.call( _this )
+				.on( 'push', function( evt ) {
+					var bound;
+					if( _this.renderer && evt ) {
+						if( bound = _this.bound( s_container ) || _this.bound() ) {
+							for( i = _this.length - evt.args.length; i &lt; _this.length; i++ ) {
+								bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+							}
+						}
+					}
+				})
+				.on( 'pull pop shift', function( evt ) {
+					var el;
+					if( _this.renderer && evt && evt.returns ) {
+						if( el = evt.returns.bound( _this.__id ) ) {
+							el.parentNode.removeChild( el )
+							_this.killDOMItem( evt.returns );
+						}
+					}
+				})
+				.on( 'unshift', function( evt ) {
+					var bound,
+						el;
+					if( _this.renderer && evt ) {
+						if( bound = _this.bound( s_container ) || _this.bound() ) {
+							for( i = evt.args.length - 1; i + 1; i-- ) {
+								el = _this.initDOMItem( _this[ i ] ).bound( _this.__id );
+								if( bound.children ) {
+									bound.insertBefore( el, bound.firstChild );
+								} else {
+									bound.appendChild( el );
+								}
+								
+							}
+						}
+					}
+				})
+				.on( 'sort reverse', function() {
+					var bound,
+						el;
+					if( _this.renderer ) {
+						if( bound = _this.bound( s_container ) || _this.bound() ) {
+							for( i = 0; i &lt; _this.length; i++ ) {
+								if( el = _this[ i ].bound( _this.__id ) ) {
+									bound.appendChild( el );
+								}
+							}
+						}
+					}
+				})
+				.on( 'splice', function( evt ) {
+					var bound,
+						el;
+					if( _this.renderer && evt && evt.returns ) {
+						if( bound = _this.bound( s_container ) || _this.bound() ) {
+							for( i = 0; i &lt; evt.returns.length; i++ ) {
+								if( el = evt.returns[ i ].bound( _this.__id ) ) {
+									el.parentNode.removeChild( el )
+									_this.killDOMItem( evt.returns[ i ] );
+								}
+							}
+							for( i = 0; i &lt; this.length; i++ ) {
+								bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+							}
+						}
+					}
+				})
+				.on( 'pull pop shift splice', function( evt ) {
+					if( evt && evt.returns ) {
+						if( evt.method === 'splice' ) {
+							if( evt.returns.length ) {
+								_this.trigger( 'remove', MK.extend( { removed: evt.returns }, evt ) );
+							}
+						} else {
+							_this.trigger( 'remove', MK.extend( { removed: [ evt.returns ] }, evt ) );
+						}
+					}
+				})
+				.on( 'push unshift splice', function( evt ) {
+					var added;
+					if( evt && evt.args && evt.args.length ) {
+						if( evt.method === 'splice' ) {
+							added = evt.args[ 2 ];
+							if( added && added.length ) {
+								_this.trigger( 'add', MK.extend( { added: added }, evt ) );
+							}
+						} else {
+							_this.trigger( 'add', MK.extend( { added: evt.args }, evt ) );
+						}
+					}
+				})
+				.on( 'recreate', function( evt ) {
+					var _this = this,
+						added, removed, now, was;
+						
+					if( was = evt && evt.was ) {
+						now = this.toNative();
+						
+						if( was.length ) {
+							removed = was.filter( function( item ) {
+								return !~now.indexOf( item );
+							});
+							
+							if( removed.length ) {
+								_this.trigger( 'remove', MK.extend( { removed: removed }, evt ) );
+							}
+						}
+						
+						if( now.length ) {
+							added = now.filter( function( item ) {
+								return !~was.indexOf( item );
+							});
+							
+							if( added.length ) {
+								_this.trigger( 'add', MK.extend( { added: added }, evt ) );
+							}
+						}
+					}
+					
+					if( _this.renderer ) {
+						for( i = 0; i &lt; this.length; i++ ) {
+							bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+						}
+					}
+					
+				})
+				.on( 'recreate pull push pop unshift shift splice sort reverse', function( evt ) {
+					_this.trigger( 'modify', evt );
+				})
+			;
+		},
+		
+		/**
+		 * @private
+		 * @since 0.1
+		 */
+		initDOMItem: function( item ) {
+			var _this = this,
+				__id = _this.__id,
+				el,
+				$el,
+				template;
+				
+			if( !item[ __id ] ) {
+				item[ __id ] = _this;
+			}
+
+			if( _this.renderer && !item.bound( __id ) ) {
+				template = _this.renderer( item );
+				$el = typeof template === 'string' ? MK.$.parseHTML( template.replace( /^\s+|\s+$/g, '' ) ) : template;
+				item
+					.bindElement( __id, $el )
+					.trigger( 'render', {
+						element: $el[ 0 ],
+						elements: $el
+					})
+				;
+				_this.trigger( 'itemrender', {
+					element: $el[ 0 ],
+					elements: $el,
+					item: item
+				});
+			}
+			
+			return item;
+		},
+		
+		/**
+		 * @private
+		 * @since 0.1
+		 */
+		killDOMItem: function( item ) {
+			return item.remove( this.__id, { silent: true });
+		},
+		
+		/**
+		 * @method Matreshka.Array#initAllDOMItems
+		 * @since 0.1
+		 * @summary TODO DESCRIPTION
+		 * @returns {boolean}
+		 * @example &lt;caption>Basic usage&lt;/caption>
+		 * mkArray.initAllDOMItems();
+		 */
+		initAllDOMItems: function() {
+			var _this = this,
+				bound;
+			if( _this.renderer ) {
+				if( bound = _this.bound( 'container' ) || _this.bound() ) {
+					for( i = 0; i &lt; _this.length; i++ ) {
+						bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+					}
+				}
+			}
 		},
 		
 		/**
@@ -321,7 +505,7 @@
 		 */
 		toJSON: function() {
 			var JSON = [];
-			for( var i = 0; i &lt; this.length; i++ ) {
+			for( i = 0; i &lt; this.length; i++ ) {
 				this[ i ] && this[ i ].toJSON ? JSON.push( this[ i ].toJSON() ) : JSON.push( this[ i ] );
 			}
 			return JSON;
@@ -354,9 +538,59 @@
 			return new MK.Array().createFrom( result );
 		},
 		
+		
+		/**
+		 * @method Matreshka.Array#pull
+		 * @since 0.1
+		 * @fires pull
+		 * @fires modify
+		 * @summary Removes Matreshka#Array element by given index and returns that element.
+		 * @param {string|number} index
+		 * @returns {*} Removed element
+		 * @example &lt;caption>Basic usage&lt;/caption>
+		 * var removed;
+		 * this.createFrom( [ 'a', 'b', 'c' ] );
+		 * removed = this.pull( 1 );
+		 * alert( removed ); // 'b'
+		 * alert( this.toString ); // 'a,c' 
+		 */
+		pull: function( index ) {
+			var returns = this.silentPull( index );
+			
+			this.trigger( 'pull', {
+				returns: returns,
+				method: 'pull',
+				args: [ index ]
+			});
+		
+			return returns;
+		},
+		
+		/**
+		 * @method Matreshka.Array#silentPull
+		 * @since 0.1
+		 * @summary Works similar to {@link Matreshka.Array#pull} but without triggering events
+		 * @param {string|number} index
+		 * @returns {*} Removed element
+		 * @example &lt;caption>Basic usage&lt;/caption>
+		 * var removed;
+		 * this.createFrom( [ 'a', 'b', 'c' ] );
+		 * removed = this.silentPull( 1 );
+		 * alert( removed ); // 'b'
+		 * alert( this.toString ); // 'a,c'
+		 */
+		silentPull: function( index ) {
+			var array = this.toArray(),
+				returns = array.splice( index, 1 )[ 0 ];
+				this.silentCreateFrom( array );
+				
+			return returns;
+		},
+		
 		/**
 		 * @method Matreshka.Array#push
 		 * @fires push
+		 * @fires add
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push Array.prototype.push} but returns self instead of length
 		 * @param {...*} element
@@ -371,17 +605,19 @@
 		/**
 		 * @method Matreshka.Array#pop
 		 * @fires pop
+		 * @fires remove
 		 * @fires modify
-		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop Array.prototype.pop} but returns self instead of length
+		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop Array.prototype.pop}
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.pop();
 		 */
-		pop: createArrayMethod( MODIFIES, 'pop' ),
+		pop: createArrayMethod( MODIFIES_AND_RETURNS_NEW_TYPE, 'pop' ),
 		
 		/**
 		 * @method Matreshka.Array#unshift
 		 * @fires unshift
+		 * @fires add
 		 * @fires modify
 		 * @param {...*} element
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift Array.prototype.unshift} but returns self instead of length
@@ -394,13 +630,14 @@
 		/**
 		 * @method Matreshka.Array#shift
 		 * @fires shift
+		 * @fires remove
 		 * @fires modify
-		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift Array.prototype.shift} but returns self instead of length
+		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift Array.prototype.shift}
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.shift( 1, 2, 3 );
 		 */
-		shift: createArrayMethod( MODIFIES, 'shift' ),
+		shift: createArrayMethod( MODIFIES_AND_RETURNS_NEW_TYPE, 'shift' ),
 		
 		/**
 		 * @method Matreshka.Array#sort
@@ -432,6 +669,8 @@
 		/**
 		 * @method Matreshka.Array#splice
 		 * @fires splice
+		 * @fires add
+		 * @fires remove
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice Array.prototype.splice}
 		 * @param {number} index
@@ -460,7 +699,7 @@
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.silentPop();
 		 */
-		silentPop: createArrayMethod( MODIFIES, 'pop', true ),
+		silentPop: createArrayMethod( MODIFIES_AND_RETURNS_NEW_TYPE, 'pop', true ),
 		
 		/**
 		 * @method Matreshka.Array#silentUnshift
@@ -479,7 +718,7 @@
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.silentShift();
 		 */
-		silentShift: createArrayMethod( MODIFIES, 'shift', true ),
+		silentShift: createArrayMethod( MODIFIES_AND_RETURNS_NEW_TYPE, 'shift', true ),
 		
 		/**
 		 * @method Matreshka.Array#silentSort
@@ -706,23 +945,16 @@
 
 
 	</div>
-</div>
+</main>
 
-<nav class="navigation">
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Class">Class</a></li><li><a href="global.html#instanceOf">instanceOf</a></li></ul>
-</nav>
-
-<br clear="both">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Jan 08 2014 13:39:17 GMT+0200 (EET)
+<footer class="jsdoc-footer container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
 </footer>
 
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="//code.jquery.com/jquery.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-</body>
+
+		</main>
+		<footer></footer>
+	</body>
 </html>
