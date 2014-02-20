@@ -1,0 +1,44 @@
+<h3 id="matreshka_adddependence"><a href="#matreshka_adddependence"><code>.addDependence</code> method <span class="label new"></span></a></h3>
+<p><code>.addDependence</code> method allows property to be dependent from other properties.</p>
+<p><a href="{{page.relative}}matreshka/docs/Matreshka.html#addDependence">Get more on documentation page</a></p>
+<div class="row">
+		<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}var mk = new MK();
+mk.on( 'change:a', function() {
+	$( '.output' ).html( 'a = ' + this.a );
+});
+
+// a depends from b and c
+mk.addDependence( 'a', 'b c', function() {
+	return this.b + this.c;
+});
+
+mk.b = 11;
+mk.c = 22;
+{% endhighlight %}
+		</div>
+		<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}<div class="output"></div>{% endhighlight %}			
+	</div>
+	<div class="col-lg-2 mk-example mk-example-result">
+		<div class="output ex11"></div>
+		<script>
+			runIt.push( function() {
+				var mk = new MK();
+				mk.on( 'change:a', function() {
+					$( '.output.ex11' ).html( 'a = ' + this.a );
+				});
+				
+				// a depends from b and c
+				mk.addDependence( 'a', 'b c', function() {
+					return this.b + this.c;
+				});
+				
+				mk.b = 11;
+				mk.c = 22;
+				
+			});
+		</script>
+	</div>
+	<div class="clearfix"></div>
+</div> 

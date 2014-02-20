@@ -1,0 +1,13 @@
+<div class="wrap">
+	<div class="logo">
+		<img src="{{page.relative}}../img/mk-logo-colour.svg" height="80">
+		<span>Matreshka.js</span>
+	</div>
+	<nav>
+		<a href="{{page.relative}}matreshka" {% if page.active == "home" %} class="selected" {% endif %}>Home</a>
+		<a href="{{page.relative}}matreshka/about" {% if page.active == "about" %} class="selected" {% endif %}>Why Matreshka</a>
+		<a href="{{page.relative}}matreshka/docs" {% if page.active == "docs" %} class="selected" {% endif %}>Docs</a>
+		<a href="{{page.relative}}matreshka/examples" {% if page.active == "examples" %} class="selected" {% endif %}>Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
+	</nav>
+</div> 

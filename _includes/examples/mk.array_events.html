@@ -1,0 +1,132 @@
+<h3 id="original-methods"><a href="#original-methods">Events</a></h3>
+<p>Each method that modifies <code>Matreshka.Array</code> instance fires two events: method name and <code>"modify"</code>. Some of methods that add or remove (or both: add and remove) fire corresponding events. For example <code>.push</code> method fires <code>"push"</code>, <code>"modify"</code> and <code>"add"</code> events, <code>.sort</code> method fires <code>"sort"</code>and <code>"modify"</code> events, <code>.splice</code> method fires <code>"splice"</code>, <code>"modify"</code>, <code>"add"</code> (if something is added) and <code>"remove"</code> (if something is remove) events.. and so on. Event options that passed to methods contain information about what is going on (what is added/removed, which method is called...).</p>
+<div class="row">
+	<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}var mkArray = new MK.Array();
+
+mkArray
+	.on( 'modify', function( evtOpts ) {
+		alert(
+			'"modify" event is fired\nresult is: ' 
+			+ evtOpts.returns + '\narguments: ' 
+			+ ( [].slice.call( evtOpts.args ).toString() || 'none' )
+			+ '\nfired by: .' + evtOpts.method + ' method'
+		);
+
+		$( '.output' ).html( this.join( ', ' ) );
+	})
+	.on( 'push', function( evtOpts ) {
+		alert(
+			'"push" event is fired\nresult is: ' 
+			+ evtOpts.returns 
+			+ ' (original Array.prototype push returns length)\narguments: ' 
+			+ [].slice.call( evtOpts.args ) 
+		);
+	})
+	.on( 'pop', function( evtOpts ) {
+		alert(
+			'"pop" event is fired\nresult is: ' 
+			+ evtOpts.returns 
+			+ ' (original Array.prototype.pop returns last array item)'
+		);
+	})
+	.on( 'reverse', function( evtOpts ) {
+		alert( '"reverse" event is fired' );
+	})
+	.on( 'sort', function( evtOpts ) {
+		alert( '"sort" event is fired' );
+	})
+;
+
+$( '.push-example' ).on( 'click', function() {
+	mkArray.push( 1, 2, 3, 4, 5 );
+});
+$( '.pop-example' ).on( 'click', function() {
+	mkArray.pop();
+});
+$( '.reverse-example' ).on( 'click', function() {
+	mkArray.reverse();
+});
+$( '.sort-example' ).on( 'click', function() {
+	mkArray.sort();
+});
+{% endhighlight %}
+	</div>
+	<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}
+<div class="output"></div>
+<button class="btn btn-default push-example">
+	.push( 1, 2, 3, 4, 5 );
+</button>
+<button class="btn btn-default pop-example">
+	.pop();
+</button>
+<button class="btn btn-default reverse-example">
+	.reverse();
+</button>
+<button class="btn btn-default sort-example">
+	.sort();
+</button>
+{% endhighlight %}			
+	</div>
+	<div class="col-lg-2 mk-example mk-example-result">
+		<div class="output ex7"></div>
+		<button class="btn btn-default push-example pull-left clearfix ex7"><code>.push(1,2,3,4,5);</code></button>
+		<button class="btn btn-default pop-example pull-left clearfix ex7"><code>.pop();</code></button>
+		<button class="btn btn-default reverse-example pull-left clearfix ex7"><code>.reverse();</code></button>
+		<button class="btn btn-default sort-example pull-left clearfix ex7"><code>.sort();</code></button>
+		
+		<script>
+			runIt.push( function() {
+				var mkArray = new MK.Array();
+				
+				mkArray
+					.on( 'modify', function( evtOpts ) {
+						alert(
+							'"modify" event is fired\nresult is: ' 
+							+ evtOpts.returns + '\narguments: ' 
+							+ ( [].slice.call( evtOpts.args ).toString() || 'none' )
+							+ '\nfired by: .' + evtOpts.method + ' method'
+						);
+
+						$( '.output.ex7' ).html( this.join( ', ' ) );
+					})
+					.on( 'push', function( evtOpts ) {
+						alert(
+							'"push" event is fired\nresult is: ' 
+							+ evtOpts.returns 
+							+ ' (original Array.prototype push returns length)\narguments: ' 
+							+ [].slice.call( evtOpts.args ) 
+						);
+					})
+					.on( 'pop', function( evtOpts ) {
+						alert(
+							'"pop" event is fired\nresult is: ' 
+							+ evtOpts.returns 
+							+ ' (original Array.prototype.pop returns last array item)'
+						);
+					})
+					.on( 'reverse', function( evtOpts ) {
+						alert( '"reverse" event is fired' );
+					})
+					.on( 'sort', function( evtOpts ) {
+						alert( '"sort" event is fired' );
+					})
+				;
+
+				$( '.push-example.ex7' ).on( 'click', function() {
+					mkArray.push( 1, 2, 3, 4, 5 );
+				});
+				$( '.pop-example.ex7' ).on( 'click', function() {
+					mkArray.pop();
+				});
+				$( '.reverse-example.ex7' ).on( 'click', function() {
+					mkArray.reverse();
+				});
+				$( '.sort-example.ex7' ).on( 'click', function() {
+					mkArray.sort();
+				});
+			});
+		</script>
+	</div>
+</div> 

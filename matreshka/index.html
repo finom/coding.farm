@@ -1,43 +1,18 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>New layout</title>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<style>
-	@import "../bootstrap/css/bootstrap.min.css";
-	@import "../bootstrap/css/bootstrap-theme.min.css";
-	@import "../css/syntax.css";
-	@import "../css/style.css";
-</style>
-	</head>
-	<body class="home">
-		<header>
-			<div class="wrap">
-	<div class="logo">
-		<img src="../../img/mk-logo-colour.svg" height="80">
-		<span>Matreshka.js</span>
-	</div>
-	<nav>
-		<a href="../matreshka"  class="selected" >Home</a>
-		<a href="../matreshka/about" >Why Matreshka</a>
-		<a href="../matreshka/docs" >Docs</a>
-		<a href="../matreshka/examples" >Examples</a>
-		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
-	</nav>
-</div> 
-
-		</header>
-		<main>
-			 <div class="index">
+---
+layout: default
+title: Your New Jekyll Site
+active: home
+---
+<div class="index">
 	<section class="first">
-		<img src="../img/mk-logo-white.svg" height="280">
+		<img src="{{page.relative}}img/mk-logo-white.svg" height="280">
 		<h1>Matreshka.js</h1>
 		<p>The awesome way how you build your apps </p>
 	</section>
 	<section class="row-fluid info second">
 		<div class="col-md-4 sponsoring">
 			<p>Sponsoring by<p>
-			<a href="http://www.shooju.com/"><img class="shooju-logo" src="../img/shooju-logo.png"></a>
+			<a href="http://www.shooju.com/"><img class="shooju-logo" src="{{page.relative}}img/shooju-logo.png"></a>
 		</div>
 		
 		<div class="col-md-8">
@@ -56,7 +31,7 @@
 		<div class="col-md-12">
 			<article>
 			<h2>No dirty HTML</h2>
-			<p>There're many Javascript frameworks that create new language by extending HTML. Developers that use these frameworks should change HTML code by adding new attributes and new syntax stuff. We love HTML and {{dont.like}} when application logic goes to HTML code. So one of the main advantages of Matreshka is keeping HTML to be just HTML.</p>
+			<p>There're many Javascript frameworks that create new language by extending HTML. Developers that use these frameworks should change HTML code by adding new attributes and new syntax stuff. We love HTML and {% raw %}{{dont.like}}{% endraw %} when application logic goes to HTML code. So one of the main advantages of Matreshka is keeping HTML to be just HTML.</p>
 			</article>
 			<article>
 			<h2>Get semantic code</h2>
@@ -70,7 +45,7 @@
 		<div class="clearfix"></div>
 	</section>
 	<section class="row-fluid info fourth">
-		<img src="../img/mk-logo-colour.svg" height="480" style="position: absolute; left: -147px;">
+		<img src="{{page.relative}}img/mk-logo-colour.svg" height="480" style="position: absolute; left: -147px;">
 		<div style="margin-top: 150px; text-align: center;">
 			<h2>Get Matreshka now!</h2>
 			<a href="https://github.com/finom/matreshka/releases" class="btn download btn-lg">Download latest version</a>
@@ -78,7 +53,3 @@
 		</div>
 	</section>
 </div>
-		</main>
-		<footer></footer>
-	</body>
-</html>

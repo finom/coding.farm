@@ -1,0 +1,42 @@
+<h3 id="events"><a href="#events">Events</a></h3>
+<p>Matreshka includes powerful event engine. You can listen and trigger any event you want. Check out methods that do it:
+<a href="{{page.relative}}matreshka/docs/Matreshka.html#on"></a>
+<a href="{{page.relative}}matreshka/docs/Matreshka.html#once"></a>
+<a href="{{page.relative}}matreshka/docs/Matreshka.html#off"></a>
+<a href="{{page.relative}}matreshka/docs/Matreshka.html#trigger"></a>. </p>
+	<div class="row">
+	
+		<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}
+var mk = new MK(); // same as new Matreshka;
+
+mk.on( 'yeah', function() {
+	var args = [].slice.call( arguments ).join( ', ' );
+	$( '.output' ).html( args );
+});
+
+mk.trigger( 'yeah', 1, 'string', {} );
+{% endhighlight %}
+		</div>
+		<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}
+<div class="output"></div>
+{% endhighlight %}			
+		</div>
+		<div class="col-lg-2 mk-example mk-example-result">
+			<div class="output ex4"></div>
+			<script>
+				runIt.push( function() {
+					var mk = new MK();
+
+					mk.on( 'yeah', function() {
+						var args = [].slice.call( arguments ).join( ', ' );
+						$( '.output.ex4' ).html( args );
+					});
+
+					mk.trigger( 'yeah', 1, 'string', {} );
+				});
+			</script>
+		</div>
+	</div>
+	 

@@ -1,38 +1,13 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>New layout</title>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<style>
-	@import "../../bootstrap/css/bootstrap.min.css";
-	@import "../../bootstrap/css/bootstrap-theme.min.css";
-	@import "../../css/syntax.css";
-	@import "../../css/style.css";
-</style>
-	</head>
-	<body class="docs">
-		<header>
-			<div class="wrap">
-	<div class="logo">
-		<img src="../../../img/mk-logo-colour.svg" height="80">
-		<span>Matreshka.js</span>
-	</div>
-	<nav>
-		<a href="../../matreshka" >Home</a>
-		<a href="../../matreshka/about" >Why Matreshka</a>
-		<a href="../../matreshka/docs"  class="selected" >Docs</a>
-		<a href="../../matreshka/examples" >Examples</a>
-		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
-	</nav>
-</div> 
-
-		</header>
-		<main>
-			 <script src="scripts/prettify/prettify.js"></script>
+---
+layout: default
+title: JSDoc
+active: docs
+--- 
+<script src="scripts/prettify/prettify.js"></script>
 <script src="scripts/prettify/lang-css.js"></script>
 <link type="text/css" rel="stylesheet" href="styles/prettify.css">
 <linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-<link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
+<link type="text/css" rel="stylesheet" href="{{page.relative}}css/jsdoc.css">
 <nav class="navigation">
     <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
     <a href="global.html">Globals</a><br>
@@ -2023,7 +1998,3 @@ mkObject.toObject(); // returns { a: 1, b: 2 }</code></pre>
 
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>
-		</main>
-		<footer></footer>
-	</body>
-</html>

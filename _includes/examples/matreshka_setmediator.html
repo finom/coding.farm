@@ -1,0 +1,59 @@
+<h3 id="matreshka_setmediator"><a href="#matreshka_setmediator"><code>.setMediator</code> method <span class="label new"></span></a></h3>
+<p>This method allows you to keep property valid and keep it to be a string/number/function/object... even if incoming value has another type. This logic is very similar to input value (if you're sessing input value it always converts to string).</p>
+<p><a href="{{page.relative}}matreshka/docs/Matreshka.html#setMediator">Get more on documentation page</a></p>
+<div class="row">
+		<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}var mk = new MK();
+mk.setMediator({
+	percentageValue: function( v ) {
+		return v > 100 ? 100 : v < 0 ? 0 : v;
+	},
+	stringValue: String,
+	integerValue: parseInt
+});
+
+mk.on( 'change', function() {
+	$( '.output' ).html(
+		'percentageValue = ' + JSON.stringify( this.percentageValue )
+		+ '<br>stringValue = ' + JSON.stringify( this.stringValue )
+		+ '<br>integerValue = ' + JSON.stringify( this.integerValue )
+	);
+});
+
+mk.percentageValue = -5;
+mk.stringValue = 1234;
+mk.integerValue = '6789.123456';	
+{% endhighlight %}
+		</div>
+		<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}<div class="output"></div>{% endhighlight %}			
+	</div>
+	<div class="col-lg-2 mk-example mk-example-result">
+		<div class="output ex10"></div>
+		<script>
+			runIt.push( function() {
+				var mk = new MK();
+				mk.setMediator({
+					percentageValue: function( v ) {
+						return v > 100 ? 100 : v < 0 ? 0 : v;
+					},
+					stringValue: String,
+					integerValue: parseInt
+				});
+				
+				mk.on( 'change', function() {
+					$( '.output.ex10' ).html(
+						'percentageValue = ' + JSON.stringify( this.percentageValue )
+						+ '<br>stringValue = ' + JSON.stringify( this.stringValue )
+						+ '<br>integerValue = ' + JSON.stringify( this.integerValue )
+					);
+				});
+				
+				mk.percentageValue = -5;
+				mk.stringValue = 1234;
+				mk.integerValue = '6789.123456';				
+			});
+		</script>
+	</div>
+	<div class="clearfix"></div>
+</div> 

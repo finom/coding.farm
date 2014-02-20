@@ -1,0 +1,43 @@
+<h3 id="original-methods"><a href="#original-methods">Original Array methods</a></h3>
+<p>Remember that Matreshka.Array instance has same methods as native Javascript Array. Some methods are changed for chain calling (sugared native Array methods).</p>
+<div class="row">
+	<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}var mkArray = new MK.Array(),
+	result;
+mkArray
+	.push( 1, 2, 3, 4, 5 )
+	.shift()
+;
+result = mkArray
+	.unshift( 6, 7 )
+	.splice( 1, 4 )
+	.toString()
+;				
+$( '.output' ).html( result );
+{% endhighlight %}
+	</div>
+	<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}
+<div class="output"></div>
+{% endhighlight %}			
+	</div>
+	<div class="col-lg-2 mk-example mk-example-result">
+		<div class="output ex8"></div>
+		<script>
+			runIt.push( function() {
+				var mkArray = new MK.Array(),
+					result;
+				mkArray
+					.push( 1, 2, 3, 4, 5 )
+					.shift()
+				;
+				result = mkArray
+					.unshift( 6, 7 )
+					.splice( 1, 4 )
+					.toString()
+				;				
+				$( '.output.ex8' ).html( result );
+			});
+		</script>
+	</div>
+</div> 
