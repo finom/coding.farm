@@ -71,11 +71,17 @@ $( '.sort-example' ).on( 'click', function() {
 	</div>
 	<div class="col-lg-2 mk-example mk-example-result">
 		<div class="output ex7"></div>
-		<button class="btn btn-default push-example pull-left clearfix ex7"><code>.push(1,2,3,4,5);</code></button>
-		<button class="btn btn-default pop-example pull-left clearfix ex7"><code>.pop();</code></button>
-		<button class="btn btn-default reverse-example pull-left clearfix ex7"><code>.reverse();</code></button>
-		<button class="btn btn-default sort-example pull-left clearfix ex7"><code>.sort();</code></button>
-		
+		<button class="btn btn-default push-example ex7"><code>.push(1,2,3,4,5);</code></button>
+		<button class="btn btn-default pop-example ex7"><code>.pop();</code></button>
+		<button class="btn btn-default reverse-example ex7"><code>.reverse();</code></button>
+		<button class="btn btn-default sort-example ex7"><code>.sort();</code></button>
+		<style>
+			button.ex7 {
+				font-size: 14px;
+				width: 180px;
+				margin-bottom: 2px;
+			}
+		</style>
 		<script>
 			runIt.push( function() {
 				var mkArray = new MK.Array();

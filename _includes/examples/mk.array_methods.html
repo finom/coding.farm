@@ -11,8 +11,8 @@ mkArray
 result = mkArray
 	.unshift( 6, 7 )
 	.splice( 1, 4 )
-	.toString()
-;				
+	.join( ',' )
+;
 $( '.output' ).html( result );
 {% endhighlight %}
 	</div>
@@ -31,11 +31,12 @@ $( '.output' ).html( result );
 					.push( 1, 2, 3, 4, 5 )
 					.shift()
 				;
+				
 				result = mkArray
 					.unshift( 6, 7 )
 					.splice( 1, 4 )
-					.toString()
-				;				
+					.join( ',' )
+				;
 				$( '.output.ex8' ).html( result );
 			});
 		</script>

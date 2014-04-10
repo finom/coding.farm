@@ -17,7 +17,7 @@ active: docs
 </nav>
 <main>
     <div class="container docs">
-		<h1 class="page-title hide">Source: array.mk.js</h1>
+		<h1 class="page-title hide">Source: matreshka-array.js</h1>
 		
 
 
@@ -27,7 +27,7 @@ active: docs
             <pre class="prettyprint source"><code>"use strict";
 ( function( MK, Array_prototype ) {
 	if( !MK ) {
-		throw Error( 'Matreshka is missing' );
+		throw new Error( 'Matreshka is missing' );
 	}
 	
 	// Array methods flags
@@ -68,17 +68,28 @@ active: docs
 		} else if( type === RETURNS_NEW_TYPE ) {
 			return function() {
 				var array = this.toArray();
-				return Array_prototype[ name ].apply( array, arguments );;
+				return Array_prototype[ name ].apply( array, arguments );
 			};
 		} else if( type === MODIFIES ) {
 			return function() {
-				var array = this.toArray(),
-					returns = Array_prototype[ name ].apply( array, arguments );
+				var args = [].slice.call( arguments ),
+					array = this.toArray(),
+					returns;
+				
+				if( typeof this._itemMediator === 'function' && ( name === 'unshift' || name === 'push' ) ) {
+					for( var i = 0; i &lt; args.length; i++ ) {
+						args[ i ] = this._itemMediator.call( this, args[ i ], i );
+					}
+				}
+				
+				returns = Array_prototype[ name ].apply( array, args );
+				
 				this.silentCreateFrom( array );
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
-						args: [].slice.call( arguments ),
+						args: args,
+						originalArgs: [].slice.call( arguments ),
 						method: name
 					});
 				}
@@ -100,18 +111,29 @@ active: docs
 			};
 		} else if( type === SPLICE ) { // the combination of returnsnew and modify
 			return function() {
-				var array = this.toArray(),
-					returns = Array_prototype[ name ].apply( array, arguments );
+				var args = [].slice.call( arguments ),
+					array = this.toArray(),
+					returns;
+				
+				if( typeof this._itemMediator === 'function' ) {
+					for( i = 2; i &lt; args.length; i++ ) {
+						args[ i ] = this._itemMediator.call( this, args[ i ], i );
+					}
+				}
+				
+				returns = Array_prototype[ name ].apply( array, args );
+				
 				this.silentCreateFrom( array );
 
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
-						method: name,
-						args: [].slice.call( arguments )
+						args: args,
+						originalArgs: [].slice.call( arguments ),
+						method: name
 					});
 				}
-				return new MK.Array().silentCreateFrom( returns );;
+				return new MK.Array().silentCreateFrom( returns );
 			};
 		}
 	};
@@ -150,24 +172,63 @@ active: docs
 		isMKArray: true,
 		length: 0,
 		/**
-		 * @method Matreshka.Array#renderer
+		 * @method Matreshka.Array#itemRenderer
 		 * @since 0.1
-		 * @summary Renderer for array items
-		 * @desc TODO
+		 * @summary Renderer for array items. 
+		 * @desc This method equals to &lt;code>null&lt;/code> by default. You can assign function that returns types below to make {@Matreshka Array} to be "smart array" that changes DOM automatically when data is changed. Check [live example]{@link http://finom.github.io/matreshka/examples/#mk.array_itemrenderer} to see how it works.
 		 * @returns {string|Node|jQuery} HTML or element
 		 */
-		renderer: null,
+		itemRenderer: null,
+		/**
+		 * @method Matreshka.Array#Model
+		 * @since 0.2
+		 * @private
+		 * @experimental
+		 * @summary Override this property to specify the model class that the collection contains.
+		 * @desc This property equals to &lt;code>null&lt;/code> by default.
+		 * @example
+		 * var MyModel = Class({
+		 * 	'extends': MK.Object
+		 * });
+		 * var MyMKArray = Class({
+		 * 	'extends': MK.Array,
+		 * 	Model: MyModel
+		 * });
+		 */
+		Model: null,
 		constructor: function( length ) {
 			this.initMK();
 			var al = arguments.length;
 			if( al === 1 && typeof length === 'number' ) {
 				this.length = length;
 			} else {
-				for( i = 0; i &lt; al; i++ ) {
+				for( var i = 0; i &lt; al; i++ ) {
 					this[ i ] = arguments[ i ];
 				}
 				this.length = arguments.length;
 			}
+		},
+		/**
+		 * @method Matreshka.Array#setItemMediator
+		 * @since 0.1
+		 * @summary Sets function that transforms items
+		 * @desc This method is using when you want to keep your items to be a certain type (string, number, object...). Pay attention that new mediator overrides Model property
+		 * @example 
+		 * var mkArray = new MK.Array( 1, 2, 3, 4, 5 );
+		 * mkArray.setItemMediator( function( value ) {
+		 * 	return String( value );
+		 * });
+		 * mkArray.push( 6, 7 );
+		 * mkArray.unshift( true, {} );
+		 * 
+		 * console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", "4", "5", "6", "7" ]
+		 */
+		setItemMediator: function( itemMediator ) {
+			this._itemMediator = itemMediator;
+			for( var i = 0; i &lt; this.length; i++ ) {
+				this[ i ] = itemMediator.call( this, this[ i ], i );
+			}
+			return this;
 		},
 		/**
 		 * @method Matreshka.Array#createFrom
@@ -186,30 +247,44 @@ active: docs
 				was: this.toNative()
 			};
 
-			this
+			
+			return this
 				.silentCreateFrom( array )
 				.trigger( 'recreate', evtOpts )
 			;
-			return this;
 		},
 		
 		/**
 		 * @method Matreshka.Array#silentCreateFrom
 		 * @summary Creates self from another array 
-		 * @desc Works similar to {@link Matreshka.Array#createFrom} but without triggering events
+		 * @desc Works similar to {@link Matreshka.Array#createFrom} but doesn't trigger events
 		 * @param {Array} array
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * new MK.Array().silentCreateFrom( [1, 2, 3, 4, 5] );
 		 */
 		silentCreateFrom: function( array ) {
-			var diff = this.length - array.length;
+			var diff = this.length - array.length,
+				prepared;
+			
+			if( this._itemMediator ) {
+				prepared = [];
+				for( var i = 0; i &lt; array.length; i++ ) {
+					prepared[ i ] = this._itemMediator.call( this, array[ i ], i );
+				}
+				array = prepared;
+			}
+			
 			for( i = 0; i &lt; array.length; i++ ) {
 				this[ i ] = array[ i ];
 			}
+			
 			for( i = 0; i &lt; diff; i++ ) {
-				delete this[ i + array.length ];
+				this.remove( i + array.length, { silent: true });
 			}
+			
+			
+			
 			this.length = array.length;
 			return this;
 		},
@@ -226,7 +301,7 @@ active: docs
 				return Array_prototype.slice.call( this );
 			} catch( e ) {
 				var array = [];
-				for( i = 0; i &lt; this.length; i++ ) {
+				for( var i = 0; i &lt; this.length; i++ ) {
 					array[ i ] = this[ i ];
 				}
 				return array;
@@ -260,10 +335,16 @@ active: docs
 			var _this = this,
 				s_container = 'container';
 			
+			if( _this.Model ) {
+				_this.setItemMediator( function( item ) {
+					return !item || !item.isMK || !item.instanceOf( _this.Model ) ? new _this.Model( item, this ) : item;
+				});
+			}
+				
 			return MK.prototype.initMK.call( _this )
 				.on( 'push', function( evt ) {
 					var bound;
-					if( _this.renderer && evt ) {
+					if( _this.itemRenderer && evt ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
 							for( i = _this.length - evt.args.length; i &lt; _this.length; i++ ) {
 								bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
@@ -273,7 +354,7 @@ active: docs
 				})
 				.on( 'pull pop shift', function( evt ) {
 					var el;
-					if( _this.renderer && evt && evt.returns ) {
+					if( _this.itemRenderer && evt && evt.returns ) {
 						if( el = evt.returns.bound( _this.__id ) ) {
 							el.parentNode.removeChild( el )
 							_this.killDOMItem( evt.returns );
@@ -283,7 +364,7 @@ active: docs
 				.on( 'unshift', function( evt ) {
 					var bound,
 						el;
-					if( _this.renderer && evt ) {
+					if( _this.itemRenderer && evt ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
 							for( i = evt.args.length - 1; i + 1; i-- ) {
 								el = _this.initDOMItem( _this[ i ] ).bound( _this.__id );
@@ -300,9 +381,9 @@ active: docs
 				.on( 'sort reverse', function() {
 					var bound,
 						el;
-					if( _this.renderer ) {
+					if( _this.itemRenderer ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
-							for( i = 0; i &lt; _this.length; i++ ) {
+							for( var i = 0; i &lt; _this.length; i++ ) {
 								if( el = _this[ i ].bound( _this.__id ) ) {
 									bound.appendChild( el );
 								}
@@ -313,9 +394,9 @@ active: docs
 				.on( 'splice', function( evt ) {
 					var bound,
 						el;
-					if( _this.renderer && evt && evt.returns ) {
+					if( _this.itemRenderer && evt && evt.returns ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
-							for( i = 0; i &lt; evt.returns.length; i++ ) {
+							for( var i = 0; i &lt; evt.returns.length; i++ ) {
 								if( el = evt.returns[ i ].bound( _this.__id ) ) {
 									el.parentNode.removeChild( el )
 									_this.killDOMItem( evt.returns[ i ] );
@@ -342,7 +423,7 @@ active: docs
 					var added;
 					if( evt && evt.args && evt.args.length ) {
 						if( evt.method === 'splice' ) {
-							added = evt.args[ 2 ];
+							added = [].slice.call( evt.args, 2 );
 							if( added && added.length ) {
 								_this.trigger( 'add', MK.extend( { added: added }, evt ) );
 							}
@@ -353,7 +434,7 @@ active: docs
 				})
 				.on( 'recreate', function( evt ) {
 					var _this = this,
-						added, removed, now, was;
+						added, removed, now, was, bound;
 						
 					if( was = evt && evt.was ) {
 						now = this.toNative();
@@ -379,9 +460,18 @@ active: docs
 						}
 					}
 					
-					if( _this.renderer ) {
-						for( i = 0; i &lt; this.length; i++ ) {
-							bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+					if( _this.itemRenderer ) {
+						if( bound = _this.bound( s_container ) || _this.bound() ) {
+							if( removed ) {
+								for( var i = 0; i &lt; removed.length; i++ ) {
+									bound.removeChild( removed[ i ].bound( _this.__id ) );
+									_this.killDOMItem( removed[ i ] );
+								}
+							}
+							
+							for( i = 0; i &lt; _this.length; i++ ) {
+								bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+							}
 						}
 					}
 					
@@ -407,9 +497,9 @@ active: docs
 				item[ __id ] = _this;
 			}
 
-			if( _this.renderer && !item.bound( __id ) ) {
-				template = _this.renderer( item );
-				$el = typeof template === 'string' ? MK.$.parseHTML( template.replace( /^\s+|\s+$/g, '' ) ) : template;
+			if( _this.itemRenderer && !item.bound( __id ) ) {
+				template = _this.itemRenderer( item );
+				$el = typeof template === 'string' ? MK.$.parseHTML( template ) : MK.$( template );
 				item
 					.bindElement( __id, $el )
 					.trigger( 'render', {
@@ -436,19 +526,31 @@ active: docs
 		},
 		
 		/**
-		 * @method Matreshka.Array#initAllDOMItems
+		 * @method Matreshka.Array#initializeSmartArray
 		 * @since 0.1
-		 * @summary TODO DESCRIPTION
+		 * @summary Initializes "smart array"
+		 * @desc This method is only needed when you're setting {@Matreshka.Array#itemRenderer} property after some items are added.
 		 * @returns {boolean}
 		 * @example &lt;caption>Basic usage&lt;/caption>
-		 * mkArray.initAllDOMItems();
+		 * var mkArray = new MK.Array;
+		 * // DOM is not changing because itemRenderer is not assigned yet
+		 * mkArray.push( ... );
+		 * mkArray.itemRenderer = function() { '&lt;div>MyDiv&lt;/div>' };
+		 * // DOM is changing after initializeSmartArray execution
+		 * mkArray.initializeSmartArray();
+		 * @example &lt;caption>When &lt;code>initializeSmartArray&lt;/code> is not needed&lt;/caption>
+		 * var mkArray = new MK.Array;
+		 * // setting itemRenderer before adding any item to array
+		 * mkArray.itemRenderer = function() { '&lt;div>MyDiv&lt;/div>' };
+		 * // DOM is changing after push, no need to use initializeSmartArray
+		 * mkArray.push( ... );
 		 */
-		initAllDOMItems: function() {
+		initializeSmartArray: function() {
 			var _this = this,
 				bound;
-			if( _this.renderer ) {
+			if( _this.itemRenderer ) {
 				if( bound = _this.bound( 'container' ) || _this.bound() ) {
-					for( i = 0; i &lt; _this.length; i++ ) {
+					for( var i = 0; i &lt; _this.length; i++ ) {
 						bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
 					}
 				}
@@ -480,7 +582,7 @@ active: docs
 		 */
 		toJSON: function() {
 			var JSON = [];
-			for( i = 0; i &lt; this.length; i++ ) {
+			for( var i = 0; i &lt; this.length; i++ ) {
 				this[ i ] && this[ i ].toJSON ? JSON.push( this[ i ].toJSON() ) : JSON.push( this[ i ] );
 			}
 			return JSON;
@@ -500,11 +602,11 @@ active: docs
 		concat: function() {
 			var args = arguments,
 				result = this.toArray(),
-				i, j, arg;
-			for( i = 0; i &lt; args.length; i++ ) {
+				arg;
+			for( var i = 0; i &lt; args.length; i++ ) {
 				arg = args[ i ];
 				if( arg instanceof Array || arg && arg.instanceOf && arg.instanceOf( MK.Array ) ) {
-					for( j = 0; j &lt; arg.length; j++ ) {
+					for( var j = 0; j &lt; arg.length; j++ ) {
 						result.push( arg[ i ] );
 					}
 				}
@@ -544,7 +646,7 @@ active: docs
 		/**
 		 * @method Matreshka.Array#silentPull
 		 * @since 0.1
-		 * @summary Works similar to {@link Matreshka.Array#pull} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#pull} but doesn't trigger events
 		 * @param {string|number} index
 		 * @returns {*} Removed element
 		 * @example &lt;caption>Basic usage&lt;/caption>
@@ -583,7 +685,7 @@ active: docs
 		 * @fires remove
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop Array.prototype.pop}
-		 * @returns {mkArray} self
+		 * @returns {*|undefined} removed element
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.pop();
 		 */
@@ -596,7 +698,7 @@ active: docs
 		 * @fires modify
 		 * @param {...*} element
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift Array.prototype.unshift} but returns self instead of length
-		 * @returns {mkArray} self
+		 * @returns {*|undefined} removed element
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.unshift( 1, 2, 3 );
 		 */
@@ -659,7 +761,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentPush
-		 * @summary Works similar to {@link Matreshka.Array#push} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#push} but doesn't trigger events
 		 * @param {...*} element
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
@@ -669,7 +771,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentPop
-		 * @summary Works similar to {@link Matreshka.Array#pop} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#pop} but doesn't trigger events
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.silentPop();
@@ -678,7 +780,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentUnshift
-		 * @summary Works similar to {@link Matreshka.Array#shift} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#shift} but doesn't trigger events
 		 * @param {...*} element
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
@@ -688,7 +790,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentShift
-		 * @summary Works similar to {@link Matreshka.Array#shift} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#shift} but doesn't trigger events
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.silentShift();
@@ -697,7 +799,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentSort
-		 * @summary Works similar to {@link Matreshka.Array#sort} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#sort} but doesn't trigger events
 		 * @param {function} compareFunction
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
@@ -711,7 +813,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentReverse
-		 * @summary Works similar to {@link Matreshka.Array#reverse} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#reverse} but doesn't trigger events
 		 * @returns {mkArray} self
 		 * @example &lt;caption>Basic usage&lt;/caption>
 		 * this.silentReverse();
@@ -720,7 +822,7 @@ active: docs
 		
 		/**
 		 * @method Matreshka.Array#silentSplice
-		 * @summary Works similar to {@link Matreshka.Array#splice} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#splice} but doesn't trigger events
 		 * @param {number} index
 		 * @param {number} howMany
 		 * @param {...*} [element]
@@ -923,7 +1025,7 @@ active: docs
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Apr 10 2014 21:27:31 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,4 +1,99 @@
-"use strict";
+// taken from https://github.com/remy/polyfills
+(function () {
+
+	if (typeof window.Element === "undefined" || "classList" in document.documentElement) return;
+
+	var prototype = Array.prototype,
+		push = prototype.push,
+		splice = prototype.splice,
+		join = prototype.join;
+
+	function DOMTokenList(el) {
+		this.el = el;
+		// The className needs to be trimmed and split on whitespace
+		// to retrieve a list of classes.
+		var classes = el.className.replace(/^\s+|\s+$/g, '').split(/\s+/);
+		for (var i = 0; i < classes.length; i++) {
+			push.call(this, classes[i]);
+		}
+	};
+
+	DOMTokenList.prototype = {
+		add: function (token) {
+			if (this.contains(token)) return;
+			push.call(this, token);
+			this.el.className = this.toString();
+		},
+		contains: function (token) {
+			return this.el.className.indexOf(token) != -1;
+		},
+		item: function (index) {
+			return this[index] || null;
+		},
+		remove: function (token) {
+			if (!this.contains(token)) return;
+			for (var i = 0; i < this.length; i++) {
+				if (this[i] == token) break;
+			}
+			splice.call(this, i, 1);
+			this.el.className = this.toString();
+		},
+		toString: function () {
+			return join.call(this, ' ');
+		},
+		toggle: function (token) {
+			if (!this.contains(token)) {
+				this.add(token);
+			} else {
+				this.remove(token);
+			}
+
+			return this.contains(token);
+		}
+	};
+
+	window.DOMTokenList = DOMTokenList;
+
+	function defineElementGetter(obj, prop, getter) {
+		if (Object.defineProperty) {
+			Object.defineProperty(obj, prop, {
+				get: getter
+			});
+		} else {
+			obj.__defineGetter__(prop, getter);
+		}
+	}
+
+	defineElementGetter(Element.prototype, 'classList', function () {
+		return new DOMTokenList(this);
+	});
+
+})(); 
+;Number.isNaN = Number.isNaN || function(value) {
+	return typeof value === 'number' && isNaN(value);
+};;"use strict";
+/**
+ * @function $b
+ * @version 1.0
+ * @since 0.1
+ * @extends Array
+ * @summary <code>Balalaika</code> DOM utilite
+ * 
+ * @desc <p>Balalaika is tiny (999 bytes uncompressed) embedded library that makes easier vanilla.js (pure JS) coding. This is individual project and will be presented on github soon.</p>
+ * 
+ * <p>It's using in {@link http://finom.github.io/matreshka|Matreshka} framework as DOM utilite when jQuery is not defined.</p>
+ * 
+ * <p>Balalaika extends Array. It means that you can use Array methods such as <code>.forEach</code>, <code>.map</code>, <code>.reduce</code>, <code>.splice</code> and so on.</p>
+ * 
+ * <p>Balalaika includes 3 own methods: <code>.on</code>, <code>.off</code>, <code>.is</code> and static <code>.extend</code> method that work same way as jQuery analogues (<code>.on</code> doesn't support data). </p>
+ * 
+ * <p>WARNING: This lib works fine in modern browsers (including Internet Explorer 9) only or using DOM shims. For older browsers you still need jQuery.</p>
+ * 
+ * @example $( 'div' ).forEach( ... );
+ * @example $( 'span', document.body ).map( ... );
+ * @example $( '.button' ).on( 'click.mynamespace', ... );
+ * @example $( '.button' ).off( 'click.mynamespace' );
+ */
 // nsRegAndEvents is regesp for eventname.namespace and the list of all events
 // fn is empty array and balalaika prototype
 window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener, s_MatchesSelector, i, j, k, l, $ ) {
@@ -30,7 +125,7 @@ window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener
 				// item.b$ is balalaika_id for an element
 				// i is eventName + id ("click75")
 				// nsRegAndEvents[ i ] is array of events (eg all click events for element#75) ([[namespace, handler], [namespace, handler]])
-				( nsRegAndEvents[ i ] = nsRegAndEvents[ i = n[ 0 ] + ( item.b$ = item.b$ || ++id ) ] || [] ).push([f, n[ 1 ]]);
+				( nsRegAndEvents[ i = n[ 0 ] + ( item.b$ = item.b$ || ++id ) ] = nsRegAndEvents[ i ] || [] ).push([f, n[ 1 ]]);
 				// item.addEventListener( eventName, f )
 				item[ 'add' + s_EventListener ]( n[ 0 ], f );
 			});
@@ -60,7 +155,7 @@ window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener
 					}
 				} else {
 					// if event added before using addEventListener, just remove it using item.removeEventListener( eventName, f )
-					item[ l ]( n[ 0 ], f );
+					!n[ 1 ] && item[ l ]( n[ 0 ], f );
 				}	
 			});
 			return this;
@@ -75,41 +170,14 @@ window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener
 		}
 	});	
 	return $;
-})( window, document, [], /\.(.+)/, 0, 'EventListener', 'MatchesSelector' );;(function( window, document, $, i, j, k, fn ) {
-	if( document.documentMode < 9 ) {
-		fn = $.i[ j = 'prototype' ];
-
-		$.i = function( s, context ) {
-			k = !s ? fn : s && s.nodeType || s === window ? [s] : "" + s === s ? /</.test( s ) ? ( ( i = document.createElement( 'div' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : !function r(f){/in/(document.readyState)?setTimeout(r,9,f):f()}(s): s;
-		
-			j = []; for (i = k ? k.length : 0; i--; j[i] = k[i]) {}
-			
-			fn.push.apply( this, j );
-		};
-		
-		$.i[ j ] = fn;
-		if( !$( 'html' ).is( 'html' ) ) {
-			fn.is = function( s ) {
-				var el = this[ 0 ],
-					is,
-					b_b = 'b_b',
-					selected;
-				if( !el || !s || !el.setAttribute ) return false;
-				el.setAttribute( b_b, b_b );
-				selected = document.querySelector( s );
-				is = selected === el;
-				el.removeAttribute( b_b, b_b );
-				return is;
-			};
-		}
-	}
-	return $;
-})( window, document, $b ); 
-;"use strict";
+})( window, document, [], /\.(.+)/, 0, 'EventListener', 'MatchesSelector' );;"use strict";
 ( function( $, s_classList ) {
-	if( !$b ) throw Error( 'Balalaika is missing' );
+	if( !$b ) {
+		throw new Error( 'Balalaika is missing' );
+	}
+	
 	$b.extend( $b.fn, {
-		hasClass: function( className ) { return !!this[ 0 ] && this[ 0 ][ s_classList ].contains( className ) },
+		hasClass: function( className ) { return !!this[ 0 ] && this[ 0 ][ s_classList ].contains( className ); },
 		addClass: function( className ) {
 			this.forEach( function( item ) {
 				var classList = item[ s_classList ];
@@ -128,7 +196,7 @@ window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener
 			this.forEach( function( item ) {
 				var classList = item[ s_classList ];
 				if( typeof b !== 'boolean' ) {
-					b = !classList.contains( className )
+					b = !classList.contains( className );
 				}
 				classList[ b ? 'add' : 'remove' ].apply( classList, className.split( /\s/ ) );
 			});
@@ -170,6 +238,8 @@ window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener
 			},
 			wrapper,
 			i;
+			
+		html = html.replace( /^\s+|\s+$/g, '' );
 		
 		wrapMap.optgroup = wrapMap.option;
 		wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
@@ -181,10 +251,33 @@ window.$b = (function( window, document, fn, nsRegAndEvents, id, s_EventListener
 		
 		i = wrapper[ 0 ];
 
-		while( i-- ) node = node.firstElementChild;
+		while( i-- ) {
+			node = node.firstElementChild;
+		}
 		
 		return $b( node.children );
 	};
+	
+	
+	
+	// IE8 Balalaika fix. This browser doesn't support HTMLCollection and NodeList as second argument for .apply
+	// This part of code will be removed in Matreshka 1.0
+	(function( document, $, i, j, k, fn ) {
+		if( document.documentMode < 9 ) {
+			fn = $.i[ j = 'prototype' ];
+
+			$.i = function( s, context ) {
+				k = !s ? fn : s && s.nodeType || s === window ? [s] : "" + s === s ? /</.test( s ) ? ( ( i = document.createElement( 'div' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : !function r(f){/in/(document.readyState)?setTimeout(r,9,f):f()}(s): s;
+			
+				j = []; for (i = k ? k.length : 0; i--; j[i] = k[i]) {}
+				
+				fn.push.apply( this, j );
+			};
+			
+			$.i[ j ] = fn;
+		}
+		return $;
+	})( document, $b );
 	
 	return $b;
 })( window.$b, 'classList' ); 
@@ -250,7 +343,7 @@ if( ~ie && ie < 8 ) {
  */
  
  /**
- * @method instanceOf
+ * @method Class.instanceOf
  * @summary Checks is instance of class created by {@link Class} function instanced by given class
  * @desc You still can use instanceof operator but it doesn't work in Internet Explorer 8 because of XDR hack. 
  * @param {function} class
@@ -441,45 +534,11 @@ Class.Interface = function Interface( parent, props ) {
 };
 
 Class.isXDR = ie8;
-})( this );;"use strict";// v2401
+})( this );;"use strict";// v2402
 ( function( gc, Class ) {
 if( !Class ) {
-	throw Error( 'Class function is missing' );
+	throw new Error( 'Class function is missing' );
 }
-
-//todo plugin model-collection (???)
-//review docs
-//this.on( 'click::volodia(.x > y:rabotai) change:valuev' )
-//beforechange event
-//new events engine (evt.preventDefault, evt.stopEventsChain etc)
-//lazy initMK
-//optimize for uglify tool
-//refactor code
-//optimize methods speed (bound)
-
-
-// done: passed arguments to addDependence handler on init, bound, boundAll, select, selectAll,, element, elements as bindElement argument, pop and shift return returned value
-// Allow to use numbers in MK.Object#addJSONKeys and MK.Object#removeJSONKeys
-// Return removed element from MK.Array#pop and MK.Array#shift methods
-// Do nothing if undefined is passed to MK.Object#addJSONKeys and MK.Object#removeJSONKeys (now throws error)
-// Use element as this in MK.elementProcessors functions
-// Listen 'keyup' event for checkboxes/radios (if keyboard is using) (MK.elementProcessors)
-// Listen 'paste' event for input[type="text"] and textarea (MK.elementProcessors)
-// Make possible to add DOM events like so:
-// Class.Interface
-// merged mk.domarray
-// MK.Array#pull
-// isMKObject, Array
-// initAllDOMItems (no docs!)
-// balalaika methods, new file structure
-// arguments event property from mkArray renamed to args and made them array
-// optional container for mkArray
-// MK.binders
-// MK.defaultBinders instead of elementProcessors
-// mkArray triggers add remove
-// removed capture argument from createFrom method
-// recreate DOM handler and triggering add/remove
-//fix: once doesn't work
 
 var $ = window.jQuery || window.$b,
 
@@ -544,7 +603,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	isMK: true,
 	/**
 	 * @private
-	 * @member {boolean} Matreshka#isMK
+	 * @member {boolean} Matreshka#isMKInitialized
 	 * @summary Using for "Lazy initialization".
 	 */
 	isMKInitialized: false,
@@ -555,7 +614,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * You can pass <code>"change:myKey"</code> as first {@link Matreshka#on} argument to monitor <code>"myKey"</code> property changes.
 	 * @param {eventNames} names - Names of the space-delimited list of events (eg. "change:x ajaxcomplete change:y")
 	 * @param {eventHandler} callback - A function to execute when the event is triggered
-	 * @param {boolean} [triggerOnInit] - If <code>triggerOnInit</code> equals to <code>true</code> then an event handler will be triggered immediately
+	 * @param {boolean} [triggerOnInit=false] - If <code>triggerOnInit</code> equals to <code>true</code> then an event handler will be triggered immediately
 	 * @param {object} [context] - An object to use as <code>this</code>when executing <code>callback</code>
 	 * @returns {mk} self
 	 * @example <caption>Basic usage</caption>
@@ -781,7 +840,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 			}
 		}
 		
-		if (allEvents && !silentAllEvent) triggerEvents(allEvents, arguments);
+		if (allEvents && !silentAllEvent) triggerEvents(allEvents, args);
 		
 		return this;
 	},
@@ -813,7 +872,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * 
 	 * @param {(string|mk)} key - A key (or space-delimited list keys) that has to be binded to given element(s)
 	 * @param {(Node[]|NodeList|Node|jQuery|balalaika|string)} el - An element (DOM Node or DOM NodeList or array of nodes or balalaika array or jQuery instance or css selector...) that has to be binded to given key(s)
-	 * @param {elementOptions} [elOpts] - An element options object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)
+	 * @param {binder} [binder] - A binder object which contains following properties: setValue (how to set value for an element), getValue (how to extract value from an element), on (when we have to extract a value from an element and assign it to given property)
 	 * @param {eventOptions} [evtOpts] - If you want to set <code>"silent"</code> flag or pass some options to a <code>"bind"</code> event handler
 	 * 
 	 * @returns {mk} self
@@ -832,7 +891,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * this.myKey = true; // makes checkbox checked
 	 * this.myKey = false; // makes checkbox unchecked
 	 * 
-	 * @example <caption>Basic usage 2. By {@link Matreshka.defaultBinders} array that contains elementOptions for few dom elements <code>(input[type="text"], input[type="radio"], input[type="checkbox"], select, textarea...)</code>. So you don't need to pass eventOptions for these elements</caption>
+	 * @example <caption>Basic usage 2. By {@link Matreshka.defaultBinders} array that contains binder for few dom elements (<code>input[type="text"]</code>, <code>input[type="radio"]</code>, <code>input[type="checkbox"]</code>, <code>select</code>, <code>textarea</code>). So you don't need to pass eventOptions for these elements</caption>
 	 * this.bindElement( 'myKey', '.checkbox' );
 	 * 
 	 * @example <caption>Custom checkbox 1. This example Shows how to create your own custom checkbox that has <code>"checked"</code> class if it's state is checked.</caption>
@@ -846,7 +905,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * 	}
 	 * });
 	 * 
-	 * @example <caption>Custom checkbox 2. In this example we'll do the same as in previous example but using predefined elementOptions via {@link Matreshka.defaultBinders}.</caption>
+	 * @example <caption>Custom checkbox 2. In this example we'll do the same as in previous example but using predefined binder via {@link Matreshka.defaultBinders}.</caption>
 	 * //shift means that we're adding new default binder to the beginning of MK.defaultBinders list
 	 * MK.defaultBinders.shift( function( element ) {
 	 * 	if( $( element ).hasClass( 'custom-checkbox' ) ) return {
@@ -869,7 +928,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * this.on( 'bind:myKey', function() { alert( 'ok!' ); });
 	 * this.bindElement( 'myKey', '.custom-checkbox', {}, { silent: true } ); // no alert
 	 * 
-	 * @example <caption>Extending default elementOptions. For example we're working with <code>input[type="text"]</code>. By default <code>"on"</code> property for this element contains <code>"keydown"</code> string. But we want to use <code>"blur"</code> event for the element that has been bound to <code>myKey</code> property</caption>
+	 * @example <caption>Extending default binders. For example we're working with <code>input[type="text"]</code>. By default <code>"on"</code> property for this element contains <code>"keydown"</code> string. But we want to use <code>"blur"</code> event for the element that has been bound to <code>myKey</code> property</caption>
 	 * this.bindElement( 'myKey', '.custom-checkbox', { on: "blur" });
 	 * 
 	 * @example <caption>Bind self to the element. If you want to use context (sandbox) for binding of elements contained in single element, you can pass <code>this</code> special property to the method</caption>
@@ -886,7 +945,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * @desc {@link Matreshka#bindElement} accepts key-element use case if you have many bindings.
 	 * 
 	 * @param {object} keyElementPairs
-	 * @param {elementOptions} [elOpts] - (see above)
+	 * @param {binder} [binder] - (see above)
 	 * @param {eventOptions} [evtOpts] - (see above)
 	 * 
 	 * @example <caption>Basic usage</caption>
@@ -900,7 +959,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * @method Matreshka#bindElement
 	 * @variation 3
 	 * @summary Many options alternative
-	 * @desc {@link Matreshka#bindElement} accepts one more way how to pass <code>key, element, elementOptions</code> to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using {@link Matreshka#unbindElement}.
+	 * @desc {@link Matreshka#bindElement} accepts one more way how to pass <code>key, element, binder</code> to the method. It looks ugly but helps when you want to memorize special bindings that you going to kill later using {@link Matreshka#unbindElement}.
 	 * 
 	 * @param {Array[]} setOfArguments - (see example)
 	 * @param {eventOptions} [evtOpts] - (see above)
@@ -929,7 +988,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * 	}]
 	 * ]);
 	 */
-	bindElement: function( key, el, elOpts, evtOpts ) {
+	bindElement: function( key, el, binder, evtOpts ) {
 		var self = this,
 			$el,
 			keys,
@@ -957,13 +1016,13 @@ var MK = gc.MK = gc.Matreshka = Class({
 		
 		
 		/*
-		 * this.bindElement('key1 key2', el, elOpts, { silent: true });
+		 * this.bindElement('key1 key2', el, binder, { silent: true });
 		 */
 		if( typeof key === 'string' ) {
 			keys = key.split( /\s/ );
 			if( keys.length > 1 ) {
 				for( i = 0; i < keys.length; i++ ) {
-					this.bindElement( keys[ i ], el, elOpts, evtOpts );
+					this.bindElement( keys[ i ], el, binder, evtOpts );
 				}
 				return this;
 			}
@@ -975,7 +1034,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 		 */		
 		if( typeof key === 'object' ) {
 			for( i in key ) if( key.hasOwnProperty( i ) ) {
-				this.bindElement( i, key[ i ], el, elOpts );
+				this.bindElement( i, key[ i ], el, binder );
 			}
 			return this;
 		}
@@ -992,7 +1051,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 		this.__special[ key ].elements = this.__special[ key ].elements.add( $el );
 		
 		MK.each( $el, function( el ) {
-			var options = elOpts !== null ? MK.extend( key === '__this__' ? {} : self.lookForBinder( el ), elOpts ) : {},
+			var options = binder !== null ? MK.extend( key === '__this__' ? {} : self.lookForBinder( el ), binder ) : {},
 				mkHandler;
 			if( options.setValue ) {
 				mkHandler = function( evt ) {
@@ -1248,7 +1307,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#$el
-	 * @deprecated since v0.1. Use Matreshka#boundAll method instead
+	 * @deprecated since 0.1. Use Matreshka#boundAll method instead
 	 */
 	$el: function( key ) {
 		warnDeprecated( '#$el', '#boundAll' );
@@ -1257,7 +1316,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#el
-	 * @deprecated since v0.1. Use Matreshka#bound method instead
+	 * @deprecated since 0.1. Use Matreshka#bound method instead
 	 */
 	el: function( key ) {
 		warnDeprecated( '#el', '#bound' );
@@ -1284,7 +1343,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#$
-	 * @alias Matreshka#selectAll
+	 * @summary Works similar to {@link Matreshka#selectAll}
 	 */
 	$: function( s ) {
 		return this.selectAll( s );
@@ -1321,7 +1380,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 				elements: $(),
 				value: this[ key ],
 				getter: function() { return specialProps.value; },
-				mediator: function( v ) { return v; }
+				mediator: null
 			};
 			Object.defineProperty( this, key, {
 				configurable: true,
@@ -1350,7 +1409,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * @example <caption>Basic usage</caption>
 	 * this.eq( object ); // true or false
 	 */
-	eq: function( object ) {
+	eq: function( object ) { // @IE8
 		return typeof object === 'object' && object !== null && this.__id === object.__id;
 	},
 	
@@ -1396,13 +1455,30 @@ var MK = gc.MK = gc.Matreshka = Class({
 	
 	/**
 	 * @method Matreshka#setMediator
+	 * @variation 1
 	 * @since 0.1
-	 * @summary Transforms property when setting
-	 * @desc This method is using when you want to keep your property to be a certain type (string, number, object).
+	 * @summary Transforms property
+	 * @desc This method is using when you want to keep your property to be a certain type (string, number, object...).
 	 * @example
 	 * this.setMediator( 'x', function() { return String( s ); } );
 	 * this.x = 1;
 	 * alert( typeof this.x ); // "string"
+	 */
+	/**
+	 * @method Matreshka#setMediator
+	 * @variation 2
+	 * @since 0.1
+	 * @summary Does same as described above but accepts key-mediator object
+	 * @example
+	 * this.setMediator({
+	 * 	x: String,
+	 * 	y: parseInt
+	 * });
+	 * this.x = 1;
+	 * this.y = '12345.678';
+	 * alert( typeof this.x ); // "string"
+	 * alert( typeof this.y ); // "number"
+	 * alert( this.y ); // 12345
 	 */
 	setMediator: function( key, mediator ) {
 		if( typeof key === 'object' ) {
@@ -1415,7 +1491,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 		var __special = this.makeSpecial( key );
 		
 		__special.mediator = function( v ) {
-			return mediator.call( this, v, this, key );
+			return mediator.call( this, v, __special.value, key, this );
 		}.bind( this );
 		
 		__special.value = __special.mediator( __special.value );
@@ -1428,9 +1504,10 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * @since 0.1
 	 * @summary Defines smart getter
 	 * @desc {@link Matreshka#addDependence} adds dependence of <code>key</code> from <code>keys</code>. You can use it instead of {@link Matreshka#defineGetter} if you want to listen change:*key* event for given key or bind key to an element)
-	 * @param {string} key
-	 * @param {string|string[]} keys
-	 * @param {function} getter
+	 * @param {string} key - what depends on
+	 * @param {string|string[]} keys - depends from
+	 * @param {function} [getter=function(value){return value;}] - how depends (should return value)
+	 * @param {boolean} [setOnInit=true]
 	 * @example <caption>Basic usage</caption>
 	 * this.a = 3;
 	 * this.b = 4;
@@ -1550,21 +1627,36 @@ var MK = gc.MK = gc.Matreshka = Class({
 		}
 		var special = this.__special[ key ],
 			prevVal = special.value,
-			evtObject;
-
-		v = special.value = special.mediator( v );
+			evtObject, newV;
+		
 		evtOpts = evtOpts || {};
 		
-		if( v !== prevVal || evtOpts.force || evtOpts.forceHTML ) {
-			this.trigger( '_change:' + key, { // using for changing element state
-				silentAllEvent: true,
-				silentChangeEvent: evtOpts.silent || v === prevVal
+		if( special.mediator && v !== prevVal && !evtOpts.skipMediator ) {
+			newV = special.mediator.call( this, v, prevVal, key, this );
+		} else {
+			newV = v;
+		}
+		
+		special.value = newV;
+		
+		if( newV !== v && !Number.isNaN( newV ) ) {
+			this.set( key, newV, {
+				silent: true,
+				forceHTML: true,
+				skipMediator: true
 			});
 		}
 		
-		if( ( v !== prevVal || evtOpts.force ) && !evtOpts.silent ) {
+		if( newV !== prevVal || evtOpts.force || evtOpts.forceHTML ) {
+			this.trigger( '_change:' + key, { // using for changing element state
+				silentAllEvent: true,
+				silentChangeEvent: evtOpts.silent || newV === prevVal
+			});
+		}
+		
+		if( ( newV !== prevVal || evtOpts.force ) && !evtOpts.silent ) {
 			evtObject = MK.extend({
-				value: v,
+				value: newV,
 				previousValue: prevVal,
 				key: key,
 				element: special.elements[ 0 ] || null,
@@ -1597,7 +1689,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 */
 	remove: function( key, evtOpts ) {
 		var exists,
-			keys = key.split( /\s/ );
+			keys = String( key ).split( /\s/ );
 			
 		evtOpts = MK.extend({
 			keys: keys
@@ -1612,7 +1704,10 @@ var MK = gc.MK = gc.Matreshka = Class({
 				this.unbindElement( keys[ i ] ).off( 'change:' + keys[ i ] );
 				
 				delete this.__special[ keys[ i ] ];
-				delete this[ keys[ i ] ];				
+				
+				try { // @IE8 fix
+					delete this[ keys[ i ] ];
+				} catch(e) {}
 				
 				if( !evtOpts || !evtOpts.silent ) {
 					this
@@ -1673,7 +1768,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 	 * @variation 1
 	 * @summary Defines non-enumerable property using get-set hack for IE8
 	 * @param {string} key - key
-	 * @param {*} - value
+	 * @param {*} value - value
 	 * @returns {mk} self
 	 * @example <caption>Basic usage</caption>
 	 * this.defineNotEnum( 'myKey', 3 );
@@ -1698,7 +1793,7 @@ var MK = gc.MK = gc.Matreshka = Class({
 			return this;
 		}
 		
-		if( MK.isXDR ) {
+		if( MK.isXDR ) { // @IE8
 			Object.defineProperty( this, key, {
 				get: function() {
 					return value;	
@@ -1823,13 +1918,13 @@ MK.extend( MK, {
 	/**
 	 * @member {Array} Matreshka.elementProcessors
 	 * @enum {function}
-	 * @deprecated since v0.1. This property is renamed. Use Matreshka.defaultBinders instead
+	 * @deprecated since 0.1. This property is renamed. Use {@link Matreshka.defaultBinders} instead
 	 */
 	
 	/**
 	 * @member {Array} Matreshka.defaultBinders
 	 * @enum {function}
-	 * @summary {@link Matreshka.defaultBinders} is the array of functions that compare given element by given rules and returns elementOptions if comparing is successfully. It used for defining elements behavior in {@link Matreshka#bindElement} method without passing third argument.
+	 * @summary {@link Matreshka.defaultBinders} is the array of functions that compare given element by given rules and returns {@binder} if comparing is successfully. It used for defining elements behavior in {@link Matreshka#bindElement} method without passing third argument.
 	 * @example <caption>HTML5 input type=number</caption>
 	 * //shift means that we're adding new default binder to the beginning of MK.defaultBinders list
 	 * MK.defaultBinders.shift( function( element ) {
@@ -1862,8 +1957,8 @@ MK.extend( MK, {
 	defaultBinders: MK.elementProcessors = [],
 	
 	/**
-	 * @member {elementOptions} Matreshka.htmlp
-	 * @deprecated since v0.1. Use Matreshka.binders.innerHTML function instead
+	 * @member {binder} Matreshka.htmlp
+	 * @deprecated since 0.1. Use {@link Matreshka.binders.innerHTML} function instead
 	 */
 	htmlp: {
 		setValue: function( v ) {
@@ -1875,7 +1970,7 @@ MK.extend( MK, {
 	/**
 	 * @method Matreshka.classp
 	 * @since 0.0.2
-	 * @deprecated since v0.1. Use Matreshka.binders.className function instead
+	 * @deprecated since 0.1. Use {@link Matreshka.binders.className} function instead
 	 */
 	classp: function( className ) {
 		var not = !className.indexOf( '!' );
@@ -1969,6 +2064,11 @@ MK.defaultBinders.push( function( el ) {
  * @typedef {object} mk
  */
 
+/**
+ * {@link $b} instance
+ * @typedef {Array} balalaika
+ */
+
  /**
  * Event name or space-delimited list of event names 
  * @typedef {string} eventNames
@@ -1978,19 +2078,19 @@ MK.defaultBinders.push( function( el ) {
  */
 
  /**
- * <code>elementOptions</code> contains information about how to extract value from an element, how to set value for an element and which element's event we have to listen
- * @typedef {object} elementOptions
+ * <code>binder</code> contains information about how to extract value from an element, how to set value for an element and which element's event we have to listen
+ * @typedef {object} binder
  * @property {string} [on] - event name (or space-delimited list of events) which we have to listen
  * @property {function} [getValue] - function that tells how to extract value from an element (context <code>this</code> is given element)
  * @property {function} [setValue] - "How to set value" for an element (context <code>this</code> is given element)
  * 
  * @example
- * var elementOptions = {
+ * var binder = {
  * 	on: 'click',
  * 	getValue: function() { return this.value; } 
  * 	setValue: function( v ) { this.value = v; } 
  * };
- * this.bindElement( 'a', '.my-checkbox', elementOptions );
+ * this.bindElement( 'a', '.my-checkbox', binder );
  */
 
 /**
@@ -2012,17 +2112,18 @@ MK.defaultBinders.push( function( el ) {
  })( this, this.Class );;"use strict";
 ( function( MK ) {
 	if( !MK ) {
-		throw Error( 'Matreshka is missing' );
+		throw new Error( 'Matreshka is missing' );
 	}
 	var constructObject = function( f ) {
 		return { on: null, getValue: null, setValue: f };
 	};
 	/**
-	 * @member {Object} Matreshka.binders
+	 * @namespace Matreshka.binders
+	 * @desc TODO
 	 */
 	MK.binders = {
 		/**
-		* @function MK.binders.innerHTML
+		* @function Matreshka.binders.innerHTML
 		* @since 0.1
 		* @summary <code>innerHTML</code> binder
 		* @desc By default if you pass html element to {@link Matreshka#bindElement} as second argument that doesn't match any <code>defaultBinders item</code>, the binding does nothing. But sometimes you want to change <code>innerHTML</code> without having possibility to retrieve value from the element. {@link Matreshka.htmlp} is created as simple <code>binder</code> function for this case and it reduces your code.
@@ -2111,7 +2212,7 @@ MK.defaultBinders.push( function( el ) {
 ( function( MK ) {
 	var i;
 	if( !MK ) {
-		throw Error( 'Matreshka is missing' );
+		throw new Error( 'Matreshka is missing' );
 	}
 	
 	/**
@@ -2461,7 +2562,7 @@ MK.defaultBinders.push( function( el ) {
 })( window.Matreshka );;"use strict";
 ( function( MK, Array_prototype ) {
 	if( !MK ) {
-		throw Error( 'Matreshka is missing' );
+		throw new Error( 'Matreshka is missing' );
 	}
 	
 	// Array methods flags
@@ -2502,17 +2603,28 @@ MK.defaultBinders.push( function( el ) {
 		} else if( type === RETURNS_NEW_TYPE ) {
 			return function() {
 				var array = this.toArray();
-				return Array_prototype[ name ].apply( array, arguments );;
+				return Array_prototype[ name ].apply( array, arguments );
 			};
 		} else if( type === MODIFIES ) {
 			return function() {
-				var array = this.toArray(),
-					returns = Array_prototype[ name ].apply( array, arguments );
+				var args = [].slice.call( arguments ),
+					array = this.toArray(),
+					returns;
+				
+				if( typeof this._itemMediator === 'function' && ( name === 'unshift' || name === 'push' ) ) {
+					for( var i = 0; i < args.length; i++ ) {
+						args[ i ] = this._itemMediator.call( this, args[ i ], i );
+					}
+				}
+				
+				returns = Array_prototype[ name ].apply( array, args );
+				
 				this.silentCreateFrom( array );
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
-						args: [].slice.call( arguments ),
+						args: args,
+						originalArgs: [].slice.call( arguments ),
 						method: name
 					});
 				}
@@ -2534,18 +2646,29 @@ MK.defaultBinders.push( function( el ) {
 			};
 		} else if( type === SPLICE ) { // the combination of returnsnew and modify
 			return function() {
-				var array = this.toArray(),
-					returns = Array_prototype[ name ].apply( array, arguments );
+				var args = [].slice.call( arguments ),
+					array = this.toArray(),
+					returns;
+				
+				if( typeof this._itemMediator === 'function' ) {
+					for( i = 2; i < args.length; i++ ) {
+						args[ i ] = this._itemMediator.call( this, args[ i ], i );
+					}
+				}
+				
+				returns = Array_prototype[ name ].apply( array, args );
+				
 				this.silentCreateFrom( array );
 
 				if( !silent ) {
 					this.trigger( name, {
 						returns: returns,
-						method: name,
-						args: [].slice.call( arguments )
+						args: args,
+						originalArgs: [].slice.call( arguments ),
+						method: name
 					});
 				}
-				return new MK.Array().silentCreateFrom( returns );;
+				return new MK.Array().silentCreateFrom( returns );
 			};
 		}
 	};
@@ -2578,29 +2701,69 @@ MK.defaultBinders.push( function( el ) {
 	MK.Array = Class({
 		'extends': MK,
 		/**
-		 * @member {boolean} Matreshka.Array
+		 * @member {boolean} Matreshka.Array#isMKArray
 		 * @summary <code>isMKArray</code> is always </code>true</code>. It using for easy detecting Matreshka.Array instance.
 		 */
 		isMKArray: true,
 		length: 0,
 		/**
-		 * @method Matreshka.Array#renderer
-		 * @since v0.1
-		 * @summary TODO DESCRIPTION
+		 * @method Matreshka.Array#itemRenderer
+		 * @since 0.1
+		 * @summary Renderer for array items. 
+		 * @desc This method equals to <code>null</code> by default. You can assign function that returns types below to make {@Matreshka Array} to be "smart array" that changes DOM automatically when data is changed. Check [live example]{@link http://finom.github.io/matreshka/examples/#mk.array_itemrenderer} to see how it works.
 		 * @returns {string|Node|jQuery} HTML or element
 		 */
-		renderer: null,
+		itemRenderer: null,
+		/**
+		 * @method Matreshka.Array#Model
+		 * @since 0.2
+		 * @private
+		 * @experimental
+		 * @summary Override this property to specify the model class that the collection contains.
+		 * @desc This property equals to <code>null</code> by default.
+		 * @example
+		 * var MyModel = Class({
+		 * 	'extends': MK.Object
+		 * });
+		 * var MyMKArray = Class({
+		 * 	'extends': MK.Array,
+		 * 	Model: MyModel
+		 * });
+		 */
+		Model: null,
 		constructor: function( length ) {
 			this.initMK();
 			var al = arguments.length;
 			if( al === 1 && typeof length === 'number' ) {
 				this.length = length;
 			} else {
-				for( i = 0; i < al; i++ ) {
+				for( var i = 0; i < al; i++ ) {
 					this[ i ] = arguments[ i ];
 				}
 				this.length = arguments.length;
 			}
+		},
+		/**
+		 * @method Matreshka.Array#setItemMediator
+		 * @since 0.1
+		 * @summary Sets function that transforms items
+		 * @desc This method is using when you want to keep your items to be a certain type (string, number, object...). Pay attention that new mediator overrides Model property
+		 * @example 
+		 * var mkArray = new MK.Array( 1, 2, 3, 4, 5 );
+		 * mkArray.setItemMediator( function( value ) {
+		 * 	return String( value );
+		 * });
+		 * mkArray.push( 6, 7 );
+		 * mkArray.unshift( true, {} );
+		 * 
+		 * console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", "4", "5", "6", "7" ]
+		 */
+		setItemMediator: function( itemMediator ) {
+			this._itemMediator = itemMediator;
+			for( var i = 0; i < this.length; i++ ) {
+				this[ i ] = itemMediator.call( this, this[ i ], i );
+			}
+			return this;
 		},
 		/**
 		 * @method Matreshka.Array#createFrom
@@ -2619,30 +2782,44 @@ MK.defaultBinders.push( function( el ) {
 				was: this.toNative()
 			};
 
-			this
+			
+			return this
 				.silentCreateFrom( array )
 				.trigger( 'recreate', evtOpts )
 			;
-			return this;
 		},
 		
 		/**
 		 * @method Matreshka.Array#silentCreateFrom
 		 * @summary Creates self from another array 
-		 * @desc Works similar to {@link Matreshka.Array#createFrom} but without triggering events
+		 * @desc Works similar to {@link Matreshka.Array#createFrom} but doesn't trigger events
 		 * @param {Array} array
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
 		 * new MK.Array().silentCreateFrom( [1, 2, 3, 4, 5] );
 		 */
 		silentCreateFrom: function( array ) {
-			var diff = this.length - array.length;
+			var diff = this.length - array.length,
+				prepared;
+			
+			if( this._itemMediator ) {
+				prepared = [];
+				for( var i = 0; i < array.length; i++ ) {
+					prepared[ i ] = this._itemMediator.call( this, array[ i ], i );
+				}
+				array = prepared;
+			}
+			
 			for( i = 0; i < array.length; i++ ) {
 				this[ i ] = array[ i ];
 			}
+			
 			for( i = 0; i < diff; i++ ) {
-				delete this[ i + array.length ];
+				this.remove( i + array.length, { silent: true });
 			}
+			
+			
+			
 			this.length = array.length;
 			return this;
 		},
@@ -2659,7 +2836,7 @@ MK.defaultBinders.push( function( el ) {
 				return Array_prototype.slice.call( this );
 			} catch( e ) {
 				var array = [];
-				for( i = 0; i < this.length; i++ ) {
+				for( var i = 0; i < this.length; i++ ) {
 					array[ i ] = this[ i ];
 				}
 				return array;
@@ -2693,10 +2870,16 @@ MK.defaultBinders.push( function( el ) {
 			var _this = this,
 				s_container = 'container';
 			
+			if( _this.Model ) {
+				_this.setItemMediator( function( item ) {
+					return !item || !item.isMK || !item.instanceOf( _this.Model ) ? new _this.Model( item, this ) : item;
+				});
+			}
+				
 			return MK.prototype.initMK.call( _this )
 				.on( 'push', function( evt ) {
 					var bound;
-					if( _this.renderer && evt ) {
+					if( _this.itemRenderer && evt ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
 							for( i = _this.length - evt.args.length; i < _this.length; i++ ) {
 								bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
@@ -2706,7 +2889,7 @@ MK.defaultBinders.push( function( el ) {
 				})
 				.on( 'pull pop shift', function( evt ) {
 					var el;
-					if( _this.renderer && evt && evt.returns ) {
+					if( _this.itemRenderer && evt && evt.returns ) {
 						if( el = evt.returns.bound( _this.__id ) ) {
 							el.parentNode.removeChild( el )
 							_this.killDOMItem( evt.returns );
@@ -2716,7 +2899,7 @@ MK.defaultBinders.push( function( el ) {
 				.on( 'unshift', function( evt ) {
 					var bound,
 						el;
-					if( _this.renderer && evt ) {
+					if( _this.itemRenderer && evt ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
 							for( i = evt.args.length - 1; i + 1; i-- ) {
 								el = _this.initDOMItem( _this[ i ] ).bound( _this.__id );
@@ -2733,9 +2916,9 @@ MK.defaultBinders.push( function( el ) {
 				.on( 'sort reverse', function() {
 					var bound,
 						el;
-					if( _this.renderer ) {
+					if( _this.itemRenderer ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
-							for( i = 0; i < _this.length; i++ ) {
+							for( var i = 0; i < _this.length; i++ ) {
 								if( el = _this[ i ].bound( _this.__id ) ) {
 									bound.appendChild( el );
 								}
@@ -2746,9 +2929,9 @@ MK.defaultBinders.push( function( el ) {
 				.on( 'splice', function( evt ) {
 					var bound,
 						el;
-					if( _this.renderer && evt && evt.returns ) {
+					if( _this.itemRenderer && evt && evt.returns ) {
 						if( bound = _this.bound( s_container ) || _this.bound() ) {
-							for( i = 0; i < evt.returns.length; i++ ) {
+							for( var i = 0; i < evt.returns.length; i++ ) {
 								if( el = evt.returns[ i ].bound( _this.__id ) ) {
 									el.parentNode.removeChild( el )
 									_this.killDOMItem( evt.returns[ i ] );
@@ -2775,7 +2958,7 @@ MK.defaultBinders.push( function( el ) {
 					var added;
 					if( evt && evt.args && evt.args.length ) {
 						if( evt.method === 'splice' ) {
-							added = evt.args[ 2 ];
+							added = [].slice.call( evt.args, 2 );
 							if( added && added.length ) {
 								_this.trigger( 'add', MK.extend( { added: added }, evt ) );
 							}
@@ -2786,7 +2969,7 @@ MK.defaultBinders.push( function( el ) {
 				})
 				.on( 'recreate', function( evt ) {
 					var _this = this,
-						added, removed, now, was;
+						added, removed, now, was, bound;
 						
 					if( was = evt && evt.was ) {
 						now = this.toNative();
@@ -2812,9 +2995,18 @@ MK.defaultBinders.push( function( el ) {
 						}
 					}
 					
-					if( _this.renderer ) {
-						for( i = 0; i < this.length; i++ ) {
-							bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+					if( _this.itemRenderer ) {
+						if( bound = _this.bound( s_container ) || _this.bound() ) {
+							if( removed ) {
+								for( var i = 0; i < removed.length; i++ ) {
+									bound.removeChild( removed[ i ].bound( _this.__id ) );
+									_this.killDOMItem( removed[ i ] );
+								}
+							}
+							
+							for( i = 0; i < _this.length; i++ ) {
+								bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
+							}
 						}
 					}
 					
@@ -2827,7 +3019,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @private
-		 * @since v0.1
+		 * @since 0.1
 		 */
 		initDOMItem: function( item ) {
 			var _this = this,
@@ -2840,9 +3032,9 @@ MK.defaultBinders.push( function( el ) {
 				item[ __id ] = _this;
 			}
 
-			if( _this.renderer && !item.bound( __id ) ) {
-				template = _this.renderer( item );
-				$el = typeof template === 'string' ? MK.$.parseHTML( template.replace( /^\s+|\s+$/g, '' ) ) : template;
+			if( _this.itemRenderer && !item.bound( __id ) ) {
+				template = _this.itemRenderer( item );
+				$el = typeof template === 'string' ? MK.$.parseHTML( template ) : MK.$( template );
 				item
 					.bindElement( __id, $el )
 					.trigger( 'render', {
@@ -2862,26 +3054,38 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @private
-		 * @since v0.1
+		 * @since 0.1
 		 */
 		killDOMItem: function( item ) {
 			return item.remove( this.__id, { silent: true });
 		},
 		
 		/**
-		 * @method Matreshka.Array#initAllDOMItems
-		 * @since v0.1
-		 * @summary TODO DESCRIPTION
+		 * @method Matreshka.Array#initializeSmartArray
+		 * @since 0.1
+		 * @summary Initializes "smart array"
+		 * @desc This method is only needed when you're setting {@Matreshka.Array#itemRenderer} property after some items are added.
 		 * @returns {boolean}
 		 * @example <caption>Basic usage</caption>
-		 * mkArray.initAllDOMItems();
+		 * var mkArray = new MK.Array;
+		 * // DOM is not changing because itemRenderer is not assigned yet
+		 * mkArray.push( ... );
+		 * mkArray.itemRenderer = function() { '<div>MyDiv</div>' };
+		 * // DOM is changing after initializeSmartArray execution
+		 * mkArray.initializeSmartArray();
+		 * @example <caption>When <code>initializeSmartArray</code> is not needed</caption>
+		 * var mkArray = new MK.Array;
+		 * // setting itemRenderer before adding any item to array
+		 * mkArray.itemRenderer = function() { '<div>MyDiv</div>' };
+		 * // DOM is changing after push, no need to use initializeSmartArray
+		 * mkArray.push( ... );
 		 */
-		initAllDOMItems: function() {
+		initializeSmartArray: function() {
 			var _this = this,
 				bound;
-			if( _this.renderer ) {
+			if( _this.itemRenderer ) {
 				if( bound = _this.bound( 'container' ) || _this.bound() ) {
-					for( i = 0; i < _this.length; i++ ) {
+					for( var i = 0; i < _this.length; i++ ) {
 						bound.appendChild( _this.initDOMItem( _this[ i ] ).bound( _this.__id ) );
 					}
 				}
@@ -2913,7 +3117,7 @@ MK.defaultBinders.push( function( el ) {
 		 */
 		toJSON: function() {
 			var JSON = [];
-			for( i = 0; i < this.length; i++ ) {
+			for( var i = 0; i < this.length; i++ ) {
 				this[ i ] && this[ i ].toJSON ? JSON.push( this[ i ].toJSON() ) : JSON.push( this[ i ] );
 			}
 			return JSON;
@@ -2933,11 +3137,11 @@ MK.defaultBinders.push( function( el ) {
 		concat: function() {
 			var args = arguments,
 				result = this.toArray(),
-				i, j, arg;
-			for( i = 0; i < args.length; i++ ) {
+				arg;
+			for( var i = 0; i < args.length; i++ ) {
 				arg = args[ i ];
 				if( arg instanceof Array || arg && arg.instanceOf && arg.instanceOf( MK.Array ) ) {
-					for( j = 0; j < arg.length; j++ ) {
+					for( var j = 0; j < arg.length; j++ ) {
 						result.push( arg[ i ] );
 					}
 				}
@@ -2949,7 +3153,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#pull
-		 * @since v0.1
+		 * @since 0.1
 		 * @fires pull
 		 * @fires modify
 		 * @summary Removes Matreshka#Array element by given index and returns that element.
@@ -2976,8 +3180,8 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentPull
-		 * @since v0.1
-		 * @summary Works similar to {@link Matreshka.Array#pull} but without triggering events
+		 * @since 0.1
+		 * @summary Works similar to {@link Matreshka.Array#pull} but doesn't trigger events
 		 * @param {string|number} index
 		 * @returns {*} Removed element
 		 * @example <caption>Basic usage</caption>
@@ -2998,6 +3202,7 @@ MK.defaultBinders.push( function( el ) {
 		/**
 		 * @method Matreshka.Array#push
 		 * @fires push
+		 * @fires add
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push Array.prototype.push} but returns self instead of length
 		 * @param {...*} element
@@ -3012,9 +3217,10 @@ MK.defaultBinders.push( function( el ) {
 		/**
 		 * @method Matreshka.Array#pop
 		 * @fires pop
+		 * @fires remove
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop Array.prototype.pop}
-		 * @returns {mkArray} self
+		 * @returns {*|undefined} removed element
 		 * @example <caption>Basic usage</caption>
 		 * this.pop();
 		 */
@@ -3023,10 +3229,11 @@ MK.defaultBinders.push( function( el ) {
 		/**
 		 * @method Matreshka.Array#unshift
 		 * @fires unshift
+		 * @fires add
 		 * @fires modify
 		 * @param {...*} element
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift Array.prototype.unshift} but returns self instead of length
-		 * @returns {mkArray} self
+		 * @returns {*|undefined} removed element
 		 * @example <caption>Basic usage</caption>
 		 * this.unshift( 1, 2, 3 );
 		 */
@@ -3035,6 +3242,7 @@ MK.defaultBinders.push( function( el ) {
 		/**
 		 * @method Matreshka.Array#shift
 		 * @fires shift
+		 * @fires remove
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift Array.prototype.shift}
 		 * @returns {mkArray} self
@@ -3073,6 +3281,8 @@ MK.defaultBinders.push( function( el ) {
 		/**
 		 * @method Matreshka.Array#splice
 		 * @fires splice
+		 * @fires add
+		 * @fires remove
 		 * @fires modify
 		 * @summary Works similar to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice Array.prototype.splice}
 		 * @param {number} index
@@ -3086,7 +3296,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentPush
-		 * @summary Works similar to {@link Matreshka.Array#push} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#push} but doesn't trigger events
 		 * @param {...*} element
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
@@ -3096,7 +3306,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentPop
-		 * @summary Works similar to {@link Matreshka.Array#pop} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#pop} but doesn't trigger events
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
 		 * this.silentPop();
@@ -3105,7 +3315,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentUnshift
-		 * @summary Works similar to {@link Matreshka.Array#shift} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#shift} but doesn't trigger events
 		 * @param {...*} element
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
@@ -3115,7 +3325,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentShift
-		 * @summary Works similar to {@link Matreshka.Array#shift} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#shift} but doesn't trigger events
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
 		 * this.silentShift();
@@ -3124,7 +3334,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentSort
-		 * @summary Works similar to {@link Matreshka.Array#sort} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#sort} but doesn't trigger events
 		 * @param {function} compareFunction
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
@@ -3138,7 +3348,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentReverse
-		 * @summary Works similar to {@link Matreshka.Array#reverse} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#reverse} but doesn't trigger events
 		 * @returns {mkArray} self
 		 * @example <caption>Basic usage</caption>
 		 * this.silentReverse();
@@ -3147,7 +3357,7 @@ MK.defaultBinders.push( function( el ) {
 		
 		/**
 		 * @method Matreshka.Array#silentSplice
-		 * @summary Works similar to {@link Matreshka.Array#splice} but without triggering events
+		 * @summary Works similar to {@link Matreshka.Array#splice} but doesn't trigger events
 		 * @param {number} index
 		 * @param {number} howMany
 		 * @param {...*} [element]

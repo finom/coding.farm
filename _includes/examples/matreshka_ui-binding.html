@@ -1,0 +1,62 @@
+<h3 id="ui-binding"><a href="#ui-binding">Custom element binding 2 (jQuery UI example) </a></h3>
+<div class="row">
+		<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}jQuery( '.slider.ex-bind-slider' ).slider({
+	min: 0,
+	max: 100
+});
+{% endhighlight %}
+{% highlight javascript %}var mk = new MK(); // same as new Matreshka;
+
+mk
+	.bindElement( 'x', '.slider', {
+		on: 'slide',
+		getValue: function() {
+			return $( this ).slider( "value" );
+		},
+		setValue: function( v ) {
+			$( this ).slider( "value", v );
+		}
+	})
+	.bindElement( 'x', '.output', MK.binders.innerHTML() )
+;
+
+mk.x = 30;
+{% endhighlight %}
+		</div>
+		<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}<div class="slider"></div>
+<div class="output"></div>
+{% endhighlight %}			
+	</div>
+	<div class="col-lg-2 mk-example mk-example-result">
+		<div class="slider ex-bind-slider"></div>
+		<div class="output ex-bind-slider"></div>
+		<script>
+			runIt.push( function() {
+				jQuery( '.slider.ex-bind-slider' ).slider({
+					min: 0,
+					max: 100
+				});
+				
+				var mk = new MK();
+				
+				mk
+					.bindElement( 'x', '.slider.ex-bind-slider', {
+						on: 'slide',
+						getValue: function() {
+							return $( this ).slider( "value" );
+						},
+						setValue: function( v ) {
+							$( this ).slider( "value", v );
+						}
+					})
+					.bindElement( 'x', '.output.ex-bind-slider', MK.binders.innerHTML() )
+				;
+
+				mk.x = 30;
+			});
+		</script>
+	</div>
+	<div class="clearfix"></div>
+</div> 

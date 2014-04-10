@@ -1,0 +1,264 @@
+<h3 id="mk.array_itemrenderer"><a href="#mk.array_itemrenderer">Array renderer</a> <span class="label new"></span></h3>
+<p><code>MK.Array</code> could become "smart" array. This means that each time when you add/remove/sort your data, the UI will also change. You just need to set <code>.itemRenderer</code> property as function before adding any data to array. When you're adding data (eg via <code>.push</code> method) the <code>"render"</code> event triggers on added elements and MK.Array renders these items and adds them to element that bound to <code>"container"</code> key or <code>"__this__"</code> key of this array. Look carefully at this example.</p>
+<div class="row">
+	<div class="col-lg-5 mk-example mk-example-js">
+{% highlight javascript %}var mkArray = new MK.Array()
+		.bindElement( '__this__', $( '.smart-array-table tbody' ) )
+		.on( 'add', function( evt ) {
+			this.$( 'tr' ).css( 'backgroundColor', 'none' );
+			evt.added.forEach( function( item ) {
+				item.boundAll().css( 'backgroundColor', '#FEFFE3' );
+			});
+		})
+	,
+	SomeModel = Class({
+		'extends': MK.Object,
+		constructor: function( data ) {
+			this
+				.initMK()
+				.jset( data )
+				.on( 'render', function( evt ) {
+					this
+						.bindElement( this, evt.element )
+						.bindElement({
+							a: this.$( '.a' ),
+							b: this.$( '.b' ),
+							c: this.$( '.c' )
+						}, MK.binders.innerHTML() )
+					;
+				})
+			;
+		}
+	});
+	
+mkArray.itemRenderer = function() {
+	return '<tr><td class="a"></td><td class="b"></td><td class="c"></td></tr>';
+};
+
+$( '.push' ).on( 'click', function() {
+	mkArray.push( new SomeModel({
+		a: 'a',
+		b: 'b',
+		c: 'c'
+	}),
+	new SomeModel({
+		a: 'd',
+		b: 'e',
+		c: 'f'
+	}));
+});
+
+$( '.splice' ).on( 'click', function() {
+	mkArray.splice( 1, 2, new SomeModel({
+		a: 'h',
+		b: 'i',
+		c: 'j'
+	}),
+	new SomeModel({
+		a: 'k',
+		b: 'l',
+		c: 'm'
+	}));
+});
+
+$( '.pop' ).on( 'click', function() {
+	mkArray.pop();
+});
+
+$( '.unshift' ).on( 'click', function() {
+	mkArray.unshift( new SomeModel({
+		a: 'n',
+		b: 'o',
+		c: 'p'
+	}));
+});
+
+$( '.sort' ).on( 'click', function() {
+	mkArray.sort( function( x, y ) {
+		return x.a > y.a ? 1 : -1;
+	});
+});
+
+$( '.shift' ).on( 'click', function() {
+	mkArray.shift();
+});
+
+$( '.set_0_a' ).on( 'click', function() {
+	if( mkArray[ 0 ] ) {
+		mkArray[ 0 ].a = 'xxx';
+	}
+});
+
+$( '.set_1_c' ).on( 'click', function() {
+	if( mkArray[ 1 ] ) {
+		mkArray[ 1 ].c = 'yyy';
+	}
+});
+{% endhighlight %}
+	</div>
+	<div class="col-lg-5 mk-example mk-example-layout">
+{% highlight html %}
+<div>
+	<button class="push">array.push</button>
+	<button class="splice">array.splice</button>
+	<button class="pop">array.pop</button>
+	<button class="unshift">array.unshift</button>
+	<button class="sort">array.sort</button>
+	<button class="shift">array.shift</button>
+	<button class="set_0_a">array[0].a = 123</button>
+	<button class="set_1_c">array[1].c = 'xxx'</button>
+	
+</div>
+<table class="smart-array-table">
+	<thead>
+		<th>a
+		<th>b
+		<th>c
+	</thead>
+	<tbody></tbody>
+</table>
+<style>	
+	.smart-array-table {
+		width: 100%;
+	}
+	
+	.smart-array-table td {
+		width: 30%;
+	}
+</style>
+{% endhighlight %}			
+	</div>
+	<div class="col-lg-2 mk-example mk-example-result">
+		<div>
+			<button class="push ex12"><code>array.push</code></button>
+			<button class="splice ex12"><code>array.splice</code></button>
+			<button class="pop ex12"><code>array.pop</code></button>
+			<button class="unshift ex12"><code>array.unshift</code></button>
+			<button class="sort ex12"><code>array.sort</code></button>
+			<button class="shift ex12"><code>array.shift</code></button>
+			<button class="set_0_a ex12"><code>array[0].a = 123</code></button>
+			<button class="set_1_c ex12"><code>array[1].c = 'xxx'</code></button>
+			
+		</div>
+		<table class="smart-array-table">
+			<thead>
+				<th>a
+				<th>b
+				<th>c
+			</thead>
+			<tbody></tbody>
+		</table>
+		<style>
+			button.ex12 {
+				font-size: 14px;
+				width: 160px;
+				margin-bottom: 2px;
+			}
+			
+			.smart-array-table {
+				width: 100%;
+			}
+			
+			.smart-array-table td {
+				width: 30%;
+			}
+		</style>
+		<script>
+			runIt.push( function() {
+				var mkArray = new MK.Array()
+						.bindElement( '__this__', $( '.smart-array-table tbody' ) )
+						.on( 'add', function( evt ) {
+							this.$( 'tr' ).css( 'backgroundColor', 'none' );
+							evt.added.forEach( function( item ) {
+								item.boundAll().css( 'backgroundColor', '#FEFFE3' );
+							});
+						})
+					,
+					SomeModel = Class({
+						'extends': MK.Object,
+						constructor: function( data ) {
+							this
+								.initMK()
+								.jset( data )
+								.on( 'render', function( evt ) {
+									this
+										.bindElement( this, evt.element )
+										.bindElement({
+											a: this.$( '.a' ),
+											b: this.$( '.b' ),
+											c: this.$( '.c' )
+										}, MK.binders.innerHTML() )
+									;
+								})
+							;
+						}
+					});
+					
+				mkArray.itemRenderer = function() {
+					return '<tr><td class="a"></td><td class="b"></td><td class="c"></td></tr>';
+				};
+				
+				$( '.push.ex12' ).on( 'click', function() {
+					mkArray.push( new SomeModel({
+						a: 'a',
+						b: 'b',
+						c: 'c'
+					}),
+					new SomeModel({
+						a: 'd',
+						b: 'e',
+						c: 'f'
+					}));
+				});
+				
+				$( '.splice.ex12' ).on( 'click', function() {
+					mkArray.splice( 1, 2, new SomeModel({
+						a: 'h',
+						b: 'i',
+						c: 'j'
+					}),
+					new SomeModel({
+						a: 'k',
+						b: 'l',
+						c: 'm'
+					}));
+				});
+				
+				$( '.pop.ex12' ).on( 'click', function() {
+					mkArray.pop();
+				});
+				
+				$( '.unshift.ex12' ).on( 'click', function() {
+					mkArray.unshift( new SomeModel({
+						a: 'n',
+						b: 'o',
+						c: 'p'
+					}));
+				});
+				
+				$( '.sort.ex12' ).on( 'click', function() {
+					mkArray.sort( function( x, y ) {
+						return x.a > y.a ? 1 : -1;
+					});
+				});
+				
+				$( '.shift.ex12' ).on( 'click', function() {
+					mkArray.shift();
+				});
+				
+				$( '.set_0_a.ex12' ).on( 'click', function() {
+					if( mkArray[ 0 ] ) {
+						mkArray[ 0 ].a = 'xxx';
+					}
+				});
+				
+				$( '.set_1_c.ex12' ).on( 'click', function() {
+					if( mkArray[ 1 ] ) {
+						mkArray[ 1 ].c = 'yyy';
+					}
+				});
+			});
+		</script>
+	</div>
+</div> 
+ 
