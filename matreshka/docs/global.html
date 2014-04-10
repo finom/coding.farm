@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>New layout</title>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<style>
-	@import "../../bootstrap/css/bootstrap.min.css";
-	@import "../../bootstrap/css/bootstrap-theme.min.css";
-	@import "../../css/syntax.css";
-	@import "../../css/style.css";
-</style>
+		<meta charset="utf-8">
+<title>New layout</title>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="../../css/syntax.css" rel="stylesheet" type="text/css">
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<link href="../../css/ie8.css" rel="stylesheet" type="text/css">
+<script src="../../js/es5-shim.min.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
 	</head>
 	<body class="docs">
 		<header>
-			<div class="wrap">
+			<div class="modern-b typo">Found inaccuracy or typo? <br> Select it and press <button>CTRL</button>+<button>Enter</button></div>
+<div class="wrap">
 	<div class="logo">
 		<img src="../../../img/mk-logo-colour.svg" height="80">
 		<span>Matreshka.js</span>
@@ -24,7 +33,7 @@
 		<a href="../../matreshka/examples" >Examples</a>
 		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
 	</nav>
-</div> 
+</div>
 
 		</header>
 		<main>
@@ -125,7 +134,7 @@
     
     
     <div class="description">
-        <p>Balalaika is tiny (997 bytes uncompressed) embedded library that makes easier vanilla.js (pure JS) coding. This is individual project and will be presented on github soon.</p>
+        <p>Balalaika is tiny (999 bytes uncompressed) embedded library that makes easier vanilla.js (pure JS) coding. This is individual project and will be presented on github soon.</p>
 
 <p>It's using in <a href="http://finom.github.io/matreshka">Matreshka</a> framework as DOM utilite when jQuery is not defined.</p>
 
@@ -210,7 +219,7 @@
 
     <pre class="prettyprint"><code> $( '.button' ).on( 'click.mynamespace', ... );</code></pre>
 
-    <pre class="prettyprint"><code> $( '.button' ).off( '.mynamespace' );</code></pre>
+    <pre class="prettyprint"><code> $( '.button' ).off( 'click.mynamespace' );</code></pre>
 
     
 </dd>
@@ -533,7 +542,7 @@
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line869">line 869</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line971">line 971</a></dd>
     
     
     
@@ -613,7 +622,7 @@ this.forEach( callback );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1534">line 1534</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1518">line 1518</a></dd>
     
     
     
@@ -630,7 +639,7 @@ this.forEach( callback );</code></pre>
             
                 
 <dt>
-    <h4 class="name" id="elementOptions"><a href="#elementOptions">elementOptions</a> 
+    <h4 class="name" id="binder"><a href="#binder">binder</a> 
         
 <span class="param-type label label-type label-type-object">object</span>
 
@@ -642,7 +651,7 @@ this.forEach( callback );</code></pre>
 <dd>
     
     <div class="description">
-        <code>elementOptions</code> contains information about how to extract value from an element, how to set value for an element and which element's event we have to listen
+        <code>binder</code> contains information about how to extract value from an element, how to set value for an element and which element's event we have to listen
     </div>
     
     
@@ -802,7 +811,7 @@ this.forEach( callback );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1538">line 1538</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1522">line 1522</a></dd>
     
     
     
@@ -816,12 +825,12 @@ this.forEach( callback );</code></pre>
     
         <div>Example</div>
         
-    <pre class="prettyprint"><code>var elementOptions = {
+    <pre class="prettyprint"><code>var binder = {
 	on: 'click',
 	getValue: function() { return this.value; } 
 	setValue: function( v ) { this.value = v; } 
 };
-this.bindElement( 'a', '.my-checkbox', elementOptions );</code></pre>
+this.bindElement( 'a', '.my-checkbox', binder );</code></pre>
 
     
 </dd>
@@ -938,7 +947,7 @@ this.bindElement( 'a', '.my-checkbox', elementOptions );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1530">line 1530</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1514">line 1514</a></dd>
     
     
     
@@ -1013,7 +1022,7 @@ this.trigger( 'fyeah', 'foo', 'bar', 'baz' ); // logs 'foo', 'bar', 'baz'</code>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1536">line 1536</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1520">line 1520</a></dd>
     
     
     
@@ -1074,7 +1083,7 @@ this.on( eventNames, function() {} );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1540">line 1540</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1524">line 1524</a></dd>
     
     
     
@@ -1144,7 +1153,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka.js.html">matreshka.js</a>, <a href="matreshka.js.html#line1532">line 1532</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1516">line 1516</a></dd>
     
     
     
@@ -1201,7 +1210,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="array.mk.js.html">array.mk.js</a>, <a href="array.mk.js.html#line867">line 867</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line969">line 969</a></dd>
     
     
     
@@ -1258,7 +1267,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="object.mk.js.html">object.mk.js</a>, <a href="object.mk.js.html#line348">line 348</a></dd>
+    <dd class="tag-source"><a href="matreshka-object.js.html">matreshka-object.js</a>, <a href="matreshka-object.js.html#line348">line 348</a></dd>
     
     
     
@@ -1287,12 +1296,16 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Apr 10 2014 21:27:31 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>
 		</main>
-		<footer></footer>
+		<footer><script src="../../js/typo.js"></script>
+
+
+</footer>
+		
 	</body>
 </html>

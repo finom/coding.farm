@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>New layout</title>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<style>
-	@import "../../bootstrap/css/bootstrap.min.css";
-	@import "../../bootstrap/css/bootstrap-theme.min.css";
-	@import "../../css/syntax.css";
-	@import "../../css/style.css";
-</style>
+		<meta charset="utf-8">
+<title>New layout</title>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="../../css/syntax.css" rel="stylesheet" type="text/css">
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<link href="../../css/ie8.css" rel="stylesheet" type="text/css">
+<script src="../../js/es5-shim.min.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
 	</head>
 	<body class="docs">
 		<header>
-			<div class="wrap">
+			<div class="modern-b typo">Found inaccuracy or typo? <br> Select it and press <button>CTRL</button>+<button>Enter</button></div>
+<div class="wrap">
 	<div class="logo">
 		<img src="../../../img/mk-logo-colour.svg" height="80">
 		<span>Matreshka.js</span>
@@ -24,7 +33,7 @@
 		<a href="../../matreshka/examples" >Examples</a>
 		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
 	</nav>
-</div> 
+</div>
 
 		</header>
 		<main>
@@ -65,17 +74,53 @@
 <!-- 
  -->
 
-	<h2>Doc index</h2>
+	<h2>Matreshka documentation</h2>
+	<p>Wellcome to Matreshka docs. You can find there explanations of what any method or property does. Some methods marked as <b>deprecated</b>. That means that these methods will be removed in next major version.</p>
+	
+	<h3>How to use Matreshka?</h3>
+	<p>There are 3 cases how to attach Matreshka to your page.</p>
+	
+	<h4>IE9+ using jQuery</h4>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/matreshka.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+
+<h4>IE9+ without jQuery</h4>
+<p>Matreshka doesn't require jQuery from version 0.1.0. If jQuery is not included, Matreshka will use own tiny DOM utilite called <code>Balalaika</code>.</p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/matreshka.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+
+<h4>IE8</h4>
+<p>Pay attention that Balalaika works with modern browsers only. If you use Internet Explorer 8, you still need jQuery. Besides, Mateshka (Matreshka.Array) requires modern Array.prototype methods so you must use polyfill <a href="https://github.com/es-shims/es5-shim">called es5-shim</a></p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/es5-shim.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/matreshka.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+
+<h3>How to attach scripts as is?</h3>
+<p>If you're developer and if you'd like to run Matreska source files, keep order as described below.</p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/es5-shim/es5-shim.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> <span class="c">&lt;!-- Required for IE8 --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/jquery/dist/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> <span class="c">&lt;!-- Required for IE8 --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/polyfills/classlist.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> <span class="c">&lt;!-- Required for IE8 and IE9 --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/xclass.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/balalaika.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/balalaika-plugins.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/matreshka-core.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/matreshka-binders.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/matreshka-object.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;src/matreshka-array.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
     <!--<section>
         <article><h1>Matreshka v0.1</h1>
 
-<p><a href="https://github.com/finom/matreshka/releases">Download</a></p>
+<h3><a href="https://github.com/finom/matreshka/releases">Download</a></h3>
 
-<p>Matreshka - is the tiny (15KB uncompressed, 5KB gzipped) client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:
-<em> binding of DOM elements to the data
-</em> model events
-<em> Pub/Sub pattern
-</em> improved data types (MK.Array and MK.Object)</p>
+<p>[<img alt="Matreshka Website" src="http://finom.github.io/img/mk-logo-colour.svg)](http://finom.github.io/matreshka"/></p>
+
+<p>Matreshka - is the small (25KB uncompressed, 8KB gzipped) client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:
+<em> DOM-data bindings
+</em> Events of data change
+* Improved data types (MK.Array and MK.Object)</p>
 
 <p>Forget that you have a UI, because it changes automatically when the data changes.</p>
 
@@ -83,11 +128,10 @@
 
 <h4>Plug in Matreshka to your app</h4>
 
-<p><code>html
-&lt;!-- Latest version of jQuery 1.X or 2.X --&gt;
-&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;build/matreshka.all.min.js&quot;&gt;&lt;/script&gt;
-&lt;!-- that&#39;s all --&gt;
+<p>More info about how to attach Matreshka to your page ou can find in <a href="http://finom.github.io/matreshka/docs/">documentation</a>
+<code>html
+&lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js//matreshka.min.js&quot;&gt;&lt;/script&gt;
 </code></p>
 
 <h4>Matreshka (main class) using</h4>
@@ -144,39 +188,42 @@ mkArray = new MK.Array( 1, 2, 3, 4 );</p>
 
 <p><a href="http://finom.github.io/matreshka/examples/">More live examples</a></p>
 
-<h2>Documentation</h2>
+<h2><a href="http://finom.github.io/matreshka/docs/">Documentation</a></h2>
 
-<p><a href="http://finom.github.io/matreshka/docs/Matreshka.html">Matreshka</a></p>
+<h2>Known issues in Internet Explorer 8</h2>
 
-<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a></p>
+<ul><li><strong>.toString</strong> method doesn&#39;t work (fixable)</li><li><strong>MK.Object</strong>: <strong>for..in</strong> cycle works buggy because of restriction of <strong>Object.defineProperty</strong> in IE8. Use <strong>.each</strong> method instead</li></ul>
 
-<p><a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html">MK.Array</a></p>
+<h2>Known issues because of Internet Explorer 8</h2>
+
+<p>These bugs will be fixed in Matreshka v1.0 when IE8 support will be removed
+<strong>MK.Array</strong>: Standard iterators (.forEeach, .map, .some) takes native array as third callback&#39;s element.
+For example
+<code>js
+var array = new MK.Array( 1, 2, 3, 4, 5 );
+array.forEach( function( item, index, self ) {
+	alert( array === self ); // false
+});
+</code></p>
 
 <h2><a href="https://github.com/finom/matreshka/releases">Release History</a></h2>
 
 <h2>Roadmap</h2>
 
-<ul><li>Allow to use numbers in MK.Object#<strong>addJSONKeys</strong> and MK.Object#<strong>removeJSONKeys</strong></li><li>Return removed element from MK.Array#pop and MK.Array#shift methods</li><li>Do nothing if undefined is passed to MK.Object#<strong>addJSONKey</strong>s and MK.Object#<strong>removeJSONKeys</strong> (now throws error)</li><li>Remove jQuery dependence (create mQuery(?))</li><li>Use element as <strong>this</strong> in MK.elementProcessors functions</li><li>Merge <strong>MK.DOMArray</strong> with <strong>MK.Array</strong></li><li>Listen <strong>&#39;keyup&#39;</strong> event for checkboxes/radios (if keyboard is using) (MK.elementProcessors)</li><li>Listen <strong>&#39;paste&#39;</strong> event for input[type=&quot;text&quot;] and textarea (MK.elementProcessors)</li><li>Think about how to create shortcut when listening many properties change
-<code></code>`js
-this.on( &#39;change:a change:b change:c change:d change:e change:f change:g&#39; );
-// →
-this.on( &#39;change:[a b c d e f g]&#39; ); // ?</li><li>Create MK#<strong>addDependence</strong> method</li></ul>
-
-<p><code>js
+<ul><li>v0.2 <strong>MK.Array#Model</strong> property (very close to Backbone style)</li><li>v0.2 <strong>MK.Object#renderer</strong> method (overrides MK.Array#itemRenderer for that item)</li><li>v0.2 <strong>Lazy initialization.</strong> No need to run <strong>.initMK</strong> method</li><li>v0.2 Optimize methods speed<ul><li><strong>bound</strong></li></ul></li><li>v1.0 Screw Internet Explorer 8. IE8 Support Ends April 8, 2014.</li><li>Do <strong>defineSetter</strong> method</li><li>New event engine <ul><li><strong>evt.stopEventsChain</strong> method</li><li><strong>evt.type</strong> property</li><li>Event of collection item change</li><li>CSS selectors for DOM events
+<code>js
+this.on( &#39;click::something(.x &gt; .y)&#39; )
+</code></li><li>etc</li></ul></li><li>Optimize code for minifier</li><li>Allow to render regular objects using <strong>MK.Array#itemRenderer</strong></li><li>Improve <strong>addDependence</strong> method to make possible to add dependence between other instances keys (not only current instance key)</li><li>Somehow add same event handler for multiple instances</li><li>~~Allow to use numbers in MK.Object#<strong>addJSONKeys</strong> and MK.Object#<strong>removeJSONKeys</strong>~~</li><li>~~Return removed element from MK.Array#pop and MK.Array#shift methods~~</li><li>~~Do nothing if undefined is passed to MK.Object#<strong>addJSONKey</strong>s and MK.Object#<strong>removeJSONKeys</strong> (now throws error)~~</li><li>~~Remove jQuery dependence (create mQuery(?))~~</li><li>~~Use element as <strong>this</strong> in MK.elementProcessors functions~~</li><li>~~Merge <strong>MK.DOMArray</strong> with <strong>MK.Array</strong>~~</li><li>~~Listen <strong>&#39;keyup&#39;</strong> event for checkboxes/radios (if keyboard is using) (MK.elementProcessors)~~`</li><li>~~Listen <strong>&#39;paste&#39;</strong> event for input[type=&quot;text&quot;] and textarea (MK.elementProcessors)~~</li><li><p>~~Create MK#<strong>addDependence</strong> method~~
+<code>js
 mk.addDependence( &#39;perimeter&#39;, &#39;a b&#39;, function() { return ( this.a + this.b ) * 2} );
 mk.addDependence( &#39;a&#39;, &#39;perimeter b&#39;, function() { return this.perimeter/2 - this.b } );
 mk.addDependence( &#39;b&#39;, &#39;perimeter a&#39;, function() { return this.perimeter/2 - this.a } );
-</code></p>
-
-<ul><li>Make possible to add DOM events like so:</li></ul>
-
-<p><code>js
+</code></p></li><li><p>~~Make possible to add DOM events like so:~~
+<code>js
 mk.on( &#39;click::myKey&#39;, f );
 // Instead of
 // mk.$el( &#39;myKey&#39; ).on( &#39;click&#39;, f.bind( this ) );
-</code></p>
-
-<ul><li>Plugins<ul><li>MK.MVVM</li><li>MK.Hash</li><li>MK.Table</li></ul></li></ul>
+</code></p></li></ul>
 
 <hr/>
 
@@ -201,12 +248,16 @@ mk.on( &#39;click::myKey&#39;, f );
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed Feb 19 2014 21:37:52 GMT+0200 (EET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Apr 10 2014 21:27:31 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>
 		</main>
-		<footer></footer>
+		<footer><script src="../../js/typo.js"></script>
+
+
+</footer>
+		
 	</body>
 </html>
