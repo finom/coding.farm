@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-<title>New layout</title>
+<title>Matreshka Documentation - Class: Object</title>
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">
 <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
@@ -22,10 +22,10 @@
 		<header>
 			<div class="modern-b typo">Found inaccuracy or typo? <br> Select it and press <button>CTRL</button>+<button>Enter</button></div>
 <div class="wrap">
-	<div class="logo">
+	<a class="logo" href="../../matreshka">
 		<img src="../../../img/mk-logo-colour.svg" height="80">
 		<span>Matreshka.js</span>
-	</div>
+	</a>
 	<nav>
 		<a href="../../matreshka" >Home</a>
 		<a href="../../matreshka/about" >Why Matreshka</a>
@@ -76,6 +76,7 @@
     
         
 <dt>
+	<a id="Object"></a>
     <h4 class="name" id="Object"><a class="method-anchor" href="#Object"> <span class="type-signature"></span>new Object</a><span class="signature">()</span><span class="type-signature"></span></h4>
     
     
@@ -200,6 +201,7 @@ new MK.Object({ a: 1, b: 2 });
         <dl>
             
 <dt>
+	<a id="addJSONKeys"></a>
     <h4 class="name" id="addJSONKeys"><a class="method-anchor" href="#addJSONKeys"> <span class="type-signature"></span>addJSONKeys</a><span class="signature">(keys)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -371,6 +373,7 @@ this.each( function( value, key ) {
         
             
 <dt>
+	<a id="each"></a>
     <h4 class="name" id="each"><a class="method-anchor" href="#each"> <span class="type-signature"></span>each</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -560,6 +563,7 @@ this.each( function( value, key ) {
         
             
 <dt>
+	<a id="hasOwnProperty"></a>
     <h4 class="name" id="hasOwnProperty"><a class="method-anchor" href="#hasOwnProperty"> <span class="type-signature"></span>hasOwnProperty</a><span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -708,6 +712,7 @@ mkObject.hasOwnProperty( 'c' ); // false</code></pre>
         
             
 <dt>
+	<a id="initMK"></a>
     <h4 class="name" id="initMK"><a class="method-anchor" href="#initMK"> <span class="type-signature"></span>initMK</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -807,6 +812,7 @@ mkObject.hasOwnProperty( 'c' ); // false</code></pre>
         
             
 <dt>
+	<a id="jset"></a>
     <h4 class="name" id="jset-1"><a class="method-anchor" href="#jset-1"> <span class="type-signature"></span>jset</a><span class="signature">(key, value, <span class="optional">evtOpts</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -1074,6 +1080,7 @@ this.b = 4;</code></pre>
         
             
 <dt>
+	<a id="jset"></a>
     <h4 class="name" id="jset-2"><a class="method-anchor" href="#jset-2"> <span class="type-signature"></span>jset</a><span class="signature">(keyValuePairs, evtOpts)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -1257,6 +1264,7 @@ this.b = 4;</code></pre>
         
             
 <dt>
+	<a id="keyOf"></a>
     <h4 class="name" id="keyOf"><a class="method-anchor" href="#keyOf"> <span class="type-signature"></span>keyOf</a><span class="signature">()</span><span class="type-signature"> &rarr; {string|null}</span></h4>
     
     
@@ -1413,6 +1421,7 @@ mkObject.keyOf( 3 ); // null</code></pre>
         
             
 <dt>
+	<a id="keys"></a>
     <h4 class="name" id="keys"><a class="method-anchor" href="#keys"> <span class="type-signature"></span>keys</a><span class="signature">()</span><span class="type-signature"> &rarr; {string[]}</span></h4>
     
     
@@ -1507,6 +1516,7 @@ mkObject.keyOf( 3 ); // null</code></pre>
         
             
 <dt>
+	<a id="removeJSONKeys"></a>
     <h4 class="name" id="removeJSONKeys"><a class="method-anchor" href="#removeJSONKeys"> <span class="type-signature"></span>removeJSONKeys</a><span class="signature">(keys)</span><span class="type-signature"> &rarr; {<a href="global.html#mkObject">mkObject</a>}</span></h4>
     
     
@@ -1670,6 +1680,7 @@ mkObject.keyOf( 3 ); // null</code></pre>
         
             
 <dt>
+	<a id="toJSON"></a>
     <h4 class="name" id="toJSON"><a class="method-anchor" href="#toJSON"> <span class="type-signature"></span>toJSON</a><span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
     
@@ -1766,6 +1777,7 @@ mkObject.keyOf( 3 ); // null</code></pre>
         
             
 <dt>
+	<a id="toNative"></a>
     <h4 class="name" id="toNative"><a class="method-anchor" href="#toNative"> <span class="type-signature"></span>toNative</a><span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
     
@@ -1859,6 +1871,7 @@ mkObject.toNative(); // returns { a: 1, b: 2 }</code></pre>
         
             
 <dt>
+	<a id="toObject"></a>
     <h4 class="name" id="toObject"><a class="method-anchor" href="#toObject"> <span class="type-signature"></span>toObject</a><span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
     
@@ -2027,7 +2040,7 @@ mkObject.toObject(); // returns { a: 1, b: 2 }</code></pre>
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Apr 10 2014 21:27:31 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Sat Apr 12 2014 13:55:01 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
