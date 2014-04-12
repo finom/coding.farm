@@ -52,6 +52,8 @@ header .logo {
 	font-size: 40px;
 	font-weight: 300;
 	line-height: 100%;
+	color: #444;
+	text-decoration: none;
 }
 
 header .logo img {
