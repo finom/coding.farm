@@ -60,7 +60,7 @@ header .logo img {
 	vertical-align: top;
 }
 
-header .logo span {
+header .logo .logo-text {
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 3px;
