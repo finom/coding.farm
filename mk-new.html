@@ -1,0 +1,38 @@
+<body>
+	<div class="app">
+		<div>
+			<div mk-bind="vasia as innerHTML()"></div>
+			<div>
+				<div mk-bind="vova"></div>
+			</div>
+		</div>
+		<div>
+			<div mk-each="phone in phones">
+				<div>
+					<input mk-bind="phone.number">
+					<div mk-each="vasia in phone.vasias">
+						<span>
+							<input mk-bind="phone.hehey as className('!volodia')">
+							<input mk-bind="vasia.volodia as superInput">
+						</span>
+					</div>
+				</div>
+			</div>
+			<div mk-each="phone in phones">
+				...
+			</div>
+		</div>-
+	</div>
+</body>
+<script>
+	this.process = function( node ) {
+		$( node.children ).forEach( function( child ) {
+			var attrValue;
+			if( attrValue = child.getAttribute( 'mk-bind' ) ) {
+				
+			}
+		});	
+	};
+	Model.ptt.itemRenderer = fucntion() { ...  }
+	Model.templateKey = 'vasia.volodia'; //что делать если модель содержится в нескольких кллекциях?
+</script>

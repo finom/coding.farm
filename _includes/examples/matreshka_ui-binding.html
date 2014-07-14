@@ -1,11 +1,6 @@
 <h3 id="ui-binding"><a href="#ui-binding">Custom element binding 2 (jQuery UI example) </a></h3>
 <div class="row">
 		<div class="col-lg-5 mk-example mk-example-js">
-{% highlight javascript %}jQuery( '.slider.ex-bind-slider' ).slider({
-	min: 0,
-	max: 100
-});
-{% endhighlight %}
 {% highlight javascript %}var mk = new MK(); // same as new Matreshka;
 
 mk
@@ -16,6 +11,12 @@ mk
 		},
 		setValue: function( v ) {
 			$( this ).slider( "value", v );
+		},
+		initialize: function() {
+			jQuery( this ).slider({
+				min: 0,
+				max: 100
+			});
 		}
 	})
 	.bindElement( 'x', '.output', MK.binders.innerHTML() )
@@ -34,10 +35,7 @@ mk.x = 30;
 		<div class="output ex-bind-slider"></div>
 		<script>
 			runIt.push( function() {
-				jQuery( '.slider.ex-bind-slider' ).slider({
-					min: 0,
-					max: 100
-				});
+				
 				
 				var mk = new MK();
 				
@@ -49,6 +47,12 @@ mk.x = 30;
 						},
 						setValue: function( v ) {
 							$( this ).slider( "value", v );
+						},
+						initialize: function() {
+							jQuery( this ).slider({
+								min: 0,
+								max: 100
+							});
 						}
 					})
 					.bindElement( 'x', '.output.ex-bind-slider', MK.binders.innerHTML() )

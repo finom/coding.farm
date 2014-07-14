@@ -8,10 +8,15 @@ cd ../../matreshka
 npm i & grunt
 
 cd ../finom.github.io
-cp ../matreshka/build/*.js js
+cp ../matreshka/matreshka.min.js js
+cp ../matreshka/matreshka.js ../todomvc/labs/architecture-examples/matreshka/bower_components/matreshka/
+docco ../todomvc/labs/architecture-examples/matreshka/js/*.js --output ../todomvc/labs/architecture-examples/matreshka/docs/
+cp -r ../todomvc/labs/architecture-examples/matreshka/ ./matreshka/todo/
 
 echo "Start Jekyll"
 jekyll build
 echo "Done Jekyll"
+
+
 
 echo "Done All"

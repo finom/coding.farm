@@ -29,8 +29,38 @@ h4.name {
 	color: #999;
 }
 
-nav.navigation { position: fixed; top: 120px; right: -1px; background: rgba(255,255,255,.9);  padding: 20px; border-top-left-radius: 5px;
-border-bottom-left-radius: 5px; border: 1px solid #f0f0f0; }
+nav.navigation {
+	position: fixed;
+	top: 120px;
+	left: 0;
+	background: rgba(255,255,255,.9);
+	padding: 20px;
+	padding-left: 50px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+nav.navigation a {
+	display: inline-block;
+	width: 130px;
+	padding-left: 10px;
+	line-height: 30px;
+}
+nav.navigation a.selected {
+	background: #C0CA55;
+	color: #fff;
+	position: relative;
+}
+nav.navigation a.selected:after {
+	content: '';
+	right: -8px;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 15px 0 15px 8px;
+	border-color: transparent transparent transparent #C0CA55;
+	
+}
 
 .label-type {
 	font-family: Consolas, "Lucida Console", Monaco, monospace;
@@ -95,5 +125,8 @@ table.params thead td, table.props thead td  {
 .tag-todo ul { margin-left: 80px; }
 
 .description { font-weight: 300; }
+.description ul {
+	margin-left: 30px;
+}
 
 p.summary { font-weight: 400; }

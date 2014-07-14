@@ -11,7 +11,7 @@
 {% highlight javascript %}var     mkObject = new MK.Object,
 	result;
 
-// making 'a' and 'b' data keys
+// making 'a' and 'b' to be enuberable fot this instance ("data keys")
 mkObject.jset({
 	a: 1,
 	b: 2
@@ -19,7 +19,7 @@ mkObject.jset({
 
 mkObject.b = 3;
 
-// c is not data so it's not part of result
+// c is not "data" so it's not a part of result
 // of the .toJSON method
 mkObject.c = 4;
 

@@ -1,5 +1,5 @@
 <h3 id="mk.array_itemrenderer"><a href="#mk.array_itemrenderer">Array renderer</a> <span class="label new"></span></h3>
-<p><code>MK.Array</code> could become "smart" array. This means that each time when you add/remove/sort your data, the UI will also change. You just need to set <code>.itemRenderer</code> property as function before adding any data to array. When you're adding data (eg via <code>.push</code> method) the <code>"render"</code> event triggers on added elements and MK.Array renders these items and adds them to element that bound to <code>"container"</code> key or <code>"__this__"</code> key of this array. Look carefully at this example.</p>
+<p><code>MK.Array</code> can become "smart" array. It means that each time when you add/remove/sort your data, the UI will also change. You just need to set <code>.itemRenderer</code> property as function before adding any data to array. When you're adding data (eg via <code>.push</code> method) the <code>"render"</code> event triggers on added elements and MK.Array renders these items and adds them to element that bound to <code>"container"</code> key or <code>"__this__"</code> key of this array. Look carefully at this example.</p>
 <div class="row">
 	<div class="col-lg-5 mk-example mk-example-js">
 {% highlight javascript %}var mkArray = new MK.Array()

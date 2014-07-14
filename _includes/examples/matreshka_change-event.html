@@ -1,5 +1,5 @@
-<h3 id="change-event"><a href="#change-event"><code>change:</code> event</a></h3>
-<p>Matreshka allows you to listen property change event. When you're adding listener for <code>change:%PROPERTY_NAME%</code> event, Matreshka creates setter for this property. It means that you can change the property directly, without calling methods such as <code>.set</code>.</p>
+<h3 id="change-event"><a href="#change-event"><code>change:KEY</code> event</a></h3>
+<p>Matreshka allows you to listen property change event. When you're adding listener for <code>change:KEY</code> event, Matreshka creates setter for this property. It means that you can change the property directly, without calling methods such as <code>.set</code>.</p>
 	<div class="row">
 		
 		<div class="col-lg-5 mk-example mk-example-js">
@@ -29,7 +29,7 @@ mk.x = 5;
 						$( '.output.ex2' ).html( text );
 					});
 
-					mk.x = 5;
+					mk.x = 5; // !
 				});
 			</script>
 		</div>

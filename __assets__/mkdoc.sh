@@ -9,6 +9,6 @@ sh ./jsdoc/jsdoc \
 ../../matreshka/src/matreshka-array.js \
 ../../matreshka/src/matreshka-object.js \
 ../../matreshka/src/balalaika.js \
-../../matreshka/src/balalaika-plugins.js \
+../../matreshka/src/balalaika-extended.js \
 ../../matreshka/README.md -d ../matreshka/docs/ -t jsdoc/templates/matreshka
 echo "Done JSDoc"
