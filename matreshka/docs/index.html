@@ -62,24 +62,24 @@ require(['path/to/matreshka'], function(MK) {
 {% endhighlight %}
 
     <!--<section>
-        <article><h1>Matreshka v0.1</h1>
+        <article><h1>Matreshka v0.2</h1>
 
 <h3><a href="https://github.com/finom/matreshka/releases">Download</a></h3>
 
 <p>[<img alt="Matreshka Website" src="http://finom.github.io/img/mk-logo-colour.svg)](http://finom.github.io/matreshka"/></p>
 
-<p>Matreshka - is the small (25KB uncompressed, 8KB gzipped) client-side Javascript framework that allows you to build your application a new way. The main advantages of Matreshka are:
-<em> DOM-data bindings
-</em> Events of data change
-* Improved data types (MK.Array and MK.Object)</p>
+<p>Matreshka - is the small and powerful client-side Javascript framework that allows you to build your applications a new way. The main advantages of Matreshka are:
+<em> Data-DOM bindings
+</em> Firing events when data changes
+* Improved data types (Matreshka.Array and Matreshka.Object)</p>
 
-<p>Forget that you have a UI, because it changes automatically when the data changes.</p>
+<p>Forget that you have an UI, because it changes automatically when the data changes!</p>
 
 <h2>Getting started</h2>
 
 <h4>Plug in Matreshka to your app</h4>
 
-<p>More info about how to attach Matreshka to your page ou can find in <a href="http://finom.github.io/matreshka/docs/">documentation</a>
+<p>More info about how to attach Matreshka to your page you can find on <a href="http://finom.github.io/matreshka/docs/">documentation</a>
 <code>html
 &lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;js/matreshka.min.js&quot;&gt;&lt;/script&gt;
@@ -147,8 +147,9 @@ mkArray = new MK.Array( 1, 2, 3, 4 );</p>
 
 <h2>Known issues because of Internet Explorer 8</h2>
 
-<p>These bugs will be fixed in Matreshka v1.0 when IE8 support will be removed
-<strong>MK.Array</strong>: Standard iterators (.forEeach, .map, .some) takes native array as third callback&#39;s element.
+<p>These bugs will be fixed in Matreshka v1.0 when IE8 support will be removed</p>
+
+<p><strong>MK.Array</strong>: Standard iterators (.forEeach, .map, .some) takes native array as third callback&#39;s element.
 For example
 <code>js
 var array = new MK.Array( 1, 2, 3, 4, 5 );
@@ -159,22 +160,12 @@ array.forEach( function( item, index, self ) {
 
 <h2><a href="https://github.com/finom/matreshka/releases">Release History</a></h2>
 
-<h2>Roadmap</h2>
+<h2>Todo</h2>
 
-<ul><li>v0.2 <strong>MK.Array#Model</strong> property (very close to Backbone style)</li><li>v0.2 <strong>MK.Object#renderer</strong> method (overrides MK.Array#itemRenderer for that item)</li><li>v0.2 <strong>Lazy initialization.</strong> No need to run <strong>.initMK</strong> method</li><li>v0.2 Optimize methods speed<ul><li><strong>bound</strong></li></ul></li><li>v1.0 Screw Internet Explorer 8. IE8 Support Ends April 8, 2014.</li><li>Do <strong>defineSetter</strong> method</li><li>New event engine <ul><li><strong>evt.stopEventsChain</strong> method</li><li><strong>evt.type</strong> property</li><li>Event of collection item change</li><li>CSS selectors for DOM events
+<ul><li><strong>MK.Object#renderer</strong> method (overrides MK.Array#itemRenderer)</li><li><strong>Lazy initialization.</strong> No need to run <strong>.initMK</strong> method</li><li>v1.0 - Screw Internet Explorer 8. IE8 Support Ends April 8, 2014.</li><li>CSS selectors for DOM events
 <code>js
 this.on( &#39;click::something(.x &gt; .y)&#39; )
-</code></li><li>etc</li></ul></li><li>Optimize code for minifier</li><li>Allow to render regular objects using <strong>MK.Array#itemRenderer</strong></li><li>Improve <strong>addDependence</strong> method to make possible to add dependence between other instances keys (not only current instance key)</li><li>Somehow add same event handler for multiple instances</li><li>~~Allow to use numbers in MK.Object#<strong>addJSONKeys</strong> and MK.Object#<strong>removeJSONKeys</strong>~~</li><li>~~Return removed element from MK.Array#pop and MK.Array#shift methods~~</li><li>~~Do nothing if undefined is passed to MK.Object#<strong>addJSONKey</strong>s and MK.Object#<strong>removeJSONKeys</strong> (now throws error)~~</li><li>~~Remove jQuery dependence (create mQuery(?))~~</li><li>~~Use element as <strong>this</strong> in MK.elementProcessors functions~~</li><li>~~Merge <strong>MK.DOMArray</strong> with <strong>MK.Array</strong>~~</li><li>~~Listen <strong>&#39;keyup&#39;</strong> event for checkboxes/radios (if keyboard is using) (MK.elementProcessors)~~`</li><li>~~Listen <strong>&#39;paste&#39;</strong> event for input[type=&quot;text&quot;] and textarea (MK.elementProcessors)~~</li><li><p>~~Create MK#<strong>addDependence</strong> method~~
-<code>js
-mk.addDependence( &#39;perimeter&#39;, &#39;a b&#39;, function() { return ( this.a + this.b ) * 2} );
-mk.addDependence( &#39;a&#39;, &#39;perimeter b&#39;, function() { return this.perimeter/2 - this.b } );
-mk.addDependence( &#39;b&#39;, &#39;perimeter a&#39;, function() { return this.perimeter/2 - this.a } );
-</code></p></li><li><p>~~Make possible to add DOM events like so:~~
-<code>js
-mk.on( &#39;click::myKey&#39;, f );
-// Instead of
-// mk.$el( &#39;myKey&#39; ).on( &#39;click&#39;, f.bind( this ) );
-</code></p></li></ul>
+</code></li><li>Allow to render regular objects using <strong>MK.Array#itemRenderer</strong></li></ul>
 
 <hr/>
 
@@ -186,9 +177,7 @@ mk.on( &#39;click::myKey&#39;, f );
 
 <p><strong>License:</strong> <a href="https://raw.github.com/finom/matreshka/master/LICENSE">MIT License</a></p>
 
-<p><strong>Support/Discussion</strong>: <a href="https://groups.google.com/forum/#!forum/matreshkajs">ENG</a>, <a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">RUS</a></p>
-
-<p>[<img alt="Bitdeli Badge" title="Bitdeli Badge" src="https://d2weczhvl823v0.cloudfront.net/finom/matreshka/trend.png)](https://bitdeli.com/free"/></p></article>
+<p><strong>Support/Discussion</strong>: <a href="https://groups.google.com/forum/#!forum/matreshkajs">ENG</a>, <a href="https://groups.google.com/forum/#!forum/matreshkajs-rus">RUS</a></p></article>
     </section>-->
 
 
@@ -201,7 +190,7 @@ mk.on( &#39;click::myKey&#39;, f );
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jul 14 2014 16:53:20 GMT+0400 (EET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jul 14 2014 18:46:45 GMT+0400 (EET)
 </footer>
 
 <script> prettyPrint(); </script>
