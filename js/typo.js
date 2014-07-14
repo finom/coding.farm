@@ -16,7 +16,7 @@
 					var selectionText = window.getSelection().toString(),
 						commentText;
 					if( selectionText ) {
-						commentText = prompt( 'Selected text:\n\n"' + selectionText + '"\n\nYour Comment:' );
+						commentText = prompt( 'Thanks! You\'re selected:\n\n"' + selectionText + '"\n\nYour Comment:' );
 						if( commentText !== null ) {
 							selection.value = selectionText;
 							comment.value = commentText;

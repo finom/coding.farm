@@ -48,7 +48,7 @@
 <script>window.runIt = [];</script>
 <div class="container-fluid examples">
 	<h2 id="matreshka"><a href="#matreshka">Matreshka</a></h2>
-	<p>Matreshka is the core class that provides magical possibilities. It contains events engine, data-UI bindings engine, dependences engine and so on. Examples below shows main uses of Matreshka by providing source code and running code. Other examples (for each method) you can find on  <a href="../../matreshka/docs/Matreshka.html">documentation page</a></p>
+	<p>Matreshka is the core class that provides magical possibilities. It contains events engine, data-UI bindings engine, dependences engine and so on. Examples below show common uses of Matreshka by providing source code and running code. Other examples (for each method) you can find on  <a href="../../matreshka/docs/Matreshka.html">documentation page</a></p>
 	<h3 id="binding"><a href="#binding">Element binding</a></h3>
 <p>The next 3 examples show you how to bind data to UI. More info about <code>bindElement</code> method you can find in <a href="../../matreshka/docs/Matreshka.html#bindElement">on documentation page</a>. </p>
 <div class="row">
@@ -107,7 +107,7 @@
 </div> 
 
 	<h3 id="predef-binding"><a href="#predef-binding">Element binding using default binders</a></h3>
-<p>You can describe default binding cases via <a href="../docs/Matreshka.html#defaultBinders"><code>.defaultBinders</code></a> array.</p>
+<p>You can describe default binding cases via <code>.defaultBinders</code> array. Look at the docs: <a href="../docs/Matreshka.html#defaultBinders">.defaultBinders</a>.</p>
 	<div class="row">
 		
 		<div class="col-lg-5 mk-example mk-example-js">
@@ -229,11 +229,6 @@
 	<h3 id="ui-binding"><a href="#ui-binding">Custom element binding 2 (jQuery UI example) </a></h3>
 <div class="row">
 		<div class="col-lg-5 mk-example mk-example-js">
-<div class="highlight"><pre><code class="javascript"><span class="nx">jQuery</span><span class="p">(</span> <span class="s1">&#39;.slider.ex-bind-slider&#39;</span> <span class="p">).</span><span class="nx">slider</span><span class="p">({</span>
-	<span class="nx">min</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-	<span class="nx">max</span><span class="o">:</span> <span class="mi">100</span>
-<span class="p">});</span>
-</code></pre></div>
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">mk</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">();</span> <span class="c1">// same as new Matreshka;</span>
 
 <span class="nx">mk</span>
@@ -244,6 +239,12 @@
 		<span class="p">},</span>
 		<span class="nx">setValue</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">v</span> <span class="p">)</span> <span class="p">{</span>
 			<span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">slider</span><span class="p">(</span> <span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="nx">v</span> <span class="p">);</span>
+		<span class="p">},</span>
+		<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">jQuery</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">slider</span><span class="p">({</span>
+				<span class="nx">min</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+				<span class="nx">max</span><span class="o">:</span> <span class="mi">100</span>
+			<span class="p">});</span>
 		<span class="p">}</span>
 	<span class="p">})</span>
 	<span class="p">.</span><span class="nx">bindElement</span><span class="p">(</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;.output&#39;</span><span class="p">,</span> <span class="nx">MK</span><span class="p">.</span><span class="nx">binders</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">()</span> <span class="p">)</span>
@@ -262,10 +263,7 @@
 		<div class="output ex-bind-slider"></div>
 		<script>
 			runIt.push( function() {
-				jQuery( '.slider.ex-bind-slider' ).slider({
-					min: 0,
-					max: 100
-				});
+				
 				
 				var mk = new MK();
 				
@@ -277,6 +275,12 @@
 						},
 						setValue: function( v ) {
 							$( this ).slider( "value", v );
+						},
+						initialize: function() {
+							jQuery( this ).slider({
+								min: 0,
+								max: 100
+							});
 						}
 					})
 					.bindElement( 'x', '.output.ex-bind-slider', MK.binders.innerHTML() )
@@ -290,11 +294,11 @@
 </div> 
 
 	<h3 id="events"><a href="#events">Events</a></h3>
-<p>Matreshka includes powerful event engine. You can listen and trigger any event you want. Check out methods that do it:
-<a href="../../matreshka/docs/Matreshka.html#on"></a>
-<a href="../../matreshka/docs/Matreshka.html#once"></a>
-<a href="../../matreshka/docs/Matreshka.html#off"></a>
-<a href="../../matreshka/docs/Matreshka.html#trigger"></a>. </p>
+<p>Matreshka includes powerful event engine. You can listen and fire any event you want :) Check out the methods that do it:
+<a href="../../matreshka/docs/Matreshka.html#on">on</a>,
+<a href="../../matreshka/docs/Matreshka.html#once">once</a>,
+<a href="../../matreshka/docs/Matreshka.html#off">off</a>,
+<a href="../../matreshka/docs/Matreshka.html#trigger">trigger</a>. </p>
 	<div class="row">
 	
 		<div class="col-lg-5 mk-example mk-example-js">
@@ -330,8 +334,8 @@
 	</div>
 	 
 
-	<h3 id="change-event"><a href="#change-event"><code>change:</code> event</a></h3>
-<p>Matreshka allows you to listen property change event. When you're adding listener for <code>change:%PROPERTY_NAME%</code> event, Matreshka creates setter for this property. It means that you can change the property directly, without calling methods such as <code>.set</code>.</p>
+	<h3 id="change-event"><a href="#change-event"><code>change:KEY</code> event</a></h3>
+<p>Matreshka allows you to listen property change event. When you're adding listener for <code>change:KEY</code> event, Matreshka creates setter for this property. It means that you can change the property directly, without calling methods such as <code>.set</code>.</p>
 	<div class="row">
 		
 		<div class="col-lg-5 mk-example mk-example-js">
@@ -360,7 +364,7 @@
 						$( '.output.ex2' ).html( text );
 					});
 
-					mk.x = 5;
+					mk.x = 5; // !
 				});
 			</script>
 		</div>
@@ -368,7 +372,7 @@
 	 
 
 	<h3 id="matreshka_setmediator"><a href="#matreshka_setmediator"><code>.setMediator</code> method <span class="label new"></span></a></h3>
-<p>This method allows you to keep property valid and keep it to be a string/number/function/object... even if incoming value has another type. This logic is very similar to input value (if you're setting input value it always converts to string).</p>
+<p>This method allows you to keep property valid and keep it to be a string/number/function/object... even if incoming value has another type. This logic is very similar to <code>input.value</code> logic: if you set input value it always converts to string.</p>
 <p><a href="../../matreshka/docs/Matreshka.html#setMediator">Get more on documentation page</a></p>
 <div class="row">
 		<div class="col-lg-5 mk-example mk-example-js">
@@ -428,9 +432,9 @@
 	<div class="clearfix"></div>
 </div> 
 
-	<h3 id="matreshka_adddependence"><a href="#matreshka_adddependence"><code>.addDependence</code> method <span class="label new"></span></a></h3>
-<p><code>.addDependence</code> method allows property to be dependent from other properties.</p>
-<p><a href="../../matreshka/docs/Matreshka.html#addDependence">Get more on documentation page</a></p>
+	<h3 id="matreshka_adddependency"><a href="#matreshka_adddependency"><code>.addDependency</code> method <span class="label new"></span></a></h3>
+<p><code>.addDependency</code> method allows property to be dependent from other properties.</p>
+<p><a href="../../matreshka/docs/Matreshka.html#addDependency">Get more on documentation page</a></p>
 <div class="row">
 		<div class="col-lg-5 mk-example mk-example-js">
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">mk</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">();</span>
@@ -438,8 +442,8 @@
 	<span class="nx">$</span><span class="p">(</span> <span class="s1">&#39;.output&#39;</span> <span class="p">).</span><span class="nx">html</span><span class="p">(</span> <span class="s1">&#39;a = &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">);</span>
 <span class="p">});</span>
 
-<span class="c1">// a depends from b and c</span>
-<span class="nx">mk</span><span class="p">.</span><span class="nx">addDependence</span><span class="p">(</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b c&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="c1">// a depends from b and c as their sum</span>
+<span class="nx">mk</span><span class="p">.</span><span class="nx">addDependency</span><span class="p">(</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b c&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 	<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">c</span><span class="p">;</span>
 <span class="p">});</span>
 
@@ -460,8 +464,8 @@
 					$( '.output.ex11' ).html( 'a = ' + this.a );
 				});
 				
-				// a depends from b and c
-				mk.addDependence( 'a', 'b c', function() {
+				// a depends from b and c as their sum
+				mk.addDependency( 'a', 'b c', function() {
 					return this.b + this.c;
 				});
 				
@@ -474,7 +478,7 @@
 </div> 
 
 	<h2 id="mk.object"><a href="#mk.object">MK.Object</a></h2>
-	<p>After you got how to work with Matreshka you need to delimit application data from application state. What does it mean? For example, you're developing simple login form. It should have two inputs (login and password), "Show Password" checkbox, "Remember Me" checkbox and submit button. All of these elements represent "application state". Server needs 3 things: login, password, and "Remember Me" option, but it doesn't need to know is password is showing to user or not. So we have login, password and "Remember Me" as data state and login, password, "Remember Me" and "Show Password" as application state. As you see data state is always a subset of application state. <a href="http://jsbin.com/ATAPUCo/9">Check this example out on JSBin</a>.</p>
+	<p>After you got how to work with Matreshka you need to delimit application data from application states. What does it mean? For example, you're developing simple login form. It should have two inputs (login and password), "Show Password" checkbox, "Remember Me" checkbox and submit button. All of these elements represent "application state". Server needs 3 things: login, password, and "Remember Me" option, but it doesn't need to know is password is showing to user or not. So we have login, password and "Remember Me" as application state and login, password, "Remember Me" and "Show Password" as data state. As you see data state is always a subset of application state. <a href="http://jsbin.com/jiwuweya/2/">Check this example out on JSBin</a>.</p>
 	<p><a href="../../matreshka/docs/Matreshka.Object.html">Documentation page</a></p>
 	<h3 id="mk-object_jset-and-toJSON"><a href="#mk-object_jset-and-toJSON"><code>.jset</code> and <code>.toJSON</code></a></h3>
 <p>How to add properties to appliaton data set? It could be done using <code>jset</code> method by passing needed properties to this method once. From now you don't need to be care which properties are responsible for data and you can work with any data property as with regilar property. Look at docs:
@@ -489,7 +493,7 @@
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span>     <span class="nx">mkObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">.</span><span class="nb">Object</span><span class="p">,</span>
 	<span class="nx">result</span><span class="p">;</span>
 
-<span class="c1">// making &#39;a&#39; and &#39;b&#39; data keys</span>
+<span class="c1">// making &#39;a&#39; and &#39;b&#39; to be enuberable fot this instance (&quot;data keys&quot;)</span>
 <span class="nx">mkObject</span><span class="p">.</span><span class="nx">jset</span><span class="p">({</span>
 	<span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
 	<span class="nx">b</span><span class="o">:</span> <span class="mi">2</span>
@@ -497,7 +501,7 @@
 
 <span class="nx">mkObject</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-<span class="c1">// c is not data so it&#39;s not part of result</span>
+<span class="c1">// c is not &quot;data&quot; so it&#39;s not a part of result</span>
 <span class="c1">// of the .toJSON method</span>
 <span class="nx">mkObject</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
@@ -537,7 +541,7 @@
 </div>		 
 
 	<h2 id="mk.array"><a href="#mk.array">MK.Array</a></h2>
-	<p><code>MK.Array</code> is responsible for collections in Matreshka apps. It inherits Matreshka class and has same features as Matreshka (events, dependences etc) but provides collection methods.</p>
+	<p><code>MK.Array</code> is responsible for collections in Matreshka apps. It inherits Matreshka class and has same features as Matreshka (events, dependences etc) but responsible for "collection" functionality.</p>
 	<p><a href="../../matreshka/docs/Matreshka.Array.html">Documentation page</a></p>
 	<h3 id="original-methods"><a href="#original-methods">Original Array methods</a></h3>
 <p>Remember that Matreshka.Array instance has same methods as native Javascript Array. Some methods are changed for chain calling (sugared native Array methods).</p>
@@ -584,7 +588,7 @@
 </div> 
 
 	<h3 id="original-methods"><a href="#original-methods">Events</a></h3>
-<p>Each method that modifies <code>Matreshka.Array</code> instance fires two events: method name and <code>"modify"</code>. Some of methods that add or remove (or both: add and remove) fire corresponding events. For example <code>.push</code> method fires <code>"push"</code>, <code>"modify"</code> and <code>"add"</code> events, <code>.sort</code> method fires <code>"sort"</code>and <code>"modify"</code> events, <code>.splice</code> method fires <code>"splice"</code>, <code>"modify"</code>, <code>"add"</code> (if something is added) and <code>"remove"</code> (if something is remove) events.. and so on. Event options that passed to methods contain information about what is going on (what is added/removed, which method is called...).</p>
+<p>Each method that modifies <code>Matreshka.Array</code> instance fires two events: <code>method name</code> and <code>"modify"</code>. Some of methods that add or remove (or both: add and remove) fire corresponding events. For example <code>.push</code> method fires <code>"push"</code>, <code>"modify"</code> and <code>"add"</code> events, <code>.sort</code> method fires <code>"sort"</code>and <code>"modify"</code> events, <code>.splice</code> method fires <code>"splice"</code>, <code>"modify"</code>, <code>"add"</code> (if something is added) and <code>"remove"</code> (if something is remove) events... and so on. Event options object that passed to event handlers contains information about what is going on (what is added/removed, which method is called...).</p>
 <div class="row">
 	<div class="col-lg-5 mk-example mk-example-js">
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">mkArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">.</span><span class="nb">Array</span><span class="p">();</span>
@@ -722,7 +726,7 @@
 </div> 
 
 	<h3 id="mk.array_itemrenderer"><a href="#mk.array_itemrenderer">Array renderer</a> <span class="label new"></span></h3>
-<p><code>MK.Array</code> could become "smart" array. This means that each time when you add/remove/sort your data, the UI will also change. You just need to set <code>.itemRenderer</code> property as function before adding any data to array. When you're adding data (eg via <code>.push</code> method) the <code>"render"</code> event triggers on added elements and MK.Array renders these items and adds them to element that bound to <code>"container"</code> key or <code>"__this__"</code> key of this array. Look carefully at this example.</p>
+<p><code>MK.Array</code> can become "smart" array. It means that each time when you add/remove/sort your data, the UI will also change. You just need to set <code>.itemRenderer</code> property as function before adding any data to array. When you're adding data (eg via <code>.push</code> method) the <code>"render"</code> event triggers on added elements and MK.Array renders these items and adds them to element that bound to <code>"container"</code> key or <code>"__this__"</code> key of this array. Look carefully at this example.</p>
 <div class="row">
 	<div class="col-lg-5 mk-example mk-example-js">
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">mkArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MK</span><span class="p">.</span><span class="nb">Array</span><span class="p">()</span>
@@ -988,7 +992,7 @@
 </div>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="../../js/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="../../js/matreshka.js"></script>
+<script src="../../js/matreshka.min.js"></script>
 <script>
 	if( window.runIt ) {
 		for( var i = 0; i < window.runIt.length; i++ ) {

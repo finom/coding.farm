@@ -51,10 +51,10 @@
 <link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
 <nav class="navigation">
     <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
-    <a href="global.html">Globals</a><br>
-    <a href="Matreshka.html">Matreshka (MK)</a><br>
-    <a href="Matreshka.Object.html">MK.Object</a><br>
-    <a href="Matreshka.Array.html">MK.Array</a><br>
+    <a href="global.html" class="selected">Globals</a><br>
+    <a href="Matreshka.html" class="">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html" class="">MK.Object</a><br>
+    <a href="Matreshka.Array.html" class="">MK.Array</a><br>
 </nav>
 <main>
     <div class="container docs">
@@ -132,7 +132,7 @@
             
 <dt>
 	<a id="$b"></a>
-    <h4 class="name" id="$b"><a class="method-anchor" href="#$b"> <span class="type-signature"></span>$b</a><span class="signature">()</span><span class="type-signature"></span> <span class="label new"></span></h4>
+    <h4 class="name" id="$b"><a class="method-anchor" href="#$b"> <span class="type-signature"></span>$b</a><span class="signature">()</span><span class="type-signature"></span></h4>
     
     
     <p class="summary"><code>Balalaika</code> DOM utilite</p>
@@ -149,8 +149,6 @@
 <p>Balalaika extends Array. It means that you can use Array methods such as <code>.forEach</code>, <code>.map</code>, <code>.reduce</code>, <code>.splice</code> and so on.</p>
 
 <p>Balalaika includes 3 own methods: <code>.on</code>, <code>.off</code>, <code>.is</code> and static <code>.extend</code> method that work same way as jQuery analogues (<code>.on</code> doesn't support data). </p>
-
-<p>WARNING: This lib works fine in modern browsers (including Internet Explorer 9) only or using DOM shims. For older browsers you still need jQuery.</p>
     </div>
     
 
@@ -198,7 +196,7 @@
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="balalaika.js.html">balalaika.js</a>, <a href="balalaika.js.html#line2">line 2</a></dd>
+    <dd class="tag-source"><a href="balalaika.js.html">balalaika.js</a>, <a href="balalaika.js.html#line11">line 11</a></dd>
     
     
     
@@ -221,13 +219,39 @@
     
         <h5 class="hide">Examples</h5>
         
-    <pre class="prettyprint"><code> $( 'div' ).forEach( ... );</code></pre>
+    <pre class="prettyprint"><code> $b( 'div' ).forEach( ... );</code></pre>
 
-    <pre class="prettyprint"><code> $( 'span', document.body ).map( ... );</code></pre>
+    <pre class="prettyprint"><code> $b( 'span', document.body ).map( ... );</code></pre>
 
-    <pre class="prettyprint"><code> $( '.button' ).on( 'click.mynamespace', ... );</code></pre>
+    <pre class="prettyprint"><code> $b( '.button' ).on( 'click.mynamespace', ... );</code></pre>
 
-    <pre class="prettyprint"><code> $( '.button' ).off( 'click.mynamespace' );</code></pre>
+    <pre class="prettyprint"><code> $b( '.button' ).off( 'click.mynamespace' );</code></pre>
+
+        <p class="code-caption">AMD way (named modules)</p>
+    
+    <pre class="prettyprint"><code>retuire.config({
+	paths: {
+		'xclass': 'path/to/matreshka.min',
+		'matreshka': 'path/to/matreshka.min',
+		'balalaika': 'path/to/matreshka.min'
+	}
+});
+require(['xclass', 'matreshka', 'balalaika'], function(Class, MK, $) {
+	var $divs = $( 'div' );
+	var MyClass = Class({
+		'extends': MK
+	});
+});</code></pre>
+
+        <p class="code-caption">AMD way (unnamed Matreshka module)</p>
+    
+    <pre class="prettyprint"><code>// Matreshka contains Class function as "Class" property and balalaika as "$b" property
+require(['path/to/matreshka.min'], function(MK) {
+	var $divs = MK.$b( 'div' );
+	var MyClass = MK.Class({
+		'extends': MK
+	});
+});</code></pre>
 
     
 </dd>
@@ -236,7 +260,7 @@
             
 <dt>
 	<a id="Class"></a>
-    <h4 class="name" id="Class"><a class="method-anchor" href="#Class"> <span class="type-signature"></span>Class</a><span class="signature">(prototype)</span><span class="type-signature"> &rarr; {function}</span></h4>
+    <h4 class="name" id="Class"><a class="method-anchor" href="#Class"> <span class="type-signature"></span>Class</a><span class="signature">(prototype)</span><span class="type-signature"> &rarr; {<a href="global.html#xclass">xclass</a>}</span></h4>
     
     
     <p class="summary">Javascript class implementation</p>
@@ -265,10 +289,10 @@
 
 
 	
-<span class="param-type label label-type label-type-function">function</span>
+<span class="param-type label label-type label-type-unknown"><a href="global.html#xclass">xclass</a></span>
 
 
-    (constructor)
+    (class (or rather costructor of a class))
 
 
         </div>
@@ -352,7 +376,7 @@
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="xclass.js.html">xclass.js</a>, <a href="xclass.js.html#line28">line 28</a></dd>
+    <dd class="tag-source"><a href="xclass.js.html">xclass.js</a>, <a href="xclass.js.html#line36">line 36</a></dd>
     
     
     
@@ -373,11 +397,61 @@
 	
     
     
-        <h5 class="hide">Example</h5>
+        <h5 class="hide">Examples</h5>
         
         <p class="code-caption">Usage</p>
     
-    <pre class="prettyprint"><code>var A = Class({	method1: function() { ... }});var B = Class({	'extends': A,	method2: function() { ... }});var C = Class({	'extends': B,	method2: function() {		// "this" is execution context		// arguments is just standard arguments pseudo array		// the same as B.prototype.apply( this, arguments );		C.parent.method2( this, arguments );	},	method3: function( a, b ) { ... }});var D = Class({	'extends': C,	method3: function( a, b ) {		// you can pass any arguments to the method		// the same as C.prototype.call( this, a, b );		C.parent.method2( this, a, b );	}});</code></pre>
+    <pre class="prettyprint"><code>var A = Class({
+	method1: function() { ... }
+});
+var B = Class({
+	'extends': A,
+	method2: function() { ... }
+});
+var C = Class({
+	'extends': B,
+	method2: function() {
+		// "this" is execution context
+		// arguments is just standard arguments pseudo array
+		// next string does the same thing as B.prototype.apply( this, arguments ); does
+		C.parent.method2( this, arguments );
+	},
+	method3: function( a, b ) { ... }
+});
+var D = Class({
+	'extends': C,
+	method3: function( a, b ) {
+		// you can pass any arguments to the method
+		// next string does the same thing as C.prototype.call( this, a, b ); does
+		C.parent.method2( this, a, b );
+	}
+});</code></pre>
+
+        <p class="code-caption">AMD way (named modules)</p>
+    
+    <pre class="prettyprint"><code>retuire.config({
+	paths: {
+		'xclass': 'path/to/matreshka.min',
+		'matreshka': 'path/to/matreshka.min',
+		'balalaika': 'path/to/matreshka.min'
+	}
+});
+require(['xclass', 'matreshka', 'balalaika'], function(Class, MK, $) {
+	var $divs = $( 'div' );
+	var MyClass = Class({
+		'extends': MK
+	});
+});</code></pre>
+
+        <p class="code-caption">AMD way (unnamed Matreshka module)</p>
+    
+    <pre class="prettyprint"><code>// Matreshka contains Class function as "Class" property and balalaika as "$b" property
+require(['path/to/matreshka.min'], function(MK) {
+	var $divs = MK.$b( 'div' );
+	var MyClass = MK.Class({
+		'extends': MK
+	});
+});</code></pre>
 
     
 </dd>
@@ -403,7 +477,7 @@
     
     <div class="description">
         <p>Array callback is using in some <a href="Matreshka.Array.html">Matreshka.Array</a> methods like: <a href="Matreshka.Array.html#forEach">Matreshka.Array#forEach</a>, <a href="Matreshka.Array.html#filter">Matreshka.Array#filter</a>, <a href="Matreshka.Array.html#some">Matreshka.Array#some</a>... as iterator callback.</p>
-<p>To keep methods as fast as possible and reduce errors, most of methods are written using native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">Array.prototype</a> methods. Pay attention that callback gets third argument that doesn't match self (<code>this</code> of the method). This is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> representation of <a href="Matreshka.Array.html">Matreshka.Array</a> instance because <code>Array.prototype[ method ].apply( this, arguments );</code> doesn't work with DOM objects (XDomainRequest hack that we're using to keep dynamic accessors support). So we convert <a href="Matreshka.Array.html">Matreshka.Array</a> to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> and use it this way: <code>Array.prototype[ method ].apply( representation, arguments );</code></p>
+<p>To keep methods as fast as possible and reduce errors, most of methods are written using native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">Array.prototype</a> methods. Pay attention that callback gets third argument that doesn't match self (<code>this</code> of the method). This is Internet Explorer 8 support restriction and will be fixd after we refuse it.</p>
     </div>
     
 
@@ -552,7 +626,7 @@
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line971">line 971</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line1039">line 1039</a></dd>
     
     
     
@@ -632,7 +706,7 @@ this.forEach( callback );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1518">line 1518</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1855">line 1855</a></dd>
     
     
     
@@ -717,6 +791,9 @@ this.forEach( callback );</code></pre>
             
                 
 <span class="param-type label label-type label-type-string">string</span>
+ 
+
+<span class="param-type label label-type label-type-function">function</span>
 
 
             
@@ -726,7 +803,7 @@ this.forEach( callback );</code></pre>
             
             
             
-            <td class="description last">event name (or space-delimited list of events) which we have to listen</td>
+            <td class="description last">event name or space-delimited list of events or which we have to listen. Function contained callback is also supported.</td>
         </tr>
 	
 	
@@ -798,6 +875,40 @@ this.forEach( callback );</code></pre>
         </tr>
 	
 	
+	
+        <tr>
+            
+                <td class="name">
+						<span class="prop-name">initialize</span>
+					  
+						<span class="prop-attributes">
+						
+							&lt;optional><br>
+						
+							
+						
+						</span>
+					
+                </td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-function">function</span>
+
+
+            
+            </td>
+            
+          
+            
+            
+            
+            <td class="description last">Fuction that executes once per binding</td>
+        </tr>
+	
+	
 	</tbody>
 </table></dl>
         
@@ -821,7 +932,7 @@ this.forEach( callback );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1522">line 1522</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1859">line 1859</a></dd>
     
     
     
@@ -833,12 +944,29 @@ this.forEach( callback );</code></pre>
 
     
     
-        <div>Example</div>
+        <div>Examples</div>
         
     <pre class="prettyprint"><code>var binder = {
 	on: 'click',
-	getValue: function() { return this.value; } 
-	setValue: function( v ) { this.value = v; } 
+	getValue: function( options ) { return this.value; } 
+	setValue: function( v, options ) { this.value = v; },
+	initialize: function( options ) {
+		alert( 'Binder is initialized. Initial input value=' + this.value );
+	}
+};
+this.bindElement( 'a', '.my-checkbox', binder );</code></pre>
+
+        <p class="code-caption">Function as <code>on</code> property</p>
+    
+    <pre class="prettyprint"><code>var binder = {
+	on: function( callback ) {
+		this.onclick = callback;
+	},
+	getValue: function( options ) { return this.value; } 
+	setValue: function( v, options ) { this.value = v; },
+	initialize: function( options ) {
+		alert( 'Binder is initialized. Initial input value=' + this.value );
+	}
 };
 this.bindElement( 'a', '.my-checkbox', binder );</code></pre>
 
@@ -857,7 +985,7 @@ this.bindElement( 'a', '.my-checkbox', binder );</code></pre>
     
     
     <div class="description">
-        Event handler
+        Matreshka event handler
     </div>
     
 
@@ -958,7 +1086,7 @@ this.bindElement( 'a', '.my-checkbox', binder );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1514">line 1514</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1851">line 1851</a></dd>
     
     
     
@@ -1033,7 +1161,7 @@ this.trigger( 'fyeah', 'foo', 'bar', 'baz' ); // logs 'foo', 'bar', 'baz'</code>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1520">line 1520</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1857">line 1857</a></dd>
     
     
     
@@ -1045,10 +1173,50 @@ this.trigger( 'fyeah', 'foo', 'bar', 'baz' ); // logs 'foo', 'bar', 'baz'</code>
 
     
     
-        <div>Example</div>
+        <div>Examples</div>
         
-    <pre class="prettyprint"><code>var eventNames = 'change:a change:b fyeah done change:x'
-this.on( eventNames, function() {} );</code></pre>
+        <p class="code-caption">Space-delimited list of event names</p>
+    
+    <pre class="prettyprint"><code>this.on( 'x y z', function() {} );</code></pre>
+
+        <p class="code-caption"><code>change:KEY</code> event. Listens changes of given property.</p>
+    
+    <pre class="prettyprint"><code>this.on( 'change:x', function( evt ) {
+	alert( evt.value );
+});
+this.x = 1;</code></pre>
+
+        <p class="code-caption">DOM events for bound elements (<code>DOM_EVENT::KEY</code>). Fires when fiven DOM event is fired on bound element (since v0.1.0).</p>
+    
+    <pre class="prettyprint"><code>this.bindElement( 'x', '.my-button' );
+this.bindElement( 'y', '.my-select' );
+this.on( 'click::x change::y', function( evt ) {
+	alert( 'clicked "x" or changed "y"' );
+});</code></pre>
+
+        <p class="code-caption">Bubbling events (<code>KEY@EVENT_NAME</code>). You can attach event to any inner member of Matreshka (since v0.2.0). This event type is "live" and fires even when property is set after event initialized.</p>
+    
+    <pre class="prettyprint"><code>this.on( 'x@change:a', function() {
+	alert( '"x.a" is changed' );
+});
+this.x = new MK;
+this.x.a = 1;</code></pre>
+
+        <p class="code-caption">Bubbling events (<code>@EVENT_NAME</code>) for <code>MK.Object</code> members (since v0.2.0). This event type is "live" and fires even when property is set after event initialized.</p>
+    
+    <pre class="prettyprint"><code>this.on( '@change:a', function() {
+	alert( '"a" is changed' );
+});
+this.jset( 'x', new MK );
+this.x.a = 1;</code></pre>
+
+        <p class="code-caption">Bubbling events (<code>@EVENT_NAME</code>) for <code>MK.Array</code> members (since v0.2.0). This event type is "live" and fires even when element is added after event initialized.</p>
+    
+    <pre class="prettyprint"><code>this.on( '@change:a', function() {
+	alert( '"a" is changed' );
+});
+this.push( new MK );
+this[ 0 ].a = 1;</code></pre>
 
     
 </dd>
@@ -1098,7 +1266,7 @@ this.on( eventNames, function() {} );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1524">line 1524</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1861">line 1861</a></dd>
     
     
     
@@ -1168,7 +1336,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1516">line 1516</a></dd>
+    <dd class="tag-source"><a href="matreshka-core.js.html">matreshka-core.js</a>, <a href="matreshka-core.js.html#line1853">line 1853</a></dd>
     
     
     
@@ -1225,7 +1393,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line969">line 969</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line1037">line 1037</a></dd>
     
     
     
@@ -1282,7 +1450,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-object.js.html">matreshka-object.js</a>, <a href="matreshka-object.js.html#line348">line 348</a></dd>
+    <dd class="tag-source"><a href="matreshka-object.js.html">matreshka-object.js</a>, <a href="matreshka-object.js.html#line426">line 426</a></dd>
     
     
     
@@ -1293,6 +1461,159 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
 </dl>
 
     
+    
+</dd>
+
+            
+                
+<dt>
+	<a id="xclass"></a>
+    <h4 class="name" id="xclass"><a class="method-anchor" href="#xclass"> <span class="type-signature"></span>xclass</a><span class="signature">()</span><span class="type-signature"></span> <span class="label new"></span></h4>
+    
+    
+    <p class="summary">Class (or rather costructor of a class) returned from <a href="global.html#Class">Class</a> function</p>
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+   
+    
+   
+    
+	
+	
+	
+	
+    
+    
+     
+	
+	
+<dl class="details">
+    
+        
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		<td colspan="3">Properties</td>
+		<!--
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>-->
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name">
+						<span class="prop-name">same</span>
+					  
+                </td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type label label-type label-type-function">function</span>
+
+
+            
+            </td>
+            
+          
+            
+            
+            
+            <td class="description last">Clones constructor (but only constructor, not prototype!)</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since">0.2</dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><a href="xclass.js.html">xclass.js</a>, <a href="xclass.js.html#line293">line 293</a></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Examples</h5>
+        
+    <pre class="prettyprint"><code>var MyXClass = Class({
+	method: function() { ... }
+});</code></pre>
+
+        <p class="code-caption"><code>.same</code> method (clones constructor function)</p>
+    
+    <pre class="prettyprint"><code>var MyXClass = Class({
+	constructor: function( a ) {
+		thia.a = a;
+	}
+});
+
+// MyAnotherXClass works exactly same way as MyXClass
+var MyAnotherXClass = Class({
+	'extends': MyXClass,
+	constructor: MyXClass.same()
+});</code></pre>
+
     
 </dd>
 
@@ -1311,7 +1632,7 @@ this.set( 'a', 2 ); // alerts "yeah"</code></pre>
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Apr 15 2014 13:24:34 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jul 14 2014 18:46:45 GMT+0400 (EET)
 </footer>
 
 <script> prettyPrint(); </script>

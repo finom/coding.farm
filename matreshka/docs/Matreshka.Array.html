@@ -51,10 +51,10 @@
 <link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
 <nav class="navigation">
     <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
-    <a href="global.html">Globals</a><br>
-    <a href="Matreshka.html">Matreshka (MK)</a><br>
-    <a href="Matreshka.Object.html">MK.Object</a><br>
-    <a href="Matreshka.Array.html">MK.Array</a><br>
+    <a href="global.html" class="">Globals</a><br>
+    <a href="Matreshka.html" class="">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html" class="">MK.Object</a><br>
+    <a href="Matreshka.Array.html" class="selected">MK.Array</a><br>
 </nav>
 <main>
     <div class="container docs">
@@ -140,7 +140,7 @@ Version 2.0, January 2004</dd>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line115">line 115</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line124">line 124</a></dd>
     
     
     
@@ -182,7 +182,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     <pre class="prettyprint"><code>var MyClass = Class({
 	'extends': MK.Array,
 	constructor: function() {
-		// calls MK.Array constructor with this context and given arguments
+		// calls MK.Array constructor with same context and given arguments
 		MyClass.parent.constructor( this, arguments );
 	},
 	method: function() {}
@@ -216,7 +216,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     <h4 class="name" id="concat"><a class="method-anchor" href="#concat"> <span class="type-signature"></span>concat</a><span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">Array.prototype.concat</a> and accepts <a href="Matreshka.Array.html">Matreshka.Array</a> instances</p>
+    <p class="summary">Works similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">Array.prototype.concat</a></p>
     
 </dt>
 <dd>
@@ -336,7 +336,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line565">line 565</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line635">line 635</a></dd>
     
     
     
@@ -366,7 +366,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         <p class="code-caption">Basic usage 2</p>
     
     <pre class="prettyprint"><code>var mkArray = new MK.Array().createFrom( [ 1, 2, 3, 4, 5 ] ),
-	result = this.concat( mkArray, [ 6, 7, 8 ] );</code></pre>
+    result = this.concat( mkArray, [ 6, 7, 8 ] );</code></pre>
 
     
 </dd>
@@ -378,14 +378,14 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     <h4 class="name" id="createFrom"><a class="method-anchor" href="#createFrom"> <span class="type-signature"></span>createFrom</a><span class="signature">(array)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Creates self from another array</p>
+    <p class="summary">Recreates <a href="Matreshka.Array.html">Matreshka.Array</a> instance from another array</p>
     
 </dt>
 <dd>
     
     
     <div class="description">
-        If you have array or array-like object (e.g. arguments) you can convert it to MK.Array instance by this method
+        You can convert array or array-like object (e.g. arguments) to <a href="Matreshka.Array.html">Matreshka.Array</a> instance using this method
     </div>
     
 
@@ -499,7 +499,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line207">line 207</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line275">line 275</a></dd>
     
     
     
@@ -536,7 +536,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     <h4 class="name" id="each"><a class="method-anchor" href="#each"> <span class="type-signature"></span>each</a><span class="signature">(callback, <span class="optional">thisArg</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Works similar to Matreshka.Array.forEach</p>
+    <p class="summary">Works similar to <a href="Matreshka.Array.html#forEach">Matreshka.Array#forEach</a></p>
     
 </dt>
 <dd>
@@ -687,7 +687,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line911">line 911</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line979">line 979</a></dd>
     
     
     
@@ -875,7 +875,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line846">line 846</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line914">line 914</a></dd>
     
     
     
@@ -901,7 +901,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
         <p class="code-caption">Basic usage</p>
     
     <pre class="prettyprint"><code>var isBigEnough = this.every( function( item ) {
-		return item > 10;
+	return item > 10;
 });</code></pre>
 
     
@@ -1065,7 +1065,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line822">line 822</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line890">line 890</a></dd>
     
     
     
@@ -1255,7 +1255,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line898">line 898</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line966">line 966</a></dd>
     
     
     
@@ -1350,7 +1350,7 @@ new MK.Array( 'Hi', { a: 'b' } );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line534">line 534</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line604">line 604</a></dd>
     
     
     
@@ -1540,7 +1540,7 @@ mkArray.hasOwnProperty( 'blah' ); // false</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line933">line 933</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line1001">line 1001</a></dd>
     
     
     
@@ -1575,7 +1575,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
             
 <dt>
 	<a id="initializeSmartArray"></a>
-    <h4 class="name" id="initializeSmartArray"><a class="method-anchor" href="#initializeSmartArray"> <span class="type-signature"></span>initializeSmartArray</a><span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="initializeSmartArray"><a class="method-anchor" href="#initializeSmartArray"> <span class="type-signature"></span>initializeSmartArray</a><span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
     
     <p class="summary">Initializes "smart array"</p>
@@ -1585,7 +1585,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
     
     
     <div class="description">
-        This method is only needed when you're setting {@Matreshka.Array#itemRenderer} property after some items are added.
+        This method is only needed when you're setting <a href="Matreshka.Array.html#itemRenderer">Matreshka.Array#itemRenderer</a> property after some items are added.
     </div>
     
 
@@ -1641,7 +1641,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line502">line 502</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line570">line 570</a></dd>
     
     
     
@@ -1669,7 +1669,7 @@ alert( this.indexOf( 2 ) ); // alerts 1</code></pre>
     <pre class="prettyprint"><code>var mkArray = new MK.Array;
 // DOM is not changing because itemRenderer is not assigned yet
 mkArray.push( ... );
-mkArray.itemRenderer = function() { '<div>MyDiv</div>' };
+mkArray.itemRenderer = function() { '&lt;div&gt;MyDiv&lt;/div&gt;' };
 // DOM is changing after initializeSmartArray execution
 mkArray.initializeSmartArray();</code></pre>
 
@@ -1677,7 +1677,7 @@ mkArray.initializeSmartArray();</code></pre>
     
     <pre class="prettyprint"><code>var mkArray = new MK.Array;
 // setting itemRenderer before adding any item to array
-mkArray.itemRenderer = function() { '<div>MyDiv</div>' };
+mkArray.itemRenderer = function() { '&lt;div&gt;MyDiv&lt;/div&gt;' };
 // DOM is changing after push, no need to use initializeSmartArray
 mkArray.push( ... );</code></pre>
 
@@ -1691,7 +1691,7 @@ mkArray.push( ... );</code></pre>
     <h4 class="name" id="initMK"><a class="method-anchor" href="#initMK"> <span class="type-signature"></span>initMK</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#mkArray">mkArray</a>}</span></h4>
     
     
-    <p class="summary">Initializes MK.Array instance</p>
+    <p class="summary">Initializes <a href="Matreshka.Array.html">Matreshka.Array</a> instance. See <a href="Matreshka.html#initMK">Matreshka#initMK</a>.</p>
     
 </dt>
 <dd>
@@ -1749,7 +1749,7 @@ mkArray.push( ... );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line296">line 296</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line364">line 364</a></dd>
     
     
     
@@ -1776,7 +1776,7 @@ mkArray.push( ... );</code></pre>
     
     <pre class="prettyprint"><code>var MyClass = Class({
 	'extends': MK.Array,
- constructor: function() {
+	constructor: function() {
  	this.initMK();
 	}
 });</code></pre>
@@ -1788,17 +1788,17 @@ mkArray.push( ... );</code></pre>
             
 <dt>
 	<a id="itemRenderer"></a>
-    <h4 class="name" id="itemRenderer"><a class="method-anchor" href="#itemRenderer"> <span class="type-signature"></span>itemRenderer</a><span class="signature">()</span><span class="type-signature"> &rarr; {string|Node|jQuery}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="itemRenderer"><a class="method-anchor" href="#itemRenderer"> <span class="type-signature"></span>itemRenderer</a><span class="signature">()</span><span class="type-signature"> &rarr; {string|Node|jQuery}</span></h4>
     
     
-    <p class="summary">Renderer for array items.</p>
+    <p class="summary">Renderer for array items</p>
     
 </dt>
 <dd>
     
     
     <div class="description">
-        This method equals to <code>null</code> by default. You can assign function that returns types below to make {@Matreshka Array} to be "smart array" that changes DOM automatically when data is changed. Check <a href="http://finom.github.io/matreshka/examples/#mk.array_itemrenderer">live example</a> to see how it works.
+        This method equals to <code>null</code> by default. You can assign function that returns element for making {@Matreshka Array} to be "smart array" that changes DOM automatically when data is changed. Check <a href="http://finom.github.io/matreshka/examples/#mk.array_itemrenderer">live example</a> to see how it works.
     </div>
     
 
@@ -1862,13 +1862,20 @@ mkArray.push( ... );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line148">line 148</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line157">line 157</a></dd>
     
     
     
     
     
     
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Maybe clearer explanation</li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -1999,7 +2006,7 @@ mkArray.push( ... );</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line957">line 957</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line1025">line 1025</a></dd>
     
     
     
@@ -2186,7 +2193,7 @@ alert( this.join( ':' ) ); // alerts '1:2:3:4:4:3:2:1'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line945">line 945</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line1013">line 1013</a></dd>
     
     
     
@@ -2375,7 +2382,7 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line809">line 809</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line877">line 877</a></dd>
     
     
     
@@ -2403,6 +2410,94 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
     <pre class="prettyprint"><code>var props = this.map( function( item ) {
 	 return item.prop;
 });</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+	<a id="on"></a>
+    <h4 class="name" id="on"><a class="method-anchor" href="#on"> <span class="type-signature"></span>on</a><span class="signature">()</span><span class="type-signature"></span> <span class="label new"></span></h4>
+    
+    
+    <p class="summary">Works same way as <a href="Matreshka.html#on">Matreshka#on</a> and allows to attach event handlers for any existing and furite items</p>
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+   
+    
+   
+    
+	
+	
+	
+	
+    
+    
+     
+	
+	
+<dl class="details">
+    
+        
+    
+    
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since">0.2</dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line217">line 217</a></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+
+    
+
+    
+    
+    
+    
+    
+	
+    
+    
+        <h5 class="hide">Example</h5>
+        
+    <pre class="prettyprint"><code>var mkArray = new MK.Array();
+mkArray.on( '@something', function() {
+	alert( 'something happens' )
+});
+mkArray.push( new MK );
+mkArray[ 0 ].trigger( 'something' );</code></pre>
 
     
 </dd>
@@ -2485,7 +2580,7 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line656">line 656</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line724">line 724</a></dd>
     
     
     
@@ -2519,10 +2614,10 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
             
 <dt>
 	<a id="pull"></a>
-    <h4 class="name" id="pull"><a class="method-anchor" href="#pull"> <span class="type-signature"></span>pull</a><span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="pull"><a class="method-anchor" href="#pull"> <span class="type-signature"></span>pull</a><span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
     
-    <p class="summary">Removes Matreshka#Array element by given index and returns that element.</p>
+    <p class="summary">Removes Matreshka#Array element by given index and returns that element</p>
     
 </dt>
 <dd>
@@ -2645,7 +2740,7 @@ alert( this.lastIndexOf( 2 ) ); // alerts 6</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line593">line 593</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line663">line 663</a></dd>
     
     
     
@@ -2813,7 +2908,7 @@ alert( this.toString ); // 'a,c' </code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line641">line 641</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line711">line 711</a></dd>
     
     
     
@@ -2834,13 +2929,9 @@ alert( this.toString ); // 'a,c' </code></pre>
 	
     
     
-        <h5 class="hide">Examples</h5>
+        <h5 class="hide">Example</h5>
         
         <p class="code-caption">Basic usage</p>
-    
-    <pre class="prettyprint"><code>this.push( 1, 2, 3 );</code></pre>
-
-        <p class="code-caption">Chaining call</p>
     
     <pre class="prettyprint"><code>this.push( 1, 2, 3 );</code></pre>
 
@@ -3003,7 +3094,7 @@ alert( this.toString ); // 'a,c' </code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line872">line 872</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line940">line 940</a></dd>
     
     
     
@@ -3191,7 +3282,7 @@ alert( this.toString ); // 'a,c' </code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line885">line 885</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line953">line 953</a></dd>
     
     
     
@@ -3296,7 +3387,7 @@ alert( this.toString ); // 'a,c' </code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line709">line 709</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line777">line 777</a></dd>
     
     
     
@@ -3330,10 +3421,10 @@ alert( this.toString ); // 'a,c' </code></pre>
             
 <dt>
 	<a id="setItemMediator"></a>
-    <h4 class="name" id="setItemMediator"><a class="method-anchor" href="#setItemMediator"> <span class="type-signature"></span>setItemMediator</a><span class="signature">()</span><span class="type-signature"></span> <span class="label new"></span></h4>
+    <h4 class="name" id="setItemMediator"><a class="method-anchor" href="#setItemMediator"> <span class="type-signature"></span>setItemMediator</a><span class="signature">()</span><span class="type-signature"></span></h4>
     
     
-    <p class="summary">Sets function that transforms items</p>
+    <p class="summary">Transforms items values</p>
     
 </dt>
 <dd>
@@ -3385,7 +3476,7 @@ alert( this.toString ); // 'a,c' </code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line185">line 185</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line195">line 195</a></dd>
     
     
     
@@ -3496,7 +3587,7 @@ console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", 
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line681">line 681</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line749">line 749</a></dd>
     
     
     
@@ -3646,7 +3737,7 @@ console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", 
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line231">line 231</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line299">line 299</a></dd>
     
     
     
@@ -3741,7 +3832,7 @@ console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", 
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line746">line 746</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line814">line 814</a></dd>
     
     
     
@@ -3775,7 +3866,7 @@ console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", 
             
 <dt>
 	<a id="silentPull"></a>
-    <h4 class="name" id="silentPull"><a class="method-anchor" href="#silentPull"> <span class="type-signature"></span>silentPull</a><span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="silentPull"><a class="method-anchor" href="#silentPull"> <span class="type-signature"></span>silentPull</a><span class="signature">(index)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
     
     <p class="summary">Works similar to <a href="Matreshka.Array.html#pull">Matreshka.Array#pull</a> but doesn't trigger events</p>
@@ -3893,7 +3984,7 @@ console.log( mkArray.toJSON() ); // [ "true", "[object Object]", "1", "2", "3", 
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line620">line 620</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line690">line 690</a></dd>
     
     
     
@@ -4051,7 +4142,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line736">line 736</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line804">line 804</a></dd>
     
     
     
@@ -4146,7 +4237,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line788">line 788</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line856">line 856</a></dd>
     
     
     
@@ -4241,7 +4332,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line765">line 765</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line833">line 833</a></dd>
     
     
     
@@ -4387,7 +4478,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line774">line 774</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line842">line 842</a></dd>
     
     
     
@@ -4617,7 +4708,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line797">line 797</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line865">line 865</a></dd>
     
     
     
@@ -4771,7 +4862,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line755">line 755</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line823">line 823</a></dd>
     
     
     
@@ -4945,7 +5036,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line835">line 835</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line903">line 903</a></dd>
     
     
     
@@ -5131,7 +5222,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line859">line 859</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line927">line 927</a></dd>
     
     
     
@@ -5157,7 +5248,7 @@ alert( this.toString ); // 'a,c'</code></pre>
         <p class="code-caption">Basic usage</p>
     
     <pre class="prettyprint"><code>var isBigEnough = this.some( function( item ) {
-		return item > 10;
+	return item > 10;
 });</code></pre>
 
     
@@ -5287,7 +5378,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line693">line 693</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line761">line 761</a></dd>
     
     
     
@@ -5529,7 +5620,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line720">line 720</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line788">line 788</a></dd>
     
     
     
@@ -5566,7 +5657,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     <h4 class="name" id="toArray"><a class="method-anchor" href="#toArray"> <span class="type-signature"></span>toArray</a><span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
-    <p class="summary">Converts MK.Array instance to Javascript Array</p>
+    <p class="summary">Converts <a href="Matreshka.Array.html">Matreshka.Array</a> to Javascript Array</p>
     
 </dt>
 <dd>
@@ -5624,7 +5715,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line266">line 266</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line334">line 334</a></dd>
     
     
     
@@ -5661,14 +5752,14 @@ alert( this.toString ); // 'a,c'</code></pre>
     <h4 class="name" id="toJSON"><a class="method-anchor" href="#toJSON"> <span class="type-signature"></span>toJSON</a><span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
     
     
-    <p class="summary">Converts MK.Array instance to native object</p>
+    <p class="summary">Converts <a href="Matreshka.Array.html">Matreshka.Array</a> instance to native array</p>
     
 </dt>
 <dd>
     
     
     <div class="description">
-        Diferrence between toJSON and toArray is that toJSON tries to call toJSON method for inner objects
+        The difference between <a href="Matreshka.Array.html#toJSON">Matreshka.Array#toJSON</a> and <a href="Matreshka.Array.html#toArray">Matreshka.Array#toArray</a> is that <a href="Matreshka.Array.html#toJSON">Matreshka.Array#toJSON</a> tries to call toJSON method for inner objects
     </div>
     
 
@@ -5721,7 +5812,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line549">line 549</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line619">line 619</a></dd>
     
     
     
@@ -5758,7 +5849,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     <h4 class="name" id="toNative"><a class="method-anchor" href="#toNative"> <span class="type-signature"></span>toNative</a><span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
-    <p class="summary">Does the same as MK.Array#toArray</p>
+    <p class="summary">Does the same as <a href="Matreshka.Array.html#toArray">Matreshka.Array#toArray</a></p>
     
 </dt>
 <dd>
@@ -5816,7 +5907,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line285">line 285</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line353">line 353</a></dd>
     
     
     
@@ -5909,7 +6000,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line924">line 924</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line992">line 992</a></dd>
     
     
     
@@ -6076,7 +6167,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line668">line 668</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line736">line 736</a></dd>
     
     
     
@@ -6123,7 +6214,7 @@ alert( this.toString ); // 'a,c'</code></pre>
      </h4>
     
     
-    <p class="summary"><code>isMKArray</code> is always </code>true</code>. It using for easy detecting Matreshka.Array instance.</p>
+    <p class="summary"><code>isMKArray</code> is always </code>true</code>. It's using for easy Matreshka.Array instance detection.</p>
     
 </dt>
 <dd>
@@ -6153,7 +6244,7 @@ alert( this.toString ); // 'a,c'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line142">line 142</a></dd>
+    <dd class="tag-source"><a href="matreshka-array.js.html">matreshka-array.js</a>, <a href="matreshka-array.js.html#line151">line 151</a></dd>
     
     
     
@@ -6184,7 +6275,7 @@ alert( this.toString ); // 'a,c'</code></pre>
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Apr 15 2014 13:24:34 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jul 14 2014 18:46:45 GMT+0400 (EET)
 </footer>
 
 <script> prettyPrint(); </script>

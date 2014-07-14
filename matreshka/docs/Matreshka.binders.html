@@ -51,10 +51,10 @@
 <link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
 <nav class="navigation">
     <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
-    <a href="global.html">Globals</a><br>
-    <a href="Matreshka.html">Matreshka (MK)</a><br>
-    <a href="Matreshka.Object.html">MK.Object</a><br>
-    <a href="Matreshka.Array.html">MK.Array</a><br>
+    <a href="global.html" class="">Globals</a><br>
+    <a href="Matreshka.html" class="">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html" class="">MK.Object</a><br>
+    <a href="Matreshka.Array.html" class="">MK.Array</a><br>
 </nav>
 <main>
     <div class="container docs">
@@ -80,7 +80,7 @@
     
     
         
-            <div class="description">TODO</div>
+            <div class="description">Collection of binders. Feel free to add your own binders to this namespace.</div>
         
         
         
@@ -105,7 +105,7 @@
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-binders.js.html">matreshka-binders.js</a>, <a href="matreshka-binders.js.html#line9">line 9</a></dd>
+    <dd class="tag-source"><a href="matreshka-binders.js.html">matreshka-binders.js</a>, <a href="matreshka-binders.js.html#line15">line 15</a></dd>
     
     
     
@@ -139,7 +139,7 @@
             
 <dt>
 	<a id="className"></a>
-    <h4 class="name" id="className"><a class="method-anchor" href="#className"> <span class="type-signature">&lt;static> </span>className</a><span class="signature">(className)</span><span class="type-signature"> &rarr; {<a href="global.html#binder">binder</a>}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="className"><a class="method-anchor" href="#className"> <span class="type-signature">&lt;static> </span>className</a><span class="signature">(className)</span><span class="type-signature"> &rarr; {<a href="global.html#binder">binder</a>}</span></h4>
     
     
     <p class="summary"><code>className</code> binder</p>
@@ -149,7 +149,7 @@
     
     
     <div class="description">
-        This function is a shortcut for using existence of element's <code>className</code> as boolean value when you bind it to a property.
+        This function returns <a href="global.html#binder">binder</a> that binds element to a property as element class name switcher.
     </div>
     
 
@@ -256,7 +256,7 @@
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-binders.js.html">matreshka-binders.js</a>, <a href="matreshka-binders.js.html#line35">line 35</a></dd>
+    <dd class="tag-source"><a href="matreshka-binders.js.html">matreshka-binders.js</a>, <a href="matreshka-binders.js.html#line41">line 41</a></dd>
     
     
     
@@ -310,7 +310,7 @@ this.shown = false; // adds 'hide' class to '.my-element'</code></pre>
             
 <dt>
 	<a id="innerHTML"></a>
-    <h4 class="name" id="innerHTML"><a class="method-anchor" href="#innerHTML"> <span class="type-signature">&lt;static> </span>innerHTML</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#binder">binder</a>}</span> <span class="label new"></span></h4>
+    <h4 class="name" id="innerHTML"><a class="method-anchor" href="#innerHTML"> <span class="type-signature">&lt;static> </span>innerHTML</a><span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#binder">binder</a>}</span></h4>
     
     
     <p class="summary"><code>innerHTML</code> binder</p>
@@ -320,7 +320,7 @@ this.shown = false; // adds 'hide' class to '.my-element'</code></pre>
     
     
     <div class="description">
-        By default if you pass html element to Matreshka#bindElement as second argument that doesn't match any <code>defaultBinders item</code>, the binding does nothing. But sometimes you want to change <code>innerHTML</code> without having possibility to retrieve value from the element. <a href="Matreshka.html#htmlp">Matreshka.htmlp</a> is created as simple <code>binder</code> function for this case and it reduces your code.
+        This function returns <a href="global.html#binder">binder</a> that syncronizes property value and bound element <code>innerHTML</code>.
     </div>
     
 
@@ -376,7 +376,7 @@ this.shown = false; // adds 'hide' class to '.my-element'</code></pre>
     
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><a href="matreshka-binders.js.html">matreshka-binders.js</a>, <a href="matreshka-binders.js.html#line14">line 14</a></dd>
+    <dd class="tag-source"><a href="matreshka-binders.js.html">matreshka-binders.js</a>, <a href="matreshka-binders.js.html#line20">line 20</a></dd>
     
     
     
@@ -431,7 +431,7 @@ this.bindElement( 'myKey', '.my-element', { // no "getValue" and no "on" propert
 </main>
 
 <footer class="jsdoc-footer container">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Apr 15 2014 13:24:34 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jul 14 2014 18:46:45 GMT+0400 (EET)
 </footer>
 
 <script> prettyPrint(); </script>
