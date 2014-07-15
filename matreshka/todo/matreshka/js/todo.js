@@ -1,4 +1,4 @@
-// **todo.js** contains ``Todo`` class that wil be used as ``Model`` for main ``Todos`` class. ``Todo`` class extends [MK.Object](http://finom.github.io/matreshka/docs/Matreshka.Object.html) class.
+// **todo.js** contains ``Todo`` class that will be used as ``Model`` for main ``Todos`` class. ``Todo`` class extends [MK.Object](http://finom.github.io/matreshka/docs/Matreshka.Object.html) class.
 "use strict";
 this.Todo = Class({
 	'extends': MK.Object,
@@ -32,7 +32,7 @@ this.Todo = Class({
 						edit: this.$( '.edit' ),
 						destroy: this.$( '.destroy' )
 					})
-					// Bindings with cpecified binders (third argument) TODO
+					// Bindings with cpecified binders (third argument)
 					// * Binding of main element whose visibility will be toggled via ``"visible"`` property
 					// * Binding of main element whose ``"completed"`` class name will be toggled via ``"completed"`` property
 					// * Binding of main element whose ``"editing"`` class name will be toggled via ``"editing"`` property
@@ -42,17 +42,17 @@ this.Todo = Class({
 					.bindElement( 'editing', this.$bound(), MK.binders.className( 'editing' ) )
 					.bindElement( 'title', this.$( 'label' ), MK.binders.innerHTML() )
 					// Attaching ``"dblclick"`` event handler to the element that bound to ``"title"`` property (``label`` tag)
-					// When user produces double-click then we're moving todo item to edit mode by setting ``"editing"`` property to true. This action adds ``"edit"`` class on todo item.
-					// Then we assign current ``"title"`` property value to ``"edit"`` property which sets ``"edit"`` input value as well
-					// Making ``"edit"`` input be focused
+					// When user produces double-click then we're moving todo item to edit mode by setting ``"editing"`` property to ``true``. This action adds ``"edit"`` class on todo item.
+					// Then we assign current ``"title"`` property value to ``"edit"`` property which sets ``"edit"`` input value as well.
+					// Then making ``"edit"`` input be focused.
 					.on( 'dblclick::title', function() {
 						this.editing = true;
 						this.edit = this.title;
 						this.$bound( 'edit' ).focus();
 					})
-					// Attaching ``"keyup"`` event handler to element that bound to ``"edit"`` property
-					// If ``Escape`` key is pressed there then we're moving back to the regular mode
-					// If ``Enter`` key is pressed then then we're assigning trimmed ``"edit"`` property value to the ``"title"`` property and moving back to regular mode
+					// Attaching ``"keyup"`` event handler to element that bound to ``"edit"`` property.
+					// If ``Escape`` key is pressed then we're moving back to the regular mode.
+					// If ``Enter`` key is pressed then then we're assigning trimmed ``"edit"`` property value to the ``"title"`` property and moving back to regular mode.
 					.on( 'keyup::edit', function( evt ) {
 						if( evt.which === ESC_KEY ) {
 							this.editing = false;
