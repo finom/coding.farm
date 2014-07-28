@@ -157,7 +157,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>We’re using <a href="https://github.com/flatiron/director">director</a> router as TodoMVC specification says. When location.hash changes the value assigns to <code>&quot;route&quot;</code> property.</p>
+              <p>We’re using <a href="https://github.com/flatiron/director">director</a> router as TodoMVC specification says. When <code>location.hash</code> changes the value assigns to <code>&quot;route&quot;</code> property.</p>
 
             </div>
             
@@ -180,7 +180,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p><strong>Bindings</strong></p>
+              <h1 id="bindings">Bindings</h1>
 
             </div>
             
@@ -290,7 +290,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p><strong>Events</strong></p>
+              <h1 id="events">Events</h1>
 
             </div>
             
@@ -374,12 +374,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>If element that bound to <code>&quot;destroy&quot;</code> property of any todo item is clicked then we’re removing todo items using <a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#pull">pull</a> method. This method accepts index of element that has to be removed from collection. <code>evt</code> argument from event handler contains <code>&quot;self&quot;</code> property equals to instance on which event is triggered.</p>
+              <p>If some element fires <code>&quot;readytodie&quot;</code> event then we remove it using <a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#pull">pull</a> method. This method accepts index of element that has to be removed from collection.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			.on( <span class="hljs-string">'@click::destroy'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( evt )</span> </span>{
-				<span class="hljs-keyword">this</span>.pull( <span class="hljs-keyword">this</span>.indexOf( evt.self ) );
+            <div class="content"><div class='highlight'><pre>			.on( <span class="hljs-string">'@readytodie'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( todo )</span> </span>{
+				<span class="hljs-keyword">this</span>.pull( <span class="hljs-keyword">this</span>.indexOf( todo ) );
 			})</pre></div></div>
             
         </li>

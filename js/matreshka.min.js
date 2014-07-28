@@ -1,5 +1,5 @@
 /*
-	Matreshka v0.2.0 (2014-07-15)
+	Matreshka v0.2.0 (2014-07-28)
 	JavaScript Framework by Andrey Gubanov
 	Released under the MIT license
 	More info: http://finom.github.io/matreshka/

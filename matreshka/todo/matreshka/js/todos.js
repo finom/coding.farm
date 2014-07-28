@@ -25,7 +25,7 @@ this.Todos = Class({
 			}) )
 		;
 		
-		// We're using [director](https://github.com/flatiron/director) router as TodoMVC specification says. When location.hash changes the value assigns to ``"route"`` property.
+		// We're using [director](https://github.com/flatiron/director) router as TodoMVC specification says. When ``location.hash`` changes the value assigns to ``"route"`` property.
 		Router({
 			':state': function( state ) {
 				self.route = state;
@@ -35,7 +35,7 @@ this.Todos = Class({
 			}
 		}).init();
 	},
-	// **Bindings**
+	// # Bindings
 	bindings: function() {
 		return this
 			// We're binding main element which has "todoapp" ID. This means association between instance and element. After that we're binding another elements (main, footer etc).
@@ -80,7 +80,7 @@ this.Todos = Class({
 			})
 		;
 	},
-	// **Events**
+	// # Events
 	events: function() {
 		return this
 			// If ``Enter`` key is pressed on element that bound to ``"newTodo"`` and if trimmed value of this property is not empty string, we're adding new todo item using [push](http://finom.github.io/matreshka/docs/Matreshka.Array.html#push) method
@@ -112,9 +112,9 @@ this.Todos = Class({
 					}
 				}, this );
 			})
-			// If element that bound to ``"destroy"`` property of any todo item is clicked then we're removing todo items using [pull](http://finom.github.io/matreshka/docs/Matreshka.Array.html#pull) method. This method accepts index of element that has to be removed from collection. ``evt`` argument from event handler contains ``"self"`` property equals to instance on which event is triggered.
-			.on( '@click::destroy', function( evt ) {
-				this.pull( this.indexOf( evt.self ) );
+			// If some element fires ``"readytodie"`` event then we remove it using [pull](http://finom.github.io/matreshka/docs/Matreshka.Array.html#pull) method. This method accepts index of element that has to be removed from collection.
+			.on( '@readytodie', function( todo ) {
+				this.pull( this.indexOf( todo ) );
 			})
 			// This event handler is attached on two events. The first is ``"modify"`` event which is firing when ``MK.Array`` collection changes (some element(s) is added or removed). The second is ``"@change:completed"`` event. "@" symbol means that we're listening ``"change:completed"`` for each todo item. So event handler executes when some todos are added or removed and when ``"completed"`` property is changed on some todo item. The code inside event handler explains itself: ``"allCompleted"`` becames ``true`` if every item is completed becames and becames ``false`` when some item is not completed. ``"completedLength"`` contains the length of completed items.
 			.on( 'modify @change:completed', function() {
@@ -130,7 +130,7 @@ this.Todos = Class({
 			.on( 'modify @change:completed change:allCompleted', function() {
 				this.JSON = JSON.stringify( this );
 			})
-			// Next strings control which todo items are visible depends on ``location.hash``. This part could be written few ways. I've choose [addDependency](http://finom.github.io/matreshka/docs/Matreshka.html#addDependency) way for it. What is going on there? We're listening ``"add"`` event. Fired event passes ```"added"``` property to the event (``evt``) argument which contain an array of added items. We're iterating new added todos and adding dependency over them. ``"visible"`` value depends on ``todos.route`` property and on self's ``"completed"`` property as third argument describes. 
+			// Next strings control which todo items are visible depends on ``location.hash``. This part could be written few ways. I've choose [addDependency](http://finom.github.io/matreshka/docs/Matreshka.html#addDependency) way for it. What is going on there? We're listening ``"add"`` event. Fired event passes ``"added"`` property to the event (``evt``) argument which contain an array of added items. We're iterating new added todos and adding dependency over them. ``"visible"`` value depends on ``todos.route`` property and on self's ``"completed"`` property as third argument describes. 
 			.on( 'add', function( evt ) {
 				evt.added.forEach( function( todo ) {
 					todo.addDependency( 'visible', [

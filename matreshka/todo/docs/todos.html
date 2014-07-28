@@ -53,7 +53,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p><strong>todos.js</strong> is the biggest file that contains most of logic because application is tiny. In bigger projects is better to split up your application parts. <code>Todos</code> class extends <code>MK.Array</code> class which means “collection”.</p>
+              <p><strong>todos.js</strong> is the biggest file that contains most of logic. In bigger projects is better to split up your application to a few JS files. <code>Todos</code> class extends <code>MK.Array</code> class which means “collection”.</p>
 
             </div>
             
@@ -71,7 +71,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p><a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#itemRenderer">itemRenderer</a> method renders element for each added item. At this case it takes template in element that has <code>id=&quot;todo_item_template&quot;</code></p>
+              <p><a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#itemRenderer">itemRenderer</a> method renders element for each added item. At this case it retrieves HTML template for todo item from element that has <code>id=&quot;todo_item_template&quot;</code> (look at HTML code)</p>
 
             </div>
             
@@ -105,7 +105,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p><code>&quot;leftLength&quot;</code> is dependent from <code>&quot;length&quot;</code> and <code>&quot;completedLength&quot;</code> properties as their difference and listens any cnanges on these properties.</p>
+              <p><code>&quot;leftLength&quot;</code> is dependent from <code>&quot;length&quot;</code> and <code>&quot;completedLength&quot;</code> properties as their difference. It listens any cnanges on these properties.</p>
 
             </div>
             
@@ -122,7 +122,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p><code>&quot;bindings&quot;</code> method created bindings between instance properties and DOM elements. <code>&quot;events&quot;</code> as you might guess adds events listeners for the instance. I don’t say that these method names mean somethig special, I just moved grouped actions to methods that I liked to call <code>&quot;bindings&quot;</code> and <code>&quot;events&quot;</code>. After calling them we’re parsing locally stored todos and passing obtained array to createFrom method which pushes converted array items to the instance.</p>
+              <p><code>&quot;bindings&quot;</code> method creates bindings between instance properties and DOM elements. <code>&quot;events&quot;</code> as you might guess adds event listeners to the instance. I don’t say that these method names mean somethig special, I just moved grouped actions to methods that I liked to call <code>&quot;bindings&quot;</code> and <code>&quot;events&quot;</code>. After calling them we’re parsing locally stored todos and passing obtained array to <a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#createFrom">createFrom</a> method which pushes converted array items to the instance.</p>
 
             </div>
             
@@ -139,7 +139,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>After we created todos array from <code>localStorage</code> we’re adding event lister on change of <code>&quot;JSON&quot;</code> property which stores stringified representation of our todo list. Look at <a href="http://finom.github.io/matreshka/docs/Matreshka.html#procrastinate">procrastinate</a> method. It disallows to call function many times per time period. We need this optimiation because <code>localStorage</code> stores data on hard drive which works much slower then RAM.</p>
+              <p>After we created todos array retrieved from <code>localStorage</code> we’re adding event lister on change of <code>&quot;JSON&quot;</code> property which stores stringified representation of our todo list. Look at <a href="http://finom.github.io/matreshka/docs/Matreshka.html#procrastinate">procrastinate</a> method. It disallows to call function many times per time period. We need this optimiation because <code>localStorage</code> stores data on hard drive which works much slower then RAM.</p>
 
             </div>
             
@@ -157,7 +157,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>We’re using <a href="https://github.com/flatiron/director">director</a> router as TodoMVC specification says. When location.hash changes the value assigns to <code>&quot;route&quot;</code> property.</p>
+              <p>We’re using <a href="https://github.com/flatiron/director">director</a> router as TodoMVC specification says. When <code>location.hash</code> changes the value assigns to <code>&quot;route&quot;</code> property.</p>
 
             </div>
             
@@ -196,7 +196,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>We’re binding main alament which has “todoapp” ID. After that we’r binding another elements (main, footer etc).</p>
+              <p>We’re binding main element which has “todoapp” ID. This means association between instance and element. After that we’re binding another elements (main, footer etc).</p>
 
             </div>
             
@@ -332,7 +332,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Code abowe shows that <code>&quot;allCompleted&quot;</code> property is associated with <code>#toggle-all</code> element. When it’s value is changed we’re setting same <code>&quot;completed&quot;</code> peoperty value for all items we have. <code>&quot;silent&quot;</code> flag says that <code>&quot;change:completed&quot;</code> event has not to be fired.</p>
+              <p>Code above shows that <code>&quot;allCompleted&quot;</code> property is associated with <code>#toggle-all</code> element. When it’s value is changed we’re setting same <code>&quot;completed&quot;</code> peoperty value for all items we have. <code>&quot;silent&quot;</code> flag says that <code>&quot;change:completed&quot;</code> event has not to be fired.</p>
 
             </div>
             
@@ -374,12 +374,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>If element that bound to <code>&quot;destroy&quot;</code> property of any todo item is clicked then we’re removing todo items using <a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#pull">pull</a> method. This method accepts index of element that has to be removed from collection. <code>evt</code> argument from event handler contains <code>&quot;self&quot;</code> property equals to instance on which event is triggered.</p>
+              <p>If some element fires <code>&quot;readytodie&quot;</code> event then we remove it using <a href="http://finom.github.io/matreshka/docs/Matreshka.Array.html#pull">pull</a> method. This method accepts index of element that has to be removed from collection.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			.on( <span class="hljs-string">'@click::destroy'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( evt )</span> </span>{
-				<span class="hljs-keyword">this</span>.pull( <span class="hljs-keyword">this</span>.indexOf( evt.self ) );
+            <div class="content"><div class='highlight'><pre>			.on( <span class="hljs-string">'@readytodie'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( todo )</span> </span>{
+				<span class="hljs-keyword">this</span>.pull( <span class="hljs-keyword">this</span>.indexOf( todo ) );
 			})</pre></div></div>
             
         </li>
@@ -391,7 +391,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>This event handler is attached on two events. The first is <code>&quot;modify&quot;</code> event which is firing when <code>MK.Array</code> collection changes (some element(s) is added or removed). The second is <code>&quot;@change:completed&quot;</code> event. “@” symbol means that we’re listening <code>&quot;change:completed&quot;</code> for each todo item. So event handler executes when some todos are added or removed and when <code>&quot;completed&quot;</code> property is changed in some todo item. The code inside event handler explains itself: <code>&quot;allCompleted&quot;</code> becames <code>true</code> if every item is completed becames and becames <code>false</code> when some item is not completed. <code>&quot;completedLength&quot;</code> contains the length of completed items.</p>
+              <p>This event handler is attached on two events. The first is <code>&quot;modify&quot;</code> event which is firing when <code>MK.Array</code> collection changes (some element(s) is added or removed). The second is <code>&quot;@change:completed&quot;</code> event. “@” symbol means that we’re listening <code>&quot;change:completed&quot;</code> for each todo item. So event handler executes when some todos are added or removed and when <code>&quot;completed&quot;</code> property is changed on some todo item. The code inside event handler explains itself: <code>&quot;allCompleted&quot;</code> becames <code>true</code> if every item is completed becames and becames <code>false</code> when some item is not completed. <code>&quot;completedLength&quot;</code> contains the length of completed items.</p>
 
             </div>
             
@@ -431,7 +431,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>Next strings control which todo items are visible depends on hash URL. This part could be written few ways. I’ve choose <a href="http://finom.github.io/matreshka/docs/Matreshka.html#addDependency">addDependency</a> way for it. What is going on there? We’re listening <code>&quot;add&quot;</code> event. Fired event passes <code>&quot;added&quot;</code> property to the event (<code>evt</code>) argument which contain an array of added items. We’re iterating new added todos and adding dependency over them. <code>&quot;visible&quot;</code> value depends on <code>todos.route</code> property and on self’s <code>&quot;completed&quot;</code> property as third argument describes. </p>
+              <p>Next strings control which todo items are visible depends on <code>location.hash</code>. This part could be written few ways. I’ve choose <a href="http://finom.github.io/matreshka/docs/Matreshka.html#addDependency">addDependency</a> way for it. What is going on there? We’re listening <code>&quot;add&quot;</code> event. Fired event passes <code>&quot;added&quot;</code> property to the event (<code>evt</code>) argument which contain an array of added items. We’re iterating new added todos and adding dependency over them. <code>&quot;visible&quot;</code> value depends on <code>todos.route</code> property and on self’s <code>&quot;completed&quot;</code> property as third argument describes. </p>
 
             </div>
             
