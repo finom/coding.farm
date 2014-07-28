@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+<title>Matreshka Documentation - Source: balalaika.js</title>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="../../css/syntax.css" rel="stylesheet" type="text/css">
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+<style>
+@media (max-width: 1120px){
+	header .logo .logo-text {
+		display: none;
+	}
+}
+</style>
+<!--[if lt IE 9]>
+<link href="../../css/ie8.css" rel="stylesheet" type="text/css">
+<script src="../../js/es5-shim.min.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+	</head>
+	<body class="docs">
+		<header>
+			<div class="modern-b typo">Found inaccuracy or typo? <br> Select it and press <button>CTRL</button>+<button>Enter</button></div>
+<div class="wrap">
+	<a class="logo" href="../../matreshka">
+		<img src="../../../img/mk-logo-colour.svg" height="80">
+		<span class="logo-text">Matreshka.js</span>
+	</a>
+	<nav>
+		<a href="../../matreshka" >Home</a>
+		<a href="../../matreshka/about" >Why Matreshka</a>
+		<a href="../../matreshka/docs"  class="selected" >Docs</a>
+		<a href="../../matreshka/examples" >Examples</a>
+		<a href="https://github.com/finom/matreshka/releases" class="btn download">Download</a>
+	</nav>
+</div>
+
+		</header>
+		<main>
+			 <script src="scripts/prettify/prettify.js"></script>
+<script src="scripts/prettify/lang-css.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/prettify.css">
+<linkq type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<link type="text/css" rel="stylesheet" href="../../css/jsdoc.css">
+<nav class="navigation">
+    <!--<h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="Class.Interface.html">Interface</a></li><li><a href="Matreshka.html">Matreshka</a></li><li><a href="Matreshka.Array.html">Array</a></li><li><a href="Matreshka.Object.html">Object</a></li></ul><h3>Namespaces</h3><ul><li><a href="Matreshka.binders.html">binders</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$b">$b</a></li><li><a href="global.html#Class">Class</a></li></ul>-->
+    <a href="global.html" class="">Globals</a><br>
+    <a href="Matreshka.html" class="">Matreshka (MK)</a><br>
+    <a href="Matreshka.Object.html" class="">MK.Object</a><br>
+    <a href="Matreshka.Array.html" class="">MK.Array</a><br>
+</nav>
+<main>
+    <div class="container docs">
+		<h1 class="page-title hide">Source: balalaika.js</h1>
+		
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>"use strict";
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('balalaika', [
+			'matreshka_dir/polyfills/addeventlistener'
+		], factory);
+    } else {
+        root.$b = factory();
+    }
+}(this, function () {
+/**
+ * @function $b
+ * @version 1.0
+ * @since 0.1
+ * @extends Array
+ * @summary &lt;code>Balalaika&lt;/code> DOM utilite
+ * 
+ * @desc &lt;p>Balalaika is tiny (999 bytes uncompressed) embedded library that makes easier vanilla.js (pure JS) coding. This is individual project and will be presented on github soon.&lt;/p>
+ * 
+ * &lt;p>It's using in {@link http://finom.github.io/matreshka|Matreshka} framework as DOM utilite when jQuery is not defined.&lt;/p>
+ * 
+ * &lt;p>Balalaika extends Array. It means that you can use Array methods such as &lt;code>.forEach&lt;/code>, &lt;code>.map&lt;/code>, &lt;code>.reduce&lt;/code>, &lt;code>.splice&lt;/code> and so on.&lt;/p>
+ * 
+ * &lt;p>Balalaika includes 3 own methods: &lt;code>.on&lt;/code>, &lt;code>.off&lt;/code>, &lt;code>.is&lt;/code> and static &lt;code>.extend&lt;/code> method that work same way as jQuery analogues (&lt;code>.on&lt;/code> doesn't support data). &lt;/p>
+ * 
+ * @example $b( 'div' ).forEach( ... );
+ * @example $b( 'span', document.body ).map( ... );
+ * @example $b( '.button' ).on( 'click.mynamespace', ... );
+ * @example $b( '.button' ).off( 'click.mynamespace' );
+ * @example &lt;caption>AMD way (named modules)&lt;/caption>
+ * retuire.config({
+ * 	paths: {
+ * 		'xclass': 'path/to/matreshka.min',
+ * 		'matreshka': 'path/to/matreshka.min',
+ * 		'balalaika': 'path/to/matreshka.min'
+ * 	}
+ * });
+ * require(['xclass', 'matreshka', 'balalaika'], function(Class, MK, $) {
+ * 	var $divs = $( 'div' );
+ * 	var MyClass = Class({
+ * 		'extends': MK
+ * 	});
+ * });
+ * @example &lt;caption>AMD way (unnamed Matreshka module)&lt;/caption>
+ * // Matreshka contains Class function as "Class" property and balalaika as "$b" property
+ * require(['path/to/matreshka.min'], function(MK) {
+ * 	var $divs = MK.$b( 'div' );
+ * 	var MyClass = MK.Class({
+ * 		'extends': MK
+ * 	});
+ * });
+ */
+// nsRegAndEvents is regesp for eventname.namespace and the list of all events
+// fn is empty array and balalaika prototype
+return ( function( window, document, fn, nsRegAndEvents, id, s_EventListener, s_MatchesSelector, i, j, k, l, $ ) {
+	$ = function( s, context ) {
+		return new $.i( s, context );
+	};
+	
+	$.i = function( s, context ) {
+		fn.push.apply( this, !s ? fn : s.nodeType || s == window ? [s] : "" + s === s ? /&lt;/.test( s ) 
+		? ( ( i = document.createElement( context || 'div' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : $(document).on('DOMContentLoaded', s) : s );
+	};
+	
+	$.i[ l = 'prototype' ] = ( $.extend = function(obj) {
+		k = arguments;
+		for( i = 1; i &lt; k.length; i++ ) {
+			if ( l = k[ i ] ) {
+				for (j in l) {
+					obj[j] = l[j];
+				}
+			}
+		}
+		
+		return obj;
+	})( $.fn = $[ l ] = fn, { // $.fn = $.prototype = fn
+		on: function( n, f ) {
+			// n = [ eventName, nameSpace ]
+			n = n.split( nsRegAndEvents );
+			this.map( function( item ) {
+				// item.b$ is balalaika_id for an element
+				// i is eventName + id ("click75")
+				// nsRegAndEvents[ i ] is array of events (eg all click events for element#75) ([[namespace, handler], [namespace, handler]])
+				( nsRegAndEvents[ i = n[ 0 ] + ( item.b$ = item.b$ || ++id ) ] = nsRegAndEvents[ i ] || [] ).push([f, n[ 1 ]]);
+				// item.addEventListener( eventName, f )
+				item[ 'add' + s_EventListener ]( n[ 0 ], f );
+			});
+			return this;
+		},
+		off: function( n, f ) {
+			// n = [ eventName, nameSpace ]
+			n = n.split( nsRegAndEvents );
+			// l = 'removeEventListener'
+			l = 'remove' + s_EventListener;
+			this.map( function( item ) {
+				// k - array of events
+				// item.b$ - balalaika_id for an element
+				// n[ 0 ] + item.b$ - eventName + id ("click75")
+				k = nsRegAndEvents[ n[ 0 ] + item.b$ ];
+				// if array of events exist then i = length of array of events
+				if( i = k && k.length ) {
+					// while j = one of array of events
+					while( j = k[ --i ] ) {
+						// if( no f and no namespace || f but no namespace || no f but namespace || f and namespace )
+						if( ( !f || f == j[ 0 ] ) && ( !n[ 1 ] || n[ 1 ] == j[ 1 ] ) ) {
+							// item.removeEventListener( eventName, handler );
+							item[ l ]( n[ 0 ], j[ 0 ] );
+							// remove event from array of events
+							k.splice( i, 1 );
+						}
+					}
+				} else {
+					// if event added before using addEventListener, just remove it using item.removeEventListener( eventName, f )
+					!n[ 1 ] && item[ l ]( n[ 0 ], f );
+				}	
+			});
+			return this;
+		},
+		is: function( s ) {
+			i = this[ 0 ];
+			j = !!i && ( i.matches
+				|| i[ 'webkit' + s_MatchesSelector ]
+				|| i[ 'moz' + s_MatchesSelector ]
+				|| i[ 'ms' + s_MatchesSelector ] );
+			return !!j && j.call( i, s );
+		}
+	});	
+	return $;
+})( window, document, [], /\.(.+)/, 0, 'EventListener', 'MatchesSelector' );
+
+}));</code></pre>
+        </article>
+    </section>
+
+
+
+
+	</div>
+</main>
+
+<footer class="jsdoc-footer container">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jul 28 2014 21:27:02 GMT+0400 (EET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+
+		</main>
+		<footer><script src="../../js/typo.js"></script>
+
+
+</footer>
+		
+	</body>
+</html>

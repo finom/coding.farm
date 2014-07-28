@@ -36,7 +36,7 @@ this.Todos = Class({
 			}
 		}).init();
 	},
-	// **Привязки**
+	// # Привязки
 	bindings: function() {
 		return this
 			// Привязываем (ассоциируем) "главный" элемент, который имеет id="todoapp" к экземпляру класса. После этого присязываем несколько других элементов (main, footer и т. д.).
@@ -49,7 +49,7 @@ this.Todos = Class({
 				allCompleted: '#toggle-all',
 				clearCompleted: '#clear-completed'
 			})
-			// Следующий вызов [bindElement](http://finom.github.io/matreshka/docs/Matreshka.html#bindElement-1) делает видимость элементов зависимым от значений соответствующих свойств (если значение проходит не-строгую проверку на равенство ``true``, элемент будет показан, иначе - спрятан). Метод [$bound](http://finom.github.io/matreshka/docs/Matreshka.html#$bound) возвращает элемент(ы), который привязан к соответствующему свойству или свойствам, рсзделенным пробелом.
+			// Следующий вызов [bindElement](http://finom.github.io/matreshka/docs/Matreshka.html#bindElement-1) делает видимость элементов зависимым от значений соответствующих свойств (если значение проходит не-строгую проверку на равенство ``true``, элемент будет показан, иначе - спрятан). Метод [$bound](http://finom.github.io/matreshka/docs/Matreshka.html#$bound) возвращает элемент(ы), который привязан к соответствующему свойству или свойствам, разделенным пробелом.
 			// ```js
 			// //возвращает элемент '#clear-completed'
 			// this.$bound( 'clearCompleted' );
@@ -81,7 +81,7 @@ this.Todos = Class({
 			})
 		;
 	},
-	// **События**
+	// # События
 	events: function() {
 		return this
 			// Если в инпуте, привязанном к свойству ``"newTodo"`` нажата клавиша  ``Enter`` и если очищенное от пробелов значение этого свойства не является пустой строкой, добавляем новый пункт todo, используя метод [push](http://finom.github.io/matreshka/docs/Matreshka.Array.html#push).
@@ -97,7 +97,7 @@ this.Todos = Class({
 					this.newTodo = '';
 				}
 			})
-			// Код выше (см. привязки) показывает, что свойство ``"allCompleted"` ассоциировано с элементом ``#toggle-all``. Когда меняется его значение, мы присваиваем свойствам ``"completed"`` для всех todo то же самое значение. Флаг ``"silent"`` говорит о том, что событие ``"change:completed"`` не должно быть вызвано.
+			// Код выше (см. привязки) показывает, что свойство ``"allCompleted"`` ассоциировано с элементом ``#toggle-all``. Когда меняется его значение, мы присваиваем свойствам ``"completed"`` для всех todo то же самое значение. Флаг ``"silent"`` говорит о том, что событие ``"change:completed"`` не должно быть вызвано.
 			.on( 'change:allCompleted', function( evt ) {
 				this.forEach( function( todo ) {
 					todo.set( 'completed', evt.value, { silent: true });
