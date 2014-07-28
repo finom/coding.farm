@@ -53,7 +53,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p><strong>todo.js</strong> содержит <code>Todo</code> класс, который используется, как модель (<code>Model</code>) для главного класса (<code>Todos</code>). Класс <code>Todo</code> наследуется от класса <a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a>.</p>
+              <p><strong>todo.js</strong> содержит класс <code>Todo</code>, который используется, как модель (<code>Model</code>) для главного класса (<code>Todos</code>). Класс <code>Todo</code> наследуется от класса <a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a>.</p>
 
             </div>
             
@@ -173,7 +173,7 @@
 <ul>
 <li>Свойство <code>&quot;completed&quot;</code> привязывается к чекбоксу с классом <code>toggle</code></li>
 <li>Свойство <code>&quot;edit&quot;</code> привязывается к полю (input type=text) с классом <code>edit</code></li>
-<li>Свойство <code>&quot;destroy&quot;</code> привязывается к элементу с классом <code>destroy</code>, который не имеет стандартного привязчика. Это значит, что элемент просто ассоциируется со свойством, не синхронизируясь с ним.</li>
+<li>Свойство <code>&quot;destroy&quot;</code> привязывается к элементу с классом <code>destroy</code>, который не имеет стандартного привязчика. Это значит, что элемент просто ассоциируется со свойством, не синхронизируясь с его значением.</li>
 </ul>
 
             </div>
@@ -217,8 +217,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Добавляем обработчик события двойного щелчка мышью (<code>&quot;dblclick&quot;</code>) для элемента, привязанного к свойству <code>&quot;title&quot;</code> (тег <code>label</code>)
-Когда срабатывает события, мы меняем “режим” экземпляра на редактирование, присваивая свойству <code>&quot;editing&quot;</code> значение <code>true</code>. Это действие добавляет класс <code>&quot;edit&quot;</code> главному элементу (см. привязки выше).
+              <p>Добавляем обработчик события двойного щелчка мышью (<code>&quot;dblclick&quot;</code>) для элемента, привязанного к свойству <code>&quot;title&quot;</code> (тег <code>label</code>).
+Когда срабатывает обработчик, мы меняем “режим” экземпляра на редактирование, присваивая свойству <code>&quot;editing&quot;</code> значение <code>true</code>. Это действие добавляет класс <code>&quot;edit&quot;</code> главному элементу (см. привязки выше).
 Затем мы присваиваем текущее значение свойства <code>&quot;title&quot;</code> свойству <code>&quot;edit&quot;</code>.
 После этого устанавливаем фокус на поле, привязанное к свойству <code>&quot;edit&quot;</code>.</p>
 

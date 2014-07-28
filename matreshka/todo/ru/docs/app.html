@@ -53,7 +53,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <p>Этор документация к реализации <a href="https://todomvc.com">TodoMVC</a>, используя фреймворк <a href="http://finom.github.io/matreshka/">Matreshka.js</a>. Живая версия находится  <a href="http://finom.github.io/matreshka/todo/ru/">на этой странице</a>.</p>
+
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-pi">"use strict"</span>;</pre></div></div>
@@ -85,7 +86,7 @@ $( <span class="hljs-function"><span class="hljs-keyword">function</span><span c
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Создаем кастомный привязчик (binder), который будет синхронизировать значение свойства с видимостью элемента, с помощью метода <a href="http://api.jquery.com/toggle/">jQuery.fn.toggle</a>.</p>
+              <p>Создаем кастомный привязчик (<a href="http://finom.github.io/matreshka/docs/global.html#binder">binder</a>), который будет синхронизировать значение свойства с тем, будет ли виден элемент на странице или нет (используя  метод <a href="http://api.jquery.com/toggle/">jQuery.fn.toggle</a>).</p>
 <pre><code class="lang-js"><span class="hljs-keyword">this</span>.bindElement( <span class="hljs-string">'x'</span>, element, MK.binders.display() );
 <span class="hljs-keyword">this</span>.x = <span class="hljs-literal">false</span>; <span class="hljs-comment">// элемент не видим (display:none)</span>
 <span class="hljs-keyword">this</span>.x = <span class="hljs-literal">true</span>; <span class="hljs-comment">// элемент видим</span>
@@ -114,8 +115,23 @@ $( <span class="hljs-function"><span class="hljs-keyword">function</span><span c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	<span class="hljs-built_in">window</span>.app = <span class="hljs-keyword">new</span> Todos();
-});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="hljs-built_in">window</span>.app = <span class="hljs-keyword">new</span> Todos();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>См. <a href="todos.html">todos.js</a> and <a href="todo.html">todo.js</a></p>
+<p><a href="http://finom.github.io/matreshka/todo/docs/app.html">English version</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>});</pre></div></div>
             
         </li>
         

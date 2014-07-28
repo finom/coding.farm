@@ -35,7 +35,7 @@ this.Todos = Class({
 			}
 		}).init();
 	},
-	// **Bindings**
+	// # Bindings
 	bindings: function() {
 		return this
 			// We're binding main element which has "todoapp" ID. This means association between instance and element. After that we're binding another elements (main, footer etc).
@@ -80,7 +80,7 @@ this.Todos = Class({
 			})
 		;
 	},
-	// **Events**
+	// # Events
 	events: function() {
 		return this
 			// If ``Enter`` key is pressed on element that bound to ``"newTodo"`` and if trimmed value of this property is not empty string, we're adding new todo item using [push](http://finom.github.io/matreshka/docs/Matreshka.Array.html#push) method
