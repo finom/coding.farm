@@ -13,7 +13,7 @@ this.Todo = Class({
 				title: '',
 				completed: false
 			})
-			// Setting data that class is received (eg ``{ title: 'Do it!' }``). 
+			// Setting data that constructor is received (eg ``{ title: 'Do it!' }``). 
 			.set( data )
 			// ``"visible"`` property says is this todo item visible.
 			.set( 'visible', true )
@@ -21,12 +21,12 @@ this.Todo = Class({
 			.on( 'render', function( evt ) {
 				this
 					// ``"render"`` event passes event object to the event handler and contains element that has been rendered.
-					// We're binding this element to the class as "main" element of this class using [bindElement](http://finom.github.io/matreshka/docs/Matreshka.html#bindElement-1) method.
+					// We're binding this element to the instance as "main" element of this instance using [bindElement](http://finom.github.io/matreshka/docs/Matreshka.html#bindElement-1) method. Why do we need to do this manually? Because an instance (model) could be an item of few collections.
 					.bindElement( this, evt.element )
 					// Bindings with no binder argument (uses [defaultBinders](http://finom.github.io/matreshka/docs/Matreshka.html#defaultBinders) if it's posible).
 					// * ``"completed"`` property is bound with ``.toggle`` checkbox
 					// * ``"edit"`` property is bound with ``.edit`` input
-					// * ``"destroy"`` property is bound with ``.destroy`` element which is unknown for Matreshka (no default binder)
+					// * ``"destroy"`` property is bound with ``.destroy`` element which is unknown for Matreshka (no default binder). It means that element is just associated with property without synchronizing with it.
 					.bindElement({
 						completed: this.$( '.toggle' ),
 						edit: this.$( '.edit' ),
@@ -52,14 +52,23 @@ this.Todo = Class({
 					})
 					// Attaching ``"keyup"`` event handler to element that bound to ``"edit"`` property.
 					// If ``Escape`` key is pressed then we're moving back to the regular mode.
-					// If ``Enter`` key is pressed then then we're assigning trimmed ``"edit"`` property value to the ``"title"`` property and moving back to regular mode.
+					// If ``Enter`` key is pressed then then we're assigning trimmed ``"edit"`` property value to the ``"title"`` property and moving back to regular mode. If trimmed value is empty then we trigger ``"readytodie"`` event which is listened in ``Todos`` class.
 					.on( 'keyup::edit', function( evt ) {
+						var editValue;
 						if( evt.which === ESC_KEY ) {
 							this.editing = false;
 						} else if( evt.which === ENTER_KEY ) {
-							this.title = this.edit.trim();
-							this.editing = false;
+							if( editValue = this.edit.trim() ) {
+								this.title = editValue;
+								this.editing = false;
+							} else {
+								this.trigger( 'readytodie', this );
+							}
 						}
+					})
+					// If destroy button is clicked then we trigger ``"readytodie"`` event which is listened in ``Todos`` class.
+					.on( 'click::destroy', function() {
+						this.trigger( 'readytodie', this );
 					})
 				;
 			});

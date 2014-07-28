@@ -6,8 +6,8 @@
 				<div mk-bind="vova"></div>
 			</div>
 		</div>
-		<div>
-			<div mk-each="phone in phones">
+		<div mk-bind="someobject">
+			<div mk-each="phone in someobject.phones">
 				<div>
 					<input mk-bind="phone.number">
 					<div mk-each="vasia in phone.vasias">
@@ -18,9 +18,10 @@
 					</div>
 				</div>
 			</div>
-			<div mk-each="phone in phones">
+			<div mk-each="phone in someobject.phones">
 				...
 			</div>
+			
 		</div>-
 	</div>
 </body>
@@ -36,3 +37,4 @@
 	Model.ptt.itemRenderer = fucntion() { ...  }
 	Model.templateKey = 'vasia.volodia'; //что делать если модель содержится в нескольких кллекциях?
 </script>
+

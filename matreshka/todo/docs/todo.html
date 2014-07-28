@@ -53,7 +53,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p><strong>todo.js</strong> contains <code>Todo</code> class that wil be used as <code>Model</code> for main <code>Todos</code> class. <code>Todo</code> class extends <a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a> class.</p>
+              <p><strong>todo.js</strong> contains <code>Todo</code> class that will be used as <code>Model</code> for main <code>Todos</code> class. <code>Todo</code> class extends <a href="http://finom.github.io/matreshka/docs/Matreshka.Object.html">MK.Object</a> class.</p>
 
             </div>
             
@@ -107,7 +107,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Setting data that class is received (eg <code>{ title: &#39;Do it!&#39; }</code>). </p>
+              <p>Setting data that constructor is received (eg <code>{ title: &#39;Do it!&#39; }</code>). </p>
 
             </div>
             
@@ -154,7 +154,7 @@
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p><code>&quot;render&quot;</code> event passes event object to the event handler and contains element that has been rendered.
-We’re binding this element to the class as “main” element of this class using <a href="http://finom.github.io/matreshka/docs/Matreshka.html#bindElement-1">bindElement</a> method.</p>
+We’re binding this element to the instance as “main” element of this instance using <a href="http://finom.github.io/matreshka/docs/Matreshka.html#bindElement-1">bindElement</a> method. Why do we need to do this manually? Because an instance (model) could be an item of few collections.</p>
 
             </div>
             
@@ -173,7 +173,7 @@ We’re binding this element to the class as “main” element of this class us
 <ul>
 <li><code>&quot;completed&quot;</code> property is bound with <code>.toggle</code> checkbox</li>
 <li><code>&quot;edit&quot;</code> property is bound with <code>.edit</code> input</li>
-<li><code>&quot;destroy&quot;</code> property is bound with <code>.destroy</code> element which is unknown for Matreshka (no default binder)</li>
+<li><code>&quot;destroy&quot;</code> property is bound with <code>.destroy</code> element which is unknown for Matreshka (no default binder). It means that element is just associated with property without synchronizing with it.</li>
 </ul>
 
             </div>
@@ -193,7 +193,7 @@ We’re binding this element to the class as “main” element of this class us
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Bindings with cpecified binders (third argument) TODO</p>
+              <p>Bindings with cpecified binders (third argument)</p>
 <ul>
 <li>Binding of main element whose visibility will be toggled via <code>&quot;visible&quot;</code> property</li>
 <li>Binding of main element whose <code>&quot;completed&quot;</code> class name will be toggled via <code>&quot;completed&quot;</code> property</li>
@@ -218,9 +218,9 @@ We’re binding this element to the class as “main” element of this class us
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Attaching <code>&quot;dblclick&quot;</code> event handler to the element that bound to <code>&quot;title&quot;</code> property (<code>label</code> tag)
-When user produces double-click then we’re moving todo item to edit mode by setting <code>&quot;editing&quot;</code> property to true. This action adds <code>&quot;edit&quot;</code> class on todo item.
-Then we assign current <code>&quot;title&quot;</code> property value to <code>&quot;edit&quot;</code> property which sets <code>&quot;edit&quot;</code> input value as well
-Making <code>&quot;edit&quot;</code> input be focused</p>
+When user produces double-click then we’re moving todo item to edit mode by setting <code>&quot;editing&quot;</code> property to <code>true</code>. This action adds <code>&quot;edit&quot;</code> class on todo item.
+Then we assign current <code>&quot;title&quot;</code> property value to <code>&quot;edit&quot;</code> property which sets <code>&quot;edit&quot;</code> input value as well.
+Then making <code>&quot;edit&quot;</code> input be focused.</p>
 
             </div>
             
@@ -239,19 +239,41 @@ Making <code>&quot;edit&quot;</code> input be focused</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Attaching <code>&quot;keyup&quot;</code> event handler to element that bound to <code>&quot;edit&quot;</code> property
-If <code>Escape</code> key is pressed there then we’re moving back to the regular mode
-If <code>Enter</code> key is pressed then then we’re assigning trimmed <code>&quot;edit&quot;</code> property value to the <code>&quot;title&quot;</code> property and moving back to regular mode</p>
+              <p>Attaching <code>&quot;keyup&quot;</code> event handler to element that bound to <code>&quot;edit&quot;</code> property.
+If <code>Escape</code> key is pressed then we’re moving back to the regular mode.
+If <code>Enter</code> key is pressed then then we’re assigning trimmed <code>&quot;edit&quot;</code> property value to the <code>&quot;title&quot;</code> property and moving back to regular mode. If trimmed value is empty then we trigger <code>&quot;readytodie&quot;</code> event which is listened in <code>Todos</code> class.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>					.on( <span class="hljs-string">'keyup::edit'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( evt )</span> </span>{
+						<span class="hljs-keyword">var</span> editValue;
 						<span class="hljs-keyword">if</span>( evt.which === ESC_KEY ) {
 							<span class="hljs-keyword">this</span>.editing = <span class="hljs-literal">false</span>;
 						} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( evt.which === ENTER_KEY ) {
-							<span class="hljs-keyword">this</span>.title = <span class="hljs-keyword">this</span>.edit.trim();
-							<span class="hljs-keyword">this</span>.editing = <span class="hljs-literal">false</span>;
+							<span class="hljs-keyword">if</span>( editValue = <span class="hljs-keyword">this</span>.edit.trim() ) {
+								<span class="hljs-keyword">this</span>.title = editValue;
+								<span class="hljs-keyword">this</span>.editing = <span class="hljs-literal">false</span>;
+							} <span class="hljs-keyword">else</span> {
+								<span class="hljs-keyword">this</span>.trigger( <span class="hljs-string">'readytodie'</span>, <span class="hljs-keyword">this</span> );
+							}
 						}
+					})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>If destroy button is clicked then we trigger <code>&quot;readytodie&quot;</code> event which is listened in <code>Todos</code> class.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>					.on( <span class="hljs-string">'click::destroy'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+						<span class="hljs-keyword">this</span>.trigger( <span class="hljs-string">'readytodie'</span>, <span class="hljs-keyword">this</span> );
 					})
 				;
 			});
