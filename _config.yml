@@ -4,7 +4,7 @@ email:       a@odessite.com.ua
 author:      Andrey Gubanov
 description: "Блог о веб разработке."
 baseurl:     ""
-url:         "http://finom.github.io"
+url:         "http://coding.farm"
 
 # Google analytics
 google_analytics:
