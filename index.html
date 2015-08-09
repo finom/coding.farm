@@ -3,12 +3,16 @@ layout: default
 ---
 
 <div class="home">
-
+Это тестовый запуск блога, возвращайтесь позже.
   <div class="posts">
     {% for post in paginator.posts %}
       <div class="post py3">
         <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
-        <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+        {% if post.external_url %}
+            <a href="{{ post.url | prepend: site.baseurl }}" class="external post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+        {% else %}
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+        {% endif %}
         <p class="post-summary">
           {% if post.summary %}
             {{ post.summary }}
