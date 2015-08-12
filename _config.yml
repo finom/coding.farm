@@ -7,7 +7,7 @@ baseurl:     ""
 url:         "http://coding.farm"
 
 # Google analytics
-google_analytics:
+google_analytics: UA-12418613-6
 
 # Optional features
 animated:           false
@@ -47,6 +47,8 @@ share_hackernews: false
 
 # Build settings
 markdown:     kramdown
+kramdown:
+  input: GFM
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    pretty

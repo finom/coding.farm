@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Object.defineProperty vs Object.observe &#8211; Finom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Разберемся, что лучше.">
+    <meta name="author" content="Andrey Gubanov">
+    <meta name="keywords" content="javascript">
+    <link rel="canonical" href="http://coding.farm/javascript/2015/08/12/object-defineproperty-vs-object-observe/">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Finom" href="/feed.xml" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/pixyll.css?201508121829" type="text/css">
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700italic,700,400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+    <link href='//fonts.googleapis.com/css?family=Roboto:900,300' rel='stylesheet' type='text/css'>
+    
+
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Object.defineProperty vs Object.observe">
+    <meta property="og:description" content="Блог о веб разработке.">
+    <meta property="og:url" content="http://coding.farm/javascript/2015/08/12/object-defineproperty-vs-object-observe/">
+    <meta property="og:site_name" content="Finom">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    
+    <meta name="twitter:title" content="Object.defineProperty vs Object.observe" />
+    <meta name="twitter:description" content="Разберемся, что лучше." />
+    <meta name="twitter:url" content="http://coding.farm/javascript/2015/08/12/object-defineproperty-vs-object-observe/" />
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-12418613-6']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+</head>
+
+<body class="site">
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://coding.farm" class="site-title">
+          <!--Finom-->
+          <img src="/images/coding_farm_v4_blog.svg" height="100">
+     </a>
+      <nav class="site-nav">
+        <!--<a href="/about/">About</a>-->
+<a href="/contact/">Contact</a>
+
+      </nav>
+      <div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Object.defineProperty vs Object.observe</h1>
+  <span class="post-meta">Aug 12, 2015</span><br>
+    
+  <span class="post-meta small">
+  
+    5 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <p>Не так давно в Хроме появилась потрясающая возможность, описанная в черновике спецификации ECMAScript 7: функция <code>Object.observe</code>. Она создана для оповещения обо всех изменениях в объекте (см. <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/observe">MDN</a>). Эта потрясающая возможность позволит сэкономить драгоценные ресурсы процессора во фреймворках и библиотеках, использующих так называемый dirty checking (дословно “грязная проверка”) для контроля изменений данных и перерисовки DOM. Такой подход используется во фрефмворке Angular 1, знаменитый своими тормозами при большом количестве элементов.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nx">bar</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">};</span>
+
+<span class="c1">// вот сюда попадет &quot;отчет&quot; об изменениях</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">changes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">changes</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">baz</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="c1">// [{name: &#39;baz&#39;, object: &lt;obj&gt;, type: &#39;add&#39;}]</span>
+
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span><span class="p">;</span>
+<span class="c1">// [{name: &#39;foo&#39;, object: &lt;obj&gt;, type: &#39;update&#39;, oldValue: 0}]</span>
+
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">baz</span><span class="p">;</span>
+<span class="c1">// [{name: &#39;baz&#39;, object: &lt;obj&gt;, type: &#39;delete&#39;, oldValue: 2}]</span></code></pre></div>
+
+<p>Все изменения через небольшой промежуток времени (несколько миллисекунд) попадут в качестве аргумента переданной функции. Хочется сказать “WOW”!</p>
+
+<p>К моему удивлению, многие забывают о том, что зарегистрировать изменения в объекте можно было и раньше с помощью функции <code>Object.defineProperty</code>. Функция позволяет навешать на свойство объекта геттер, сеттер и некоторые другие служебные опции, называемые дескриптором свойства.</p>
+
+<p>Вот так, например, вы создаете свойство <code>key</code> у объекта, которое:<br />
+- Имеет значение <code>'static'</code>;<br />
+- Не перечисляется в цикле for..in;<br />
+- Его нельзя переписать (т. е. свойство только для чтения);<br />
+- Ему нельзя переустановить дескриптор (снова запустить <code>Object.defineProperty</code> с таким же ключем).</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">configurable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">writable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;static&#39;</span>
+<span class="p">});</span></code></pre></div>
+
+<p>С геттерами и сеттерами (одним словом их называют акцессоры или accessor, от слова access - доступ) использование функции выглядит так:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">set</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;ты пытаешься установить свойство &#39;key&#39;&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span></code></pre></div>
+
+<p>Что тут происходит:<br />
+- При обращении к свойству <code>obj.key</code>, вызывается функция <code>get</code>. В данном случае, она просто возвращает число 42, но возвращаемое значение можно и просчитать (например, возвращать <code>Math.random()</code>, тогда <code>obj.key</code> будет всегда “содержать” случайное значение при каждом обращении);<br />
+- При каждом присваивании свойству нового значения будет вызываться функция <code>set</code>, в данном случае, она содержит вызов <code>alert(...)</code>. Для контроля изменения в объекте нам нужен только сеттер.</p>
+
+<p>Более подробно можете прочесть в <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">статье на MDN</a>.</p>
+
+<p>Итак, что лучше: <code>Object.defineProperty</code> или <code>Object.observe</code>?</p>
+
+<h3 id="section">1. Производительность</h3>
+<p><a href="http://jsperf.com/object-observe-vs-object-defineproperty">Бенчмарк на jsperf</a> показал невероятные результаты: скорость обычного сеттера при количестве и тераций <code>1e5</code> (10 тысяч) выше обзервера в 350 раз!</p>
+
+<p>Но я предлагаю не сильно обращать внимание на этот тест. Из-за особенностей jsperf тест выглядит неправдоподобным по сравнению с более объективным “консольным тестом”. Откройте консоль и запустите этот код:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">o1</span> <span class="o">=</span> <span class="p">{},</span>
+	<span class="nx">o2</span> <span class="o">=</span> <span class="p">{},</span>
+	<span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">;</span>
+
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span> <span class="nx">o1</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// some code which turns off browser optimization</span>
+	<span class="nx">j</span><span class="o">++</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span> <span class="nx">o2</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="p">{</span>
+	<span class="nx">set</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">v</span> <span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// some code which turns off browser optimization</span>
+		<span class="nx">j</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">});</span>
+
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span> <span class="s1">&#39;observe&#39;</span> <span class="p">);</span>
+
+<span class="k">for</span><span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="nx">e6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="nx">o1</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span> <span class="s1">&#39;observe&#39;</span> <span class="p">);</span>
+
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span> <span class="s1">&#39;defineProperty&#39;</span> <span class="p">);</span>
+
+<span class="k">for</span><span class="p">(</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="nx">e6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="nx">o2</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span> <span class="s1">&#39;defineProperty&#39;</span> <span class="p">);</span></code></pre></div>
+
+<p>У меня получилось 1592 миллисекунд у Object.observe против 868 у <code>Object.defineProperty</code>, т. е. первый на 80% медленнее второго. Если уменьшить количество итераций циклов до 10 тысяч, то разница будет более существенной: 32 мсек против 15 мсек.</p>
+
+<p>Очко в пользу <code>Object.defineProperty</code>. <em>1:0</em></p>
+
+<h3 id="section-1">2. Своевременность регистрации изменений</h3>
+<p>Сеттер запускается сразу же, после попытки присваивания значения. Обзервер коллекционирует изменения и отдаёт их асинхронно, когда “основной цикл” разблокирован. Первый вариант, не мой взгляд, лучше: я хочу знать об изменениях сразу, чтобы запустить код, вызывающийся вследствие этих изменений (обычно событие изменения свойства). Обзервер оповестит обо всех изменениях потом.</p>
+
+<p>У обоих подходов есть вои плюсы. <em>1:0</em></p>
+
+<h3 id="delete">3. Оператор <code>delete</code></h3>
+<p>Обзервер уведомляет так же и об удалении свойства (не только об изменении). <code>Object.defineProperty</code>, к сожалению, такой возможности не имеет (хотя, было бы логично её добавить). К сожалению, это огромный камень в огород <code>Object.defineProperty</code>… <em>1:1</em></p>
+
+<h3 id="section-2">4. Что будем слушать?</h3>
+<p>В случае с <code>Object.defineProperty</code> нам нужно явно указать, какое свойство мы слушаем. Иногде это удобно и хорошо отражается на производительности. В свою очередь, <code>Object.observe</code> регистрирует изменения всех свойств, без исключения.</p>
+
+<p>У обоих подходов есть вои плюсы. <em>1:1</em></p>
+
+<h3 id="section-3">5. Поддержка браузерами</h3>
+<p><code>Object.defineProperty</code>  поддерживается всеми браузерами, начиная с IE8. <code>Object.observe</code> работает только с браузерах на основе Хромиума.</p>
+
+<p>Очко в пользу <code>Object.defineProperty</code>. <em>2:1</em></p>
+
+<h3 id="section-4">Вывод</h3>
+<p>Несмотря на плохую поддержку браузерами, <code>Object.observe</code> это невероятно интересная и по-настоящему революционная возможность. Но, к сожалению, лично для меня, асинхронная задержка является самым главным аргументом против этой функции и я, как и раньше, буду пользоваться сеттерами. Надеюсь, что разработчики спецификаций решат как-нибудь проблему с <code>delete</code>, либо браузеры, наконец, начнут  внедрять долгожданный <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a>.</p>
+
+</article>
+
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'codingfarm';
+    var disqus_identifier = '/javascript/2015/08/12/object-defineproperty-vs-object-observe';
+    var disqus_title      = '';
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+      Theme crafted with &lt;3 by <a href="http://johnotander.com">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).<br>
+      &lt;/&gt; available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+    </small>
+  </div>
+</footer>
+
+</body>
+</html>

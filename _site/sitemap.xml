@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://finom.github.io/jekyll/pixyll/2015/07/11/announcing-pixyll-version-2/</loc>
-    <lastmod>2015-07-11T00:00:00+03:00</lastmod>
+    <loc>http://coding.farm/javascript/2015/08/12/object-defineproperty-vs-object-observe/</loc>
+    <lastmod>2015-08-12T00:00:00+03:00</lastmod>
   </url>
   <url>
-    <loc>http://finom.github.io/2015/04/10/matreshka-10-reasons/</loc>
+    <loc>http://coding.farm/matreshka/2015/08/12/interview/</loc>
+    <lastmod>2015-08-12T00:00:00+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://coding.farm/matreshka/2015/06/05/radiojs/</loc>
+    <lastmod>2015-06-05T00:00:00+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://coding.farm/matreshka/2015/04/16/matreshka-by-igor-iakimenko/</loc>
+    <lastmod>2015-04-16T00:00:00+03:00</lastmod>
+  </url>
+  <url>
+    <loc>http://coding.farm/matreshka/2015/04/10/matreshka-10-reasons/</loc>
     <lastmod>2015-04-10T00:00:00+03:00</lastmod>
   </url>
   <url>
-    <loc>http://finom.github.io/jekyll/pixyll/2014/06/11/welcome-to-pixyll/</loc>
-    <lastmod>2014-06-11T18:31:19+03:00</lastmod>
+    <loc>http://coding.farm/matreshka/2015/04/08/matreshka-from-simple-to-simple/</loc>
+    <lastmod>2015-04-08T00:00:00+03:00</lastmod>
   </url>
   <url>
-    <loc>http://finom.github.io/jekyll/pixyll/2014/06/10/see-pixyll-in-action/</loc>
-    <lastmod>2014-06-10T15:31:19+03:00</lastmod>
+    <loc>http://coding.farm/matreshka/2015/04/06/matreshka-1/</loc>
+    <lastmod>2015-04-06T00:00:00+03:00</lastmod>
   </url>
   <url>
-    <loc>http://finom.github.io/jekyll/pixyll/2014/06/09/so-what-is-jekyll/</loc>
-    <lastmod>2014-06-09T15:32:18+03:00</lastmod>
+    <loc>http://coding.farm/404.html</loc>
   </url>
   <url>
-    <loc>http://finom.github.io/jekyll/pixyll/2014/06/08/pixyll-has-pagination/</loc>
-    <lastmod>2014-06-08T14:21:29+03:00</lastmod>
+    <loc>http://coding.farm/about/</loc>
   </url>
   <url>
-    <loc>http://finom.github.io/404.html</loc>
+    <loc>http://coding.farm/contact/</loc>
   </url>
   <url>
-    <loc>http://finom.github.io/about/</loc>
+    <loc>http://coding.farm/</loc>
   </url>
   <url>
-    <loc>http://finom.github.io/contact/</loc>
+    <loc>http://coding.farm/thanks/</loc>
   </url>
   <url>
-    <loc>http://finom.github.io/</loc>
-  </url>
-  <url>
-    <loc>http://finom.github.io/thanks/</loc>
-  </url>
-  <url>
-    <loc>http://finom.github.io/page2/</loc>
+    <loc>http://coding.farm/page2/</loc>
   </url>
 </urlset>
