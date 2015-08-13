@@ -12,7 +12,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Finom" href="/feed.xml" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?201508121829" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?201508131952" type="text/css">
 
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700italic,700,400italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
@@ -105,7 +105,7 @@
 </div>
 
 <article class="post-content">
-  <p>Не так давно в Хроме появилась потрясающая возможность, описанная в черновике спецификации ECMAScript 7: функция <code>Object.observe</code>. Она создана для оповещения обо всех изменениях в объекте (см. <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/observe">MDN</a>). Эта потрясающая возможность позволит сэкономить драгоценные ресурсы процессора во фреймворках и библиотеках, использующих так называемый dirty checking (дословно “грязная проверка”) для контроля изменений данных и перерисовки DOM. Такой подход используется во фрефмворке Angular 1, знаменитый своими тормозами при большом количестве элементов.</p>
+  <p>Не так давно в Хроме появилась потрясающая возможность, описанная в черновике спецификации ECMAScript 7: функция <code>Object.observe</code>. Она создана для оповещения обо всех изменениях в объекте (см. <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/observe">MDN</a>). Эта потрясающая возможность позволит сэкономить драгоценные ресурсы процессора во фреймворках и библиотеках, использующих так называемый dirty checking (дословно “грязная проверка”) для контроля изменений данных и перерисовки DOM. Такой подход используется во фреймворке Angular 1, знаменитый своими тормозами при большом количестве элементов.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">foo</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -202,7 +202,7 @@
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span> <span class="s1">&#39;defineProperty&#39;</span> <span class="p">);</span></code></pre></div>
 
-<p>У меня получилось 1592 миллисекунд у Object.observe против 868 у <code>Object.defineProperty</code>, т. е. первый на 80% медленнее второго. Если уменьшить количество итераций циклов до 10 тысяч, то разница будет более существенной: 32 мсек против 15 мсек.</p>
+<p>У меня получилось 1592 миллисекунд у <code>Object.observe</code> против 868 у <code>Object.defineProperty</code>, т. е. первый на 80% медленнее второго. Если уменьшить количество итераций циклов до 10 тысяч, то разница будет более существенной: 32 мсек против 15 мсек.</p>
 
 <p>Очко в пользу <code>Object.defineProperty</code>. <em>1:0</em></p>
 

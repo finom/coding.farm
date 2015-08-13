@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Matreshka.js by Igor Iakymenko &#8211; Finom</title>
+    <title>Производительность Matreshka 1.1-aplha &#8211; Finom</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Блог о веб разработке.">
+    <meta name="description" content="Теперь Матрешка быстрее Angular, Knockout и React">
     <meta name="author" content="Andrey Gubanov">
     <meta name="keywords" content="matreshka">
-    <link rel="canonical" href="http://coding.farm/matreshka/2015/04/16/matreshka-by-igor-iakimenko/">
+    <link rel="canonical" href="http://coding.farm/matreshka/2015/08/13/matreshka-1-1-alpha-performance/">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Finom" href="/feed.xml" />
 
     <!-- Custom CSS -->
@@ -25,17 +25,17 @@
     <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Matreshka.js by Igor Iakymenko">
+    <meta property="og:title" content="Производительность Matreshka 1.1-aplha">
     <meta property="og:description" content="Блог о веб разработке.">
-    <meta property="og:url" content="http://coding.farm/matreshka/2015/04/16/matreshka-by-igor-iakimenko/">
+    <meta property="og:url" content="http://coding.farm/matreshka/2015/08/13/matreshka-1-1-alpha-performance/">
     <meta property="og:site_name" content="Finom">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
     
-    <meta name="twitter:title" content="Matreshka.js by Igor Iakymenko" />
-    <meta name="twitter:description" content="Блог о веб разработке." />
-    <meta name="twitter:url" content="http://coding.farm/matreshka/2015/04/16/matreshka-by-igor-iakimenko/" />
+    <meta name="twitter:title" content="Производительность Matreshka 1.1-aplha" />
+    <meta name="twitter:description" content="Теперь Матрешка быстрее Angular, Knockout и React" />
+    <meta name="twitter:url" content="http://coding.farm/matreshka/2015/08/13/matreshka-1-1-alpha-performance/" />
 
     <!-- Icons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
@@ -96,8 +96,8 @@
 
 
 <div class="post-header mb2">
-  <h1>Matreshka.js by Igor Iakymenko</h1>
-  <span class="post-meta">Apr 16, 2015</span><br>
+  <h1>Производительность Matreshka 1.1-aplha</h1>
+  <span class="post-meta">Aug 13, 2015</span><br>
     
   <span class="post-meta small">
   
@@ -107,9 +107,15 @@
 </div>
 
 <article class="post-content">
-  <p>Презентация Матрешки Игорем Якименко.</p>
+  <p>Производительность - это больное место для фреймворков с двусторонним связыванием данных. Но базируясь на <a href="/javascript/2015/08/12/object-defineproperty-vs-object-observe/">небольшом исследовании</a> потенциала <code>Object.defineProperty</code> было принято решение воспользоваться такой прекрасной возможностью, сделав Матрешку самым быстрым фреймворком, реализующим two-way data binding. И я вам могу сказать, это получилось.</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/usz29YCCiHI" frameborder="0" allowfullscreen=""></iframe>
+<p>Разделив знаменитый тест с рендерингом коллекций по количеству итераций (<a href="http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/7">10</a>, <a href="http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/11">50</a>, <a href="http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/8">100</a>, <a href="http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/9">500</a> и <a href="http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/10">1000</a>) и дополнив бенчмарк еще пока не выпущенной <a href="https://github.com/finom/matreshka/tree/develop">Матрешкой 1.1</a>, я запустил тест во всевозможных браузерах (Safari тестировался на другом компьютере) и получил очень приятные результаты.</p>
+
+<p><img src="http://i.imgur.com/Dvn6tA4.jpg" alt="Скриншот" /></p>
+
+<p>Раньше, в том же бенчмарке, Матрешка несколько отставала в тесте с 10 элементами, сейчас она выигрывает у всех. Добиться такого результата помог отказ от высокоуровневых функций в ядре (extend и each) в пользу цикла for..of и отключение ненужных операций (например, зачем триггерить событие, если его не слушают?)</p>
+
+<p>Эта статистика собиралась для нового раздела с производительностью на сайте Матрешки. Теперь буду думать, как эти данные красиво вывести в виде соотношений (цифры на всех компьютерах будут разными).</p>
 
 </article>
 
@@ -121,7 +127,7 @@
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'codingfarm';
-    var disqus_identifier = '/matreshka/2015/04/16/matreshka-by-igor-iakimenko';
+    var disqus_identifier = '/matreshka/2015/08/13/matreshka-1-1-alpha-performance';
     var disqus_title      = '';
 
     (function() {

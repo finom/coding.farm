@@ -7,8 +7,25 @@
     <atom:link href="http://coding.farm/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Производительность Matreshka 1.1-aplha</title>
+        <description>&lt;p&gt;Производительность - это больное место для фреймворков с двусторонним связыванием данных. Но базируясь на &lt;a href=&quot;/javascript/2015/08/12/object-defineproperty-vs-object-observe/&quot;&gt;небольшом исследовании&lt;/a&gt; потенциала &lt;code&gt;Object.defineProperty&lt;/code&gt; было принято решение воспользоваться такой прекрасной возможностью, сделав Матрешку самым быстрым фреймворком, реализующим two-way data binding. И я вам могу сказать, это получилось.&lt;/p&gt;
+
+&lt;p&gt;Разделив знаменитый тест с рендерингом коллекций по количеству итераций (&lt;a href=&quot;http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/7&quot;&gt;10&lt;/a&gt;, &lt;a href=&quot;http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/11&quot;&gt;50&lt;/a&gt;, &lt;a href=&quot;http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/8&quot;&gt;100&lt;/a&gt;, &lt;a href=&quot;http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/9&quot;&gt;500&lt;/a&gt; и &lt;a href=&quot;http://jsperf.com/angular-vs-knockout-vs-react-vs-matreshka/10&quot;&gt;1000&lt;/a&gt;) и дополнив бенчмарк еще пока не выпущенной &lt;a href=&quot;https://github.com/finom/matreshka/tree/develop&quot;&gt;Матрешкой 1.1&lt;/a&gt;, я запустил тест во всевозможных браузерах (Safari тестировался на другом компьютере) и получил очень приятные результаты.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/Dvn6tA4.jpg&quot; alt=&quot;Скриншот&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Раньше, в том же бенчмарке, Матрешка несколько отставала в тесте с 10 элементами, сейчас она выигрывает у всех. Добиться такого результата помог отказ от высокоуровневых функций в ядре (extend и each) в пользу цикла for..of и отключение ненужных операций (например, зачем триггерить событие, если его не слушают?)&lt;/p&gt;
+
+&lt;p&gt;Эта статистика собиралась для нового раздела с производительностью на сайте Матрешки. Теперь буду думать, как эти данные красиво вывести в виде соотношений (цифры на всех компьютерах будут разными).&lt;/p&gt;
+</description>
+        <pubDate>Thu, 13 Aug 2015 00:00:00 +0300</pubDate>
+        <link>http://coding.farm/matreshka/2015/08/13/matreshka-1-1-alpha-performance/</link>
+        <guid isPermaLink="true">http://coding.farm/matreshka/2015/08/13/matreshka-1-1-alpha-performance/</guid>
+      </item>
+    
+      <item>
         <title>Object.defineProperty vs Object.observe</title>
-        <description>&lt;p&gt;Не так давно в Хроме появилась потрясающая возможность, описанная в черновике спецификации ECMAScript 7: функция &lt;code&gt;Object.observe&lt;/code&gt;. Она создана для оповещения обо всех изменениях в объекте (см. &lt;a href=&quot;https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/observe&quot;&gt;MDN&lt;/a&gt;). Эта потрясающая возможность позволит сэкономить драгоценные ресурсы процессора во фреймворках и библиотеках, использующих так называемый dirty checking (дословно “грязная проверка”) для контроля изменений данных и перерисовки DOM. Такой подход используется во фрефмворке Angular 1, знаменитый своими тормозами при большом количестве элементов.&lt;/p&gt;
+        <description>&lt;p&gt;Не так давно в Хроме появилась потрясающая возможность, описанная в черновике спецификации ECMAScript 7: функция &lt;code&gt;Object.observe&lt;/code&gt;. Она создана для оповещения обо всех изменениях в объекте (см. &lt;a href=&quot;https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/observe&quot;&gt;MDN&lt;/a&gt;). Эта потрясающая возможность позволит сэкономить драгоценные ресурсы процессора во фреймворках и библиотеках, использующих так называемый dirty checking (дословно “грязная проверка”) для контроля изменений данных и перерисовки DOM. Такой подход используется во фреймворке Angular 1, знаменитый своими тормозами при большом количестве элементов.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -105,7 +122,7 @@
 
 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timeEnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;defineProperty&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;У меня получилось 1592 миллисекунд у Object.observe против 868 у &lt;code&gt;Object.defineProperty&lt;/code&gt;, т. е. первый на 80% медленнее второго. Если уменьшить количество итераций циклов до 10 тысяч, то разница будет более существенной: 32 мсек против 15 мсек.&lt;/p&gt;
+&lt;p&gt;У меня получилось 1592 миллисекунд у &lt;code&gt;Object.observe&lt;/code&gt; против 868 у &lt;code&gt;Object.defineProperty&lt;/code&gt;, т. е. первый на 80% медленнее второго. Если уменьшить количество итераций циклов до 10 тысяч, то разница будет более существенной: 32 мсек против 15 мсек.&lt;/p&gt;
 
 &lt;p&gt;Очко в пользу &lt;code&gt;Object.defineProperty&lt;/code&gt;. &lt;em&gt;1:0&lt;/em&gt;&lt;/p&gt;
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://coding.farm/matreshka/2015/08/13/matreshka-1-1-alpha-performance/</loc>
+    <lastmod>2015-08-13T00:00:00+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://coding.farm/javascript/2015/08/12/object-defineproperty-vs-object-observe/</loc>
     <lastmod>2015-08-12T00:00:00+03:00</lastmod>
   </url>
@@ -42,8 +46,5 @@
   </url>
   <url>
     <loc>http://coding.farm/thanks/</loc>
-  </url>
-  <url>
-    <loc>http://coding.farm/page2/</loc>
   </url>
 </urlset>
