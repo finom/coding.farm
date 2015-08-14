@@ -1,5 +1,5 @@
 /*
-	Matreshka v1.1.0-alpha.1 (2015-08-14)
+	Matreshka v1.1.0-alpha.1 (2015-08-15)
 	JavaScript Framework by Andrey Gubanov
 	Released under the MIT license
 	More info: http://matreshka.io
@@ -3750,6 +3750,12 @@
 
 				MK._addListener(_this, 'change:Model', changeModel);
 
+				MK._addListener(_this, 'change:itemRenderer', function() {
+					_this.rerender({
+						forceRerender: true
+					});
+				});
+
 				changeModel();
 
 				return _this;
@@ -3770,7 +3776,9 @@
 					node = arraysNodes[id],
 					$node,
 					template,
-					itemEvt;
+					itemEvt,
+					sandboxes,
+					i;
 
 				if(!renderer) return;
 
@@ -3778,6 +3786,19 @@
 					if (node = item.bound(['sandbox'])) {
 						arraysNodes[id] = node;
 					}
+				}
+
+				if(node && evt.forceRerender) {
+					sandboxes = item.boundAll(['sandbox']);
+
+					for(i = 0; i < sandboxes.length; i++) {
+						if(node == sandboxes[i]) {
+							item.unbindNode('sandbox', node);
+							break;
+						}
+					}
+
+					node = arraysNodes[id] = null;
 				}
 
 				if (!node) {
@@ -3884,13 +3905,21 @@
 					case 'reverse':
 						for (i = 0; i < l; i++) {
 							item = _this[i];
-							if (node = item && item.isMK && item.bound([id])) {
+							if (node = item && item.isMK && item[sym].arraysNodes[id]) {
 								container.appendChild(node);
 							}
 						}
 
 						break;
 					case 'rerender':
+						if(evt.forceRerender) {
+							for (i = 0; i < l; i++) {
+								if (node = destroyOne(_this[i])) {
+									container.removeChild(node);
+								}
+							}
+						}
+
 						for (i = 0; i < l; i++) {
 							if (node = _this._renderOne(_this[i], evt)) {
 								container.appendChild(node);
@@ -3919,10 +3948,18 @@
 			},
 
 
-			rerender: function() {
-				return this.processRendering({
-					method: 'rerender'
-				});
+			rerender: function(evt) {
+				var _evt = {
+						method: 'rerender'
+					},
+					i;
+				if(evt && typeof evt == 'object') {
+					for(i in evt) {
+						_evt[i] = evt[i];
+					}
+				}
+
+				return this.processRendering(_evt);
 			},
 
 
