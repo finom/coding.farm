@@ -1,5 +1,5 @@
 /*
-	Matreshka v1.1.0-alpha.1 (2015-08-13)
+	Matreshka v1.1.0-alpha.1 (2015-08-14)
 	JavaScript Framework by Andrey Gubanov
 	Released under the MIT license
 	More info: http://matreshka.io
@@ -3284,7 +3284,7 @@
 		triggerModify = function(_this, evt, additional) {
 			var added = evt.added,
 				removed = evt.removed,
-				events = _this[sym].events,
+				events = _this[sym] && _this[sym].events,
 				i;
 
 			if (additional) {
@@ -3319,7 +3319,13 @@
 
 			if (added || removed) {
 				events.modify && MK._trigger(_this, 'modify', evt);
+
+				if (!evt.dontRender) {
+					_this.processRendering(evt);
+				}
 			}
+
+
 		},
 
 		recreate = function(_this, array) {
@@ -3375,7 +3381,7 @@
 				case 'sort':
 				case 'reverse':
 					return function() {
-						var _this = this,
+						var _this = this._initMK(),
 							_arguments = arguments,
 							args = toArray(_arguments),
 							evt = hasOptions ? _arguments[_arguments.length - 1] || {} : {},
@@ -3413,10 +3419,6 @@
 							triggerModify(_this, _evt, name);
 						}
 
-						if (!_evt.dontRender) {
-							_this.processRendering(_evt);
-						}
-
 						return _this;
 					};
 
@@ -3424,7 +3426,7 @@
 				case 'shift':
 					return function() {
 						if (!this.length) return;
-						var _this = this,
+						var _this = this._initMK(),
 							_arguments = arguments,
 							args = toArray(_arguments),
 							evt = hasOptions ? _arguments[_arguments.length - 1] || {} : {},
@@ -3464,16 +3466,12 @@
 							triggerModify(_this, _evt, name);
 						}
 
-						if (!_evt.dontRender) {
-							_this.processRendering(_evt);
-						}
-
 						return returns;
 					};
 				case 'push':
 				case 'unshift':
 					return function() {
-						var _this = this,
+						var _this = this._initMK(),
 							_arguments = arguments,
 							args = toArray(_arguments),
 							evt = hasOptions ? _arguments[_arguments.length - 1] || {} : {},
@@ -3488,16 +3486,15 @@
 
 						if (!args.length) return _this.length;
 
-						if (!evt.skipMediator && typeof _this._itemMediator == 'function'
-								&& (name == 'unshift' || name == 'push')) {
+						if (!evt.skipMediator && typeof _this._itemMediator == 'function') {
 							for (i = 0; i < args.length; i++) {
 								args[i] = _this._itemMediator.call(_this, args[i], i);
 							}
 						}
 
 						if (isXDR) {
-							array = _this.toArray(),
-								returns = Array_prototype[name].apply(array, args);
+							array = _this.toArray();
+							returns = Array_prototype[name].apply(array, args);
 							recreate(_this, array);
 						} else {
 							returns = Array_prototype[name].apply(_this, args);
@@ -3521,15 +3518,11 @@
 							triggerModify(_this, _evt, name);
 						}
 
-						if (!_evt.dontRender) {
-							_this.processRendering(_evt);
-						}
-
 						return returns;
 					};
 				case 'splice':
 					return function() {
-						var _this = this,
+						var _this = this._initMK(),
 							_arguments = arguments,
 							args = toArray(_arguments),
 							evt = hasOptions ? _arguments[_arguments.length - 1] || {} : {},
@@ -3549,8 +3542,8 @@
 						}
 
 						if (isXDR) {
-							array = _this.toArray(),
-								returns = Array_prototype[name].apply(array, args);
+							array = _this.toArray();
+							returns = Array_prototype[name].apply(array, args);
 							recreate(_this, array);
 						} else {
 							returns = Array_prototype[name].apply(_this, args);
@@ -3576,10 +3569,6 @@
 
 							if (!_evt.silent) {
 								triggerModify(_this, _evt, name);
-							}
-
-							if (!_evt.dontRender) {
-								_this.processRendering(_evt);
 							}
 						}
 
@@ -3610,6 +3599,7 @@
 				}
 			},
 
+
 			mediateItem: function(itemMediator) {
 				var _this = this,
 					l = _this.length,
@@ -3621,59 +3611,10 @@
 				return _this;
 			},
 
-			/*_on: function( name, callback, context, xtra ) {
-				var _this = this._initMK(),
-					f;
-
-				if( name.indexOf( '@' ) == 0 ) {
-					name = name.slice( 1 );
-					f = function( evt ) {
-						( evt && evt.added ? evt.added : _this ).forEach( function( item ) {
-							item && item.isMK && item._on( name, callback, context || _this );
-						});
-					};
-
-					f._callback = callback;
-					_this._on( 'add', f, _this, name );
-					f.call( context || _this );
-				} else {
-					MK.prototype._on.call( _this, name, callback, context, xtra );
-				}
-
-				return _this;
-			},
-
-			_off: function( name, callback, context ) {
-				var _this = this._initMK(),
-					events,
-					i;
-
-				if( name.indexOf( '@' ) == 0 ) {
-					name = name.slice( 1 );
-					if( callback ) {
-						_this.off( 'add', callback, context );
-					} else {
-						events = _this.__events.add || [];
-						for( i = 0; i < events.length; i++ ) {
-							if( events[ i ].xtra == name ) {
-								_this.off( 'add', events[ i ].callback );
-							}
-						}
-					}
-
-					_this.forEach( function( item ) {
-						item.isMK && item.off( name, callback, context );
-					}, _this );
-				} else {
-					MK.prototype._off.call( _this, name, callback, context );
-				}
-
-				return _this;
-			},*/
 
 			recreate: function(array, evt) {
 				array = array || [];
-				var _this = this,
+				var _this = this._initMK(),
 					diff = _this.length - array.length,
 					was = _this.toArray(),
 					prepared,
@@ -3709,14 +3650,27 @@
 
 				now = _this.toArray();
 
-				removed = was.length ? was.filter(function(item) {
-					return !~indexOf.call(now, item);
-				}) : [];
+				if(now.length) {
+					removed = [];
+					for(i = 0; i < was.length; i++) {
+						if(!~indexOf.call(now, was[i])) {
+							removed.push(was[i]);
+						}
+					}
+				} else {
+					removed = was;
+				}
 
-				added = now.length ? now.filter(function(item) {
-					return !~indexOf.call(was, item);
-				}) : [];
-
+				if(was.length) {
+					added = [];
+					for(i = 0; i < now.length; i++) {
+						if(!~indexOf.call(was, now[i])) {
+							added.push(now[i]);
+						}
+					}
+				} else {
+					added = now;
+				}
 
 				_evt = {
 					added: added,
@@ -3733,10 +3687,6 @@
 
 				if (!_evt.silent) {
 					triggerModify(_this, _evt, 'recreate');
-				}
-
-				if (!_evt.dontRender) {
-					_this.processRendering(_evt);
 				}
 
 				return _this;
@@ -3776,7 +3726,7 @@
 					var Model = _this.Model;
 					if (Model) {
 						_this.mediateItem(function(item) {
-							return !item || !item.isMK || !item.instanceOf(Model)
+							return !item || !item.isMK || !(item && item.instanceOf ? item.instanceOf(Model) : item instanceof Model)
 								? new Model(item && item.toJSON ? item.toJSON() : item, _this) : item;
 						});
 					}
@@ -3993,7 +3943,7 @@
 
 
 			pull: function(index, evt) {
-				var _this = this,
+				var _this = this._initMK(),
 					array = _this.toArray(),
 					_index = index,
 					type = typeof index,
@@ -4033,9 +3983,6 @@
 						triggerModify(_this, _evt, 'pull');
 					}
 
-					if (!_evt.dontRender) {
-						_this.processRendering(_evt);
-					}
 				}
 
 				return returns;
