@@ -3636,9 +3636,9 @@
 				}
 
 				for (i = 0; i < diff; i++) {
-					/*_this.remove(i + array.length, {
+					_this.remove(i + array.length, {
 						silent: true
-					});*/
+					});
 				}
 
 				_this.length = array.length;
@@ -3798,7 +3798,8 @@
 						parentArray: _this
 					};
 
-					item.onrender && item.onrender.call(item, itemEvt);
+					item.onRender && item.onRender(itemEvt);
+					_this.onItemRender && _this.onItemRender(item, itemEvt);
 
 					MK._fastTrigger(item, 'render', itemEvt);
 				}
