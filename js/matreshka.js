@@ -3636,9 +3636,9 @@
 				}
 
 				for (i = 0; i < diff; i++) {
-					_this.remove(i + array.length, {
+					/*_this.remove(i + array.length, {
 						silent: true
-					});
+					});*/
 				}
 
 				_this.length = array.length;
