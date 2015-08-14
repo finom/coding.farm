@@ -1941,27 +1941,9 @@
 					'change:' + path[path.length - 2], changeHandler);
 
 				changeHandler();
-				/*listenKey = key.slice( 0, indexOfDot );
-				restPath = key.slice( indexOfDot + 1 );
-				changeHandler = function( changeEvt ) {
-					if( changeEvt && typeof changeEvt.previousValue == 'object' && changeEvt.previousValue !== null ) {
-						magic.unbindNode( changeEvt.previousValue, restPath, node, evt );
-						//magic.off(  ???  );
-					}
 
-					if( typeof object[ listenKey ] == 'object' ) {
-						magic.bindNode( object[ listenKey ], restPath, node, binder, evt, optional );
-					}
-				};
-
-				magic._on( object, 'change:' + listenKey, changeHandler );
-
-				changeHandler();
-				*/
 				return object;
 			}
-
-
 
 			$nodes = magic._getNodes(object, node);
 
@@ -2091,7 +2073,6 @@
 								for (j in options) {
 									_options[j] = options[j];
 								}
-
 
 								value = _binder.getValue.call(node, _options);
 
@@ -3078,10 +3059,13 @@
 					o = {},
 					keys = _this[sym].keys,
 					p;
-				for (p in keys)
+                    
+				for (p in keys) {
 					if (keys.hasOwnProperty(p)) {
 						o[p] = _this[p];
 					}
+				}
+
 				return o;
 			},
 
@@ -3137,9 +3121,7 @@
 
 					for (i in key) {
                         _this[sym].keys[i] = 1;
-
 						_this._defineSpecial(i);
-                        
                         _this.set(i, key[i], v);
 					}
 
@@ -3147,9 +3129,7 @@
 				}
 
 				_this[sym].keys[key] = 1;
-
 				_this._defineSpecial(key);
-
 				return _this.set(key, v, evt);
 			},
 
@@ -3324,7 +3304,7 @@
 				}
 			}
 
-			if (added || removed) {
+			if (added.length || removed.length) {
 				events.modify && MK._trigger(_this, 'modify', evt);
 
 				if (!evt.dontRender) {
@@ -3622,7 +3602,7 @@
 					diff = _this.length - array.length,
 					was = _this.toArray(),
 					prepared,
-					i,
+					i, j,
 					_evt,
 					added, removed, now;
 
@@ -3656,9 +3636,10 @@
 
 				if(now.length) {
 					removed = [];
+					j = 0;
 					for(i = 0; i < was.length; i++) {
 						if(!~indexOf.call(now, was[i])) {
-							removed.push(was[i]);
+							removed[j++] = was[i];
 						}
 					}
 				} else {
@@ -3667,9 +3648,10 @@
 
 				if(was.length) {
 					added = [];
+					j = 0;
 					for(i = 0; i < now.length; i++) {
 						if(!~indexOf.call(was, now[i])) {
-							added.push(now[i]);
+							added[j++] = now[i];
 						}
 					}
 				} else {
@@ -3768,7 +3750,9 @@
 				if (!node) {
 					if (typeof renderer == 'function') {
 						renderer = renderer.call(rendererContext, item);
-					} else if (typeof renderer == 'string' && !/<|{{/.test(renderer)) {
+					}
+
+				 	if (typeof renderer == 'string' && !/<|{{/.test(renderer)) {
 						template = rendererContext._getNodes(renderer);
 						if (template = template && template[0]) {
 							template = template.innerHTML;
@@ -3837,7 +3821,7 @@
 								container.appendChild(node);
 							}
 						}
-						
+
 						break;
 					case 'unshift':
 						for (i = evt.added.length - 1; i + 1; i--) {
