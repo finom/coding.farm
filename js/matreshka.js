@@ -2553,10 +2553,6 @@
 							magic._fastTrigger(object, 'delete:' + key, _evt);
 						}
 					}
-
-
-
-
 				}
 			}
 
@@ -3645,9 +3641,15 @@
 				}
 
 				for (i = 0; i < diff; i++) {
-					_this.remove(i + array.length, {
+					try { // @IE8 spike
+						delete _this[i];
+					} catch (e) {}
+
+					delete _this[sym].special[i];
+
+					/*_this.remove(i + array.length, {
 						silent: true
-					});
+					});*/
 				}
 
 				_this.length = array.length;
@@ -3736,7 +3738,9 @@
 					var Model = _this.Model;
 					if (Model) {
 						_this.mediateItem(function(item) {
-							return !item || !item.isMK || !(item && item.instanceOf ? item.instanceOf(Model) : item instanceof Model) ? new Model(item && item.toJSON ? item.toJSON() : item, _this) : item;
+							return !item || !item.isMK || !(item && item.instanceOf ? item.instanceOf(Model)
+							: item instanceof Model)
+							? new Model(item && item.toJSON ? item.toJSON() : item, _this) : item;
 						});
 					}
 				};
@@ -3948,7 +3952,7 @@
 
 				for (i = 0; i < args.length; i++) {
 					arg = args[i];
-					if (arg instanceof Array || arg && arg.instanceOf && arg.instanceOf(MK.Array)) {
+					if (arg instanceof Array || arg instanceof MK.Array || arg && arg.instanceOf && arg.instanceOf(MK.Array)) {
 						for (j = 0; j < arg.length; j++) {
 							result.push(arg[j]);
 						}
