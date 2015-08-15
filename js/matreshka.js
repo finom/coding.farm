@@ -2024,9 +2024,9 @@
 					}
 
 					if (_binder.setValue) {
-						mkHandler = function(changeEvt) {
+						mkHandler = function(evt) {
 							var v = object[key];
-							if (changeEvt && changeEvt.changedNode == node && ( evt.strictComparison ? changeEvt.onChangeValue === v : changeEvt.onChangeValue == v )) return;
+							if (evt && evt.changedNode == node && evt.onChangeValue === v) return;
 
 							_options = {
 								value: v
