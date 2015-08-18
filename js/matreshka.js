@@ -1,5 +1,5 @@
 /*
-	Matreshka v1.1.0-alpha.1 (2015-08-17)
+	Matreshka v1.1.0-alpha.1 (2015-08-18)
 	JavaScript Framework by Andrey Gubanov
 	Released under the MIT license
 	More info: http://matreshka.io
@@ -1693,7 +1693,7 @@
 			if (type == 'object' && !(keys instanceof Array)) {
 				for (i in keys)
 					if (keys.hasOwnProperty(i)) {
-						magic.fixClassOf(object, i, keys[i], Class);
+						magic.setClassFor(object, i, keys[i], Class);
 					}
 
 				return object;
@@ -1704,10 +1704,11 @@
 			updateFunction = updateFunction || function(instance, data) {
 				var i;
 
-				for (i in data)
+				for (i in data) {
 					if (data.hasOwnProperty(i)) {
 						instance[i] = data[i];
 					}
+				}
 			};
 
 			for (i = 0; i < keys.length; i++) {
@@ -2878,8 +2879,8 @@
 				return magic.mediate(this, keys, mediator);
 			},
 
-			fixClassOf: function(keys, Class, updateFunction) {
-				return magic.fixClassOf(this, keys, Class, updateFunction);
+			setClassFor: function(keys, Class, updateFunction) {
+				return magic.setClassFor(this, keys, Class, updateFunction);
 			},
 
 			linkProps: function(key, keys, getter, setOnInit) {
@@ -3226,11 +3227,6 @@
 		toArray = MK.toArray,
 		slice = Array_prototype.slice,
 		isXDR = MK.isXDR,
-		silentFlag = {
-			silent: true,
-			dontRender: true,
-			skipMediator: true
-		},
 		compare = function(a1, a2, i, l) {
 			if (a1.length != a2.length)
 				return false;
@@ -3282,39 +3278,43 @@
 				events = _this[sym].events,
 				i;
 
-			if (additional) {
-				events[additional] && MK._fastTrigger(_this, additional, evt);
-			}
+			if(!evt.silent) {
+				if (additional) {
+					events[additional] && MK._fastTrigger(_this, additional, evt);
+				}
 
-			if (added.length) {
-				events.add && MK._fastTrigger(_this, 'add', evt);
+				if (added.length) {
+					events.add && MK._fastTrigger(_this, 'add', evt);
 
-				if (events.addone) {
-					for (i = 0; i < added.length; i++) {
-						MK._fastTrigger(_this, 'addone', {
-							self: _this,
-							added: added[i]
-						});
+					if (events.addone) {
+						for (i = 0; i < added.length; i++) {
+							MK._fastTrigger(_this, 'addone', {
+								self: _this,
+								added: added[i]
+							});
+						}
 					}
 				}
-			}
 
-			if (removed.length) {
-				events.remove && MK._fastTrigger(_this, 'remove', evt);
+				if (removed.length) {
+					events.remove && MK._fastTrigger(_this, 'remove', evt);
 
-				if (events.removeone) {
-					for (i = 0; i < removed.length; i++) {
-						MK._fastTrigger(_this, 'removeone', {
-							self: _this,
-							removed: removed[i]
-						});
+					if (events.removeone) {
+						for (i = 0; i < removed.length; i++) {
+							MK._fastTrigger(_this, 'removeone', {
+								self: _this,
+								removed: removed[i]
+							});
+						}
 					}
+				}
+
+				if (added.length || removed.length) {
+					events.modify && MK._fastTrigger(_this, 'modify', evt);
 				}
 			}
 
 			if (added.length || removed.length) {
-				events.modify && MK._fastTrigger(_this, 'modify', evt);
-
 				if (!evt.dontRender) {
 					_this.processRendering(evt);
 				}
@@ -3409,9 +3409,7 @@
 						}
 
 
-						if (!_evt.silent) {
-							triggerModify(_this, _evt, name);
-						}
+						triggerModify(_this, _evt, name);
 
 						return _this;
 					};
@@ -3457,9 +3455,7 @@
 							_evt[i] = evt[i];
 						}
 
-						if (!_evt.silent) {
-							triggerModify(_this, _evt, name);
-						}
+						triggerModify(_this, _evt, name);
 
 						return returns;
 					};
@@ -3509,9 +3505,7 @@
 							_evt[i] = evt[i];
 						}
 
-						if (!_evt.silent) {
-							triggerModify(_this, _evt, name);
-						}
+						triggerModify(_this, _evt, name);
 
 						return returns;
 					};
@@ -3561,9 +3555,7 @@
 								_evt[i] = evt[i];
 							}
 
-							if (!_evt.silent) {
-								triggerModify(_this, _evt, name);
-							}
+							triggerModify(_this, _evt, name);
 						}
 
 						return MK.Array.from(returns);
@@ -3632,10 +3624,10 @@
 
 				for (i = 0; i < diff; i++) {
 					try { // @IE8 spike
-						delete _this[i];
+						delete _this[i + array.length];
 					} catch (e) {}
 
-					delete _this[sym].special[i];
+					delete _this[sym].special[i + array.length];
 
 					/*_this.remove(i + array.length, {
 						silent: true
@@ -3687,9 +3679,7 @@
 					_evt[i] = evt[i];
 				}
 
-				if (!_evt.silent) {
-					triggerModify(_this, _evt, 'recreate');
-				}
+				triggerModify(_this, _evt, 'recreate');
 
 				return _this;
 			},
@@ -3755,7 +3745,7 @@
 			 * @since 0.1
 			 */
 			_renderOne: function(item, evt) {
-				if (!item.isMK || !this.renderIfPossible || evt.dontRender) return;
+				if (!item || !item.isMK || !this.renderIfPossible || evt.dontRender) return;
 
 				var _this = this,
 					id = _this[sym].id,
@@ -4029,10 +4019,7 @@
 						_evt[i] = evt[i];
 					}
 
-					if (!_evt.silent) {
-						triggerModify(_this, _evt, 'pull');
-					}
-
+					triggerModify(_this, _evt, 'pull');
 				}
 
 				return returns;
