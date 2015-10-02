@@ -32,8 +32,6 @@ define([
 
 		initMK(object);
 
-		try {object[sym].events;} catch(e){alert(sym);}
-
 		var ctx = context || object,
 			allEvents = object[sym].events,
 			events = allEvents[name] || (allEvents[name] = []),
