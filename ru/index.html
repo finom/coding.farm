@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<div class="home">
+  <div class="posts">
+    {% for post in paginator.posts %}
+      <div class="post py3">
+        <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
+        {% if post.external_url %}
+            <a href="{{ post.url | prepend: site.baseurl }}" class="external post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+        {% else %}
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+        {% endif %}
+        <p class="post-summary">
+          {% if post.summary %}
+            {{ post.summary }}
+          {% else %}
+            {{ post.excerpt }}
+          {% endif %}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% include pagination.html %}
+</div>
