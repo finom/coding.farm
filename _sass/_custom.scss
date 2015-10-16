@@ -1,14 +1,19 @@
+body {
+	font-family: "Roboto", "Helvetica Neue", Helvetica, sans-serif;
+}
+
 .mt2 {
     margin-top: 0;
 }
 
 
 .site-header nav.site-nav {
-    margin-top: 2rem;
+    margin-top: 2.7rem;
 }
 
 .post-link.external .post-title {
     color: #6DA220;
+	
 }
 
 
@@ -16,4 +21,16 @@ pre {
     -o-tab-size: 4; /* Opera */
     -moz-tab-size: 4; /* Firefox */
     tab-size: 4;
+}
+
+h1, .h1 {
+    font-size: 2rem;
+}
+
+blockquote {
+    padding: 1rem 2rem;
+}
+
+.post-link .post-title, h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
 }
